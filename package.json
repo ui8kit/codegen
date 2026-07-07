@@ -1,0 +1,39 @@
+{
+  "name": "@ui8kit/codegen",
+  "version": "0.1.0",
+  "description": "Spec-driven codegen engine for UI8Kit ui/ primitives: one typed render contract, four runtimes (Templ, React, Svelte 5, Vue 3).",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "ui8kit-codegen": "./bin/ui8kit-codegen.js"
+  },
+  "scripts": {
+    "generate": "tsx src/infrastructure/cli.ts generate --out generated",
+    "check": "tsx src/infrastructure/cli.ts check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "typecheck:generated": "npm run generate -- --out generated && tsc -p tsconfig.generated.json",
+    "verify": "npm run check && npm run typecheck && npm run typecheck:generated && npm run test"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/server-renderer": "^3.5.13",
+    "parse5": "^7.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "svelte": "^5.19.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4",
+    "vue": "^3.5.13"
+  }
+}
