@@ -32,7 +32,7 @@ templ Welcome(props WelcomeProps) {
 						UI8Kit Codegen
 					}
 					@text.Text(text.TextProps{Class: "max-w-2xl text-muted-foreground"}) {
-						One typed render contract — four generated runtimes with identical DOM, design, and ARIA.
+						One typed render contract — seven generated runtimes with identical DOM, design, and ARIA.
 					}
 				}
 				@card.Card(card.CardProps{Variant: "default"}) {
@@ -90,12 +90,12 @@ templ Welcome(props WelcomeProps) {
 					@card.Card(card.CardProps{Variant: "muted"}) {
 						@card.CardHeader(card.CardHeaderProps{}) {
 							@card.CardTitle(card.CardTitleProps{}) {
-								Four runtimes
+								Seven runtimes
 							}
 						}
 						@card.CardContent(card.CardContentProps{}) {
 							@text.Text(text.TextProps{Class: "text-sm text-muted-foreground"}) {
-								Go Templ, React 19, Svelte 5, and Vue 3 emitted from the same source.
+								Go Templ, React 19, Svelte 5, Vue 3, Latte, Twig, and static HTML from the same source.
 							}
 						}
 					}
@@ -129,6 +129,12 @@ templ Welcome(props WelcomeProps) {
 							}
 							@link.Link(link.LinkProps{Href: "http://127.0.0.1:5175", Variant: "default"}) {
 								Vue 3
+							}
+							@link.Link(link.LinkProps{Href: "http://127.0.0.1:5176", Variant: "default"}) {
+								Latte
+							}
+							@link.Link(link.LinkProps{Href: "http://127.0.0.1:5177", Variant: "default"}) {
+								Twig
 							}
 						}
 					}

@@ -1,14 +1,14 @@
 {
   "title": "UI8Kit Codegen",
-  "subtitle": "One typed render contract — four generated runtimes with identical DOM, design, and ARIA.",
+  "subtitle": "One typed render contract — seven generated runtimes with identical DOM, design, and ARIA.",
   "features": [
     {
       "title": "Spec-driven",
       "description": "Brick definitions in a tiny expression IR — no hand-written drift across stacks."
     },
     {
-      "title": "Four runtimes",
-      "description": "Go Templ, React 19, Svelte 5, and Vue 3 emitted from the same source."
+      "title": "Seven runtimes",
+      "description": "Go Templ, React 19, Svelte 5, Vue 3, Latte, Twig, and static HTML from the same source."
     },
     {
       "title": "DOM parity",
@@ -19,6 +19,8 @@
     { "id": "templ", "label": "Go Templ", "port": 8080 },
     { "id": "react", "label": "React 19", "port": 5173 },
     { "id": "svelte", "label": "Svelte 5", "port": 5174 },
-    { "id": "vue", "label": "Vue 3", "port": 5175 }
+    { "id": "vue", "label": "Vue 3", "port": 5175 },
+    { "id": "latte", "label": "Latte", "port": 5176 },
+    { "id": "twig", "label": "Twig", "port": 5177 }
   ]
 }

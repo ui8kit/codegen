@@ -1,0 +1,13 @@
+{parameters string $runtime = 'Latte'}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>UI8Kit Codegen · Latte</title>
+		<link rel="stylesheet" href="/static/css/app.css">
+	</head>
+	<body class="bg-background text-foreground antialiased">
+		{include 'welcome.latte', runtime: $runtime}
+	</body>
+</html>

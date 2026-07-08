@@ -1,0 +1,107 @@
+{parameters string $runtime = 'Latte'}
+
+{* Hero *}
+{capture $hero}
+	{include '../../../generated/ui/badge/Badge.latte', variant: 'outline', class: 'text-xs uppercase tracking-wide', children: $runtime}
+	{include '../../../generated/ui/title/Title.latte', as: 1, class: 'text-3xl font-bold tracking-tight', children: 'UI8Kit Codegen'}
+	{include '../../../generated/ui/text/Text.latte', class: 'max-w-2xl text-muted-foreground', children: 'One typed render contract — seven generated runtimes with identical DOM, design, and ARIA.'}
+{/capture}
+{capture $heroStack}
+	{include '../../../generated/ui/stack/Stack.latte', class: 'items-center gap-4 text-center', children: (string) $hero}
+{/capture}
+
+{* Primitives card *}
+{capture $buttons}
+	{include '../../../generated/ui/button/Button.latte', variant: 'default', size: 'sm', children: 'Default'}
+	{include '../../../generated/ui/button/Button.latte', variant: 'secondary', size: 'sm', children: 'Secondary'}
+	{include '../../../generated/ui/button/Button.latte', variant: 'outline', size: 'sm', children: 'Outline'}
+	{include '../../../generated/ui/button/Button.latte', variant: 'ghost', size: 'sm', children: 'Ghost'}
+	{include '../../../generated/ui/button/Button.latte', variant: 'destructive', size: 'sm', children: 'Destructive'}
+{/capture}
+{capture $badges}
+	{include '../../../generated/ui/badge/Badge.latte', variant: 'default', children: 'Badge'}
+	{include '../../../generated/ui/badge/Badge.latte', variant: 'secondary', children: 'Secondary'}
+	{include '../../../generated/ui/badge/Badge.latte', variant: 'outline', children: 'Outline'}
+{/capture}
+{capture $showcase}
+	{include '../../../generated/ui/group/Group.latte', class: 'flex-wrap gap-2', children: (string) $buttons}
+	{include '../../../generated/ui/group/Group.latte', class: 'flex-wrap gap-2', children: (string) $badges}
+{/capture}
+{capture $showcaseStack}
+	{include '../../../generated/ui/stack/Stack.latte', class: 'gap-4', children: (string) $showcase}
+{/capture}
+{capture $primitivesTitle}
+	{include '../../../generated/ui/card/CardTitle.latte', children: 'Generated primitives'}
+{/capture}
+{capture $primitivesCardInner}
+	{include '../../../generated/ui/card/CardHeader.latte', children: (string) $primitivesTitle}
+	{include '../../../generated/ui/card/CardContent.latte', children: (string) $showcaseStack}
+{/capture}
+{capture $primitivesCard}
+	{include '../../../generated/ui/card/Card.latte', variant: 'default', children: (string) $primitivesCardInner}
+{/capture}
+
+{* Feature cards *}
+{var $features = [
+	['title' => 'Spec-driven', 'description' => 'Brick definitions in a tiny expression IR — no hand-written drift across stacks.'],
+	['title' => 'Seven runtimes', 'description' => 'Go Templ, React 19, Svelte 5, Vue 3, Latte, Twig, and static HTML from the same source.'],
+	['title' => 'DOM parity', 'description' => 'The canonical renderer is the executable specification, verified by tests.'],
+]}
+{capture $featureCards}
+	{foreach $features as $feature}
+		{capture $featureTitle}
+			{include '../../../generated/ui/card/CardTitle.latte', children: $feature['title']}
+		{/capture}
+		{capture $featureText}
+			{include '../../../generated/ui/text/Text.latte', class: 'text-sm text-muted-foreground', children: $feature['description']}
+		{/capture}
+		{capture $featureInner}
+			{include '../../../generated/ui/card/CardHeader.latte', children: (string) $featureTitle}
+			{include '../../../generated/ui/card/CardContent.latte', children: (string) $featureText}
+		{/capture}
+		{include '../../../generated/ui/card/Card.latte', variant: 'muted', children: (string) $featureInner}
+	{/foreach}
+{/capture}
+{capture $featureGrid}
+	{include '../../../generated/ui/grid/Grid.latte', cols: '1-3', class: 'gap-4', children: (string) $featureCards}
+{/capture}
+
+{* Runtime links *}
+{var $runtimes = [
+	['label' => 'Go Templ', 'port' => 8080],
+	['label' => 'React 19', 'port' => 5173],
+	['label' => 'Svelte 5', 'port' => 5174],
+	['label' => 'Vue 3', 'port' => 5175],
+	['label' => 'Latte', 'port' => 5176],
+	['label' => 'Twig', 'port' => 5177],
+]}
+{capture $links}
+	{foreach $runtimes as $rt}
+		{include '../../../generated/ui/link/Link.latte', href: 'http://127.0.0.1:' . $rt['port'], variant: 'default', children: $rt['label']}
+	{/foreach}
+{/capture}
+{capture $linksLabel}
+	{include '../../../generated/ui/text/Text.latte', class: 'text-sm font-medium', children: 'Preview other runtimes'}
+{/capture}
+{capture $linksGroup}
+	{include '../../../generated/ui/group/Group.latte', class: 'flex-wrap gap-3', children: (string) $links}
+{/capture}
+{capture $linksStack}
+	{include '../../../generated/ui/stack/Stack.latte', class: 'gap-3', children: (string) $linksLabel . (string) $linksGroup}
+{/capture}
+{capture $linksBox}
+	{include '../../../generated/ui/box/Box.latte', class: 'rounded-lg border border-border bg-card p-4', children: (string) $linksStack}
+{/capture}
+
+{capture $footer}
+	{include '../../../generated/ui/text/Text.latte', class: 'text-center text-sm text-muted-foreground', children: 'Same shadcn tokens · generated ui/ primitives · @ui8kit/codegen'}
+{/capture}
+
+{* Page assembly *}
+{capture $pageStack}
+	{include '../../../generated/ui/stack/Stack.latte', class: 'gap-8', children: (string) $heroStack . (string) $primitivesCard . (string) $featureGrid . (string) $linksBox . (string) $footer}
+{/capture}
+{capture $container}
+	{include '../../../generated/ui/container/Container.latte', class: 'mx-auto max-w-4xl px-4 py-16', children: (string) $pageStack}
+{/capture}
+{include '../../../generated/ui/block/Block.latte', tag: 'main', class: 'min-h-screen bg-muted/30 text-foreground', children: (string) $container}

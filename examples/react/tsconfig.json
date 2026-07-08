@@ -15,5 +15,5 @@
       "@ui/*": ["../../generated/ui/*"]
     }
   },
-  "include": ["src/**/*.tsx", "../data/**/*.json"]
+  "include": ["src/**/*.tsx", "script/**/*.tsx", "../data/**/*.json"]
 }

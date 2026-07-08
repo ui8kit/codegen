@@ -1,8 +1,8 @@
 # @ui8kit/codegen
 
 Spec-driven codegen engine for UI8Kit `ui/` primitives. One typed render
-contract per brick — four generated runtimes with an identical DOM, design,
-and ARIA contract:
+contract per brick — six generated runtimes (plus a static HTML export) with
+an identical DOM, design, and ARIA contract:
 
 | Runtime | Output | Composition model |
 |---|---|---|
@@ -10,11 +10,22 @@ and ARIA contract:
 | **React 19** | `ui/<brick>/<brick>.tsx` | `forwardRef`, `asChild` via `Slot`, rest props |
 | **Svelte 5** | `ui/<brick>/<Part>.svelte` | runes, snippets, `<svelte:element>` |
 | **Vue 3** | `ui/<brick>/<Part>.vue` | `<script setup>`, slots, `<component :is>` |
+| **Latte** | `ui/<brick>/<Part>.latte` | typed `{parameters}`, `n:attr`, children as HTML string |
+| **Twig** | `ui/<brick>/<Part>.html.twig` | `ui8kit_attr_str`, `include with`, children as HTML string |
 
-All four consume the **same** colocated `*.variants.json` (CVA-style class
-recipes) verbatim — Go embeds it, the TS runtimes import it. Attribute logic
-(default resolution, ARIA states, boolean presence) is written **once** as a
-small typed expression IR and printed idiomatically per runtime.
+All runtimes consume the **same** colocated `*.variants.json` (CVA-style
+class recipes) — Go embeds it, the TS runtimes import it, PHP gets it
+compiled into `php/UI8Kit/Classes.php`. Attribute logic (default resolution,
+ARIA states, boolean presence) is written **once** as a small typed
+expression IR and printed idiomatically per runtime.
+
+The PHP runtimes cover **structurally simple parts only** (60 of 63): a
+mechanical predicate (`src/domain/php-support.ts`) skips parts whose render
+tree needs loops over typed items or a children slot inside conditional
+branches — today that's `breadcrumb/Breadcrumb`, `select/Select`, and
+`icon/Icon`. There is no hand-maintained tier list; the CLI prints the skip
+summary on every generate. Class helpers (`Classes::iconClasses()` etc.) are
+still emitted for *every* part as the app-level escape hatch.
 
 MIT © UI8Kit.
 
@@ -46,17 +57,18 @@ the test suite on every run.
 ```bash
 npm install
 npm run check       # validate all brick definitions
-npm run generate    # emit all four runtimes into generated/
-npm test            # domain units + 4-runtime DOM parity (Go optional)
+npm run generate    # emit all six runtimes into generated/
+npm test            # domain units + 6-runtime DOM parity (Go + PHP optional)
 npm run verify      # check + typecheck (engine and generated) + tests
 ```
 
-Four local welcome previews (generated primitives + shadcn tokens) live in
+Seven local welcome previews (generated primitives + shadcn tokens) live in
 [`examples/`](examples/) — see [`examples/README.md`](examples/README.md).
 
 ```bash
 bun run generate && cd examples && bun install && bun run build:css
 bun run dev:templ   # :8080  ·  dev:react :5173  ·  dev:svelte :5174  ·  dev:vue :5175
+bun run dev:latte   # :5176  ·  dev:twig :5177   ·  build:html → examples/html/
 ```
 
 CLI flags:
@@ -65,7 +77,14 @@ CLI flags:
 npx tsx src/infrastructure/cli.ts generate \
   --out generated \
   --go-module github.com/ui8kit/ui \
-  --runtimes templ,react,svelte,vue
+  --runtimes templ,react,svelte,vue,latte,twig
+```
+
+PHP parity tests need `php` ≥ 8.1 and `composer` on the PATH (they are
+skipped otherwise, same policy as the Go Templ suite):
+
+```bash
+sudo apt-get install -y php-cli php-xml php-mbstring composer
 ```
 
 ## Generated tree
@@ -73,7 +92,12 @@ npx tsx src/infrastructure/cli.ts generate \
 ```
 generated/
   go.mod                      # module for the Templ output (--go-module)
+  composer.json               # Latte + Twig deps (vendor-dir: php/vendor)
   cmd/parity/main.go          # Go render harness used by parity tests
+  cmd/parity-latte/main.php   # Latte render harness (same JSON protocol)
+  cmd/parity-twig/main.php    # Twig render harness
+  php/UI8Kit/                 # PHP runtime: Rt.php, Classes.php (generated),
+                              # TwigExtension.php
   utils/                      # runtime support layer (Go + TS, shipped as-is)
     utils.go tags.go variants_json.go expr.go heading.go
     cn.ts variants.ts tags.ts expr.ts recipe-types.ts env.ts index.ts
@@ -91,15 +115,26 @@ generated/
       button.tsx              # React runtime
       Button.svelte           # Svelte 5 runtime
       Button.vue              # Vue 3 runtime
+      Button.latte            # Latte runtime (PHP)
+      Button.html.twig        # Twig runtime (PHP)
     card/
       Card.svelte CardHeader.svelte …   # one file per part (SFC constraint)
       card.tsx card.templ …             # single file for Go/React
 ```
 
-Consume the Templ output with `templ generate && go build`, and the TS
-outputs with any Vite-based setup (`@vitejs/plugin-vue`,
-`@sveltejs/vite-plugin-svelte`). Peer deps per runtime: `react`, `svelte`,
-`vue`, plus `clsx` + `tailwind-merge` for the shared `cn()`.
+Consume the Templ output with `templ generate && go build`, the TS outputs
+with any Vite-based setup (`@vitejs/plugin-vue`,
+`@sveltejs/vite-plugin-svelte`), and the PHP outputs with
+`composer install` in `generated/` plus a `FileLoader`/`FilesystemLoader`
+rooted at `generated/ui` (register `UI8Kit\TwigExtension` for Twig). Peer
+deps per runtime: `react`, `svelte`, `vue`, plus `clsx` + `tailwind-merge`
+for the shared `cn()`; `latte/latte ^3` or `twig/twig ^3` for PHP.
+
+PHP children are pre-rendered HTML strings (`children` parameter, printed
+with `|noescape` / `|raw`) — compose nested bricks with `{capture}` (Latte)
+or `{% set %}` (Twig) as shown in `examples/latte` and `examples/twig`.
+Class merging in PHP is plain concatenation like Go's `Cn`; parity is
+asserted on the *effective* Tailwind utility set.
 
 ## Architecture
 

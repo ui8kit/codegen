@@ -1,0 +1,105 @@
+{# Hero #}
+{% set hero %}
+	{% include 'badge/Badge.html.twig' with {'variant': 'outline', 'class': 'text-xs uppercase tracking-wide', 'children': runtime|default('Twig')} only %}
+	{% include 'title/Title.html.twig' with {'as': 1, 'class': 'text-3xl font-bold tracking-tight', 'children': 'UI8Kit Codegen'} only %}
+	{% include 'text/Text.html.twig' with {'class': 'max-w-2xl text-muted-foreground', 'children': 'One typed render contract — seven generated runtimes with identical DOM, design, and ARIA.'} only %}
+{% endset %}
+{% set heroStack %}
+	{% include 'stack/Stack.html.twig' with {'class': 'items-center gap-4 text-center', 'children': hero} only %}
+{% endset %}
+
+{# Primitives card #}
+{% set buttons %}
+	{% include 'button/Button.html.twig' with {'variant': 'default', 'size': 'sm', 'children': 'Default'} only %}
+	{% include 'button/Button.html.twig' with {'variant': 'secondary', 'size': 'sm', 'children': 'Secondary'} only %}
+	{% include 'button/Button.html.twig' with {'variant': 'outline', 'size': 'sm', 'children': 'Outline'} only %}
+	{% include 'button/Button.html.twig' with {'variant': 'ghost', 'size': 'sm', 'children': 'Ghost'} only %}
+	{% include 'button/Button.html.twig' with {'variant': 'destructive', 'size': 'sm', 'children': 'Destructive'} only %}
+{% endset %}
+{% set badges %}
+	{% include 'badge/Badge.html.twig' with {'variant': 'default', 'children': 'Badge'} only %}
+	{% include 'badge/Badge.html.twig' with {'variant': 'secondary', 'children': 'Secondary'} only %}
+	{% include 'badge/Badge.html.twig' with {'variant': 'outline', 'children': 'Outline'} only %}
+{% endset %}
+{% set showcase %}
+	{% include 'group/Group.html.twig' with {'class': 'flex-wrap gap-2', 'children': buttons} only %}
+	{% include 'group/Group.html.twig' with {'class': 'flex-wrap gap-2', 'children': badges} only %}
+{% endset %}
+{% set showcaseStack %}
+	{% include 'stack/Stack.html.twig' with {'class': 'gap-4', 'children': showcase} only %}
+{% endset %}
+{% set primitivesTitle %}
+	{% include 'card/CardTitle.html.twig' with {'children': 'Generated primitives'} only %}
+{% endset %}
+{% set primitivesInner %}
+	{% include 'card/CardHeader.html.twig' with {'children': primitivesTitle} only %}
+	{% include 'card/CardContent.html.twig' with {'children': showcaseStack} only %}
+{% endset %}
+{% set primitivesCard %}
+	{% include 'card/Card.html.twig' with {'variant': 'default', 'children': primitivesInner} only %}
+{% endset %}
+
+{# Feature cards #}
+{% set features = [
+	{'title': 'Spec-driven', 'description': 'Brick definitions in a tiny expression IR — no hand-written drift across stacks.'},
+	{'title': 'Seven runtimes', 'description': 'Go Templ, React 19, Svelte 5, Vue 3, Latte, Twig, and static HTML from the same source.'},
+	{'title': 'DOM parity', 'description': 'The canonical renderer is the executable specification, verified by tests.'}
+] %}
+{% set featureCards %}
+	{% for feature in features %}
+		{% set featureTitle %}
+			{% include 'card/CardTitle.html.twig' with {'children': feature.title} only %}
+		{% endset %}
+		{% set featureText %}
+			{% include 'text/Text.html.twig' with {'class': 'text-sm text-muted-foreground', 'children': feature.description} only %}
+		{% endset %}
+		{% set featureInner %}
+			{% include 'card/CardHeader.html.twig' with {'children': featureTitle} only %}
+			{% include 'card/CardContent.html.twig' with {'children': featureText} only %}
+		{% endset %}
+		{% include 'card/Card.html.twig' with {'variant': 'muted', 'children': featureInner} only %}
+	{% endfor %}
+{% endset %}
+{% set featureGrid %}
+	{% include 'grid/Grid.html.twig' with {'cols': '1-3', 'class': 'gap-4', 'children': featureCards} only %}
+{% endset %}
+
+{# Runtime links #}
+{% set runtimes = [
+	{'label': 'Go Templ', 'port': 8080},
+	{'label': 'React 19', 'port': 5173},
+	{'label': 'Svelte 5', 'port': 5174},
+	{'label': 'Vue 3', 'port': 5175},
+	{'label': 'Latte', 'port': 5176},
+	{'label': 'Twig', 'port': 5177}
+] %}
+{% set links %}
+	{% for rt in runtimes %}
+		{% include 'link/Link.html.twig' with {'href': 'http://127.0.0.1:' ~ rt.port, 'variant': 'default', 'children': rt.label} only %}
+	{% endfor %}
+{% endset %}
+{% set linksLabel %}
+	{% include 'text/Text.html.twig' with {'class': 'text-sm font-medium', 'children': 'Preview other runtimes'} only %}
+{% endset %}
+{% set linksGroup %}
+	{% include 'group/Group.html.twig' with {'class': 'flex-wrap gap-3', 'children': links} only %}
+{% endset %}
+{% set linksStack %}
+	{% include 'stack/Stack.html.twig' with {'class': 'gap-3', 'children': linksLabel ~ linksGroup} only %}
+{% endset %}
+{% set linksBox %}
+	{% include 'box/Box.html.twig' with {'class': 'rounded-lg border border-border bg-card p-4', 'children': linksStack} only %}
+{% endset %}
+
+{% set footer %}
+	{% include 'text/Text.html.twig' with {'class': 'text-center text-sm text-muted-foreground', 'children': 'Same shadcn tokens · generated ui/ primitives · @ui8kit/codegen'} only %}
+{% endset %}
+
+{# Page assembly #}
+{% set pageStack %}
+	{% include 'stack/Stack.html.twig' with {'class': 'gap-8', 'children': heroStack ~ primitivesCard ~ featureGrid ~ linksBox ~ footer} only %}
+{% endset %}
+{% set container %}
+	{% include 'container/Container.html.twig' with {'class': 'mx-auto max-w-4xl px-4 py-16', 'children': pageStack} only %}
+{% endset %}
+{% include 'block/Block.html.twig' with {'tag': 'main', 'class': 'min-h-screen bg-muted/30 text-foreground', 'children': container} only %}
