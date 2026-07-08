@@ -1,0 +1,33 @@
+{
+  "name": "ui8kit-codegen-examples",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:css": "tailwindcss -i ./web/static/css/input.css -o ./web/static/css/app.css --minify",
+    "gen:templ": "cd ../generated && go run github.com/a-h/templ/cmd/templ@v0.3.1001 generate ./... && cd ../examples/templ && go run github.com/a-h/templ/cmd/templ@v0.3.1001 generate ./...",
+    "dev:templ": "bun run gen:templ && bun run build:css && cd templ && go run ./cmd/server",
+    "dev:react": "bun run build:css && vite --config react/vite.config.ts",
+    "dev:svelte": "bun run build:css && vite --config svelte/vite.config.ts",
+    "dev:vue": "bun run build:css && vite --config vue/vite.config.ts"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "svelte": "^5.19.0",
+    "tailwind-merge": "^2.6.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tailwindcss/cli": "^4.2.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.5.2",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "sirv": "^3.0.1",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.7.3",
+    "vite": "^6.3.5"
+  }
+}

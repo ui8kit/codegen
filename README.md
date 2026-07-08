@@ -51,6 +51,14 @@ npm test            # domain units + 4-runtime DOM parity (Go optional)
 npm run verify      # check + typecheck (engine and generated) + tests
 ```
 
+Four local welcome previews (generated primitives + shadcn tokens) live in
+[`examples/`](examples/) — see [`examples/README.md`](examples/README.md).
+
+```bash
+bun run generate && cd examples && bun install && bun run build:css
+bun run dev:templ   # :8080  ·  dev:react :5173  ·  dev:svelte :5174  ·  dev:vue :5175
+```
+
 CLI flags:
 
 ```bash

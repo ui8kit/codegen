@@ -8,13 +8,18 @@
     "ui8kit-codegen": "./bin/ui8kit-codegen.js"
   },
   "scripts": {
-    "generate": "tsx src/infrastructure/cli.ts generate --out generated",
-    "check": "tsx src/infrastructure/cli.ts check",
+    "generate": "bun src/infrastructure/cli.ts generate --out generated",
+    "check": "bun src/infrastructure/cli.ts check",
+    "dev:templ": "cd examples && bun run dev:templ",
+    "dev:react": "cd examples && bun run dev:react",
+    "dev:svelte": "cd examples && bun run dev:svelte",
+    "dev:vue": "cd examples && bun run dev:vue",
+    "build:css": "cd examples && bun run build:css",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "typecheck:generated": "npm run generate -- --out generated && tsc -p tsconfig.generated.json",
-    "verify": "npm run check && npm run typecheck && npm run typecheck:generated && npm run test"
+    "typecheck:generated": "bun run generate && bun x tsc -p tsconfig.generated.json",
+    "verify": "bun run check && bun x tsc --noEmit && bun run typecheck:generated && bun x vitest run"
   },
   "dependencies": {
     "clsx": "^2.1.1",

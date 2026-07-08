@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@source "../../../../generated/ui/**/*.tsx";
+@source "../../../../generated/ui/**/*.svelte";
+@source "../../../../generated/ui/**/*.vue";
+@source "../../../../generated/ui/**/*.templ";
+@source "../../../../generated/ui/**/*_templ.go";
+@source "../../../../generated/ui/**/*.variants.json";
+@source "../../../../generated/utils/**/*.ts";
+@source "../../../react/src/**/*.tsx";
+@source "../../../svelte/src/**/*.svelte";
+@source "../../../vue/src/**/*.vue";
+@source "../../../templ/**/*.templ";
+@source "../../../templ/**/*_templ.go";
+
+@import "./tokens.css";
