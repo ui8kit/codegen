@@ -3,3 +3,5 @@ examples/node_modules/
 generated/
 *.log
 .DS_Store
+.dist/
+.manual/

@@ -67,6 +67,10 @@ describe.skipIf(!available)("templ runtime parity", () => {
       cwd: GENERATED,
       stdio: ["ignore", "ignore", "inherit"],
     });
+    execFileSync("go", ["mod", "tidy"], {
+      cwd: GENERATED,
+      stdio: ["ignore", "ignore", "inherit"],
+    });
     const stdout = execFileSync("go", ["run", "./cmd/parity"], {
       cwd: GENERATED,
       input: JSON.stringify(

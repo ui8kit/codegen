@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
       - uses: oven-sh/setup-bun@v2
       - uses: actions/setup-go@v5
         with:
@@ -22,5 +18,5 @@ jobs:
         with:
           php-version: "8.3"
           tools: composer
-      - run: npm ci
-      - run: npm run verify
+      - run: bun install --frozen-lockfile
+      - run: bun run verify
