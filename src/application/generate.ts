@@ -9,14 +9,17 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { fileStem, type BrickDef } from "../domain/model";
+import { phpSupported } from "../domain/php-support";
 import { validateRegistry } from "../domain/validate";
 import { BANNER, type Emitter, type GeneratedFile } from "../emitters/common";
+import { LatteEmitter } from "../emitters/latte";
 import { ReactEmitter } from "../emitters/react";
 import { SvelteEmitter } from "../emitters/svelte";
 import { TemplEmitter } from "../emitters/templ";
+import { TwigEmitter } from "../emitters/twig";
 import { VueEmitter } from "../emitters/vue";
 
-export type RuntimeName = "templ" | "react" | "svelte" | "vue";
+export type RuntimeName = "templ" | "react" | "svelte" | "vue" | "latte" | "twig";
 
 export interface GenerateOptions {
   goModule?: string;
@@ -25,7 +28,19 @@ export interface GenerateOptions {
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const DEFAULT_GO_MODULE = "github.com/ui8kit/ui";
-export const ALL_RUNTIMES: RuntimeName[] = ["templ", "react", "svelte", "vue"];
+export const ALL_RUNTIMES: RuntimeName[] = ["templ", "react", "svelte", "vue", "latte", "twig"];
+
+/** Parts the PHP template emitters skip, with reasons (for the CLI summary). */
+export function phpSkippedParts(bricks: BrickDef[]): Array<{ brick: string; part: string; reason: string }> {
+  const out: Array<{ brick: string; part: string; reason: string }> = [];
+  for (const brick of bricks) {
+    for (const part of brick.parts) {
+      const support = phpSupported(part);
+      if (!support.ok) out.push({ brick: brick.dir, part: part.name, reason: support.reason });
+    }
+  }
+  return out;
+}
 
 export async function generateFiles(
   bricks: BrickDef[],
@@ -40,6 +55,8 @@ export async function generateFiles(
   if (runtimes.includes("react")) emitters.push(new ReactEmitter());
   if (runtimes.includes("svelte")) emitters.push(new SvelteEmitter());
   if (runtimes.includes("vue")) emitters.push(new VueEmitter());
+  if (runtimes.includes("latte")) emitters.push(new LatteEmitter());
+  if (runtimes.includes("twig")) emitters.push(new TwigEmitter());
 
   const files: GeneratedFile[] = [];
   const emitTs = runtimes.some((r) => r === "react" || r === "svelte" || r === "vue");
@@ -69,6 +86,17 @@ export async function generateFiles(
     const { emitGoParityHarness, emitGoMod } = await import("../emitters/go-harness");
     files.push(emitGoMod(goModule));
     files.push(emitGoParityHarness(bricks, goModule));
+  }
+
+  if (runtimes.includes("latte") || runtimes.includes("twig")) {
+    const { emitPhpClasses } = await import("../emitters/php-classes");
+    const { emitComposerJson, emitLatteParityHarness, emitTwigParityHarness } = await import(
+      "../emitters/php-harness"
+    );
+    files.push(emitPhpClasses(bricks));
+    files.push(emitComposerJson());
+    if (runtimes.includes("latte")) files.push(emitLatteParityHarness());
+    if (runtimes.includes("twig")) files.push(emitTwigParityHarness());
   }
 
   // Fail loudly on path collisions — one brick must never overwrite another.
@@ -106,6 +134,16 @@ async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFi
   if (runtimes.includes("react")) {
     const slot = await readFile(join(PACKAGE_ROOT, "runtime", "react", "slot.tsx"), "utf8");
     files.push({ path: "ui/slot/slot.tsx", contents: slot });
+  }
+  if (runtimes.includes("latte") || runtimes.includes("twig")) {
+    const phpDir = join(PACKAGE_ROOT, "runtime", "php");
+    for (const name of await readdir(phpDir)) {
+      if (name === "TwigExtension.php" && !runtimes.includes("twig")) continue;
+      files.push({
+        path: `php/UI8Kit/${name}`,
+        contents: await readFile(join(phpDir, name), "utf8"),
+      });
+    }
   }
   return files;
 }

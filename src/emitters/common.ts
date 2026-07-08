@@ -12,8 +12,10 @@ export interface GeneratedFile {
   contents: string;
 }
 
+export type EmitterRuntime = "templ" | "react" | "svelte" | "vue" | "latte" | "twig";
+
 export interface Emitter {
-  readonly runtime: "templ" | "react" | "svelte" | "vue";
+  readonly runtime: EmitterRuntime;
   emit(brick: BrickDef): GeneratedFile[];
 }
 

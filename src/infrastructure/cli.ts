@@ -14,6 +14,7 @@ import {
   ALL_RUNTIMES,
   DEFAULT_GO_MODULE,
   generateFiles,
+  phpSkippedParts,
   writeFiles,
   type RuntimeName,
 } from "../application/generate";
@@ -61,6 +62,12 @@ async function main(): Promise<void> {
       console.log(
         `Generated ${files.length} files for ${runtimes.join(", ")} into ${out}/ (${bricks.length} bricks).`
       );
+      if (runtimes.includes("latte") || runtimes.includes("twig")) {
+        const skipped = phpSkippedParts(bricks);
+        const total = bricks.reduce((n, b) => n + b.parts.length, 0);
+        console.log(`PHP runtimes (latte/twig): ${total - skipped.length}/${total} parts.`);
+        for (const s of skipped) console.log(`  skipped ${s.brick}/${s.part}: ${s.reason}`);
+      }
       return;
     }
     default:

@@ -74,6 +74,23 @@ export function htmlPropName(p: PropDef): string {
 }
 
 /**
+ * Latte/Twig prop name — PHP-compatible identifiers (no hyphens), HTML-native
+ * casing where unambiguous (`class`, `for`, `id`, `tabindex`), camelCase for
+ * ARIA (`ariaLabel`) since `aria-label` is not a valid PHP/Twig variable.
+ * Mirrored at runtime by `UI8Kit\Rt::params()` in `runtime/php/ui8kit.php`.
+ */
+export function phpPropName(p: PropDef): string {
+  if (p.name.startsWith("Aria")) return camelCase(p.name); // ariaLabel
+  if (p.name === "DataUI8Kit") return "dataUi8kit";
+  return htmlPropName(p);
+}
+
+/** Latte/Twig loop-item field key (mirrors `Rt::params` item conversion). */
+export function phpItemKey(field: string): string {
+  return camelCase(field);
+}
+
+/**
  * Safe local identifier for a prop inside generated TS/Svelte/Vue code
  * (hyphenated and reserved names need a destructure rename).
  */

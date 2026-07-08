@@ -5,7 +5,7 @@
 
 import type { BrickDef, PartDef, PropDef } from "../../src/domain/model";
 export type { BrickDef };
-import { htmlPropName, localIdent, reactPropName } from "../../src/domain/naming";
+import { htmlPropName, localIdent, phpPropName, reactPropName } from "../../src/domain/naming";
 
 export type CanonicalProps = Record<string, unknown>;
 
@@ -97,6 +97,24 @@ export function vueProps(part: PartDef, canonical: CanonicalProps): Record<strin
     else out[localIdent(def.name)] = value;
   }
   for (const [def, value] of passthrough) out[htmlPropName(def)] = value;
+  return out;
+}
+
+/**
+ * Latte/Twig template parameters. Every declared and passthrough prop is a
+ * typed template parameter (phpPropName), so values are coerced to the
+ * parameter type — Latte enforces `{parameters}` types at render time.
+ */
+export function phpProps(part: PartDef, canonical: CanonicalProps): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [name, value] of Object.entries(canonical)) {
+    const def = part.props.find((p) => p.name === name);
+    if (!def) continue;
+    if (def.type === "attrs" || def.type === "children" || def.type === "items") continue;
+    const coerced =
+      def.type === "bool" ? Boolean(value) : def.type === "int" ? Number(value) : String(value);
+    out[phpPropName(def)] = coerced;
+  }
   return out;
 }
 
