@@ -5,13 +5,13 @@
   "scripts": {
     "build:css": "tailwindcss -i ./web/static/css/input.css -o ./web/static/css/app.css --minify",
     "gen:templ": "cd ../generated && go run github.com/a-h/templ/cmd/templ@v0.3.1001 generate ./... && cd ../examples/templ && go run github.com/a-h/templ/cmd/templ@v0.3.1001 generate ./...",
-    "composer:install": "cd ../generated && composer install --no-interaction",
+    "composer:install": "bun scripts/composer-install.mjs",
     "dev:templ": "bun run gen:templ && bun run build:css && cd templ && go run ./cmd/server",
     "dev:react": "bun run build:css && vite --config react/vite.config.ts",
     "dev:svelte": "bun run build:css && vite --config svelte/vite.config.ts",
     "dev:vue": "bun run build:css && vite --config vue/vite.config.ts",
-    "dev:latte": "bun run composer:install && bun run build:css && cd latte && php -S 127.0.0.1:5176 server.php",
-    "dev:twig": "bun run composer:install && bun run build:css && cd twig && php -S 127.0.0.1:5177 server.php",
+    "dev:latte": "bun run composer:install && bun run build:css && bun scripts/php-server.mjs latte 5176",
+    "dev:twig": "bun run composer:install && bun run build:css && bun scripts/php-server.mjs twig 5177",
     "build:html": "bun run build:css && bun react/script/generate-static.tsx"
   },
   "dependencies": {
