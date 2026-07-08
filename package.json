@@ -18,11 +18,11 @@
     "dev:twig": "cd examples && bun run dev:twig",
     "build:html": "cd examples && bun run build:html",
     "build:css": "cd examples && bun run build:css",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
     "typecheck": "tsc --noEmit",
     "typecheck:generated": "bun run generate && bun x tsc -p tsconfig.generated.json",
-    "verify": "bun run check && bun x tsc --noEmit && bun run typecheck:generated && bun x vitest run"
+    "verify": "bun run check && bun x tsc --noEmit && bun run typecheck:generated && bun test"
   },
   "dependencies": {
     "clsx": "^2.1.1",

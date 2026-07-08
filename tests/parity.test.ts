@@ -18,6 +18,8 @@ import { renderToString as vueRenderToString } from "@vue/server-renderer";
 import { bricks } from "../bricks/index";
 import { fileStem, type BrickDef, type PartDef } from "../src/domain/model";
 import { renderPart } from "../src/domain/render";
+import { ensureGenerated } from "./support/ensure-generated";
+import { loadGeneratedUiModules } from "./support/generated-ui";
 import { showcaseCases } from "./support/fixtures";
 import { normalizeHtml } from "./support/normalize";
 import {
@@ -29,13 +31,12 @@ import {
   type CanonicalProps,
 } from "./support/props";
 
+await ensureGenerated();
+const { reactModules, svelteModules, vueModules } = await loadGeneratedUiModules();
+
 const CHILD_TEXT = "Content";
 
 type ReactModule = Record<string, ComponentType<Record<string, unknown>>>;
-
-const reactModules = import.meta.glob("../generated/ui/*/*.tsx", { eager: true });
-const svelteModules = import.meta.glob("../generated/ui/*/*.svelte", { eager: true });
-const vueModules = import.meta.glob("../generated/ui/*/*.vue", { eager: true });
 
 function reactComponent(brick: BrickDef, part: PartDef) {
   const mod = reactModules[`../generated/ui/${brick.dir}/${fileStem(brick)}.tsx`] as ReactModule;

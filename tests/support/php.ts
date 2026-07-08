@@ -23,6 +23,13 @@ export function phpAvailable(): boolean {
   return spawnSync("php", ["-v"], { stdio: "ignore" }).status === 0;
 }
 
+/** PHP parity needs vendor deps; skip when composer is missing and vendor is not installed. */
+export function phpParityAvailable(): boolean {
+  if (!phpAvailable()) return false;
+  if (existsSync(join(GENERATED, "php", "vendor", "autoload.php"))) return true;
+  return spawnSync("composer", ["--version"], { stdio: "ignore" }).status === 0;
+}
+
 /** Install Latte/Twig into generated/php/vendor once per checkout. */
 export function ensureComposerInstall(): void {
   if (existsSync(join(GENERATED, "php", "vendor", "autoload.php"))) return;

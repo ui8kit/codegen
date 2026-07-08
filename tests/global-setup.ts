@@ -3,10 +3,8 @@
  * exercise the current emitters.
  */
 
-import { bricks } from "../bricks/index";
-import { generateFiles, writeFiles } from "../src/application/generate";
+import { ensureGenerated } from "./support/ensure-generated";
 
 export default async function setup(): Promise<void> {
-  const files = await generateFiles(bricks);
-  await writeFiles(files, "generated");
+  await ensureGenerated();
 }

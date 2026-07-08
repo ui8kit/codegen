@@ -5,9 +5,9 @@
 
 import { describe, it } from "vitest";
 
-import { phpAvailable, runPhpParity } from "./support/php";
+import { phpParityAvailable, runPhpParity } from "./support/php";
 
-describe.skipIf(!phpAvailable())("twig runtime parity", () => {
+describe.skipIf(!phpParityAvailable())("twig runtime parity", () => {
   it("renders all supported parts identically to the canonical renderer", { timeout: 120_000 }, () => {
     runPhpParity("parity-twig", "html.twig");
   });
