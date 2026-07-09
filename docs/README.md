@@ -16,15 +16,17 @@ Spec-driven codegen engine for UI8Kit `ui/` primitives. One typed render contrac
 | [Testing and CI](./testing-and-ci.md) | Test suites, parity harnesses, toolchains, GitHub Actions |
 | [Examples](./examples.md) | Seven welcome previews, static export, local dev servers |
 | [PHP complex parts](./php-complex-parts.md) | The three structurally complex parts skipped by Latte/Twig |
+| [Latte theme bundle](./latte-bundle.md) | Emit Latte-only package for wp-fasty / theme consumers |
 
 ## Quick reference
 
 ```bash
 bun install
-bun run check          # validate all brick definitions
-bun run generate       # emit all runtimes into generated/
-bun test               # domain + parity (Go/PHP optional)
-bun run verify         # check + typecheck + tests (CI command)
+bun run check                 # validate all brick definitions
+bun run generate              # emit all runtimes into generated/
+bun run generate:latte-bundle # Latte-only package (no Twig / parity harness)
+bun test                      # domain + parity (Go/PHP optional)
+bun run verify                # check + typecheck + tests (CI command)
 ```
 
 **Inventory:** 33 bricks · 63 exported parts · 60 PHP template parts · 6 codegen runtimes

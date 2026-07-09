@@ -24,6 +24,25 @@ export function emitComposerJson(): GeneratedFile {
   return { path: "composer.json", contents: JSON.stringify(composer, null, 2) + "\n" };
 }
 
+/** Latte-only composer.json for theme bundles (no Twig, no parity harness). */
+export function emitLatteBundleComposerJson(): GeneratedFile {
+  const composer = {
+    name: "ui8kit/latte-primitives",
+    description: "Generated UI8Kit Latte primitives. Do not edit — regenerate via @ui8kit/codegen.",
+    type: "library",
+    license: "MIT",
+    config: { "vendor-dir": "php/vendor" },
+    require: {
+      php: ">=8.1",
+      "latte/latte": "^3.0",
+    },
+    autoload: {
+      "psr-4": { "UI8Kit\\": "php/UI8Kit/" },
+    },
+  };
+  return { path: "composer.json", contents: JSON.stringify(composer, null, 2) + "\n" };
+}
+
 export function emitLatteParityHarness(): GeneratedFile {
   const contents = `<?php
 

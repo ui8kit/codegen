@@ -9,6 +9,7 @@
   },
   "scripts": {
     "generate": "bun src/infrastructure/cli.ts generate --out generated",
+    "generate:latte-bundle": "bun src/application/generate-latte-bundle.ts",
     "check": "bun src/infrastructure/cli.ts check",
     "dev:templ": "cd examples && bun run dev:templ",
     "dev:react": "cd examples && bun run dev:react",
