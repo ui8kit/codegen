@@ -1,0 +1,14 @@
+.manual/
+.obsidian/
+.vscode/
+.cursor/
+node_modules/
+vendor/
+~cache/
+bun.lockb
+bun.lock
+composer.lock
+.cursorignore
+simple-mpa/
+.env
+dist
