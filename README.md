@@ -1,4 +1,4 @@
-# @ui8kit/codegen
+# Spec-driven UI Codegen
 
 Spec-driven codegen engine for UI8Kit `ui/` primitives. One typed render
 contract per brick — six generated runtimes (plus a static HTML export) with
@@ -27,8 +27,6 @@ branches — today that's `breadcrumb/Breadcrumb`, `select/Select`, and
 summary on every generate. Class helpers (`Classes::iconClasses()` etc.) are
 still emitted for *every* part as the app-level escape hatch.
 
-MIT © UI8Kit.
-
 ## Why an IR instead of four hand-written files
 
 The upstream registry hand-writes `.templ` and `.tsx` pairs against a shared
@@ -55,11 +53,11 @@ the test suite on every run.
 ## Quick start
 
 ```bash
-bun install
-bun run check       # validate all brick definitions
-bun run generate    # emit all six runtimes into generated/
-bun test            # domain units + 6-runtime DOM parity (Go + PHP optional)
-bun run verify      # check + typecheck (engine and generated) + tests
+npm install
+npm run check       # validate all brick definitions
+npm run generate    # emit all six runtimes into generated/
+npm test            # domain units + 6-runtime DOM parity (Go + PHP optional)
+npm run verify      # check + typecheck (engine and generated) + tests
 ```
 
 Seven local welcome previews (generated primitives + shadcn tokens) live in
@@ -266,10 +264,10 @@ helper, and the canonical reference DOM.
    `<name>.variants.json` (and optional `<name>.data.json` showcase
    fixtures — they automatically become parity test cases).
 2. Register it in `bricks/index.ts`.
-3. `bun run check` — the validator enforces recipe integrity, prop
+3. `npm run check` — the validator enforces recipe integrity, prop
    references, passthrough rules, and slot/children symmetry before anything
    is emitted.
-4. `bun test` — parity across all four runtimes is asserted automatically;
+4. `npm test` — parity across all four runtimes is asserted automatically;
    no per-runtime test writing needed.
 
 ## Deliberate deviations from the upstream hand-written pair
@@ -299,3 +297,5 @@ form controls, select, breadcrumb). Behavior-driven `components/` composites
 (Sheet, Tabs, Popover, Combobox, Menu, Toast) need the `@ui8kit/aria` client
 contract and are a separate phase — the engine's IR and emitters are ready to
 host them once that contract is specified.
+
+MIT © UI8Kit.
