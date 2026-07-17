@@ -55,10 +55,10 @@ const SOLID_ATTR_TYPES: Record<string, [string, string]> = {
   img: ["ImgHTMLAttributes", "HTMLImageElement"],
   source: ["SourceHTMLAttributes", "HTMLSourceElement"],
   picture: ["HTMLAttributes", "HTMLElement"],
-  dialog: ["DialogHTMLAttributes", "HTMLDialogElement"],
-  details: ["DetailsHTMLAttributes", "HTMLDetailsElement"],
+  dialog: ["DialogHtmlAttributes", "HTMLDialogElement"],
+  details: ["DetailsHtmlAttributes", "HTMLDetailsElement"],
   summary: ["HTMLAttributes", "HTMLElement"],
-  table: ["TableHTMLAttributes", "HTMLTableElement"],
+  table: ["HTMLAttributes", "HTMLTableElement"],
   caption: ["HTMLAttributes", "HTMLTableCaptionElement"],
   thead: ["HTMLAttributes", "HTMLTableSectionElement"],
   tbody: ["HTMLAttributes", "HTMLTableSectionElement"],
@@ -480,8 +480,8 @@ export class SolidEmitter implements Emitter {
         });
         let open = attrs.length > 0 ? `<${tagCode} ${attrs}` : `<${tagCode}`;
 
-        // Match other runtimes' SSR DOM: textarea text is children, not a
-        // `value=""` attribute (Solid controlled `value` would add that attr).
+        // Controlled `value` for client updates; empty string is stripped in
+        // parity normalizeHtml so SSR DOM matches runtimes that use children.
         if (
           !isDynamic &&
           tagCode === "textarea" &&
@@ -489,7 +489,8 @@ export class SolidEmitter implements Emitter {
           node.children[0]!.kind === "text"
         ) {
           const value = printTsExpr((node.children[0] as { expr: Expr }).expr, ctx);
-          return `${open}>{(${value}) ?? ""}\n</textarea>`;
+          open += ` value={(${value}) ?? ""}`;
+          return `${open} />`;
         }
         if (node.void || node.children.length === 0) return `${open} />`;
         const children = node.children

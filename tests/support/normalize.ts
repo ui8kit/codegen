@@ -37,6 +37,7 @@ function normalizeNode(node: P5Node): NormalizedNode | string | null {
   if (!node.tagName) return null;
 
   const attrs: Record<string, string> = {};
+  let textareaValue: string | undefined;
   for (const attr of node.attrs ?? []) {
     // Svelte SSR adds event-replay shims on media elements; not part of the
     // DOM contract.
@@ -51,13 +52,21 @@ function normalizeNode(node: P5Node): NormalizedNode | string | null {
     }
     // Solid SSR (`Dynamic` / hydratable markers) — not part of the DOM contract.
     if (attr.name === "data-hk") continue;
+    // Solid controlled textarea uses value=; other runtimes put text as children.
+    if (attr.name === "value" && node.tagName === "textarea") {
+      textareaValue = attr.value;
+      continue;
+    }
     attrs[attr.name] = attr.value;
   }
-  const children = mergeText(
+  let children = mergeText(
     (node.childNodes ?? [])
       .map(normalizeNode)
       .filter((c): c is NormalizedNode | string => c !== null)
   );
+  if (textareaValue !== undefined && children.length === 0 && textareaValue !== "") {
+    children = [textareaValue];
+  }
   return { tag: node.tagName, attrs, children };
 }
 

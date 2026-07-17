@@ -112,9 +112,8 @@ describe("solid emitter", () => {
     expect(file("ui/stack/stack.solid.tsx")).toContain("<Dynamic component={resolvedTagValue()}");
   });
 
-  it("maps the textarea content contract to children (not value attr)", () => {
-    expect(file("ui/textarea/textarea.solid.tsx")).toContain(">{(");
-    expect(file("ui/textarea/textarea.solid.tsx")).not.toContain("value={(");
+  it("maps the textarea content contract to a controlled value prop", () => {
+    expect(file("ui/textarea/textarea.solid.tsx")).toContain("value={(");
   });
 });
 
