@@ -49,6 +49,8 @@ function normalizeNode(node: P5Node): NormalizedNode | string | null {
       if (cls !== "") attrs["class"] = cls;
       continue;
     }
+    // Solid SSR (`Dynamic` / hydratable markers) — not part of the DOM contract.
+    if (attr.name === "data-hk") continue;
     attrs[attr.name] = attr.value;
   }
   const children = mergeText(

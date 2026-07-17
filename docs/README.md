@@ -1,6 +1,6 @@
 # UI8Kit Codegen — Documentation
 
-Spec-driven codegen engine for UI8Kit `ui/` primitives. One typed render contract per brick, six generated runtimes (plus a static HTML export), and DOM parity verified by tests.
+Spec-driven codegen engine for UI8Kit `ui/` primitives. One typed render contract per brick, seven generated runtimes (plus a static HTML export), and DOM parity verified by tests.
 
 ## Contents
 

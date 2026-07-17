@@ -1,12 +1,12 @@
 # UI8Kit Codegen
 
-**One brick definition → six identical runtimes.**
+**One brick definition → seven identical runtimes.**
 
-Spec-driven codegen for UI8Kit `ui/` primitives. Define props, variants, and a render tree once; emit idiomatic Templ, React, Svelte, Vue, Latte, and Twig with the same DOM, design tokens, and ARIA contract — verified by parity tests, not by review.
+Spec-driven codegen for UI8Kit `ui/` primitives. Define props, variants, and a render tree once; emit idiomatic Templ, React, Svelte, Vue, SolidJS, Latte, and Twig with the same DOM, design tokens, and ARIA contract — verified by parity tests, not by review.
 
 | Fact | Value |
 |------|-------|
-| **Inventory** | 33 bricks · 63 parts · 6 runtimes |
+| **Inventory** | 33 bricks · 63 parts · 7 runtimes |
 | **PHP templates** | 60 / 63 parts (3 skipped by structural predicate) |
 | **License** | MIT |
 
@@ -20,6 +20,7 @@ Spec-driven codegen for UI8Kit `ui/` primitives. Define props, variants, and a r
 | **React 19** | `ui/<brick>/<brick>.tsx` | `forwardRef`, `asChild` / `Slot` |
 | **Svelte 5** | `ui/<brick>/<Part>.svelte` | runes, snippets, `<svelte:element>` |
 | **Vue 3** | `ui/<brick>/<Part>.vue` | `<script setup>`, slots, `<component :is>` |
+| **SolidJS** | `ui/<brick>/<brick>.solid.tsx` | `splitProps`, `Dynamic`, `*Classes()` |
 | **Latte** | `ui/<brick>/<Part>.latte` | typed `{parameters}`, `n:attr` |
 | **Twig** | `ui/<brick>/<Part>.html.twig` | `ui8kit_attr_str`, `include with` |
 
@@ -33,7 +34,7 @@ All runtimes share the same colocated `*.variants.json` (CVA-style recipes). Att
 
 ## Why codegen?
 
-Hand-writing `.templ` + `.tsx` (and then Svelte, Vue, Latte, Twig) multiplies drift. This engine inverts the workflow:
+Hand-writing `.templ` + `.tsx` (and then Svelte, Vue, Solid, Latte, Twig) multiplies drift. This engine inverts the workflow:
 
 1. **Brick definitions** (`bricks/<name>/<name>.def.ts`) — single source of truth
 2. **Canonical renderer** (`src/domain/render.ts`) — executable DOM spec
@@ -51,14 +52,14 @@ Identity across runtimes is a property of the test suite, not a convention.
 ```bash
 bun install
 bun run check       # validate all brick definitions
-bun run generate    # emit all six runtimes → generated/
+bun run generate    # emit all seven runtimes → generated/
 bun test            # domain units + DOM parity
 bun run verify      # check + typecheck + tests (CI equivalent)
 ```
 
 ### Local previews
 
-Seven welcome screens (generated primitives + shadcn tokens) live in [`examples/`](examples/):
+Eight welcome screens (generated primitives + shadcn tokens) live in [`examples/`](examples/):
 
 ```bash
 bun run generate && cd examples && bun install && bun run build:css
@@ -69,6 +70,7 @@ bun run dev:svelte  # :5174
 bun run dev:vue     # :5175
 bun run dev:latte   # :5176
 bun run dev:twig    # :5177
+bun run dev:solid   # :5178
 bun run build:html  # → examples/html/
 ```
 
@@ -78,7 +80,7 @@ bun run build:html  # → examples/html/
 bun src/infrastructure/cli.ts generate \
   --out generated \
   --go-module github.com/ui8kit/ui \
-  --runtimes templ,react,svelte,vue,latte,twig
+  --runtimes templ,react,svelte,vue,solid,latte,twig
 ```
 
 Also available: `bun run generate:latte-bundle` for a Latte-only package — see [docs/latte-bundle.md](docs/latte-bundle.md).
@@ -94,17 +96,17 @@ generated/
   php/UI8Kit/          # Rt.php, Classes.php, TwigExtension.php
   utils/               # shared runtime support (Go + TS)
   ui/
-    index.ts | index.svelte.ts | index.vue.ts
+    index.ts | index.svelte.ts | index.vue.ts | index.solid.ts
     button/
       button.variants.json   # shared CVA recipe
       button.shared.ts       # TS types + classes helpers
-      button.templ | button.tsx | Button.svelte | Button.vue
+      button.templ | button.tsx | button.solid.tsx | Button.svelte | Button.vue
       Button.latte | Button.html.twig
 ```
 
-**Consume:** Templ → `templ generate && go build` · TS → Vite (`@vitejs/plugin-vue`, `@sveltejs/vite-plugin-svelte`) · PHP → `composer install` in `generated/` with a loader rooted at `generated/ui`.
+**Consume:** Templ → `templ generate && go build` · TS → Vite (`@vitejs/plugin-vue`, `@sveltejs/vite-plugin-svelte`, `vite-plugin-solid`) · PHP → `composer install` in `generated/` with a loader rooted at `generated/ui`.
 
-Peer deps: `react` / `svelte` / `vue` + `clsx` + `tailwind-merge`; PHP: `latte/latte ^3` or `twig/twig ^3`.
+Peer deps: `react` / `svelte` / `vue` / `solid-js` + `clsx` + `tailwind-merge`; PHP: `latte/latte ^3` or `twig/twig ^3`.
 
 ---
 
@@ -119,7 +121,7 @@ src/
   infrastructure/  # CLI
 runtime/           # support files copied into generated/utils
 tests/             # domain units + cross-runtime parity
-examples/          # seven welcome previews
+examples/          # eight welcome previews
 docs/              # full documentation
 ```
 

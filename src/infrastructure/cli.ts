@@ -2,7 +2,7 @@
 /**
  * ui8kit-codegen CLI.
  *
- *   generate [--out <dir>] [--go-module <module>] [--runtimes templ,react,svelte,vue]
+ *   generate [--out <dir>] [--go-module <module>] [--runtimes templ,react,svelte,vue,solid]
  *   check                                  validate all brick definitions
  *   list                                   list bricks and parts
  */

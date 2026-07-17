@@ -70,6 +70,25 @@ Bun test preload compiles `.svelte` with `generate: "server"` for parity tests (
 
 **Peer deps:** `vue`, `clsx`, `tailwind-merge`.
 
+## SolidJS
+
+**Output:** `ui/<brick>/<brick>.solid.tsx` (all parts in one file; `.solid.tsx` avoids colliding with React)
+
+| Feature | Implementation |
+|---------|----------------|
+| Children | `children` prop (`JSX.Element`) |
+| Prop naming | camelCase variants; HTML-native `class` (+ `className` alias) |
+| Dynamic tags | `<Dynamic component={…}>` from `solid-js/web` |
+| Rest props | `splitProps` → `{...rest}` spread last |
+| Class merge | shared `*Classes()` helpers (no `asChild`) |
+| Shared types | `<brick>.shared.ts` — same as React/Svelte/Vue |
+
+**Composition:** no Radix-style `asChild`. Style another element via `buttonClasses()` / `*Classes()` — same substitute as Svelte/Vue.
+
+**Peer deps:** `solid-js`, `clsx`, `tailwind-merge`.
+
+Bun/Vitest transform `*.solid.tsx` with `babel-preset-solid` / `vite-plugin-solid` (`generate: "ssr"`) for parity tests.
+
 ## Latte (PHP)
 
 **Output:** `ui/<brick>/<Part>.latte`
@@ -147,13 +166,13 @@ Writes `examples/html/index.html`, `examples/html/about/index.html` with relativ
 bun src/infrastructure/cli.ts generate --runtimes react,svelte
 ```
 
-Valid values: `templ`, `react`, `svelte`, `vue`, `latte`, `twig` (comma-separated). Default: all six.
+Valid values: `templ`, `react`, `svelte`, `vue`, `solid`, `latte`, `twig` (comma-separated). Default: all seven.
 
 ## Parity policy per runtime
 
 | Runtime | Parity test | Skipped when |
 |---------|-------------|--------------|
-| React, Svelte, Vue | `tests/parity.test.ts` | never (always run) |
+| React, Svelte, Vue, Solid | `tests/parity.test.ts` | never (always run) |
 | Go Templ | `tests/parity.templ.test.ts` | `go` not on PATH |
 | Latte | `tests/parity.latte.test.ts` | PHP or Composer unavailable |
 | Twig | `tests/parity.twig.test.ts` | PHP or Composer unavailable |

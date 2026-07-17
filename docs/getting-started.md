@@ -23,7 +23,7 @@ bun install
 
 ```bash
 bun run check       # validate all brick definitions (no I/O)
-bun run generate    # emit all six runtimes into generated/
+bun run generate    # emit all seven runtimes into generated/
 ```
 
 Generate with custom options:

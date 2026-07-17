@@ -10,6 +10,7 @@
     "dev:react": "bun run build:css && vite --config react/vite.config.ts",
     "dev:svelte": "bun run build:css && vite --config svelte/vite.config.ts",
     "dev:vue": "bun run build:css && vite --config vue/vite.config.ts",
+    "dev:solid": "bun run build:css && vite --config solid/vite.config.ts",
     "dev:latte": "bun run composer:install && bun run build:css && bun scripts/php-server.mjs latte 5176",
     "dev:twig": "bun run composer:install && bun run build:css && bun scripts/php-server.mjs twig 5177",
     "build:html": "bun run build:css && bun react/script/generate-static.tsx"
@@ -18,6 +19,7 @@
     "clsx": "^2.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "solid-js": "^1.9.5",
     "svelte": "^5.19.0",
     "tailwind-merge": "^2.6.0",
     "vue": "^3.5.13"
@@ -32,6 +34,7 @@
     "sirv": "^3.0.1",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.7.3",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-solid": "^2.11.6"
   }
 }

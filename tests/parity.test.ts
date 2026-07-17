@@ -2,7 +2,7 @@
  * Runtime parity — the core guarantee of the engine.
  *
  * For every brick, every part, and every showcase fixture, the generated
- * React, Svelte 5, and Vue 3 components are server-rendered and their
+ * React, Svelte 5, Vue 3, and SolidJS components are server-rendered and their
  * normalized DOM must equal the canonical renderer's output (the executable
  * specification derived from the same IR the Templ emitter prints).
  */
@@ -14,6 +14,8 @@ import { render as svelteRender } from "svelte/server";
 import { createRawSnippet, type Component } from "svelte";
 import { createSSRApp, h, type Component as VueComponent } from "vue";
 import { renderToString as vueRenderToString } from "@vue/server-renderer";
+import { createComponent, type Component as SolidComponent } from "solid-js";
+import { renderToString as solidRenderToString } from "solid-js/web";
 
 import { bricks } from "../bricks/index";
 import { fileStem, type BrickDef, type PartDef } from "../src/domain/model";
@@ -27,16 +29,18 @@ import {
   htmlRuntimeProps,
   knownCanonicalProps,
   reactProps,
+  solidProps,
   vueProps,
   type CanonicalProps,
 } from "./support/props";
 
 await ensureGenerated();
-const { reactModules, svelteModules, vueModules } = await loadGeneratedUiModules();
+const { reactModules, svelteModules, vueModules, solidModules } = await loadGeneratedUiModules();
 
 const CHILD_TEXT = "Content";
 
 type ReactModule = Record<string, ComponentType<Record<string, unknown>>>;
+type SolidModule = Record<string, SolidComponent<Record<string, unknown>>>;
 
 function reactComponent(brick: BrickDef, part: PartDef) {
   const mod = reactModules[`../generated/ui/${brick.dir}/${fileStem(brick)}.tsx`] as ReactModule;
@@ -61,11 +65,18 @@ function vueComponent(brick: BrickDef, part: PartDef): VueComponent {
   return mod.default;
 }
 
+function solidComponent(brick: BrickDef, part: PartDef): SolidComponent<Record<string, unknown>> {
+  const mod = solidModules[`../generated/ui/${brick.dir}/${fileStem(brick)}.solid.tsx`] as SolidModule;
+  const comp = mod?.[part.name];
+  if (!comp) throw new Error(`Solid component ${part.name} not found for ${brick.id}`);
+  return comp;
+}
+
 async function renderAllRuntimes(
   brick: BrickDef,
   part: PartDef,
   canonical: CanonicalProps
-): Promise<{ canonical: string; react: string; svelte: string; vue: string }> {
+): Promise<{ canonical: string; react: string; svelte: string; vue: string; solid: string }> {
   const withChildren = hasChildren(part);
 
   const canonicalHtml = renderPart(brick, part.name, canonical, {
@@ -98,7 +109,20 @@ async function renderAllRuntimes(
   });
   const vueHtml = await vueRenderToString(app);
 
-  return { canonical: canonicalHtml, react: reactHtml, svelte: svelteHtml, vue: vueHtml };
+  const solidHtml = solidRenderToString(() =>
+    createComponent(solidComponent(brick, part), {
+      ...solidProps(part, canonical),
+      ...(withChildren ? { children: CHILD_TEXT } : {}),
+    })
+  );
+
+  return {
+    canonical: canonicalHtml,
+    react: reactHtml,
+    svelte: svelteHtml,
+    vue: vueHtml,
+    solid: solidHtml,
+  };
 }
 
 for (const brick of bricks) {
@@ -122,6 +146,7 @@ for (const brick of bricks) {
           expect(normalizeHtml(out.react), "react ≠ canonical").toEqual(expected);
           expect(normalizeHtml(out.svelte), "svelte ≠ canonical").toEqual(expected);
           expect(normalizeHtml(out.vue), "vue ≠ canonical").toEqual(expected);
+          expect(normalizeHtml(out.solid), "solid ≠ canonical").toEqual(expected);
         });
       }
     }

@@ -12,6 +12,7 @@
 @source "../../../react/src/**/*.tsx";
 @source "../../../svelte/src/**/*.svelte";
 @source "../../../vue/src/**/*.vue";
+@source "../../../solid/src/**/*.tsx";
 @source "../../../templ/**/*.templ";
 @source "../../../templ/**/*_templ.go";
 @source "../../../latte/templates/**/*.latte";

@@ -1,7 +1,7 @@
-# Codegen examples — seven welcome screens
+# Codegen examples — eight welcome screens
 
 Local preview for **generated** `ui/` primitives. Same shadcn tokens and
-welcome layout on all seven runtimes.
+welcome layout on all eight surfaces (seven codegen runtimes + static HTML).
 
 | Path | Runtime | Dev command | URL |
 |------|---------|-------------|-----|
@@ -12,6 +12,7 @@ welcome layout on all seven runtimes.
 | [`vue/`](vue/) | Vue 3 + Vite | `bun run dev:vue` | http://127.0.0.1:5175 |
 | [`latte/`](latte/) | Latte + PHP server | `bun run dev:latte` | http://127.0.0.1:5176 |
 | [`twig/`](twig/) | Twig + PHP server | `bun run dev:twig` | http://127.0.0.1:5177 |
+| [`solid/`](solid/) | SolidJS + Vite | `bun run dev:solid` | http://127.0.0.1:5178 |
 
 Shared assets live under [`web/static/`](web/static/) (CSS tokens, Tailwind
 output). Copy and feature text in [`data/welcome.json`](data/welcome.json).
@@ -34,7 +35,7 @@ From `ui8kit-codegen/`:
 bun run generate          # emit generated/ui (if missing)
 cd examples && bun install
 bun run build:css         # Tailwind → web/static/css/app.css
-bun run dev:templ         # or dev:react / dev:svelte / dev:vue
+bun run dev:templ         # or dev:react / dev:svelte / dev:vue / dev:solid
 ```
 
 Or from `ui8kit-codegen/` root (after `examples` deps are installed):
@@ -44,6 +45,7 @@ bun run dev:templ
 bun run dev:react
 bun run dev:svelte
 bun run dev:vue
+bun run dev:solid
 ```
 
 ## Layout
@@ -58,5 +60,6 @@ bun run dev:vue
 | `react/script/generate-static.tsx` | Static HTML export (routes + relative links) |
 | `svelte/src/Welcome.svelte` | Svelte twin |
 | `vue/src/Welcome.vue` | Vue twin |
+| `solid/src/Welcome.tsx` | Solid twin |
 | `latte/templates/welcome.latte` | Latte twin (generated `.latte` includes) |
 | `twig/templates/welcome.html.twig` | Twig twin (generated `.html.twig` includes) |

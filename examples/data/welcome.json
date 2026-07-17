@@ -8,7 +8,7 @@
     },
     {
       "title": "Seven runtimes",
-      "description": "Go Templ, React 19, Svelte 5, Vue 3, Latte, Twig, and static HTML from the same source."
+      "description": "Go Templ, React 19, Svelte 5, Vue 3, SolidJS, Latte, and Twig from the same source."
     },
     {
       "title": "DOM parity",
@@ -21,6 +21,7 @@
     { "id": "svelte", "label": "Svelte 5", "port": 5174 },
     { "id": "vue", "label": "Vue 3", "port": 5175 },
     { "id": "latte", "label": "Latte", "port": 5176 },
-    { "id": "twig", "label": "Twig", "port": 5177 }
+    { "id": "twig", "label": "Twig", "port": 5177 },
+    { "id": "solid", "label": "SolidJS", "port": 5178 }
   ]
 }

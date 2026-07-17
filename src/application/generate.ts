@@ -14,12 +14,13 @@ import { validateRegistry } from "../domain/validate";
 import { BANNER, type Emitter, type GeneratedFile } from "../emitters/common";
 import { LatteEmitter } from "../emitters/latte";
 import { ReactEmitter } from "../emitters/react";
+import { SolidEmitter } from "../emitters/solid";
 import { SvelteEmitter } from "../emitters/svelte";
 import { TemplEmitter } from "../emitters/templ";
 import { TwigEmitter } from "../emitters/twig";
 import { VueEmitter } from "../emitters/vue";
 
-export type RuntimeName = "templ" | "react" | "svelte" | "vue" | "latte" | "twig";
+export type RuntimeName = "templ" | "react" | "svelte" | "vue" | "solid" | "latte" | "twig";
 
 export interface GenerateOptions {
   goModule?: string;
@@ -28,7 +29,7 @@ export interface GenerateOptions {
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const DEFAULT_GO_MODULE = "github.com/ui8kit/ui";
-export const ALL_RUNTIMES: RuntimeName[] = ["templ", "react", "svelte", "vue", "latte", "twig"];
+export const ALL_RUNTIMES: RuntimeName[] = ["templ", "react", "svelte", "vue", "solid", "latte", "twig"];
 
 /** Parts the PHP template emitters skip, with reasons (for the CLI summary). */
 export function phpSkippedParts(bricks: BrickDef[]): Array<{ brick: string; part: string; reason: string }> {
@@ -55,11 +56,14 @@ export async function generateFiles(
   if (runtimes.includes("react")) emitters.push(new ReactEmitter());
   if (runtimes.includes("svelte")) emitters.push(new SvelteEmitter());
   if (runtimes.includes("vue")) emitters.push(new VueEmitter());
+  if (runtimes.includes("solid")) emitters.push(new SolidEmitter());
   if (runtimes.includes("latte")) emitters.push(new LatteEmitter());
   if (runtimes.includes("twig")) emitters.push(new TwigEmitter());
 
   const files: GeneratedFile[] = [];
-  const emitTs = runtimes.some((r) => r === "react" || r === "svelte" || r === "vue");
+  const emitTs = runtimes.some(
+    (r) => r === "react" || r === "svelte" || r === "vue" || r === "solid"
+  );
 
   for (const brick of bricks) {
     // Colocate the shared recipes next to every runtime file.
@@ -118,7 +122,9 @@ export async function writeFiles(files: GeneratedFile[], outDir: string): Promis
 
 async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFile[]> {
   const files: GeneratedFile[] = [];
-  const emitTs = runtimes.some((r) => r === "react" || r === "svelte" || r === "vue");
+  const emitTs = runtimes.some(
+    (r) => r === "react" || r === "svelte" || r === "vue" || r === "solid"
+  );
   if (emitTs) {
     const tsDir = join(PACKAGE_ROOT, "runtime", "ts");
     for (const name of await readdir(tsDir)) {
@@ -151,7 +157,7 @@ async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFi
 function barrels(bricks: BrickDef[], runtimes: RuntimeName[]): GeneratedFile[] {
   const files: GeneratedFile[] = [];
 
-  if (runtimes.some((r) => r === "react" || r === "svelte" || r === "vue")) {
+  if (runtimes.some((r) => r === "react" || r === "svelte" || r === "vue" || r === "solid")) {
     const lines = [`// ${BANNER}`, `// Shared per-brick contracts (types + classes helpers).`, ``];
     for (const brick of bricks) {
       lines.push(`export * from "./${brick.dir}/${fileStem(brick)}.shared";`);
@@ -190,6 +196,15 @@ function barrels(bricks: BrickDef[], runtimes: RuntimeName[]): GeneratedFile[] {
     }
     lines.push(`export * from "./shared";`);
     files.push({ path: "ui/index.vue.ts", contents: lines.join("\n") + "\n" });
+  }
+
+  if (runtimes.includes("solid")) {
+    const lines = [`// ${BANNER}`, `// SolidJS barrel.`, ``];
+    for (const brick of bricks) {
+      lines.push(`export * from "./${brick.dir}/${fileStem(brick)}.solid";`);
+    }
+    lines.push(`export * from "./shared";`);
+    files.push({ path: "ui/index.solid.ts", contents: lines.join("\n") + "\n" });
   }
 
   return files;

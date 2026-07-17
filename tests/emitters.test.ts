@@ -98,6 +98,26 @@ describe("vue emitter", () => {
   });
 });
 
+describe("solid emitter", () => {
+  const button = file("ui/button/button.solid.tsx");
+
+  it("uses splitProps and accepts class + className", () => {
+    expect(button).toContain("splitProps(props,");
+    expect(button).toContain("class?: string;");
+    expect(button).toContain("className?: string;");
+    expect(button).toContain("local.class ?? local.className");
+  });
+
+  it("uses Dynamic for resolved tags", () => {
+    expect(file("ui/stack/stack.solid.tsx")).toContain("<Dynamic component={resolvedTagValue()}");
+  });
+
+  it("maps the textarea content contract to children (not value attr)", () => {
+    expect(file("ui/textarea/textarea.solid.tsx")).toContain(">{(");
+    expect(file("ui/textarea/textarea.solid.tsx")).not.toContain("value={(");
+  });
+});
+
 describe("behavior hooks", () => {
   it("data-ui8kit defaults off in every runtime", () => {
     for (const path of [
@@ -105,6 +125,7 @@ describe("behavior hooks", () => {
       "ui/dialog/dialog.tsx",
       "ui/dialog/Dialog.svelte",
       "ui/dialog/Dialog.vue",
+      "ui/dialog/dialog.solid.tsx",
     ]) {
       expect(file(path), path).not.toContain('data-ui8kit="');
     }
@@ -116,12 +137,16 @@ describe("barrels", () => {
     const react = file("ui/index.ts");
     const svelte = file("ui/index.svelte.ts");
     const vue = file("ui/index.vue.ts");
+    const solid = file("ui/index.solid.ts");
     for (const brick of bricks) {
       for (const part of brick.parts) {
         expect(svelte).toContain(`export { default as ${part.name} }`);
         expect(vue).toContain(`export { default as ${part.name} }`);
       }
+      expect(solid).toContain(`export * from "./${brick.dir}/`);
     }
     expect(react).toContain('export * from "./slot/slot"');
+    expect(solid).toContain('export * from "./shared"');
+    expect(solid).toContain(".solid");
   });
 });

@@ -73,6 +73,22 @@ export function reactProps(part: PartDef, canonical: CanonicalProps): Record<str
   return out;
 }
 
+/**
+ * Solid: camelCase declared props (like React), HTML-native `class` primary.
+ * `className` is also accepted by generated components as an alias.
+ */
+export function solidProps(part: PartDef, canonical: CanonicalProps): Record<string, unknown> {
+  const { declared, passthrough } = splitProps(part, canonical);
+  const out: Record<string, unknown> = {};
+  for (const [def, value] of declared) {
+    if (def.name === "Class") out["class"] = value;
+    else if (def.type === "items") out[reactPropName(def)] = itemsToRuntime(value);
+    else out[reactPropName(def)] = value;
+  }
+  for (const [def, value] of passthrough) out[htmlPropName(def)] = value;
+  return out;
+}
+
 /** Svelte and Vue share HTML-native prop naming. */
 export function htmlRuntimeProps(part: PartDef, canonical: CanonicalProps): Record<string, unknown> {
   const { declared, passthrough } = splitProps(part, canonical);

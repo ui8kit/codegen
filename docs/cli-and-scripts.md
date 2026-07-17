@@ -18,7 +18,7 @@ Entry: `src/infrastructure/cli.ts` (also exposed as `ui8kit-codegen` bin when pu
 |------|---------|-------------|
 | `--out <dir>` | `generated` | Output directory |
 | `--go-module <module>` | `github.com/ui8kit/ui` | Go module path in `go.mod` |
-| `--runtimes <list>` | all six | Comma-separated: `templ,react,svelte,vue,latte,twig` |
+| `--runtimes <list>` | all seven | Comma-separated: `templ,react,svelte,vue,solid,latte,twig` |
 
 ### Examples
 

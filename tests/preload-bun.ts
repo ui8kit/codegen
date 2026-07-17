@@ -1,10 +1,14 @@
 /**
- * Bun test preload: compile generated .svelte (SSR) and .vue SFCs before parity
- * tests import them. React .tsx files are handled natively by Bun.
+ * Bun test preload: compile generated .svelte (SSR), .vue SFCs, and
+ * `.solid.tsx` (Solid SSR via babel-preset-solid) before parity tests import
+ * them. React `.tsx` files (not `*.solid.tsx`) are handled natively by Bun.
  */
 
 import { readFileSync } from "node:fs";
+import { transformSync } from "@babel/core";
 import { plugin } from "bun";
+import solid from "babel-preset-solid";
+import typescript from "@babel/preset-typescript";
 import { compile } from "svelte/compiler";
 import { compileScript, parse } from "@vue/compiler-sfc";
 
@@ -39,6 +43,27 @@ await plugin({
         inlineTemplate: true,
       });
       return { contents: script.content, loader: "ts" };
+    });
+  },
+});
+
+await plugin({
+  name: "ui8kit solid ssr loader",
+  setup(builder) {
+    builder.onLoad({ filter: /\.solid\.tsx$/ }, ({ path }) => {
+      const source = readFileSync(path, "utf-8");
+      const result = transformSync(source, {
+        filename: path,
+        presets: [
+          [typescript, { isTSX: true, allExtensions: true }],
+          [solid, { generate: "ssr", hydratable: false }],
+        ],
+        babelrc: false,
+        configFile: false,
+        sourceMaps: "inline",
+      });
+      if (!result?.code) throw new Error(`Solid SSR transform failed for ${path}`);
+      return { contents: result.code, loader: "js" };
     });
   },
 });

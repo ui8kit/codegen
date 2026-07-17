@@ -6,7 +6,7 @@ UI8Kit Codegen is a **spec-driven codegen engine** for UI8Kit `ui/` primitives. 
 
 1. **Validates** definitions before emitting anything.
 2. **Renders** a canonical reference DOM via `src/domain/render.ts` — the executable specification.
-3. **Emits** idiomatic code for six runtimes from the same definition.
+3. **Emits** idiomatic code for seven runtimes from the same definition.
 4. **Tests** that every generated runtime produces identical normalized DOM for every part and showcase fixture.
 
 Identity across runtimes is not a review convention — it is enforced by the test suite.
@@ -19,6 +19,7 @@ Identity across runtimes is not a review convention — it is enforced by the te
 | **React 19** | `ui/<brick>/<brick>.tsx` | `forwardRef`, `asChild` via `Slot`, rest props |
 | **Svelte 5** | `ui/<brick>/<Part>.svelte` | runes, snippets, `<svelte:element>` |
 | **Vue 3** | `ui/<brick>/<Part>.vue` | `<script setup>`, slots, `<component :is>` |
+| **SolidJS** | `ui/<brick>/<brick>.solid.tsx` | `splitProps`, `Dynamic`, shared `*Classes()` |
 | **Latte** | `ui/<brick>/<Part>.latte` | typed `{parameters}`, `n:attr`, children as HTML string |
 | **Twig** | `ui/<brick>/<Part>.html.twig` | `ui8kit_attr_str`, `include with`, children as HTML string |
 
@@ -53,7 +54,7 @@ Codegen/
 ├── runtime/                # support files copied into generated/ (Go, TS, PHP)
 ├── generated/              # codegen output (gitignored; created by `bun run generate`)
 ├── tests/                  # domain units + cross-runtime parity suites
-├── examples/               # seven welcome previews + static HTML export
+├── examples/               # eight welcome previews + static HTML export
 ├── docs/                   # this documentation
 └── .github/workflows/      # CI
 ```
@@ -68,7 +69,7 @@ Codegen/
 
 ## Why an IR instead of hand-written runtimes
 
-The upstream registry hand-writes `.templ` and `.tsx` pairs against a shared spec. Adding Svelte, Vue, Latte, and Twig by hand multiplies drift surface. This engine inverts the workflow: definitions are data, the canonical renderer is the spec, emitters are printers, parity tests are the gate.
+The upstream registry hand-writes `.templ` and `.tsx` pairs against a shared spec. Adding Svelte, Vue, Solid, Latte, and Twig by hand multiplies drift surface. This engine inverts the workflow: definitions are data, the canonical renderer is the spec, emitters are printers, parity tests are the gate.
 
 ## License
 
