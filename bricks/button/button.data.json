@@ -80,6 +80,28 @@
         "Variant": "outline",
         "Size": "sm"
       }
+    },
+    "composition.href": {
+      "props": {
+        "Href": "/cart",
+        "Variant": "default",
+        "Size": "default"
+      }
+    },
+    "composition.href-external": {
+      "props": {
+        "Href": "https://example.com",
+        "External": true,
+        "Variant": "outline",
+        "Size": "sm"
+      }
+    },
+    "composition.href-disabled": {
+      "props": {
+        "Href": "/cart",
+        "Disabled": true,
+        "Variant": "secondary"
+      }
     }
   }
 }

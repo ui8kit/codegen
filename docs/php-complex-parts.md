@@ -1,6 +1,6 @@
 # PHP complex parts
 
-Latte and Twig emitters cover **60 of 63** parts. Three parts are **structurally complex** — their render trees exceed what the PHP template composition model can express mechanically.
+Latte and Twig emitters cover **59 of 63** parts. Four parts are **structurally complex** — their render trees exceed what the PHP template composition model can express mechanically.
 
 This is not a hand-maintained exclusion list. Eligibility is decided by `phpSupported()` in `src/domain/php-support.ts` and reported on every `generate` run.
 
@@ -11,6 +11,7 @@ This is not a hand-maintained exclusion list. Eligibility is decided by `phpSupp
 | `Breadcrumb` | `breadcrumb` | `forEach` over typed items | Manual loop in app template + `Classes::breadcrumbClasses()` |
 | `Select` | `select` | `forEach` over typed items | Use `SelectOption` / `OptGroup` includes + `Classes::selectClasses()` |
 | `Icon` | `icon` | Branched root (`when` at top level) | Branch in app template + `Classes::iconClasses()` |
+| `Button` | `button` | Branched root (`when` on optional `Href`) | Branch in app template + `Classes::buttonClasses()`, or omit `Href` and use a manual `<a>` |
 
 Sibling parts in the same brick **are** generated:
 
@@ -19,8 +20,9 @@ Sibling parts in the same brick **are** generated:
 | `select` | `SelectOption`, `OptGroup` | `Select` |
 | `breadcrumb` | — | `Breadcrumb` (only part) |
 | `icon` | — | `Icon` (only part) |
+| `button` | — | `Button` (only part; class helper still emitted) |
 
-Class helpers in `php/UI8Kit/Classes.php` are emitted for **all three** skipped parts.
+Class helpers in `php/UI8Kit/Classes.php` are emitted for **all four** skipped parts.
 
 ---
 

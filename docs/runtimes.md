@@ -101,7 +101,7 @@ Bun/Vitest transform `*.solid.tsx` with `babel-preset-solid` / `vite-plugin-soli
 | Expressions | `UI8Kit\Rt` helpers + generated preamble for derived values |
 | Class merge | `Rt::cn()` — plain concatenation (like Go) |
 
-**Coverage:** 60/63 parts (see [PHP complex parts](./php-complex-parts.md)).
+**Coverage:** 59/63 parts (see [PHP complex parts](./php-complex-parts.md)).
 
 **Composition pattern:**
 
@@ -125,7 +125,7 @@ Bun/Vitest transform `*.solid.tsx` with `babel-preset-solid` / `vite-plugin-soli
 | Dynamic tags | `{% set uiTag = … %}` interpolation |
 | Class merge | `Rt::cn()` via extension |
 
-**Coverage:** 60/63 parts (same predicate as Latte).
+**Coverage:** 59/63 parts (same predicate as Latte).
 
 **Composition pattern:**
 

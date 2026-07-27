@@ -90,17 +90,11 @@ export default brick({
       state: [{ test: prop("Disabled"), classes: "pointer-events-none opacity-50" }],
     },
     props: [
-      pVariant(), pSize(), pClass(), pStr("Type"), pBool("Disabled"),
-      ...controlPassthroughProps(), pAttrs(), pChildren(),
+      pVariant(), pSize(), pClass(), pStr("Type"), pStr("Href"),
+      pBool("Disabled"), ...controlPassthroughProps(), pAttrs(), pChildren(),
     ],
-    render: el("button", [
-      attrExpr("type", oneOfOr(prop("Type"), ["submit", "reset"], "button")),
-      attrClass(),
-      attrBool("disabled", prop("Disabled")),
-      fwd("id", "ID"),
-      fwd("aria-label", "AriaLabel"),
-      attrRest(),
-    ], [slot()]),
+    // Optional Href → <a> with button classes; else <button>.
+    render: when(isSet(prop("Href")), [el("a", …)], [el("button", …)]),
   }],
 });
 ```

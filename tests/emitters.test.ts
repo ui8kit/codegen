@@ -48,7 +48,8 @@ describe("react emitter", () => {
   const button = file("ui/button/button.tsx");
 
   it("forwards refs and supports asChild via Slot", () => {
-    expect(button).toContain("forwardRef<HTMLButtonElement, ButtonProps>");
+    // Multi-root (button | a when href is set) widens the ref to HTMLElement.
+    expect(button).toContain("forwardRef<HTMLElement, ButtonProps>");
     expect(button).toContain("if (asChild) {");
     expect(button).toContain('import { Slot } from "../slot/slot"');
   });

@@ -7,7 +7,7 @@ Spec-driven codegen for UI8Kit `ui/` primitives. Define props, variants, and a r
 | Fact | Value |
 |------|-------|
 | **Inventory** | 33 bricks · 63 parts · 7 runtimes |
-| **PHP templates** | 60 / 63 parts (3 skipped by structural predicate) |
+| **PHP templates** | 59 / 63 parts (4 skipped by structural predicate) |
 | **License** | MIT |
 
 ---
@@ -170,15 +170,10 @@ export default brick({
       recipe: { variant: "Variant", size: "Size" },
       state: [{ test: prop("Disabled"), classes: "pointer-events-none opacity-50" }],
     },
-    props: [pVariant(), pSize(), pClass(), pStr("Type"), pBool("Disabled"),
-            ...controlPassthroughProps(), pAttrs(), pChildren()],
-    render: el("button", [
-      attrExpr("type", oneOfOr(prop("Type"), ["submit", "reset"], "button")),
-      attrClass(),
-      attrBool("disabled", prop("Disabled")),
-      fwd("id", "ID"), fwd("aria-label", "AriaLabel"),
-      attrRest(),
-    ], [slot()]),
+    props: [pVariant(), pSize(), pClass(), pStr("Type"), pStr("Href"),
+            pBool("Disabled"), ...controlPassthroughProps(), pAttrs(), pChildren()],
+    // Href set → <a>; otherwise <button>. asChild / ButtonClasses remain for exotic roots.
+    render: when(isSet(prop("Href")), [el("a", …)], [el("button", …)]),
   }],
 });
 ```

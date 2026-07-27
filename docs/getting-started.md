@@ -38,7 +38,7 @@ bun src/infrastructure/cli.ts generate \
 On generate, when Latte or Twig is requested, the CLI prints PHP coverage:
 
 ```
-PHP runtimes (latte/twig): 60/63 parts.
+PHP runtimes (latte/twig): 59/63 parts.
   skipped breadcrumb/Breadcrumb: forEach over typed items
   skipped icon/Icon: root is not a single element (branched roots need per-branch slots)
   skipped select/Select: forEach over typed items
