@@ -134,6 +134,7 @@ async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFi
   if (runtimes.includes("templ")) {
     const goDir = join(PACKAGE_ROOT, "runtime", "go");
     for (const name of await readdir(goDir)) {
+      if (name.endsWith("_test.go")) continue;
       files.push({ path: `utils/${name}`, contents: await readFile(join(goDir, name), "utf8") });
     }
   }

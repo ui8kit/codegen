@@ -49,15 +49,10 @@ func Compose(v Variants, selection map[string]string, extra ...string) string {
 	return Cn(parts...)
 }
 
-// Cn joins non-empty class fragments with a single space.
+// Cn joins class fragments and resolves Tailwind conflicts (last class wins),
+// matching the JS `cn` = clsx + tailwind-merge used by HostingPanel kit.
 func Cn(classes ...string) string {
-	var parts []string
-	for _, c := range classes {
-		if t := strings.TrimSpace(c); t != "" {
-			parts = append(parts, t)
-		}
-	}
-	return strings.Join(parts, " ")
+	return mergeTailwind(classes...)
 }
 
 // MergeAttrs merges attribute maps left to right.

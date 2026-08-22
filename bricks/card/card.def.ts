@@ -47,14 +47,14 @@ export default brick({
     },
     staticPart(
       "CardHeader",
-      "CardHeader renders the top slot with bottom border.",
+      "CardHeader renders the top slot.",
       "div",
-      "border-b border-border px-4 py-2"
+      "grid auto-rows-min items-start gap-1.5 px-6"
     ),
     {
       name: "CardTitle",
       docs: "CardTitle renders heading text at the As level (default h2).",
-      classes: { staticBase: "text-sm font-semibold" },
+      classes: { staticBase: "font-semibold leading-none" },
       props: [
         pClass(),
         {
@@ -76,12 +76,12 @@ export default brick({
       "p",
       "text-sm text-muted-foreground"
     ),
-    staticPart("CardContent", "CardContent renders the padded main body slot.", "div", "p-4"),
+    staticPart("CardContent", "CardContent renders the padded main body slot.", "div", "px-6"),
     staticPart(
       "CardFooter",
-      "CardFooter renders the bottom action slot with top border.",
+      "CardFooter renders the bottom action slot.",
       "div",
-      "border-t border-border px-4 py-3"
+      "flex items-center px-6"
     ),
   ],
 });

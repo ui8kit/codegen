@@ -1,7 +1,7 @@
 {
   "$schema": "../../schemas/variants.schema.json",
   "id": "ui.card",
-  "base": "rounded-md border border-border bg-card text-card-foreground shadow-sm",
+  "base": "flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm",
   "keys": ["variant"],
   "defaults": {
     "variant": "default"

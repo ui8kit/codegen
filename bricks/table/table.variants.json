@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/variants.schema.json",
-  "base": "",
+  "base": "w-full caption-bottom text-sm",
   "byKey": {},
   "defaults": {},
   "id": "ui.table",

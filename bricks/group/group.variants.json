@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/variants.schema.json",
-  "base": "flex min-w-0",
+  "base": "flex items-center",
   "byKey": {},
   "defaults": {},
   "id": "ui.group",

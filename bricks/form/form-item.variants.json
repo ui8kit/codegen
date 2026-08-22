@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/variants.schema.json",
-  "base": "flex flex-col gap-2",
+  "base": "grid gap-2",
   "byKey": {},
   "defaults": {},
   "id": "ui.form.item",
