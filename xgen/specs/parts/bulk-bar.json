@@ -1,0 +1,115 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.bulk-bar",
+  "name": "BulkBar",
+  "docs": "The \"N selected\" bar of a list: a count, a clear button and the bulk actions (children). All text comes in through props.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "docs": "the count, e.g. \"3 selected\"",
+      "required": true
+    },
+    {
+      "name": "clearLabel",
+      "type": "string",
+      "docs": "accessible name of the clear button",
+      "required": true
+    }
+  ],
+  "className": true,
+  "children": true,
+  "slots": [],
+  "events": [
+    {
+      "name": "clear",
+      "args": [],
+      "docs": "the clear button was pressed"
+    }
+  ],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            "flex flex-wrap items-center gap-2 rounded bg-foreground px-4 py-2 text-xs font-bold text-background",
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "role": "region",
+        "aria-label": {
+          "$": "label"
+        },
+        "aria-live": "polite",
+        "data-slot": "bulk-bar",
+        "data-testid": "bulk-bar"
+      },
+      "children": [
+        {
+          "use": "Button",
+          "props": {
+            "Variant": "ghost",
+            "Size": "sm",
+            "Layout": "icon",
+            "Type": "button",
+            "AriaLabel": {
+              "$": "clearLabel"
+            },
+            "Class": "text-background hover:bg-background/15 hover:text-background"
+          },
+          "on": {
+            "click": {
+              "call": "emit.clear",
+              "args": []
+            }
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "x",
+                "Size": 16
+              }
+            }
+          ]
+        },
+        {
+          "use": "Inline",
+          "attrs": {
+            "data-testid": "bulk-count"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "label"
+              }
+            }
+          ]
+        },
+        {
+          "use": "Inline",
+          "props": {
+            "Class": "ml-auto flex flex-wrap items-center gap-2"
+          },
+          "children": [
+            {
+              "slot": "children"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

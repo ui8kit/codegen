@@ -1,0 +1,18 @@
+{
+  "$schema": "../../schema/schemas/variants.schema.json",
+  "id": "one.dropdown-menu",
+  "base": "flex flex-col overflow-hidden bg-card py-2 inset-ring inset-ring-border rounded shadow-md",
+  "byKey": {
+    "width": {
+      "240": "w-60",
+      "auto": ""
+    }
+  },
+  "defaults": {
+    "width": "auto"
+  },
+  "keys": [
+    "width"
+  ],
+  "compound": []
+}

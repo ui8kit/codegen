@@ -1,0 +1,917 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.checkout-form",
+  "name": "CheckoutForm",
+  "docs": "A checkout on one page: contacts, address, a delivery window, the payment and the consent as stacked steps, beside a sticky order summary with the lines, a promo code and the totals. Static markup. Axes: layout (cards: each step in a card, numbered: numbered steps divided by a line), summary (aside, none), tone.",
+  "records": {
+    "CheckoutLabels": [
+      {
+        "name": "contacts",
+        "type": "string"
+      },
+      {
+        "name": "contactsText",
+        "type": "string"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "phone",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "address",
+        "type": "string"
+      },
+      {
+        "name": "addressText",
+        "type": "string"
+      },
+      {
+        "name": "street",
+        "type": "string"
+      },
+      {
+        "name": "house",
+        "type": "string"
+      },
+      {
+        "name": "flat",
+        "type": "string"
+      },
+      {
+        "name": "entrance",
+        "type": "string"
+      },
+      {
+        "name": "floor",
+        "type": "string"
+      },
+      {
+        "name": "comment",
+        "type": "string"
+      },
+      {
+        "name": "slot",
+        "type": "string"
+      },
+      {
+        "name": "slotText",
+        "type": "string"
+      },
+      {
+        "name": "payment",
+        "type": "string"
+      },
+      {
+        "name": "paymentText",
+        "type": "string"
+      },
+      {
+        "name": "consent",
+        "type": "string"
+      },
+      {
+        "name": "submit",
+        "type": "string"
+      },
+      {
+        "name": "legal",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": "",
+      "docs": "section heading; empty: no heading (the page heading names the checkout)"
+    },
+    {
+      "name": "days",
+      "type": {
+        "ts": "Day[]"
+      },
+      "required": true
+    },
+    {
+      "name": "payments",
+      "type": {
+        "ts": "Payment[]"
+      },
+      "required": true
+    },
+    {
+      "name": "lines",
+      "type": {
+        "ts": "CartLine[]"
+      },
+      "required": true
+    },
+    {
+      "name": "rows",
+      "type": {
+        "ts": "SummaryRow[]"
+      },
+      "required": true
+    },
+    {
+      "name": "promos",
+      "type": {
+        "ts": "Promo[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "CheckoutLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "totals",
+      "type": {
+        "ts": "CartSummaryLabels"
+      },
+      "required": true,
+      "docs": "labels of the order summary"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"cards\" | \"numbered\""
+      },
+      "default": "cards"
+    },
+    {
+      "name": "summary",
+      "type": {
+        "ts": "\"aside\" | \"none\""
+      },
+      "default": "aside"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": "grid grid-cols-1 items-start gap-8 lg:grid-cols-3"
+              },
+              "children": [
+                {
+                  "use": "Form",
+                  "props": {
+                    "Method": "dialog",
+                    "Class": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "summary"
+                            },
+                            "aside"
+                          ]
+                        },
+                        "flex flex-col gap-6 lg:col-span-2",
+                        "flex flex-col gap-6 lg:col-span-3"
+                      ]
+                    }
+                  },
+                  "attrs": {
+                    "data-testid": "checkout-form"
+                  },
+                  "children": [
+                    {
+                      "organism": "CheckoutStep",
+                      "props": {
+                        "number": "1",
+                        "title": {
+                          "$": "labels.contacts"
+                        },
+                        "text": {
+                          "$": "labels.contactsText"
+                        },
+                        "layout": {
+                          "$": "layout"
+                        }
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "use": "Grid",
+                              "props": {
+                                "Cols": "1-2",
+                                "Class": "gap-4"
+                              },
+                              "children": [
+                                {
+                                  "organism": "Field",
+                                  "props": {
+                                    "label": {
+                                      "$": "labels.name"
+                                    },
+                                    "htmlFor": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-name",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "use": "Input",
+                                          "props": {
+                                            "Type": "text",
+                                            "Name": "name",
+                                            "Autocomplete": "name"
+                                          },
+                                          "attrs": {
+                                            "id": {
+                                              "op": "tpl",
+                                              "args": [
+                                                "{0}-name",
+                                                {
+                                                  "$": "id"
+                                                }
+                                              ]
+                                            },
+                                            "data-testid": "field"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "organism": "Field",
+                                  "props": {
+                                    "label": {
+                                      "$": "labels.phone"
+                                    },
+                                    "htmlFor": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-phone",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "use": "Input",
+                                          "props": {
+                                            "Type": "tel",
+                                            "Name": "phone",
+                                            "Autocomplete": "tel"
+                                          },
+                                          "attrs": {
+                                            "id": {
+                                              "op": "tpl",
+                                              "args": [
+                                                "{0}-phone",
+                                                {
+                                                  "$": "id"
+                                                }
+                                              ]
+                                            },
+                                            "data-testid": "field"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "organism": "Field",
+                                  "props": {
+                                    "label": {
+                                      "$": "labels.email"
+                                    },
+                                    "htmlFor": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-email",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "use": "Input",
+                                          "props": {
+                                            "Type": "email",
+                                            "Name": "email",
+                                            "Autocomplete": "email"
+                                          },
+                                          "attrs": {
+                                            "id": {
+                                              "op": "tpl",
+                                              "args": [
+                                                "{0}-email",
+                                                {
+                                                  "$": "id"
+                                                }
+                                              ]
+                                            },
+                                            "data-testid": "field"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "organism": "CheckoutStep",
+                      "props": {
+                        "number": "2",
+                        "title": {
+                          "$": "labels.address"
+                        },
+                        "text": {
+                          "$": "labels.addressText"
+                        },
+                        "layout": {
+                          "$": "layout"
+                        }
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "organism": "Field",
+                              "props": {
+                                "label": {
+                                  "$": "labels.street"
+                                },
+                                "htmlFor": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-street",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "slots": {
+                                "children": {
+                                  "args": [],
+                                  "do": [
+                                    {
+                                      "use": "Input",
+                                      "props": {
+                                        "Type": "text",
+                                        "Name": "street",
+                                        "Autocomplete": "address-line1"
+                                      },
+                                      "attrs": {
+                                        "id": {
+                                          "op": "tpl",
+                                          "args": [
+                                            "{0}-street",
+                                            {
+                                              "$": "id"
+                                            }
+                                          ]
+                                        },
+                                        "data-testid": "field"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "use": "Grid",
+                              "props": {
+                                "Cols": "2-4",
+                                "Class": "gap-4"
+                              },
+                              "children": [
+                                {
+                                  "organism": "Field",
+                                  "props": {
+                                    "label": {
+                                      "$": "labels.house"
+                                    },
+                                    "htmlFor": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-house",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "use": "Input",
+                                          "props": {
+                                            "Type": "text",
+                                            "Name": "house"
+                                          },
+                                          "attrs": {
+                                            "id": {
+                                              "op": "tpl",
+                                              "args": [
+                                                "{0}-house",
+                                                {
+                                                  "$": "id"
+                                                }
+                                              ]
+                                            },
+                                            "data-testid": "field"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "organism": "Field",
+                                  "props": {
+                                    "label": {
+                                      "$": "labels.flat"
+                                    },
+                                    "htmlFor": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-flat",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "use": "Input",
+                                          "props": {
+                                            "Type": "text",
+                                            "Name": "flat"
+                                          },
+                                          "attrs": {
+                                            "id": {
+                                              "op": "tpl",
+                                              "args": [
+                                                "{0}-flat",
+                                                {
+                                                  "$": "id"
+                                                }
+                                              ]
+                                            },
+                                            "data-testid": "field"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "organism": "Field",
+                                  "props": {
+                                    "label": {
+                                      "$": "labels.entrance"
+                                    },
+                                    "htmlFor": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-entrance",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "use": "Input",
+                                          "props": {
+                                            "Type": "text",
+                                            "Name": "entrance"
+                                          },
+                                          "attrs": {
+                                            "id": {
+                                              "op": "tpl",
+                                              "args": [
+                                                "{0}-entrance",
+                                                {
+                                                  "$": "id"
+                                                }
+                                              ]
+                                            },
+                                            "data-testid": "field"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "organism": "Field",
+                                  "props": {
+                                    "label": {
+                                      "$": "labels.floor"
+                                    },
+                                    "htmlFor": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-floor",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "use": "Input",
+                                          "props": {
+                                            "Type": "text",
+                                            "Name": "floor"
+                                          },
+                                          "attrs": {
+                                            "id": {
+                                              "op": "tpl",
+                                              "args": [
+                                                "{0}-floor",
+                                                {
+                                                  "$": "id"
+                                                }
+                                              ]
+                                            },
+                                            "data-testid": "field"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "organism": "Field",
+                              "props": {
+                                "label": {
+                                  "$": "labels.comment"
+                                },
+                                "htmlFor": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-comment",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "slots": {
+                                "children": {
+                                  "args": [],
+                                  "do": [
+                                    {
+                                      "use": "Textarea",
+                                      "props": {
+                                        "Rows": 4,
+                                        "Name": "comment"
+                                      },
+                                      "attrs": {
+                                        "id": {
+                                          "op": "tpl",
+                                          "args": [
+                                            "{0}-comment",
+                                            {
+                                              "$": "id"
+                                            }
+                                          ]
+                                        },
+                                        "data-testid": "field"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "organism": "CheckoutStep",
+                      "props": {
+                        "number": "3",
+                        "title": {
+                          "$": "labels.slot"
+                        },
+                        "text": {
+                          "$": "labels.slotText"
+                        },
+                        "layout": {
+                          "$": "layout"
+                        }
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "when": {
+                                "op": "gt",
+                                "args": [
+                                  {
+                                    "op": "len",
+                                    "args": [
+                                      {
+                                        "$": "days"
+                                      }
+                                    ]
+                                  },
+                                  0
+                                ]
+                              },
+                              "then": [
+                                {
+                                  "organism": "SlotGrid",
+                                  "props": {
+                                    "days": {
+                                      "$": "days"
+                                    },
+                                    "name": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-slot",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    },
+                                    "item": "plain"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "organism": "CheckoutStep",
+                      "props": {
+                        "number": "4",
+                        "title": {
+                          "$": "labels.payment"
+                        },
+                        "text": {
+                          "$": "labels.paymentText"
+                        },
+                        "layout": {
+                          "$": "layout"
+                        }
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "when": {
+                                "op": "gt",
+                                "args": [
+                                  {
+                                    "op": "len",
+                                    "args": [
+                                      {
+                                        "$": "payments"
+                                      }
+                                    ]
+                                  },
+                                  0
+                                ]
+                              },
+                              "then": [
+                                {
+                                  "organism": "PaymentOptions",
+                                  "props": {
+                                    "payments": {
+                                      "$": "payments"
+                                    },
+                                    "name": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-payment",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    },
+                                    "checked": "payment-card"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "organism": "CheckoutSubmit",
+                      "props": {
+                        "id": {
+                          "$": "id"
+                        },
+                        "consent": {
+                          "$": "labels.consent"
+                        },
+                        "submit": {
+                          "$": "labels.submit"
+                        },
+                        "legal": {
+                          "$": "labels.legal"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "summary"
+                      },
+                      "aside"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": "lg:sticky lg:top-8"
+                      },
+                      "attrs": {
+                        "data-testid": "aside"
+                      },
+                      "children": [
+                        {
+                          "organism": "CartSummaryCard",
+                          "props": {
+                            "field": {
+                              "op": "tpl",
+                              "args": [
+                                "{0}-promo",
+                                {
+                                  "$": "id"
+                                }
+                              ]
+                            },
+                            "lines": {
+                              "$": "lines"
+                            },
+                            "rows": {
+                              "$": "rows"
+                            },
+                            "promos": {
+                              "$": "promos"
+                            },
+                            "labels": {
+                              "$": "totals"
+                            },
+                            "items": "show"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "SlotGrid",
+      "names": [
+        "Day"
+      ]
+    },
+    {
+      "from": "PaymentOptions",
+      "names": [
+        "Payment"
+      ]
+    },
+    {
+      "from": "CartList",
+      "names": [
+        "CartLine"
+      ]
+    },
+    {
+      "from": "OrderSummary",
+      "names": [
+        "SummaryRow"
+      ]
+    },
+    {
+      "from": "CartSummaryCard",
+      "names": [
+        "Promo",
+        "CartSummaryLabels"
+      ]
+    }
+  ]
+}

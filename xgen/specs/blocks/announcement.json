@@ -1,0 +1,130 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.announcement",
+  "name": "Announcement bar",
+  "docs": "A thin strip above the page with one sentence and a link.",
+  "theme": "promo",
+  "group": "banner",
+  "organism": "AnnouncementBar",
+  "axes": {
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "layout": [
+      "center",
+      "split"
+    ],
+    "dismiss": [
+      "show",
+      "hide"
+    ],
+    "badge": [
+      "none",
+      "show"
+    ],
+    "position": [
+      "top",
+      "bottom"
+    ]
+  },
+  "defaults": {
+    "tone": "default",
+    "layout": "center",
+    "dismiss": "hide",
+    "badge": "none",
+    "position": "top"
+  },
+  "variants": [
+    {
+      "id": "bar",
+      "set": {}
+    },
+    {
+      "id": "badge",
+      "set": {
+        "badge": "show",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "bottom",
+      "set": {
+        "position": "bottom",
+        "dismiss": "show",
+        "layout": "split"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "split",
+      "set": {
+        "layout": "split",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "dismissible",
+      "set": {
+        "dismiss": "show"
+      }
+    },
+    {
+      "id": "shop",
+      "set": {
+        "tone": "muted",
+        "dismiss": "show"
+      },
+      "props": {
+        "text": {
+          "$": "ui.cases.shop.announcement.text"
+        },
+        "cta": {
+          "$": "ui.cases.shop.announcement.cta"
+        }
+      }
+    },
+    {
+      "id": "agency",
+      "set": {
+        "layout": "split"
+      },
+      "props": {
+        "text": {
+          "$": "ui.cases.agency.announcement.text"
+        },
+        "cta": {
+          "$": "ui.cases.agency.announcement.cta"
+        }
+      }
+    }
+  ],
+  "slots": [],
+  "data": [],
+  "sample": {
+    "props": {
+      "label": {
+        "$": "ui.promo.announcement.label"
+      },
+      "text": {
+        "$": "ui.promo.announcement.text"
+      },
+      "cta": {
+        "$": "ui.promo.announcement.cta"
+      },
+      "ctaHref": "#/pricing",
+      "dismissLabel": {
+        "$": "ui.promo.announcement.dismiss"
+      },
+      "badgeLabel": {
+        "$": "ui.promo.announcement.badge"
+      }
+    }
+  }
+}

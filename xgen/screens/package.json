@@ -1,0 +1,20 @@
+{
+  "name": "@ui8kit/xgen-screens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Builder of organism and screen structures from primitives: the view IR, bindings, fixtures and content loaders, route and URL-state planning.",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@ui8kit/xgen-schema": "workspace:*",
+    "@ui8kit/xgen-spec": "workspace:*"
+  },
+  "scripts": {
+    "test": "bun test"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.region",
+  "name": "Region",
+  "docs": "A landmark region (header, nav, section, aside, footer, article, figure) inside another file: one Block, never nested, so a nested landmark is its own component.",
+  "records": {},
+  "props": [
+    {
+      "name": "tag",
+      "type": {
+        "ts": "\"header\" | \"nav\" | \"section\" | \"aside\" | \"footer\" | \"article\" | \"figure\" | \"main\" | \"search\" | \"div\""
+      },
+      "docs": "the element",
+      "required": true
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "className": true,
+  "children": true,
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": {
+          "$": "tag"
+        },
+        "Class": {
+          "$": "className"
+        }
+      },
+      "children": [
+        {
+          "slot": "children"
+        }
+      ],
+      "attrs": {
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "frame": true
+}

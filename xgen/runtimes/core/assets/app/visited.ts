@@ -1,0 +1,66 @@
+// Preview tooling, not kit output: the block gallery and the catalog remember the pages you opened (VITE_INSPECT=1 builds only).
+// Opening /blocks/#/<block> (or /catalog/#/<category>) stores the id in localStorage, one list per screen; the index outlines
+// those cards, adds a check, and shows "Viewed N of M" with a Reset button.
+const SCREENS = ["blocks", "catalog"];
+const screen = (): string => location.pathname.split("/").filter(Boolean)[0] ?? "";
+const KEY_OF = (s: string): string => `xgen-preview:visited-${s}`;
+const MARK = "data-visited-ui";
+const CHECK = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+
+const read = (): Set<string> => { try { return new Set(JSON.parse(localStorage.getItem(KEY_OF(screen())) ?? "[]") as string[]); } catch { return new Set(); } };
+const write = (s: Set<string>) => localStorage.setItem(KEY_OF(screen()), JSON.stringify([...s].sort()));
+/** the id a card stands for: the block of a gallery card, the route of a catalog card */
+const idOf = (a: HTMLElement): string => a.dataset.block ?? a.dataset.visit ?? "";
+
+function remember(): void {
+  const id = location.hash.replace(/^#\/?/, "").split(/[/?]/)[0];
+  if (!id) return;
+  const s = read();
+  if (!s.has(id)) { s.add(id); write(s); }
+}
+
+function paint(): void {
+  const links = [...document.querySelectorAll<HTMLElement>('[data-testid="block-link"][data-block], [data-visit]')];
+  if (!links.length) return;
+  const seen = read();
+  for (const a of links) {
+    const card = (a.closest("li") ?? a) as HTMLElement;
+    const on = seen.has(idOf(a));
+    // a 2px inset ring in the primary colour at half strength: drawn over the card's own 1px ring, no layout shift
+    card.style.boxShadow = on ? "inset 0 0 0 2px color-mix(in oklab, var(--primary) 50%, transparent)" : "";
+    const icon = a.querySelector(`[${MARK}]`);
+    if (on && !icon) { const i = document.createElement("span"); i.setAttribute(MARK, ""); i.setAttribute("title", "Viewed"); i.style.color = "var(--primary)"; i.style.display = "inline-flex"; i.innerHTML = CHECK; a.append(i); }
+    if (!on && icon) icon.remove();
+  }
+  const head = document.querySelector('[data-testid="gallery-title"], [data-testid="catalog-title"]')?.parentElement;
+  if (!head) return;
+  let bar = head.querySelector<HTMLElement>(`[${MARK}="bar"]`);
+  if (!bar) {
+    bar = document.createElement("div");
+    bar.setAttribute(MARK, "bar");
+    Object.assign(bar.style, { display: "flex", alignItems: "center", gap: "8px" });
+    const count = document.createElement("span");
+    count.className = "text-sm text-muted-foreground";
+    count.setAttribute("data-testid", "visited-count");
+    const reset = document.createElement("button");
+    reset.type = "button"; reset.textContent = "Reset";
+    reset.className = document.querySelector('[data-testid="theme-toggle"]')?.className ?? "";
+    Object.assign(reset.style, { background: "transparent", boxShadow: "none" });
+    reset.addEventListener("click", () => { localStorage.removeItem(KEY_OF(screen())); paint(); });
+    bar.append(count, reset);
+    head.append(bar);
+  }
+  const n = links.filter((a) => seen.has(idOf(a))).length;
+  const label = `Viewed ${n} of ${links.length}`;
+  const count = bar.querySelector("span")!;
+  if (count.textContent !== label) count.textContent = label;
+}
+
+export function mountVisited(): void {
+  if (!SCREENS.includes(screen())) return;
+  const tick = () => { remember(); paint(); };
+  tick();
+  addEventListener("hashchange", tick);
+  let queued = false;
+  new MutationObserver(() => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; paint(); }); }).observe(document.body, { childList: true, subtree: true });
+}

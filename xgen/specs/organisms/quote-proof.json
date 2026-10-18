@@ -1,0 +1,85 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.quote-proof",
+  "name": "QuoteProof",
+  "docs": "A customer quote and who said it, as a figure.",
+  "records": {},
+  "props": [
+    {
+      "name": "quote",
+      "type": "string"
+    },
+    {
+      "name": "quoteBy",
+      "type": "string"
+    },
+    {
+      "name": "center",
+      "type": "boolean",
+      "default": false
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "figure",
+        "Class": {
+          "op": "cn",
+          "args": [
+            "flex flex-col gap-2",
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "$": "center"
+                },
+                "items-center text-center",
+                ""
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "proof"
+      },
+      "children": [
+        {
+          "use": "Text",
+          "props": {
+            "Size": "xl"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "quote"
+              }
+            }
+          ]
+        },
+        {
+          "use": "Text",
+          "props": {
+            "Size": "sm",
+            "Class": "text-muted-foreground"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "quoteBy"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

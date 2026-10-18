@@ -1,0 +1,209 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.theme-onboarding-flow",
+  "name": "ThemeOnboardingFlowScreen",
+  "kind": "composed",
+  "docs": "Onboarding: steps, a checklist that expands, a product tour with callouts, a welcome video and the first empty screen.",
+  "routes": [
+    {
+      "path": "",
+      "area": "home"
+    },
+    {
+      "path": "welcome",
+      "area": "welcome"
+    },
+    {
+      "path": "setup",
+      "area": "setup"
+    },
+    {
+      "path": "tour",
+      "area": "tour"
+    }
+  ],
+  "frame": {
+    "before": [
+      {
+        "block": "navbar",
+        "variant": "inline",
+        "props": {
+          "brandHref": "#/",
+          "links": {
+            "$": "nav.links"
+          },
+          "current": {
+            "$": "nav.current"
+          },
+          "skip": {
+            "$": "ui.site.header.skip"
+          },
+          "actions": {
+            "themeLabel": {
+              "$": "ui.theme.toggle"
+            }
+          }
+        }
+      }
+    ],
+    "after": [
+      {
+        "block": "sitemap",
+        "variant": "row"
+      }
+    ]
+  },
+  "areas": {
+    "home": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.onboardingFlow.home.title"
+          },
+          "text": {
+            "$": "ui.pages.onboardingFlow.home.text"
+          },
+          "cta": {
+            "$": "ui.pages.onboardingFlow.home.cta"
+          },
+          "href": "#/welcome"
+        }
+      },
+      {
+        "block": "stepper",
+        "variant": "horizontal"
+      },
+      {
+        "block": "checklist",
+        "variant": "expand"
+      },
+      {
+        "block": "tour",
+        "variant": "below"
+      }
+    ],
+    "welcome": [
+      {
+        "block": "pagehead",
+        "variant": "center",
+        "props": {
+          "title": {
+            "$": "ui.pages.onboardingFlow.welcome.title"
+          },
+          "text": {
+            "$": "ui.pages.onboardingFlow.welcome.text"
+          },
+          "cta": {
+            "$": "ui.pages.onboardingFlow.welcome.cta"
+          },
+          "href": "#/setup"
+        }
+      },
+      {
+        "block": "videomodal",
+        "variant": "default"
+      },
+      {
+        "block": "checklist",
+        "variant": "numbered"
+      }
+    ],
+    "setup": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.onboardingFlow.setup.title"
+          },
+          "text": {
+            "$": "ui.pages.onboardingFlow.setup.text"
+          },
+          "cta": {
+            "$": "ui.pages.onboardingFlow.setup.cta"
+          },
+          "href": "#/tour"
+        }
+      },
+      {
+        "block": "stepper",
+        "variant": "vertical"
+      },
+      {
+        "block": "checklist",
+        "variant": "card"
+      },
+      {
+        "block": "empty",
+        "variant": "compact"
+      }
+    ],
+    "tour": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.onboardingFlow.tour.title"
+          },
+          "text": {
+            "$": "ui.pages.onboardingFlow.tour.text"
+          },
+          "cta": {
+            "$": "ui.pages.onboardingFlow.tour.cta"
+          },
+          "href": "#/"
+        }
+      },
+      {
+        "block": "tour",
+        "variant": "above"
+      },
+      {
+        "block": "tour",
+        "variant": "end"
+      },
+      {
+        "block": "checklist",
+        "variant": "text"
+      },
+      {
+        "block": "videomodal",
+        "variant": "chapters"
+      }
+    ]
+  },
+  "chunks": true,
+  "requireH1": true,
+  "nameLandmarks": true,
+  "nav": true,
+  "menu": [
+    {
+      "id": "home",
+      "path": "",
+      "titleKey": "pages.onboardingFlow.home.nav"
+    },
+    {
+      "id": "welcome",
+      "path": "welcome",
+      "titleKey": "pages.onboardingFlow.welcome.nav"
+    },
+    {
+      "id": "setup",
+      "path": "setup",
+      "titleKey": "pages.onboardingFlow.setup.nav"
+    },
+    {
+      "id": "tour",
+      "path": "tour",
+      "titleKey": "pages.onboardingFlow.tour.nav"
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

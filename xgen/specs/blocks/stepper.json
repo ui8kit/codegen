@@ -1,0 +1,93 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.stepper",
+  "name": "Stepper",
+  "docs": "A multi-step form header with the current step.",
+  "theme": "onboarding",
+  "group": "setup",
+  "organism": "Stepper",
+  "axes": {
+    "layout": [
+      "horizontal",
+      "vertical"
+    ],
+    "marker": [
+      "number",
+      "icon"
+    ],
+    "summary": [
+      "show",
+      "hide"
+    ]
+  },
+  "defaults": {
+    "layout": "horizontal",
+    "marker": "number",
+    "summary": "show"
+  },
+  "variants": [
+    {
+      "id": "horizontal",
+      "set": {}
+    },
+    {
+      "id": "vertical",
+      "set": {
+        "layout": "vertical"
+      }
+    },
+    {
+      "id": "icons",
+      "set": {
+        "marker": "icon"
+      }
+    },
+    {
+      "id": "bare",
+      "set": {
+        "summary": "hide",
+        "layout": "vertical",
+        "marker": "icon"
+      }
+    }
+  ],
+  "slots": [
+    "SectionFrame"
+  ],
+  "data": [
+    {
+      "as": "steps",
+      "collection": "steps",
+      "kind": "step",
+      "record": "Step",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "stepper",
+      "title": {
+        "$": "ui.onboarding.stepper.title"
+      },
+      "steps": {
+        "$": "steps"
+      },
+      "current": 2,
+      "stepLabel": {
+        "$": "ui.onboarding.stepper.stepLabel"
+      },
+      "back": {
+        "$": "ui.onboarding.stepper.back"
+      },
+      "next": {
+        "$": "ui.onboarding.stepper.next"
+      }
+    }
+  }
+}

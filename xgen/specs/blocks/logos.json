@@ -1,0 +1,115 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.logos",
+  "name": "Logo cloud",
+  "docs": "Customers and partners as glyphs with names.",
+  "theme": "marketing",
+  "group": "proof",
+  "organism": "LogoCloud",
+  "axes": {
+    "layout": [
+      "grid",
+      "row"
+    ],
+    "cols": [
+      "2",
+      "3",
+      "4"
+    ],
+    "item": [
+      "name",
+      "icon",
+      "tile"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "roomy",
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "grid",
+    "cols": "4",
+    "item": "name",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "grid4",
+      "set": {}
+    },
+    {
+      "id": "grid3",
+      "set": {
+        "cols": "3",
+        "item": "tile"
+      }
+    },
+    {
+      "id": "row",
+      "set": {
+        "layout": "row",
+        "item": "icon",
+        "density": "compact"
+      }
+    },
+    {
+      "id": "icons",
+      "set": {
+        "item": "icon",
+        "tone": "muted",
+        "density": "compact"
+      }
+    },
+    {
+      "id": "grid2",
+      "set": {
+        "cols": "2",
+        "density": "roomy"
+      }
+    },
+    {
+      "id": "tiles4",
+      "set": {
+        "item": "tile"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "SectionFrame"
+  ],
+  "data": [
+    {
+      "as": "logos",
+      "collection": "logos",
+      "kind": "logo",
+      "record": "Logo",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "logos",
+      "title": {
+        "$": "ui.marketing.logos.title"
+      },
+      "logos": {
+        "$": "logos"
+      },
+      "empty": {
+        "$": "ui.empty.logos"
+      }
+    }
+  }
+}

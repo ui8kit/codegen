@@ -1,0 +1,111 @@
+{
+  "collection": "prompts",
+  "kind": "prompt",
+  "entries": [
+    {
+      "id": "prompt-code",
+      "locale": "en",
+      "kind": "prompt",
+      "status": "published",
+      "visibility": "public",
+      "slug": "code",
+      "title": "Code",
+      "metadata": {
+        "icon": {
+          "value": "code-xml"
+        },
+        "value": {
+          "value": "code"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "prompt-landing",
+      "locale": "en",
+      "kind": "prompt",
+      "status": "published",
+      "visibility": "public",
+      "slug": "landing",
+      "title": "Landing",
+      "metadata": {
+        "icon": {
+          "value": "layout-grid"
+        },
+        "value": {
+          "value": "landing"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "prompt-dashboard",
+      "locale": "en",
+      "kind": "prompt",
+      "status": "published",
+      "visibility": "public",
+      "slug": "dashboard",
+      "title": "Dashboard",
+      "metadata": {
+        "icon": {
+          "value": "activity"
+        },
+        "value": {
+          "value": "dashboard"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "prompt-mini-game",
+      "locale": "en",
+      "kind": "prompt",
+      "status": "published",
+      "visibility": "public",
+      "slug": "mini-game",
+      "title": "Mini Game",
+      "metadata": {
+        "icon": {
+          "value": "puzzle"
+        },
+        "value": {
+          "value": "mini-game"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "prompt-data",
+      "locale": "en",
+      "kind": "prompt",
+      "status": "published",
+      "visibility": "public",
+      "slug": "data",
+      "title": "Data",
+      "metadata": {
+        "icon": {
+          "value": "blocks"
+        },
+        "value": {
+          "value": "data"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    }
+  ]
+}

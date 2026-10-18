@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.drop-zone",
+  "name": "DropZone",
+  "docs": "A dashed area that takes files by drag and drop or by a file input. The words come from props; the files are handed to the `files` event, nothing is uploaded here.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "docs": "accessible name of the zone",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string"
+    },
+    {
+      "name": "chooseLabel",
+      "type": "string",
+      "docs": "accessible name of the file input",
+      "required": true
+    },
+    {
+      "name": "accept",
+      "type": "string"
+    },
+    {
+      "name": "multiple",
+      "type": "boolean"
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [
+    {
+      "name": "files",
+      "args": [
+        {
+          "name": "files",
+          "type": {
+            "ts": "File[]"
+          }
+        }
+      ],
+      "docs": "files were dropped or picked"
+    }
+  ],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "drag and drop and the programmatic click on the file input need DOM APIs (DataTransfer, element lookup by id): the behaviour is written by the programmer behind the `files` port"
+    },
+    "react": {
+      "portable": false,
+      "reason": "drag and drop and the programmatic click on the file input need DOM APIs (DataTransfer, element lookup by id): the behaviour is written by the programmer behind the `files` port"
+    }
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.post-outline",
+  "name": "PostOutline",
+  "docs": "The facts of a post in a column (author, date, minutes, views), then the related reading as links.",
+  "records": {},
+  "props": [
+    {
+      "name": "post",
+      "type": {
+        "ts": "Post"
+      },
+      "required": true
+    },
+    {
+      "name": "extras",
+      "type": {
+        "ts": "PostExtras"
+      },
+      "required": true,
+      "docs": "the author's role and bio, the reading figures, the tags and the outline"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "PostSplitLabels"
+      },
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "6",
+        "Align": "stretch"
+      },
+      "attrs": {
+        "data-testid": "post-outline"
+      },
+      "children": [
+        {
+          "use": "Stack",
+          "props": {
+            "Gap": "2",
+            "Align": "start",
+            "Class": "text-muted-foreground"
+          },
+          "children": [
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "2",
+                "Align": "center"
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": "user",
+                    "Size": 16
+                  }
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "post.author"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "2",
+                "Align": "center"
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": "calendar",
+                    "Size": 16
+                  }
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "post.date"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "2",
+                "Align": "center"
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": "clock",
+                    "Size": 16
+                  }
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "op": "tpl",
+                        "args": [
+                          {
+                            "$": "labels.minutes"
+                          },
+                          {
+                            "$": "post.minutes"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "2",
+                "Align": "center"
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": "eye",
+                    "Size": 16
+                  }
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "op": "tpl",
+                        "args": [
+                          {
+                            "$": "labels.views"
+                          },
+                          {
+                            "$": "extras.views"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Stack",
+          "props": {
+            "Gap": "2",
+            "Align": "stretch",
+            "Class": "border-t border-border pt-4"
+          },
+          "children": [
+            {
+              "use": "Text",
+              "props": {
+                "Size": "xs",
+                "Weight": "medium",
+                "Class": "uppercase tracking-wide text-muted-foreground"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.related"
+                  }
+                }
+              ]
+            },
+            {
+              "each": {
+                "$": "extras.outline"
+              },
+              "as": "l",
+              "key": {
+                "$": "l.id"
+              },
+              "do": [
+                {
+                  "organism": "MenuEntry",
+                  "props": {
+                    "href": {
+                      "$": "l.href"
+                    },
+                    "className": "text-sm font-medium",
+                    "size": "sm",
+                    "testid": "post-link"
+                  },
+                  "slots": {
+                    "children": {
+                      "args": [],
+                      "do": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "chevron-right",
+                            "Size": 16
+                          }
+                        },
+                        {
+                          "text": {
+                            "$": "l.name"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PostCard",
+      "names": [
+        "Post"
+      ]
+    },
+    {
+      "from": "PostSplit",
+      "names": [
+        "PostExtras",
+        "PostSplitLabels"
+      ]
+    }
+  ]
+}

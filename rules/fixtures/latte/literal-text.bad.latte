@@ -1,0 +1,13 @@
+{* Self-test fixture of the rules group, detector literal-text (violating). *}
+{capture $c_2}
+  {capture $c_1}
+    Save changes
+  {/capture}
+  {=ui_include('ui/text/text.latte', ['p' => [], 'children' => $c_1])|noescape}
+  {=ui_include('ui/input/input.latte', ['p' => ['Placeholder' => 'Your name']])|noescape}
+  {capture $c_3}
+    {=ui_t($v_ok) ? 'Yes' : 'No'}
+  {/capture}
+  {=ui_include('ui/text/text.latte', ['p' => [], 'children' => $c_3])|noescape}
+{/capture}
+{=ui_include('ui/block/block.latte', ['p' => ['Tag' => 'section'], 'children' => $c_2])|noescape}

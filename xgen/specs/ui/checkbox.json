@@ -1,0 +1,257 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.checkbox",
+  "tier": "brick",
+  "dir": "checkbox",
+  "docs": "Checkbox is a native boolean form control.\nWireframe styling via Variant and Size; supports standard ARIA attrs.",
+  "variants": {
+    "checkbox": "checkbox.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Checkbox",
+      "docs": "Checkbox renders a styled input[type=checkbox].",
+      "recipeId": "checkbox",
+      "classes": {
+        "recipe": {
+          "size": "Size",
+          "variant": "Variant"
+        }
+      },
+      "props": [
+        {
+          "name": "Variant",
+          "type": "string",
+          "cva": true,
+          "docs": "sets appearance preset"
+        },
+        {
+          "name": "Size",
+          "type": "string",
+          "cva": true,
+          "docs": "sets density preset"
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Name",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Value",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Checked",
+          "type": "bool",
+          "cva": false
+        },
+        {
+          "name": "Disabled",
+          "type": "bool",
+          "cva": false
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "cva": false
+        },
+        {
+          "name": "ID",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "element id"
+        },
+        {
+          "name": "Role",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "ARIA role override"
+        },
+        {
+          "name": "TabIndex",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "tab order override"
+        },
+        {
+          "name": "AriaLabel",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "accessible name for unlabeled controls"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "input"
+        },
+        "attrs": [
+          {
+            "kind": "expr",
+            "name": "id",
+            "expr": {
+              "kind": "prop",
+              "name": "ID"
+            }
+          },
+          {
+            "kind": "static",
+            "name": "type",
+            "value": "checkbox"
+          },
+          {
+            "kind": "expr",
+            "name": "name",
+            "expr": {
+              "kind": "prop",
+              "name": "Name"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "value",
+            "expr": {
+              "kind": "prop",
+              "name": "Value"
+            }
+          },
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "bool",
+            "name": "checked",
+            "expr": {
+              "kind": "prop",
+              "name": "Checked"
+            }
+          },
+          {
+            "kind": "bool",
+            "name": "disabled",
+            "expr": {
+              "kind": "prop",
+              "name": "Disabled"
+            }
+          },
+          {
+            "kind": "bool",
+            "name": "required",
+            "expr": {
+              "kind": "prop",
+              "name": "Required"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "role",
+            "expr": {
+              "kind": "prop",
+              "name": "Role"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "tabindex",
+            "expr": {
+              "kind": "prop",
+              "name": "TabIndex"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "aria-label",
+            "expr": {
+              "kind": "prop",
+              "name": "AriaLabel"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [],
+        "void": true
+      },
+      "slots": [],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "input"
+        ],
+        "roles": [],
+        "aria": [
+          {
+            "name": "aria-label",
+            "kind": "expr"
+          },
+          {
+            "name": "role",
+            "kind": "expr"
+          },
+          {
+            "name": "tabindex",
+            "kind": "expr"
+          }
+        ],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [
+        "--background",
+        "--border",
+        "--muted",
+        "--primary"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "state.checked",
+      "props": {
+        "Checked": true,
+        "ID": "terms",
+        "Name": "terms"
+      }
+    },
+    {
+      "id": "state.disabled",
+      "props": {
+        "Checked": true,
+        "Disabled": true,
+        "Name": "locked"
+      }
+    },
+    {
+      "id": "state.unchecked",
+      "props": {
+        "ID": "terms",
+        "Name": "terms"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.theme-support-center",
+  "name": "ThemeSupportCenterScreen",
+  "kind": "composed",
+  "docs": "A help center: channels, FAQ as tabs, chat and search, contact forms, and the pages for a missing or moved address.",
+  "routes": [
+    {
+      "path": "",
+      "area": "home"
+    },
+    {
+      "path": "faq",
+      "area": "faq"
+    },
+    {
+      "path": "contact",
+      "area": "contact"
+    },
+    {
+      "path": "missing",
+      "area": "missing"
+    },
+    {
+      "path": "moved",
+      "area": "moved"
+    }
+  ],
+  "frame": {
+    "before": [
+      {
+        "block": "navbar",
+        "variant": "inline",
+        "props": {
+          "brandHref": "#/",
+          "links": {
+            "$": "nav.links"
+          },
+          "current": {
+            "$": "nav.current"
+          },
+          "skip": {
+            "$": "ui.site.header.skip"
+          },
+          "actions": {
+            "themeLabel": {
+              "$": "ui.theme.toggle"
+            }
+          }
+        }
+      }
+    ],
+    "after": [
+      {
+        "block": "sitemap",
+        "variant": "status"
+      }
+    ]
+  },
+  "areas": {
+    "home": [
+      {
+        "block": "pagehead",
+        "variant": "center",
+        "props": {
+          "title": {
+            "$": "ui.pages.supportCenter.home.title"
+          },
+          "text": {
+            "$": "ui.pages.supportCenter.home.text"
+          },
+          "cta": {
+            "$": "ui.pages.supportCenter.home.cta"
+          },
+          "href": "#/faq"
+        }
+      },
+      {
+        "block": "channels",
+        "variant": "grid"
+      },
+      {
+        "block": "medialist",
+        "variant": "topicRows"
+      },
+      {
+        "block": "faq",
+        "variant": "tabs"
+      },
+      {
+        "block": "contact",
+        "variant": "split"
+      }
+    ],
+    "faq": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.supportCenter.faq.title"
+          },
+          "text": {
+            "$": "ui.pages.supportCenter.faq.text"
+          },
+          "cta": {
+            "$": "ui.pages.supportCenter.faq.cta"
+          },
+          "href": "#/contact"
+        }
+      },
+      {
+        "block": "faq",
+        "variant": "chat"
+      },
+      {
+        "block": "faq",
+        "variant": "search"
+      }
+    ],
+    "contact": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.supportCenter.contact.title"
+          },
+          "text": {
+            "$": "ui.pages.supportCenter.contact.text"
+          },
+          "cta": {
+            "$": "ui.pages.supportCenter.contact.cta"
+          },
+          "href": "#/missing"
+        }
+      },
+      {
+        "block": "contact",
+        "variant": "single"
+      },
+      {
+        "block": "channels",
+        "variant": "list"
+      },
+      {
+        "block": "contact",
+        "variant": "consent"
+      }
+    ],
+    "missing": [
+      {
+        "block": "errorpage",
+        "variant": "centered",
+        "props": {
+          "title": {
+            "$": "ui.pages.supportCenter.missing.title"
+          },
+          "text": {
+            "$": "ui.pages.supportCenter.missing.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.supportCenter.missing.cta"
+            },
+            "href": "#/moved"
+          }
+        }
+      }
+    ],
+    "moved": [
+      {
+        "block": "errorpage",
+        "variant": "split",
+        "props": {
+          "title": {
+            "$": "ui.pages.supportCenter.moved.title"
+          },
+          "text": {
+            "$": "ui.pages.supportCenter.moved.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.supportCenter.moved.cta"
+            },
+            "href": "#/"
+          }
+        }
+      },
+      {
+        "block": "channels",
+        "variant": "twoUp"
+      }
+    ]
+  },
+  "chunks": true,
+  "requireH1": true,
+  "nameLandmarks": true,
+  "nav": true,
+  "menu": [
+    {
+      "id": "home",
+      "path": "",
+      "titleKey": "pages.supportCenter.home.nav"
+    },
+    {
+      "id": "faq",
+      "path": "faq",
+      "titleKey": "pages.supportCenter.faq.nav"
+    },
+    {
+      "id": "contact",
+      "path": "contact",
+      "titleKey": "pages.supportCenter.contact.nav"
+    },
+    {
+      "id": "missing",
+      "path": "missing",
+      "titleKey": "pages.supportCenter.missing.nav"
+    },
+    {
+      "id": "moved",
+      "path": "moved",
+      "titleKey": "pages.supportCenter.moved.nav"
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

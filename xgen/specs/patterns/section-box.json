@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.section-box",
+  "name": "SectionBox",
+  "docs": "The body of a SectionFrame: inside a card when `boxed`, else the children as they are (no wrapper).",
+  "records": {},
+  "props": [
+    {
+      "name": "boxed",
+      "type": "boolean",
+      "docs": "the children sit in a card",
+      "default": false
+    }
+  ],
+  "children": true,
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "$": "boxed"
+      },
+      "then": [
+        {
+          "use": "Card",
+          "props": {
+            "Variant": "muted"
+          },
+          "children": [
+            {
+              "slot": "children"
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "slot": "children"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

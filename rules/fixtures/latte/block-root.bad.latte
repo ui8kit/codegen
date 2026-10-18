@@ -1,0 +1,5 @@
+{* Self-test fixture of the rules group, detector block-root (violating). *}
+{capture $c_1}
+  {=ui_text($v_title)}
+{/capture}
+{=ui_include('ui/box/box.latte', ['p' => ['Class' => 'p-4'], 'children' => $c_1])|noescape}

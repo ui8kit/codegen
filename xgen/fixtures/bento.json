@@ -1,0 +1,174 @@
+{
+  "collection": "bento",
+  "kind": "tile",
+  "entries": [
+    {
+      "id": "tile-speed",
+      "locale": "en",
+      "kind": "tile",
+      "status": "published",
+      "visibility": "public",
+      "slug": "speed",
+      "title": "Fast by default",
+      "metadata": {
+        "text": {
+          "value": "Pages ship little script and load in under a second."
+        },
+        "icon": {
+          "value": "zap"
+        },
+        "size": {
+          "value": "large"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "tile-blocks",
+      "locale": "en",
+      "kind": "tile",
+      "status": "published",
+      "visibility": "public",
+      "slug": "blocks",
+      "title": "Ready blocks",
+      "metadata": {
+        "text": {
+          "value": "Compose a page from tested blocks and variants."
+        },
+        "icon": {
+          "value": "layout-grid"
+        },
+        "size": {
+          "value": "wide"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "tile-access",
+      "locale": "en",
+      "kind": "tile",
+      "status": "published",
+      "visibility": "public",
+      "slug": "access",
+      "title": "Accessible",
+      "metadata": {
+        "text": {
+          "value": "Landmarks, labels and focus order are checked."
+        },
+        "icon": {
+          "value": "accessibility"
+        },
+        "size": {
+          "value": "small"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "tile-themes",
+      "locale": "en",
+      "kind": "tile",
+      "status": "published",
+      "visibility": "public",
+      "slug": "themes",
+      "title": "Light and dark",
+      "metadata": {
+        "text": {
+          "value": "Every block follows the theme tokens."
+        },
+        "icon": {
+          "value": "moon"
+        },
+        "size": {
+          "value": "small"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    },
+    {
+      "id": "tile-data",
+      "locale": "en",
+      "kind": "tile",
+      "status": "published",
+      "visibility": "public",
+      "slug": "data",
+      "title": "One source of data",
+      "metadata": {
+        "text": {
+          "value": "Pages read collections, never copies."
+        },
+        "icon": {
+          "value": "database"
+        },
+        "size": {
+          "value": "wide"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-09T09:00:00Z",
+      "updated_at": "2026-03-10T09:00:00Z",
+      "published_at": "2026-03-10T10:00:00Z"
+    },
+    {
+      "id": "tile-secure",
+      "locale": "en",
+      "kind": "tile",
+      "status": "published",
+      "visibility": "public",
+      "slug": "secure",
+      "title": "Private by default",
+      "metadata": {
+        "text": {
+          "value": "Your data stays in your collections."
+        },
+        "icon": {
+          "value": "lock"
+        },
+        "size": {
+          "value": "small"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "tile-export",
+      "locale": "en",
+      "kind": "tile",
+      "status": "published",
+      "visibility": "public",
+      "slug": "export",
+      "title": "Export anywhere",
+      "metadata": {
+        "text": {
+          "value": "Take pages and data with you."
+        },
+        "icon": {
+          "value": "download"
+        },
+        "size": {
+          "value": "small"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    }
+  ]
+}

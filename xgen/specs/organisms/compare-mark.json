@@ -1,0 +1,162 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.compare-mark",
+  "name": "CompareMark",
+  "docs": "One cell value of ComparisonTable: yes shows a check, no a dash (both with the hidden word for screen readers), any other value is shown as text.",
+  "records": {},
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": true,
+      "docs": "yes, no or a short text"
+    },
+    {
+      "name": "yes",
+      "type": "string",
+      "required": true,
+      "docs": "the hidden word for yes"
+    },
+    {
+      "name": "no",
+      "type": "string",
+      "required": true,
+      "docs": "the hidden word for no"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "value"
+          },
+          "yes"
+        ]
+      },
+      "then": [
+        {
+          "use": "Inline",
+          "props": {
+            "Class": "inline-flex items-center gap-2"
+          },
+          "attrs": {
+            "data-mark": "yes"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "check",
+                "Size": 16,
+                "Class": "text-foreground"
+              }
+            },
+            {
+              "use": "Inline",
+              "props": {
+                "Class": "sr-only"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "yes"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "value"
+          },
+          "no"
+        ]
+      },
+      "then": [
+        {
+          "use": "Inline",
+          "props": {
+            "Class": "inline-flex items-center gap-2 text-muted-foreground"
+          },
+          "attrs": {
+            "data-mark": "no"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "minus",
+                "Size": 16
+              }
+            },
+            {
+              "use": "Inline",
+              "props": {
+                "Class": "sr-only"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "no"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "when": {
+        "op": "and",
+        "args": [
+          {
+            "op": "ne",
+            "args": [
+              {
+                "$": "value"
+              },
+              "yes"
+            ]
+          },
+          {
+            "op": "ne",
+            "args": [
+              {
+                "$": "value"
+              },
+              "no"
+            ]
+          }
+        ]
+      },
+      "then": [
+        {
+          "use": "Inline",
+          "children": [
+            {
+              "text": {
+                "$": "value"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

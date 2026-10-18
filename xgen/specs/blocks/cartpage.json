@@ -1,0 +1,160 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.cartpage",
+  "name": "Cart page",
+  "docs": "The cart lines beside a summary with a promo code and a free-delivery bar.",
+  "theme": "commerce",
+  "group": "checkout",
+  "organism": "ShoppingCart",
+  "axes": {
+    "layout": [
+      "split",
+      "stacked"
+    ],
+    "promo": [
+      "show",
+      "hide"
+    ],
+    "progress": [
+      "show",
+      "hide"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "split",
+    "promo": "show",
+    "progress": "show",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "split",
+      "set": {}
+    },
+    {
+      "id": "stacked",
+      "set": {
+        "layout": "stacked"
+      }
+    },
+    {
+      "id": "plain",
+      "set": {
+        "promo": "hide",
+        "progress": "hide",
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "CartSummaryCard",
+    "EmptyState",
+    "MediaFrame",
+    "NumberField",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@cart"
+    },
+    {
+      "sel": "[data-testid=\"code\"]",
+      "n": "@promos",
+      "when": {
+        "promo": "show"
+      }
+    },
+    {
+      "sel": "[data-testid=\"code\"]",
+      "n": 0,
+      "when": {
+        "promo": "hide"
+      }
+    },
+    {
+      "sel": "[data-testid=\"progress\"]",
+      "n": 1,
+      "when": {
+        "progress": "show"
+      }
+    },
+    {
+      "sel": "[data-testid=\"progress\"]",
+      "n": 0,
+      "when": {
+        "progress": "hide"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "cart",
+      "collection": "cart",
+      "kind": "cartline",
+      "record": "CartLine",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "variant": "metadata.variant.value",
+        "price": "metadata.price.value",
+        "currency": "metadata.currency.value",
+        "qty": "metadata.qty.value"
+      }
+    },
+    {
+      "as": "summary",
+      "collection": "summary",
+      "kind": "summaryrow",
+      "record": "SummaryRow",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "amount": "metadata.amount.value",
+        "currency": "metadata.currency.value",
+        "strong": "metadata.strong.value"
+      }
+    },
+    {
+      "as": "promos",
+      "collection": "promos",
+      "kind": "promo",
+      "record": "Promo",
+      "fields": {
+        "id": "id",
+        "code": "title"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "cartpage",
+      "title": {
+        "$": "ui.commerce.cartPage.title"
+      },
+      "lines": {
+        "$": "cart"
+      },
+      "rows": {
+        "$": "summary"
+      },
+      "promos": {
+        "$": "promos"
+      },
+      "labels": {
+        "$": "ui.commerce.cart"
+      },
+      "totals": {
+        "$": "ui.commerce.totals"
+      },
+      "actions": {
+        "$": "ui.commerce.cartPage"
+      }
+    }
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.post-actions",
+  "name": "PostActions",
+  "docs": "The calls to action of a post header: share and save side by side, one wide read button, or a wide read button with share and save as icons.",
+  "records": {},
+  "props": [
+    {
+      "name": "labels",
+      "type": {
+        "ts": "PostSplitLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "mode",
+      "type": {
+        "ts": "\"pair\" | \"wide\" | \"icons\""
+      },
+      "default": "pair"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "mode"
+          },
+          "pair"
+        ]
+      },
+      "then": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Class": "flex-wrap"
+          },
+          "children": [
+            {
+              "use": "Button",
+              "props": {
+                "Variant": "default",
+                "Size": "default",
+                "Class": "gap-2"
+              },
+              "attrs": {
+                "data-testid": "action-primary"
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": "share-2",
+                    "Size": 16
+                  }
+                },
+                {
+                  "text": {
+                    "$": "labels.share"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Button",
+              "props": {
+                "Variant": "outline",
+                "Size": "default",
+                "Class": "gap-2"
+              },
+              "attrs": {
+                "data-testid": "post-save"
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": "bookmark",
+                    "Size": 16
+                  }
+                },
+                {
+                  "text": {
+                    "$": "labels.save"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2"
+          },
+          "children": [
+            {
+              "use": "Button",
+              "props": {
+                "Variant": "default",
+                "Size": "default",
+                "Class": "gap-2 flex-1"
+              },
+              "attrs": {
+                "data-testid": "action-primary"
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": "book-open",
+                    "Size": 16
+                  }
+                },
+                {
+                  "text": {
+                    "$": "labels.read"
+                  }
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "mode"
+                  },
+                  "icons"
+                ]
+              },
+              "then": [
+                {
+                  "use": "Button",
+                  "props": {
+                    "Variant": "outline",
+                    "Size": "default",
+                    "Layout": "icon",
+                    "AriaLabel": {
+                      "$": "labels.share"
+                    }
+                  },
+                  "attrs": {
+                    "data-testid": "post-share"
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": "share-2",
+                        "Size": 16
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Button",
+                  "props": {
+                    "Variant": "outline",
+                    "Size": "default",
+                    "Layout": "icon",
+                    "AriaLabel": {
+                      "$": "labels.save"
+                    }
+                  },
+                  "attrs": {
+                    "data-testid": "post-save"
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": "bookmark",
+                        "Size": 16
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PostCard",
+      "names": [
+        "Post"
+      ]
+    },
+    {
+      "from": "PostSplit",
+      "names": [
+        "PostExtras",
+        "PostSplitLabels"
+      ]
+    }
+  ]
+}

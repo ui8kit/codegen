@@ -1,0 +1,322 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.feature-accordion",
+  "name": "FeatureAccordion",
+  "docs": "Features as a list of disclosures: icon and title in the summary, the text when open. Axes: expand (first: the first one is open, none: all closed), media (none, image: a picture beside the list), tone, density.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "features",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true
+    },
+    {
+      "name": "empty",
+      "type": "string",
+      "default": "",
+      "docs": "the text of the empty state (no records), from the dictionary"
+    },
+    {
+      "name": "expand",
+      "type": {
+        "ts": "\"first\" | \"none\""
+      },
+      "default": "first"
+    },
+    {
+      "name": "media",
+      "type": {
+        "ts": "\"none\" | \"image\""
+      },
+      "default": "none"
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "default": false,
+      "docs": "true: several can be open at once; false: opening one closes the others (native details name)"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "layout": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "media"
+                },
+                "image"
+              ]
+            },
+            "split",
+            "stack"
+          ]
+        },
+        "media": {
+          "show": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "media"
+              },
+              "image"
+            ]
+          }
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "features"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "layout-grid",
+                    "title": {
+                      "$": "empty"
+                    }
+                  }
+                }
+              ],
+              "else": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "0",
+                    "Align": "stretch"
+                  },
+                  "attrs": {
+                    "data-testid": "items"
+                  },
+                  "children": [
+                    {
+                      "each": {
+                        "$": "features"
+                      },
+                      "as": "f",
+                      "key": {
+                        "$": "f.id"
+                      },
+                      "do": [
+                        {
+                          "use": "Disclosure",
+                          "props": {
+                            "Variant": "item",
+                            "Name": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "$": "multiple"
+                                },
+                                {
+                                  "op": "undef",
+                                  "args": []
+                                },
+                                {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-accordion",
+                                    {
+                                      "op": "coalesce",
+                                      "args": [
+                                        {
+                                          "$": "id"
+                                        },
+                                        "accordion"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "Open": {
+                              "op": "and",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "expand"
+                                    },
+                                    "first"
+                                  ]
+                                },
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "i"
+                                    },
+                                    0
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "attrs": {
+                            "data-testid": "item"
+                          },
+                          "children": [
+                            {
+                              "use": "Summary",
+                              "props": {
+                                "Variant": "item"
+                              },
+                              "children": [
+                                {
+                                  "use": "Inline",
+                                  "props": {
+                                    "Class": "flex min-w-0 items-center justify-start gap-4"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "LucideIcon",
+                                      "props": {
+                                        "Name": {
+                                          "$": "f.icon"
+                                        },
+                                        "Size": 20
+                                      }
+                                    },
+                                    {
+                                      "use": "Inline",
+                                      "props": {
+                                        "Class": "text-base font-semibold"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "f.title"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Size": "sm",
+                                "Class": "pb-4 text-muted-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "f.text"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "index": "i"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "aside": {
+          "args": [],
+          "do": [
+            {
+              "organism": "MediaFrame",
+              "props": {
+                "alt": {
+                  "$": "title"
+                },
+                "ratio": "4/3"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    }
+  ]
+}

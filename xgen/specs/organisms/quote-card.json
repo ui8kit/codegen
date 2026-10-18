@@ -1,0 +1,411 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.quote-card",
+  "name": "QuoteCard",
+  "docs": "One customer quote of TestimonialGrid: a card, a plain figure or a social post, with the author's picture, the stars and a company glyph as `item` says.",
+  "records": {},
+  "props": [
+    {
+      "name": "q",
+      "type": {
+        "ts": "Quote"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "QuoteLabels"
+      },
+      "required": true,
+      "docs": "the templates of the lines around the quote"
+    },
+    {
+      "name": "item",
+      "type": {
+        "ts": "QuoteItem"
+      },
+      "docs": "how the quote is drawn"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"grid\" | \"single\" | \"stack\" | \"masonry\" | \"strip\""
+      },
+      "default": "grid",
+      "docs": "the layout of the grid around it: the size of the card"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "FigureBlock",
+      "props": {
+        "className": {
+          "op": "cn",
+          "args": [
+            "m-0 flex flex-col gap-4",
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "item.kind"
+                    },
+                    "plain"
+                  ]
+                },
+                "",
+                "rounded p-6 inset-ring inset-ring-border bg-card"
+              ]
+            },
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "layout"
+                    },
+                    "masonry"
+                  ]
+                },
+                "mb-4 break-inside-avoid",
+                {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "layout"
+                        },
+                        "strip"
+                      ]
+                    },
+                    "w-80 shrink-0 snap-start",
+                    "h-full"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "testid": "item"
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "item.kind"
+                  },
+                  "social"
+                ]
+              },
+              "then": [
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "center"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "ne",
+                        "args": [
+                          {
+                            "$": "item.avatar"
+                          },
+                          "none"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "q.author"
+                            },
+                            "ratio": "1/1",
+                            "className": "size-12 shrink-0 rounded-full"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "0"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Weight": "semibold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "q.author"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "xs",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "tpl",
+                                "args": [
+                                  {
+                                    "$": "labels.handleLine"
+                                  },
+                                  {
+                                    "$": "q.handle"
+                                  },
+                                  {
+                                    "$": "q.time"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": "message-circle",
+                        "Size": 16,
+                        "Class": "ml-auto text-muted-foreground"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "base"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "q.quote"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "else": [
+                {
+                  "when": {
+                    "op": "ne",
+                    "args": [
+                      {
+                        "$": "item.rating"
+                      },
+                      "hide"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "Rating",
+                      "props": {
+                        "value": {
+                          "$": "q.rating"
+                        },
+                        "label": {
+                          "op": "tpl",
+                          "args": [
+                            {
+                              "$": "labels.rating"
+                            },
+                            {
+                              "$": "q.rating"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "item.mark"
+                      },
+                      "icon"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Inline",
+                      "props": {
+                        "Class": "text-muted-foreground"
+                      },
+                      "attrs": {
+                        "data-testid": "mark"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": {
+                              "$": "q.mark"
+                            },
+                            "Size": 24
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "single"
+                          ]
+                        },
+                        "xl",
+                        "base"
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "q.quote"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "center"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "ne",
+                        "args": [
+                          {
+                            "$": "item.avatar"
+                          },
+                          "none"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "q.author"
+                            },
+                            "ratio": "1/1",
+                            "className": "size-12 shrink-0 rounded-full"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "0"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Weight": "semibold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "q.author"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "tpl",
+                                "args": [
+                                  {
+                                    "$": "labels.byLine"
+                                  },
+                                  {
+                                    "$": "q.role"
+                                  },
+                                  {
+                                    "$": "q.company"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "TestimonialGrid",
+      "names": [
+        "Quote",
+        "QuoteLabels",
+        "QuoteItem"
+      ]
+    }
+  ]
+}

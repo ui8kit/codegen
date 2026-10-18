@@ -1,0 +1,250 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.theme-content-blog",
+  "name": "ThemeContentBlogScreen",
+  "kind": "composed",
+  "docs": "A blog: a magazine front page, filtered and plain lists, and articles with a table of contents, a single column or no cover.",
+  "routes": [
+    {
+      "path": "",
+      "area": "home"
+    },
+    {
+      "path": "articles",
+      "area": "articles"
+    },
+    {
+      "path": "archive",
+      "area": "archive"
+    },
+    {
+      "path": "post",
+      "area": "post"
+    },
+    {
+      "path": "story",
+      "area": "story"
+    },
+    {
+      "path": "essay",
+      "area": "essay"
+    },
+    {
+      "path": "plain",
+      "area": "plain"
+    }
+  ],
+  "frame": {
+    "before": [
+      {
+        "block": "navbar",
+        "variant": "inline",
+        "props": {
+          "brandHref": "#/",
+          "links": {
+            "$": "nav.links"
+          },
+          "current": {
+            "$": "nav.current"
+          },
+          "skip": {
+            "$": "ui.site.header.skip"
+          },
+          "actions": {
+            "themeLabel": {
+              "$": "ui.theme.toggle"
+            }
+          }
+        }
+      }
+    ],
+    "after": [
+      {
+        "block": "sitemap",
+        "variant": "compact"
+      }
+    ]
+  },
+  "areas": {
+    "home": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.contentBlog.home.title"
+          },
+          "text": {
+            "$": "ui.pages.contentBlog.home.text"
+          },
+          "cta": {
+            "$": "ui.pages.contentBlog.home.cta"
+          },
+          "href": "#/articles"
+        }
+      },
+      {
+        "block": "posts",
+        "variant": "magazine"
+      },
+      {
+        "block": "postshowcase",
+        "variant": "introCards"
+      },
+      {
+        "block": "newsletter",
+        "variant": "stacked"
+      }
+    ],
+    "articles": [
+      {
+        "block": "pagehead",
+        "variant": "center",
+        "props": {
+          "title": {
+            "$": "ui.pages.contentBlog.articles.title"
+          },
+          "text": {
+            "$": "ui.pages.contentBlog.articles.text"
+          },
+          "cta": {
+            "$": "ui.pages.contentBlog.articles.cta"
+          },
+          "href": "#/archive"
+        }
+      },
+      {
+        "block": "posts",
+        "variant": "filters"
+      },
+      {
+        "block": "posts",
+        "variant": "twoUp"
+      }
+    ],
+    "archive": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.contentBlog.archive.title"
+          },
+          "text": {
+            "$": "ui.pages.contentBlog.archive.text"
+          },
+          "cta": {
+            "$": "ui.pages.contentBlog.archive.cta"
+          },
+          "href": "#/post"
+        }
+      },
+      {
+        "block": "posts",
+        "variant": "list"
+      },
+      {
+        "block": "posts",
+        "variant": "digest"
+      },
+      {
+        "block": "posts",
+        "variant": "textOnly"
+      }
+    ],
+    "post": [
+      {
+        "block": "postheader",
+        "variant": "start"
+      },
+      {
+        "block": "article",
+        "variant": "toc"
+      }
+    ],
+    "story": [
+      {
+        "block": "postsplit",
+        "variant": "splitStats"
+      },
+      {
+        "block": "article",
+        "variant": "column"
+      }
+    ],
+    "essay": [
+      {
+        "block": "postheader",
+        "variant": "center"
+      },
+      {
+        "block": "article",
+        "variant": "column"
+      },
+      {
+        "block": "newsletter",
+        "variant": "inline"
+      }
+    ],
+    "plain": [
+      {
+        "block": "postheader",
+        "variant": "noCover"
+      },
+      {
+        "block": "article",
+        "variant": "plain"
+      },
+      {
+        "block": "posts",
+        "variant": "grid"
+      }
+    ]
+  },
+  "chunks": true,
+  "requireH1": true,
+  "nameLandmarks": true,
+  "nav": true,
+  "menu": [
+    {
+      "id": "home",
+      "path": "",
+      "titleKey": "pages.contentBlog.home.nav"
+    },
+    {
+      "id": "articles",
+      "path": "articles",
+      "titleKey": "pages.contentBlog.articles.nav"
+    },
+    {
+      "id": "archive",
+      "path": "archive",
+      "titleKey": "pages.contentBlog.archive.nav"
+    },
+    {
+      "id": "post",
+      "path": "post",
+      "titleKey": "pages.contentBlog.post.nav"
+    },
+    {
+      "id": "story",
+      "path": "story",
+      "titleKey": "pages.contentBlog.story.nav"
+    },
+    {
+      "id": "essay",
+      "path": "essay",
+      "titleKey": "pages.contentBlog.essay.nav"
+    },
+    {
+      "id": "plain",
+      "path": "plain",
+      "titleKey": "pages.contentBlog.plain.nav"
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

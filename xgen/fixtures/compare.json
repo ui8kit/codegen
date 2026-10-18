@@ -1,0 +1,126 @@
+{
+  "collection": "compare",
+  "kind": "row",
+  "entries": [
+    {
+      "id": "row-seats",
+      "locale": "en",
+      "kind": "row",
+      "status": "published",
+      "visibility": "public",
+      "slug": "seats",
+      "title": "Team seats",
+      "metadata": {
+        "a": {
+          "value": "1"
+        },
+        "b": {
+          "value": "10"
+        },
+        "c": {
+          "value": "Unlimited"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "row-storage",
+      "locale": "en",
+      "kind": "row",
+      "status": "published",
+      "visibility": "public",
+      "slug": "storage",
+      "title": "Storage",
+      "metadata": {
+        "a": {
+          "value": "1 GB"
+        },
+        "b": {
+          "value": "50 GB"
+        },
+        "c": {
+          "value": "1 TB"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "row-sso",
+      "locale": "en",
+      "kind": "row",
+      "status": "published",
+      "visibility": "public",
+      "slug": "sso",
+      "title": "Single sign-on",
+      "metadata": {
+        "a": {
+          "value": "no"
+        },
+        "b": {
+          "value": "no"
+        },
+        "c": {
+          "value": "yes"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "row-support",
+      "locale": "en",
+      "kind": "row",
+      "status": "published",
+      "visibility": "public",
+      "slug": "support",
+      "title": "Priority support",
+      "metadata": {
+        "a": {
+          "value": "no"
+        },
+        "b": {
+          "value": "yes"
+        },
+        "c": {
+          "value": "yes"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    },
+    {
+      "id": "row-export",
+      "locale": "en",
+      "kind": "row",
+      "status": "published",
+      "visibility": "public",
+      "slug": "export",
+      "title": "Data export",
+      "metadata": {
+        "a": {
+          "value": "yes"
+        },
+        "b": {
+          "value": "yes"
+        },
+        "c": {
+          "value": "yes"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-09T09:00:00Z",
+      "updated_at": "2026-03-10T09:00:00Z",
+      "published_at": "2026-03-10T10:00:00Z"
+    }
+  ]
+}

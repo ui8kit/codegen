@@ -1,0 +1,74 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.pagehead",
+  "name": "Page heading",
+  "docs": "The head of an inner page: the heading, one sentence and an optional action.",
+  "theme": "marketing",
+  "group": "page",
+  "organism": "PageIntro",
+  "axes": {
+    "align": [
+      "start",
+      "center"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "align": "start",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "start",
+      "set": {}
+    },
+    {
+      "id": "center",
+      "set": {
+        "align": "center"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"section\"]",
+      "n": 1
+    }
+  ],
+  "data": [],
+  "sample": {
+    "props": {
+      "id": "pagehead",
+      "title": {
+        "$": "ui.vibe.pagehead.title"
+      },
+      "text": {
+        "$": "ui.vibe.pagehead.text"
+      },
+      "cta": {
+        "$": "ui.vibe.pagehead.cta"
+      },
+      "href": "#/"
+    }
+  }
+}

@@ -1,0 +1,328 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.empty-panel",
+  "name": "EmptyPanel",
+  "docs": "An empty list or an empty search: a round icon, a title, a hint and an optional action, in a card or plain. Axes: layout (card, plain), actions (button, none), size (default, compact).",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "default": "inbox",
+      "docs": "Lucide name"
+    },
+    {
+      "name": "cta",
+      "type": "string",
+      "docs": "text of the action"
+    },
+    {
+      "name": "ctaHref",
+      "type": "string"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"card\" | \"plain\""
+      },
+      "default": "card"
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "\"button\" | \"none\""
+      },
+      "default": "button"
+    },
+    {
+      "name": "visual",
+      "type": {
+        "ts": "\"icon\" | \"image\""
+      },
+      "default": "icon",
+      "docs": "image: a picture instead of the round icon"
+    },
+    {
+      "name": "size",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "section"
+      },
+      "attrs": {
+        "aria-label": {
+          "op": "coalesce",
+          "args": [
+            {
+              "$": "landmarkLabel"
+            },
+            {
+              "$": "title"
+            }
+          ]
+        },
+        "data-testid": "empty"
+      },
+      "children": [
+        {
+          "use": "Container",
+          "props": {
+            "Class": {
+              "op": "cn",
+              "args": [
+                "mx-auto w-full max-w-6xl px-4",
+                {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "size"
+                        },
+                        "compact"
+                      ]
+                    },
+                    "py-4",
+                    "py-8"
+                  ]
+                }
+              ]
+            }
+          },
+          "attrs": {
+            "data-slot": "container"
+          },
+          "children": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "visual"
+                  },
+                  "image"
+                ]
+              },
+              "then": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "center",
+                    "Class": "mx-auto max-w-md text-center"
+                  },
+                  "attrs": {
+                    "data-testid": "empty-visual"
+                  },
+                  "children": [
+                    {
+                      "organism": "MediaFrame",
+                      "props": {
+                        "alt": {
+                          "$": "title"
+                        },
+                        "ratio": "4/3",
+                        "className": "w-full max-w-xs"
+                      }
+                    },
+                    {
+                      "use": "Title",
+                      "props": {
+                        "As": 2,
+                        "Size": "2xl",
+                        "Weight": "bold"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "title"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Class": "text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "text"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "actions"
+                          },
+                          "button"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "use": "Button",
+                          "props": {
+                            "Variant": "default",
+                            "Size": "sm",
+                            "Href": {
+                              "$": "ctaHref"
+                            }
+                          },
+                          "attrs": {
+                            "data-testid": "empty-action"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "cta"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "else": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": {
+                      "$": "icon"
+                    },
+                    "title": {
+                      "$": "title"
+                    },
+                    "text": {
+                      "$": "text"
+                    },
+                    "className": {
+                      "op": "cn",
+                      "args": [
+                        "mx-auto max-w-xl",
+                        {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "layout"
+                                },
+                                "plain"
+                              ]
+                            },
+                            "bg-transparent inset-ring-0",
+                            ""
+                          ]
+                        },
+                        {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "size"
+                                },
+                                "compact"
+                              ]
+                            },
+                            "py-6",
+                            ""
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "slots": {
+                    "action": {
+                      "args": [],
+                      "do": [
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "actions"
+                              },
+                              "button"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "Button",
+                              "props": {
+                                "Variant": "default",
+                                "Size": "sm",
+                                "Href": {
+                                  "$": "ctaHref"
+                                }
+                              },
+                              "attrs": {
+                                "data-testid": "empty-action"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "cta"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

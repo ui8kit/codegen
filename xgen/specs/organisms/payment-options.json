@@ -1,0 +1,156 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.payment-options",
+  "name": "PaymentOptions",
+  "docs": "Ways to pay as radio cards: icon, name and a line of text; `checked` is the chosen one. Static markup.",
+  "records": {
+    "Payment": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "payments",
+      "type": {
+        "ts": "Payment[]"
+      },
+      "required": true
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "docs": "name of the radio group"
+    },
+    {
+      "name": "checked",
+      "type": "string",
+      "default": "",
+      "docs": "id of the chosen payment"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Grid",
+      "props": {
+        "Cols": "1-2",
+        "Class": "gap-4"
+      },
+      "attrs": {
+        "data-testid": "payments"
+      },
+      "children": [
+        {
+          "each": {
+            "$": "payments"
+          },
+          "as": "p",
+          "key": {
+            "$": "p.id"
+          },
+          "do": [
+            {
+              "use": "Label",
+              "props": {
+                "Class": "flex items-center gap-4 rounded p-4 inset-ring inset-ring-border has-checked:inset-ring-foreground"
+              },
+              "attrs": {
+                "data-testid": "payment"
+              },
+              "children": [
+                {
+                  "use": "Radio",
+                  "props": {
+                    "Name": {
+                      "$": "name"
+                    },
+                    "Value": {
+                      "$": "p.id"
+                    },
+                    "Checked": {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "p.id"
+                        },
+                        {
+                          "$": "checked"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": {
+                      "$": "p.icon"
+                    },
+                    "Size": 20,
+                    "Class": "shrink-0"
+                  }
+                },
+                {
+                  "use": "Inline",
+                  "props": {
+                    "Class": "flex flex-col items-start justify-start gap-0"
+                  },
+                  "children": [
+                    {
+                      "use": "Inline",
+                      "props": {
+                        "Class": "text-sm font-semibold"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "p.title"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Inline",
+                      "props": {
+                        "Class": "text-xs text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "p.text"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

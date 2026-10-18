@@ -1,0 +1,340 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.breadcrumb",
+  "tier": "brick",
+  "dir": "breadcrumb",
+  "docs": "Breadcrumb shows the current page location within a hierarchy.\nRenders nav with ordered links and aria-current on the active item.",
+  "variants": {},
+  "recordTypes": [
+    {
+      "name": "BreadcrumbItem",
+      "fields": [
+        {
+          "name": "Label",
+          "type": "string"
+        },
+        {
+          "name": "Href",
+          "type": "string"
+        },
+        {
+          "name": "Current",
+          "type": "bool",
+          "docs": "marks the active page (aria-current=page)"
+        },
+        {
+          "name": "Disabled",
+          "type": "bool"
+        }
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "name": "Breadcrumb",
+      "docs": "Breadcrumb renders the full navigation trail.",
+      "classes": {
+        "staticBase": "text-sm"
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Items",
+          "type": "items",
+          "cva": false,
+          "itemsOf": "BreadcrumbItem"
+        },
+        {
+          "name": "AriaLabel",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "DataUI8Kit",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "opt-in behavior hook; empty emits nothing"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "nav"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "aria-label",
+            "expr": {
+              "kind": "prop",
+              "name": "AriaLabel"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "data-ui8kit",
+            "expr": {
+              "kind": "prop",
+              "name": "DataUI8Kit"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "element",
+            "tag": {
+              "kind": "static",
+              "tag": "ol"
+            },
+            "attrs": [
+              {
+                "kind": "static",
+                "name": "class",
+                "value": "flex flex-wrap items-center gap-2"
+              }
+            ],
+            "children": [
+              {
+                "kind": "forEach",
+                "itemsProp": "Items",
+                "body": [
+                  {
+                    "kind": "element",
+                    "tag": {
+                      "kind": "static",
+                      "tag": "li"
+                    },
+                    "attrs": [
+                      {
+                        "kind": "static",
+                        "name": "class",
+                        "value": "inline-flex items-center"
+                      }
+                    ],
+                    "children": [
+                      {
+                        "kind": "when",
+                        "test": {
+                          "kind": "and",
+                          "exprs": [
+                            {
+                              "kind": "isSet",
+                              "expr": {
+                                "kind": "item",
+                                "field": "Href"
+                              }
+                            },
+                            {
+                              "kind": "not",
+                              "expr": {
+                                "kind": "item",
+                                "field": "Disabled"
+                              }
+                            }
+                          ]
+                        },
+                        "then": [
+                          {
+                            "kind": "element",
+                            "tag": {
+                              "kind": "static",
+                              "tag": "a"
+                            },
+                            "attrs": [
+                              {
+                                "kind": "expr",
+                                "name": "href",
+                                "expr": {
+                                  "kind": "item",
+                                  "field": "Href"
+                                }
+                              },
+                              {
+                                "kind": "class",
+                                "spec": {
+                                  "staticBase": "text-sm",
+                                  "extra": [
+                                    {
+                                      "kind": "cond",
+                                      "test": {
+                                        "kind": "item",
+                                        "field": "Current"
+                                      },
+                                      "then": {
+                                        "kind": "lit",
+                                        "value": "font-medium"
+                                      },
+                                      "else": {
+                                        "kind": "cond",
+                                        "test": {
+                                          "kind": "item",
+                                          "field": "Disabled"
+                                        },
+                                        "then": {
+                                          "kind": "lit",
+                                          "value": "text-muted-foreground"
+                                        },
+                                        "else": {
+                                          "kind": "lit",
+                                          "value": "text-primary underline-offset-4 hover:underline"
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "includeClassProp": false
+                                }
+                              },
+                              {
+                                "kind": "expr",
+                                "name": "aria-current",
+                                "expr": {
+                                  "kind": "lit",
+                                  "value": "page"
+                                },
+                                "when": {
+                                  "kind": "item",
+                                  "field": "Current"
+                                }
+                              }
+                            ],
+                            "children": [
+                              {
+                                "kind": "text",
+                                "expr": {
+                                  "kind": "item",
+                                  "field": "Label"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "else": [
+                          {
+                            "kind": "element",
+                            "tag": {
+                              "kind": "static",
+                              "tag": "span"
+                            },
+                            "attrs": [
+                              {
+                                "kind": "class",
+                                "spec": {
+                                  "staticBase": "text-sm",
+                                  "extra": [
+                                    {
+                                      "kind": "cond",
+                                      "test": {
+                                        "kind": "item",
+                                        "field": "Current"
+                                      },
+                                      "then": {
+                                        "kind": "lit",
+                                        "value": "font-medium"
+                                      },
+                                      "else": {
+                                        "kind": "cond",
+                                        "test": {
+                                          "kind": "item",
+                                          "field": "Disabled"
+                                        },
+                                        "then": {
+                                          "kind": "lit",
+                                          "value": "text-muted-foreground"
+                                        },
+                                        "else": {
+                                          "kind": "lit",
+                                          "value": "text-primary underline-offset-4 hover:underline"
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "includeClassProp": false
+                                }
+                              },
+                              {
+                                "kind": "expr",
+                                "name": "aria-current",
+                                "expr": {
+                                  "kind": "lit",
+                                  "value": "page"
+                                },
+                                "when": {
+                                  "kind": "item",
+                                  "field": "Current"
+                                }
+                              }
+                            ],
+                            "children": [
+                              {
+                                "kind": "text",
+                                "expr": {
+                                  "kind": "item",
+                                  "field": "Label"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "slots": [],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "nav"
+        ],
+        "roles": [],
+        "aria": [
+          {
+            "name": "aria-current",
+            "kind": "expr"
+          },
+          {
+            "name": "aria-label",
+            "kind": "expr"
+          }
+        ],
+        "keyboard": []
+      },
+      "data": [
+        {
+          "name": "data-ui8kit",
+          "kind": "expr"
+        }
+      ],
+      "tokens": []
+    }
+  ],
+  "examples": [],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

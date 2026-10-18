@@ -1,0 +1,227 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.stat-tile",
+  "name": "StatTile",
+  "docs": "A dashboard counter: an icon, a big number, a caption. With `href` the whole tile is a link, without it the tile is a plain figure.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "value",
+      "type": {
+        "ts": "string | number"
+      },
+      "required": true
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "docs": "Lucide name",
+      "required": true
+    },
+    {
+      "name": "href",
+      "type": "string"
+    },
+    {
+      "name": "hint",
+      "type": "string"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": "min-w-0"
+      },
+      "children": [
+        {
+          "when": {
+            "$": "href"
+          },
+          "then": [
+            {
+              "use": "Link",
+              "props": {
+                "Href": {
+                  "$": "href"
+                },
+                "Variant": "block",
+                "Class": "flex min-w-0 flex-col gap-4 rounded bg-card p-6 text-foreground no-underline inset-ring inset-ring-border hover:bg-muted"
+              },
+              "children": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "flex items-center justify-between gap-2"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 text-xs font-bold text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "label"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "IconBadge",
+                      "props": {
+                        "Size": "sm"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": {
+                              "$": "icon"
+                            },
+                            "Size": 16
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "2xl",
+                    "Weight": "bold",
+                    "Class": "m-0 leading-8"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "value"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "$": "hint"
+                  },
+                  "then": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 text-xs font-medium text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "hint"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "else": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": "flex min-w-0 flex-col gap-4 rounded bg-card p-6 text-foreground inset-ring inset-ring-border"
+              },
+              "children": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "flex items-center justify-between gap-2"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 text-xs font-bold text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "label"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "IconBadge",
+                      "props": {
+                        "Size": "sm"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": {
+                              "$": "icon"
+                            },
+                            "Size": 16
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "2xl",
+                    "Weight": "bold",
+                    "Class": "m-0 leading-8"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "value"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "$": "hint"
+                  },
+                  "then": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 text-xs font-medium text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "hint"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

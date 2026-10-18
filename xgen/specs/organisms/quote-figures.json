@@ -1,0 +1,115 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.quote-figures",
+  "name": "QuoteFigures",
+  "docs": "Three figures in a row above the quotes of QuoteSplit.",
+  "records": {},
+  "props": [
+    {
+      "name": "extras",
+      "type": {
+        "ts": "QuoteExtras"
+      },
+      "required": true,
+      "docs": "the figures, logos and rating summary"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": "grid grid-cols-3 gap-4 border-b border-border pb-8"
+      },
+      "attrs": {
+        "data-testid": "quote-figures"
+      },
+      "children": [
+        {
+          "each": {
+            "$": "extras.stats"
+          },
+          "as": "s",
+          "key": {
+            "$": "s.id"
+          },
+          "do": [
+            {
+              "when": {
+                "op": "lt",
+                "args": [
+                  {
+                    "$": "i"
+                  },
+                  3
+                ]
+              },
+              "then": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "0"
+                  },
+                  "attrs": {
+                    "data-testid": "quote-stat"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "3xl",
+                        "Weight": "bold"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "s.value"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "xs",
+                        "Class": "text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "s.label"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "index": "i"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "QuoteSplit",
+      "names": [
+        "QuoteExtras"
+      ]
+    },
+    {
+      "from": "TestimonialGrid",
+      "names": [
+        "QuoteLabels"
+      ]
+    }
+  ]
+}

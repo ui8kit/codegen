@@ -1,0 +1,111 @@
+{
+  "collection": "sidenav",
+  "kind": "menu_item",
+  "entries": [
+    {
+      "id": "item-overview",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "overview",
+      "title": "Overview",
+      "metadata": {
+        "location": {
+          "value": "sidebar"
+        },
+        "icon": {
+          "value": "layout-dashboard"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "item-orders",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "orders",
+      "title": "Orders",
+      "metadata": {
+        "location": {
+          "value": "sidebar"
+        },
+        "icon": {
+          "value": "shopping-bag"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "item-customers",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "customers",
+      "title": "Customers",
+      "metadata": {
+        "location": {
+          "value": "sidebar"
+        },
+        "icon": {
+          "value": "users"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "item-reports",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "reports",
+      "title": "Reports",
+      "metadata": {
+        "location": {
+          "value": "sidebar"
+        },
+        "icon": {
+          "value": "file-text"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    },
+    {
+      "id": "item-settings",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "settings",
+      "title": "Settings",
+      "metadata": {
+        "location": {
+          "value": "sidebar"
+        },
+        "icon": {
+          "value": "settings"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-09T09:00:00Z",
+      "updated_at": "2026-03-10T09:00:00Z",
+      "published_at": "2026-03-10T10:00:00Z"
+    }
+  ]
+}

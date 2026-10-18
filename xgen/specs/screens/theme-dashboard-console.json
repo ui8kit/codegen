@@ -1,0 +1,303 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.theme-dashboard-console",
+  "name": "ThemeDashboardConsoleScreen",
+  "kind": "composed",
+  "docs": "A console: overview with counters, chart and activity, a kanban board, app shells with sidebar, top bar and panes, dashboard shells, navigation, and empty and loading states.",
+  "routes": [
+    {
+      "path": "",
+      "area": "home"
+    },
+    {
+      "path": "board",
+      "area": "board"
+    },
+    {
+      "path": "workspace",
+      "area": "workspace"
+    },
+    {
+      "path": "shells",
+      "area": "shells"
+    },
+    {
+      "path": "layouts",
+      "area": "layouts"
+    },
+    {
+      "path": "states",
+      "area": "states"
+    }
+  ],
+  "frame": {
+    "before": [
+      {
+        "block": "navbar",
+        "variant": "inline",
+        "props": {
+          "brandHref": "#/",
+          "links": {
+            "$": "nav.links"
+          },
+          "current": {
+            "$": "nav.current"
+          },
+          "skip": {
+            "$": "ui.site.header.skip"
+          },
+          "actions": {
+            "themeLabel": {
+              "$": "ui.theme.toggle"
+            }
+          }
+        }
+      }
+    ],
+    "after": [
+      {
+        "block": "sitemap",
+        "variant": "compact"
+      }
+    ]
+  },
+  "areas": {
+    "home": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.dashboardConsole.home.title"
+          },
+          "text": {
+            "$": "ui.pages.dashboardConsole.home.text"
+          },
+          "cta": {
+            "$": "ui.pages.dashboardConsole.home.cta"
+          },
+          "href": "#/board"
+        }
+      },
+      {
+        "block": "overview",
+        "variant": "split"
+      },
+      {
+        "block": "metrics",
+        "variant": "tiles"
+      },
+      {
+        "block": "chart",
+        "variant": "bars"
+      },
+      {
+        "block": "activity",
+        "variant": "timeline"
+      }
+    ],
+    "board": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.dashboardConsole.board.title"
+          },
+          "text": {
+            "$": "ui.pages.dashboardConsole.board.text"
+          },
+          "cta": {
+            "$": "ui.pages.dashboardConsole.board.cta"
+          },
+          "href": "#/workspace"
+        }
+      },
+      {
+        "block": "kanban",
+        "variant": "detail"
+      },
+      {
+        "block": "kanban",
+        "variant": "twoCols"
+      }
+    ],
+    "workspace": [
+      {
+        "block": "pagehead",
+        "variant": "muted",
+        "props": {
+          "title": {
+            "$": "ui.pages.dashboardConsole.workspace.title"
+          },
+          "text": {
+            "$": "ui.pages.dashboardConsole.workspace.text"
+          },
+          "cta": {
+            "$": "ui.pages.dashboardConsole.workspace.cta"
+          },
+          "href": "#/shells"
+        }
+      },
+      {
+        "block": "shell",
+        "variant": "sidebar"
+      },
+      {
+        "block": "shell",
+        "variant": "top"
+      },
+      {
+        "block": "shell",
+        "variant": "panes"
+      }
+    ],
+    "shells": [
+      {
+        "block": "pagehead",
+        "variant": "muted",
+        "props": {
+          "title": {
+            "$": "ui.pages.dashboardConsole.shells.title"
+          },
+          "text": {
+            "$": "ui.pages.dashboardConsole.shells.text"
+          },
+          "cta": {
+            "$": "ui.pages.dashboardConsole.shells.cta"
+          },
+          "href": "#/layouts"
+        }
+      },
+      {
+        "block": "dashshell",
+        "variant": "classic"
+      },
+      {
+        "block": "dashshell",
+        "variant": "twoLevel"
+      },
+      {
+        "block": "dashshell",
+        "variant": "end"
+      }
+    ],
+    "layouts": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.dashboardConsole.layouts.title"
+          },
+          "text": {
+            "$": "ui.pages.dashboardConsole.layouts.text"
+          },
+          "cta": {
+            "$": "ui.pages.dashboardConsole.layouts.cta"
+          },
+          "href": "#/states"
+        }
+      },
+      {
+        "block": "sidenav",
+        "variant": "full"
+      },
+      {
+        "block": "sidenav",
+        "variant": "compact"
+      },
+      {
+        "block": "bottomnav",
+        "variant": "labels"
+      },
+      {
+        "block": "metrics",
+        "variant": "compact"
+      },
+      {
+        "block": "chart",
+        "variant": "meters"
+      },
+      {
+        "block": "overview",
+        "variant": "stacked"
+      }
+    ],
+    "states": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.dashboardConsole.states.title"
+          },
+          "text": {
+            "$": "ui.pages.dashboardConsole.states.text"
+          },
+          "cta": {
+            "$": "ui.pages.dashboardConsole.states.cta"
+          },
+          "href": "#/"
+        }
+      },
+      {
+        "block": "empty",
+        "variant": "illustrated"
+      },
+      {
+        "block": "empty",
+        "variant": "orders"
+      },
+      {
+        "block": "skeleton",
+        "variant": "cards"
+      },
+      {
+        "block": "skeleton",
+        "variant": "list"
+      }
+    ]
+  },
+  "chunks": true,
+  "requireH1": true,
+  "nameLandmarks": true,
+  "nav": true,
+  "menu": [
+    {
+      "id": "home",
+      "path": "",
+      "titleKey": "pages.dashboardConsole.home.nav"
+    },
+    {
+      "id": "board",
+      "path": "board",
+      "titleKey": "pages.dashboardConsole.board.nav"
+    },
+    {
+      "id": "workspace",
+      "path": "workspace",
+      "titleKey": "pages.dashboardConsole.workspace.nav"
+    },
+    {
+      "id": "shells",
+      "path": "shells",
+      "titleKey": "pages.dashboardConsole.shells.nav"
+    },
+    {
+      "id": "layouts",
+      "path": "layouts",
+      "titleKey": "pages.dashboardConsole.layouts.nav"
+    },
+    {
+      "id": "states",
+      "path": "states",
+      "titleKey": "pages.dashboardConsole.states.nav"
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

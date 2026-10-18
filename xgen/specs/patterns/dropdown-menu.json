@@ -1,0 +1,87 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.dropdown-menu",
+  "name": "DropdownMenu",
+  "docs": "A menu panel (role menu or listbox) for DropdownItem rows.",
+  "records": {},
+  "props": [
+    {
+      "name": "width",
+      "type": {
+        "ts": "\"240\" | \"auto\""
+      },
+      "docs": "panel width",
+      "default": "auto"
+    },
+    {
+      "name": "label",
+      "type": "string"
+    },
+    {
+      "name": "role",
+      "type": {
+        "ts": "\"menu\" | \"listbox\""
+      },
+      "docs": "ARIA role",
+      "default": "menu"
+    },
+    {
+      "name": "anchor",
+      "type": {
+        "ts": "HTMLElement | null"
+      },
+      "docs": "the trigger: clicks on it are not outside clicks"
+    },
+    {
+      "name": "focusOnOpen",
+      "type": "boolean",
+      "docs": "move focus into the menu on open"
+    }
+  ],
+  "className": true,
+  "children": true,
+  "recipes": {
+    "dropdownMenu": "dropdown-menu"
+  },
+  "slots": [],
+  "events": [
+    {
+      "name": "close",
+      "args": [
+        {
+          "name": "reason",
+          "type": {
+            "ts": "\"escape\" | \"outside\" | \"tab\" | \"select\""
+          }
+        }
+      ],
+      "docs": "the menu asks to be closed, and why"
+    }
+  ],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "an overlay positioned at its trigger: focus into the menu, arrow keys, Escape, outside click, Tab (moveFocus and dismissable of the utils)"
+    },
+    "react": {
+      "portable": false,
+      "reason": "an overlay positioned at its trigger: focus into the menu, arrow keys, Escape, outside click, Tab (moveFocus and dismissable of the utils)"
+    }
+  },
+  "examples": [
+    {
+      "id": "width.240",
+      "props": {
+        "width": "240"
+      }
+    },
+    {
+      "id": "width.auto",
+      "props": {
+        "width": "auto"
+      }
+    }
+  ]
+}

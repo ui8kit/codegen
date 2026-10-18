@@ -1,0 +1,82 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.logo-slot",
+  "name": "LogoSlot",
+  "docs": "One logo of a logo ribbon: a fixed-size slot with a Lucide glyph; the name is read by screen readers only.",
+  "records": {},
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            "flex shrink-0 items-center justify-center text-muted-foreground",
+            {
+              "op": "preset",
+              "args": [
+                "defaults",
+                "logos.slot"
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "item",
+        "data-slot": "logo-slot"
+      },
+      "children": [
+        {
+          "use": "LucideIcon",
+          "props": {
+            "Name": {
+              "$": "icon"
+            },
+            "Size": {
+              "op": "preset",
+              "args": [
+                "defaults",
+                "logos.glyph"
+              ]
+            }
+          }
+        },
+        {
+          "use": "Text",
+          "props": {
+            "Size": "sm",
+            "Weight": "semibold",
+            "Class": "sr-only"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "name"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

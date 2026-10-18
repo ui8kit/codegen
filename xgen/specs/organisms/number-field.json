@@ -1,0 +1,130 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.number-field",
+  "name": "NumberField",
+  "docs": "A narrow number field between a minus and a plus ghost icon button, drawn as one control (4px inside its ring). Static markup: the buttons carry no logic; the page wires them.",
+  "records": {},
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "min",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the number"
+    },
+    {
+      "name": "decrease",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the minus button"
+    },
+    {
+      "name": "increase",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the plus button"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": "inline-flex h-10 items-center gap-1 rounded bg-background p-1 inset-ring inset-ring-input"
+      },
+      "attrs": {
+        "data-slot": "number-field"
+      },
+      "children": [
+        {
+          "use": "Button",
+          "props": {
+            "Variant": "ghost",
+            "Size": "sm",
+            "Layout": "icon",
+            "Type": "button",
+            "AriaLabel": {
+              "$": "decrease"
+            }
+          },
+          "attrs": {
+            "data-testid": "decrease"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "minus",
+                "Size": 16
+              }
+            }
+          ]
+        },
+        {
+          "use": "Input",
+          "props": {
+            "Type": "number",
+            "Name": {
+              "$": "name"
+            },
+            "Value": {
+              "$": "value"
+            },
+            "Min": {
+              "$": "min"
+            },
+            "AriaLabel": {
+              "$": "label"
+            },
+            "Size": "sm",
+            "Class": "number-bare w-8 bg-transparent px-0 text-center inset-ring-0"
+          }
+        },
+        {
+          "use": "Button",
+          "props": {
+            "Variant": "ghost",
+            "Size": "sm",
+            "Layout": "icon",
+            "Type": "button",
+            "AriaLabel": {
+              "$": "increase"
+            }
+          },
+          "attrs": {
+            "data-testid": "increase"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "plus",
+                "Size": 16
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

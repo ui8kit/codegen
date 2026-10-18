@@ -1,0 +1,368 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.video-modal",
+  "name": "VideoModal",
+  "docs": "A dialog with a walkthrough video: a title and a close button, the player area with a play button and, optionally, a list of chapters. Opening the dialog and playing the video are port contracts. Axes: size (default, wide), outline (none, chapters: a list under the player), tone.",
+  "records": {
+    "Chapter": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "close",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the close button"
+    },
+    {
+      "name": "play",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the play button"
+    },
+    {
+      "name": "chaptersTitle",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "chapters",
+      "type": {
+        "ts": "Chapter[]"
+      },
+      "required": true
+    },
+    {
+      "name": "size",
+      "type": {
+        "ts": "\"default\" | \"wide\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "outline",
+      "type": {
+        "ts": "\"none\" | \"chapters\""
+      },
+      "default": "none"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "use": "Stack",
+              "props": {
+                "Gap": "4",
+                "Align": "stretch",
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    "mx-auto w-full",
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "size"
+                            },
+                            "wide"
+                          ]
+                        },
+                        "max-w-4xl",
+                        "max-w-2xl"
+                      ]
+                    },
+                    "rounded bg-card inset-ring inset-ring-border p-4 shadow-lg"
+                  ]
+                }
+              },
+              "attrs": {
+                "role": "dialog",
+                "aria-label": {
+                  "$": "title"
+                },
+                "data-testid": "video-modal"
+              },
+              "children": [
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "2",
+                    "Align": "center",
+                    "Justify": "between"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Class": "text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "text"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "ghost",
+                        "Size": "sm",
+                        "Type": "button",
+                        "Class": "shrink-0"
+                      },
+                      "attrs": {
+                        "aria-label": {
+                          "$": "close"
+                        },
+                        "data-testid": "modal-close"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "x",
+                            "Size": 16
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "relative"
+                  },
+                  "attrs": {
+                    "data-testid": "player"
+                  },
+                  "children": [
+                    {
+                      "organism": "MediaFrame",
+                      "props": {
+                        "alt": {
+                          "$": "title"
+                        }
+                      }
+                    },
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "default",
+                        "Size": "default",
+                        "Type": "button",
+                        "Class": "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded"
+                      },
+                      "attrs": {
+                        "aria-label": {
+                          "$": "play"
+                        },
+                        "data-testid": "play"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "play",
+                            "Size": 24
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "outline"
+                          },
+                          "chapters"
+                        ]
+                      },
+                      {
+                        "op": "gt",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "chapters"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "2"
+                      },
+                      "attrs": {
+                        "data-testid": "chapters"
+                      },
+                      "children": [
+                        {
+                          "use": "Title",
+                          "props": {
+                            "As": 3,
+                            "Size": "base",
+                            "Weight": "bold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "chaptersTitle"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "List",
+                          "props": {
+                            "Class": "m-0 flex list-none flex-col gap-2 p-0"
+                          },
+                          "children": [
+                            {
+                              "each": {
+                                "$": "chapters"
+                              },
+                              "as": "c",
+                              "key": {
+                                "$": "c.id"
+                              },
+                              "do": [
+                                {
+                                  "use": "ListItem",
+                                  "props": {
+                                    "Class": "flex items-baseline gap-4"
+                                  },
+                                  "attrs": {
+                                    "data-testid": "item"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Weight": "semibold"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "c.title"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "xs",
+                                        "Class": "text-muted-foreground"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "c.text"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

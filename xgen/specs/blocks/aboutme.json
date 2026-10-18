@@ -1,0 +1,148 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.aboutme",
+  "name": "About me",
+  "docs": "A personal about section beside a portrait: key facts or skills.",
+  "theme": "marketing",
+  "group": "company",
+  "organism": "AboutMe",
+  "axes": {
+    "layout": [
+      "facts",
+      "skills"
+    ],
+    "mediaSide": [
+      "start",
+      "end"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "facts",
+    "mediaSide": "start",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "facts",
+      "set": {}
+    },
+    {
+      "id": "factsEnd",
+      "set": {
+        "mediaSide": "end"
+      }
+    },
+    {
+      "id": "skills",
+      "set": {
+        "layout": "skills"
+      }
+    },
+    {
+      "id": "skillsMuted",
+      "set": {
+        "layout": "skills",
+        "mediaSide": "end",
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"fact\"]",
+      "n": "@profilefacts",
+      "when": {
+        "layout": "facts"
+      }
+    },
+    {
+      "sel": "[data-testid=\"fact\"]",
+      "n": 0,
+      "when": {
+        "layout": "skills"
+      }
+    },
+    {
+      "sel": "[data-testid=\"skill\"]",
+      "n": "@skills",
+      "when": {
+        "layout": "skills"
+      }
+    },
+    {
+      "sel": "[data-testid=\"skill\"]",
+      "n": 0,
+      "when": {
+        "layout": "facts"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "profilefacts",
+      "collection": "profilefacts",
+      "kind": "profilefact",
+      "record": "Spec",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value"
+      }
+    },
+    {
+      "as": "skills",
+      "collection": "skills",
+      "kind": "skill",
+      "record": "Skill",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "level": "metadata.level.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "aboutme",
+      "title": {
+        "$": "ui.company.aboutMe.title"
+      },
+      "lead": {
+        "$": "ui.company.aboutMe.lead"
+      },
+      "badge": {
+        "$": "ui.company.aboutMe.badge"
+      },
+      "facts": {
+        "$": "profilefacts"
+      },
+      "skills": {
+        "$": "skills"
+      },
+      "labels": {
+        "$": "ui.company.aboutMe"
+      },
+      "actions": {
+        "mode": "two",
+        "cta": {
+          "$": "ui.company.aboutMe.cta"
+        },
+        "href": "#/work",
+        "secondary": {
+          "$": "ui.company.aboutMe.more"
+        },
+        "secondaryHref": "#/contact"
+      }
+    }
+  }
+}

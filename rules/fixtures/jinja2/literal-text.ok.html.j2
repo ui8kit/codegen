@@ -1,0 +1,9 @@
+{#- Self-test fixture of the rules group, detector literal-text (clean). -#}
+{%- set c_2 -%}
+  {%- set c_1 -%}
+    {{ ui_text(v_title) }}
+  {%- endset -%}
+  {{ ui_include('ui/text/text.html.j2', {'p': {}, 'children': c_1}) }}
+  {{ ui_include('ui/input/input.html.j2', {'p': {'Placeholder': ui_text(v_hint)}}) }}
+{%- endset -%}
+{{ ui_include('ui/block/block.html.j2', {'p': {'Tag': 'section'}, 'children': c_2}) }}

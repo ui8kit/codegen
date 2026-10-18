@@ -1,0 +1,112 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.skeleton",
+  "tier": "brick",
+  "dir": "skeleton",
+  "docs": "Skeleton renders a pulsing placeholder box (loading state). It is decorative: aria-hidden; the loading state is announced by the container (aria-busy).",
+  "variants": {
+    "skeleton": "skeleton.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Skeleton",
+      "docs": "Skeleton renders a decorative placeholder.",
+      "recipeId": "skeleton",
+      "classes": {
+        "recipe": {
+          "shape": "Shape"
+        }
+      },
+      "props": [
+        {
+          "name": "Shape",
+          "type": "string",
+          "cva": true,
+          "docs": "line, block or circle"
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "div"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "static",
+            "name": "aria-hidden",
+            "value": "true"
+          },
+          {
+            "kind": "static",
+            "name": "data-slot",
+            "value": "skeleton"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": []
+      },
+      "slots": [],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div"
+        ],
+        "roles": [],
+        "aria": [
+          {
+            "name": "aria-hidden",
+            "kind": "static",
+            "value": "true"
+          }
+        ],
+        "keyboard": []
+      },
+      "data": [
+        {
+          "name": "data-slot",
+          "kind": "static",
+          "value": "skeleton"
+        }
+      ],
+      "tokens": [
+        "--muted"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "shape.line",
+      "props": {
+        "Shape": "line"
+      }
+    },
+    {
+      "id": "shape.block",
+      "props": {
+        "Shape": "block"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

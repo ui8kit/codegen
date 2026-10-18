@@ -1,0 +1,18 @@
+{
+  "$schema": "../../schema/schemas/variants.schema.json",
+  "id": "one.smartbox",
+  "base": "flex h-8 min-w-0 shrink items-center justify-between bg-card pr-4 pl-2 text-muted-foreground inset-ring inset-ring-input rounded",
+  "byKey": {
+    "width": {
+      "400": "w-100",
+      "auto": ""
+    }
+  },
+  "defaults": {
+    "width": "auto"
+  },
+  "keys": [
+    "width"
+  ],
+  "compound": []
+}

@@ -1,0 +1,619 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.sitemap-footer",
+  "name": "SitemapFooter",
+  "docs": "A footer with the brand, a tagline, groups of links and the copyright. Axes: layout (columns: brand above, equal columns per group, row: the brand, the group names and the copyright in one row), signup mode (none, first: a sign-up above the links), status mode (none, show: a live status pill), density. The live status itself is a port contract.",
+  "records": {
+    "FooterSignup": [
+      {
+        "name": "mode",
+        "type": "\"none\" | \"first\"",
+        "optional": true,
+        "docs": "first: the sign-up comes before the links",
+        "default": "none"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "optional": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "optional": true,
+        "docs": "accessible name of the email field"
+      },
+      {
+        "name": "submit",
+        "type": "string",
+        "optional": true
+      }
+    ],
+    "FooterStatus": [
+      {
+        "name": "mode",
+        "type": "\"none\" | \"show\"",
+        "optional": true,
+        "docs": "show: the status pill is drawn",
+        "default": "none"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "optional": true,
+        "docs": "text of the pill"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the link groups"
+    },
+    {
+      "name": "brand",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "tagline",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "copyright",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "groups",
+      "type": {
+        "ts": "MegaGroup[]"
+      },
+      "required": true
+    },
+    {
+      "name": "signup",
+      "type": {
+        "record": "FooterSignup"
+      },
+      "docs": "a newsletter sign-up above the links"
+    },
+    {
+      "name": "status",
+      "type": {
+        "record": "FooterStatus"
+      },
+      "docs": "a live status pill beside the copyright"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "default": "footer"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"columns\" | \"row\" | \"card\""
+      },
+      "default": "columns",
+      "docs": "card: the groups in one rounded card (FooterCard)"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "layout"
+          },
+          "card"
+        ]
+      },
+      "then": [
+        {
+          "organism": "FooterCard",
+          "props": {
+            "label": {
+              "$": "label"
+            },
+            "brand": {
+              "$": "brand"
+            },
+            "groups": {
+              "$": "groups"
+            },
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          }
+        }
+      ],
+      "else": [
+        {
+          "use": "Block",
+          "props": {
+            "Tag": "footer",
+            "Class": "mt-12 border-t border-border"
+          },
+          "attrs": {
+            "data-testid": "site-footer",
+            "data-layout": {
+              "$": "layout"
+            },
+            "aria-label": {
+              "$": "landmarkLabel"
+            }
+          },
+          "children": [
+            {
+              "use": "Container",
+              "props": {
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    "mx-auto w-full max-w-6xl px-4",
+                    "flex flex-col gap-8",
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "density"
+                            },
+                            "compact"
+                          ]
+                        },
+                        "py-6",
+                        "py-12"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "attrs": {
+                "data-slot": "container"
+              },
+              "children": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "signup.mode"
+                      },
+                      "first"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "4",
+                        "Class": "max-w-md"
+                      },
+                      "attrs": {
+                        "data-testid": "signup"
+                      },
+                      "children": [
+                        {
+                          "use": "Title",
+                          "props": {
+                            "As": 3,
+                            "Size": "xl",
+                            "Weight": "bold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "signup.title"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Form",
+                          "props": {
+                            "Method": "dialog",
+                            "Class": {
+                              "op": "cn",
+                              "args": [
+                                "w-full max-w-md",
+                                {
+                                  "op": "cond",
+                                  "args": [
+                                    false,
+                                    "mx-auto",
+                                    ""
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "attrs": {
+                            "data-testid": "email-form"
+                          },
+                          "children": [
+                            {
+                              "use": "Label",
+                              "props": {
+                                "HTMLFor": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-email",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                },
+                                "Class": "sr-only"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "signup.label"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "2",
+                                "Align": "start",
+                                "Class": "w-full flex-wrap"
+                              },
+                              "children": [
+                                {
+                                  "use": "Input",
+                                  "props": {
+                                    "Type": "email",
+                                    "Name": "email",
+                                    "Class": "min-w-0 flex-1"
+                                  },
+                                  "attrs": {
+                                    "id": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-email",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    },
+                                    "data-testid": "field"
+                                  }
+                                },
+                                {
+                                  "use": "Button",
+                                  "props": {
+                                    "Variant": "default",
+                                    "Size": "default",
+                                    "Type": "submit"
+                                  },
+                                  "attrs": {
+                                    "data-testid": "submit"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "signup.submit"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "layout"
+                      },
+                      "columns"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": "flex flex-col gap-8 md:flex-row md:items-start md:gap-12"
+                      },
+                      "attrs": {
+                        "data-slot": "footer-top"
+                      },
+                      "children": [
+                        {
+                          "use": "Stack",
+                          "props": {
+                            "Gap": "2",
+                            "Class": "md:w-64 md:shrink-0"
+                          },
+                          "children": [
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Size": "xl",
+                                "Weight": "bold"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "brand"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Size": "sm",
+                                "Class": "text-muted-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "tagline"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Box",
+                          "props": {
+                            "Class": "min-w-0 flex-1"
+                          },
+                          "children": [
+                            {
+                              "organism": "FooterColumns",
+                              "props": {
+                                "label": {
+                                  "$": "label"
+                                },
+                                "groups": {
+                                  "$": "groups"
+                                },
+                                "landmarkLabel": {
+                                  "$": "landmarkLabel"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "else": [
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "6",
+                        "Align": "center",
+                        "Justify": "between",
+                        "Class": "flex-wrap"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "base",
+                            "Weight": "bold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "brand"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "gt",
+                            "args": [
+                              {
+                                "op": "len",
+                                "args": [
+                                  {
+                                    "$": "groups"
+                                  }
+                                ]
+                              },
+                              0
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "NavBlock",
+                              "props": {
+                                "label": {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "$": "landmarkLabel"
+                                    },
+                                    {
+                                      "op": "uniq",
+                                      "args": [
+                                        {
+                                          "op": "tpl",
+                                          "args": [
+                                            "{0}, {1}",
+                                            {
+                                              "$": "label"
+                                            },
+                                            {
+                                              "$": "landmarkLabel"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "$": "label"
+                                    }
+                                  ]
+                                }
+                              },
+                              "slots": {
+                                "children": {
+                                  "args": [],
+                                  "do": [
+                                    {
+                                      "use": "Group",
+                                      "props": {
+                                        "Gap": "4",
+                                        "Class": "flex-wrap"
+                                      },
+                                      "children": [
+                                        {
+                                          "each": {
+                                            "$": "groups"
+                                          },
+                                          "as": "g",
+                                          "key": {
+                                            "$": "g.id"
+                                          },
+                                          "do": [
+                                            {
+                                              "organism": "MenuEntry",
+                                              "props": {
+                                                "href": {
+                                                  "$": "g.href"
+                                                },
+                                                "className": "text-sm",
+                                                "testid": "group"
+                                              },
+                                              "slots": {
+                                                "children": {
+                                                  "args": [],
+                                                  "do": [
+                                                    {
+                                                      "text": {
+                                                        "$": "g.title"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "center",
+                    "Justify": "between",
+                    "Class": "flex-wrap border-t border-border pt-6"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Class": "text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "copyright"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "status.mode"
+                          },
+                          "show"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "Pill",
+                          "props": {
+                            "tone": "green",
+                            "icon": "circle-check"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "text": {
+                                    "$": "status.label"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "MegaMenu",
+      "names": [
+        "MegaGroup"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,624 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.faq-split",
+  "name": "FaqSplit",
+  "docs": "Questions in a split or as cards. Axes: layout (head: the heading and an action beside the disclosures, aside: the disclosures beside a help card, media: the disclosures and an action beside a picture, search: a finder beside a picture, cards: the questions as cards), cards (grid3, grid4, icons), mediaSide, tone.",
+  "records": {
+    "Question": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "question",
+        "type": "string"
+      },
+      {
+        "name": "answer",
+        "type": "string"
+      },
+      {
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "type": "string"
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "optional": true
+      }
+    ],
+    "FaqSplitLabels": [
+      {
+        "name": "cta",
+        "type": "string"
+      },
+      {
+        "name": "more",
+        "type": "string"
+      },
+      {
+        "name": "asideTitle",
+        "type": "string"
+      },
+      {
+        "name": "asideText",
+        "type": "string"
+      },
+      {
+        "name": "asideCta",
+        "type": "string"
+      },
+      {
+        "name": "search",
+        "type": "string"
+      },
+      {
+        "name": "popular",
+        "type": "string"
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "optional": true
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "lead",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "badge",
+      "type": "string",
+      "default": "",
+      "docs": "a short pill above the heading"
+    },
+    {
+      "name": "items",
+      "type": {
+        "ts": "Question[]"
+      },
+      "required": true
+    },
+    {
+      "name": "channels",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true,
+      "docs": "the ways to reach the team (aside layout)"
+    },
+    {
+      "name": "topics",
+      "type": {
+        "ts": "FaqTab[]"
+      },
+      "required": true,
+      "docs": "the topic buttons of the finder (search layout)"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "FaqSplitLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"head\" | \"aside\" | \"media\" | \"search\" | \"cards\""
+      },
+      "default": "head"
+    },
+    {
+      "name": "cards",
+      "type": {
+        "ts": "\"grid3\" | \"grid4\" | \"icons\""
+      },
+      "default": "grid3"
+    },
+    {
+      "name": "mediaSide",
+      "type": {
+        "ts": "\"end\" | \"start\""
+      },
+      "default": "end"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "gt",
+        "args": [
+          {
+            "op": "len",
+            "args": [
+              {
+                "$": "items"
+              }
+            ]
+          },
+          0
+        ]
+      },
+      "then": [
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "cards"
+            ]
+          },
+          "then": [
+            {
+              "organism": "SectionFrame",
+              "props": {
+                "id": {
+                  "$": "id"
+                },
+                "title": {
+                  "$": "title"
+                },
+                "lead": {
+                  "$": "lead"
+                },
+                "heading": {
+                  "badge": {
+                    "$": "badge"
+                  }
+                },
+                "tone": {
+                  "$": "tone"
+                },
+                "landmarkLabel": {
+                  "$": "landmarkLabel"
+                }
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "FaqCards",
+                      "props": {
+                        "items": {
+                          "$": "items"
+                        },
+                        "labels": {
+                          "$": "labels"
+                        },
+                        "cards": {
+                          "$": "cards"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "head"
+            ]
+          },
+          "then": [
+            {
+              "organism": "SectionFrame",
+              "props": {
+                "id": {
+                  "$": "id"
+                },
+                "title": {
+                  "$": "title"
+                },
+                "lead": {
+                  "$": "lead"
+                },
+                "heading": {
+                  "badge": {
+                    "$": "badge"
+                  }
+                },
+                "tone": {
+                  "$": "tone"
+                },
+                "layout": "split",
+                "media": {
+                  "show": true,
+                  "side": "end",
+                  "align": "start"
+                },
+                "landmarkLabel": {
+                  "$": "landmarkLabel"
+                }
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "use": "Box",
+                      "children": [
+                        {
+                          "use": "Button",
+                          "props": {
+                            "Variant": "default",
+                            "Size": "default"
+                          },
+                          "attrs": {
+                            "data-testid": "faq-cta"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.cta"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "aside": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "FaqDisclosures",
+                      "props": {
+                        "items": {
+                          "$": "items"
+                        },
+                        "name": {
+                          "op": "tpl",
+                          "args": [
+                            "{0}-faq",
+                            {
+                              "$": "id"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "aside"
+            ]
+          },
+          "then": [
+            {
+              "organism": "SectionFrame",
+              "props": {
+                "id": {
+                  "$": "id"
+                },
+                "title": {
+                  "$": "title"
+                },
+                "lead": {
+                  "$": "lead"
+                },
+                "heading": {
+                  "badge": {
+                    "$": "badge"
+                  }
+                },
+                "tone": {
+                  "$": "tone"
+                },
+                "layout": "split",
+                "media": {
+                  "show": true,
+                  "side": "end",
+                  "align": "start"
+                },
+                "landmarkLabel": {
+                  "$": "landmarkLabel"
+                }
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "FaqDisclosures",
+                      "props": {
+                        "items": {
+                          "$": "items"
+                        },
+                        "name": {
+                          "op": "tpl",
+                          "args": [
+                            "{0}-faq",
+                            {
+                              "$": "id"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                "aside": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "FaqHelp",
+                      "props": {
+                        "labels": {
+                          "$": "labels"
+                        },
+                        "channels": {
+                          "$": "channels"
+                        },
+                        "landmarkLabel": {
+                          "$": "landmarkLabel"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "media"
+            ]
+          },
+          "then": [
+            {
+              "organism": "SectionFrame",
+              "props": {
+                "id": {
+                  "$": "id"
+                },
+                "title": {
+                  "$": "title"
+                },
+                "lead": {
+                  "$": "lead"
+                },
+                "heading": {
+                  "badge": {
+                    "$": "badge"
+                  }
+                },
+                "tone": {
+                  "$": "tone"
+                },
+                "layout": "split",
+                "media": {
+                  "show": true,
+                  "side": {
+                    "$": "mediaSide"
+                  },
+                  "align": "start"
+                },
+                "landmarkLabel": {
+                  "$": "landmarkLabel"
+                }
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "FaqDisclosures",
+                      "props": {
+                        "items": {
+                          "$": "items"
+                        },
+                        "name": {
+                          "op": "tpl",
+                          "args": [
+                            "{0}-faq",
+                            {
+                              "$": "id"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "use": "Box",
+                      "children": [
+                        {
+                          "use": "Button",
+                          "props": {
+                            "Variant": "default",
+                            "Size": "default"
+                          },
+                          "attrs": {
+                            "data-testid": "faq-cta"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.cta"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "aside": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "MediaFrame",
+                      "props": {
+                        "alt": {
+                          "$": "title"
+                        },
+                        "ratio": "4/3"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "search"
+            ]
+          },
+          "then": [
+            {
+              "organism": "SectionFrame",
+              "props": {
+                "id": {
+                  "$": "id"
+                },
+                "title": {
+                  "$": "title"
+                },
+                "lead": {
+                  "$": "lead"
+                },
+                "heading": {
+                  "badge": {
+                    "$": "badge"
+                  }
+                },
+                "tone": {
+                  "$": "tone"
+                },
+                "layout": "split",
+                "media": {
+                  "show": true,
+                  "side": {
+                    "$": "mediaSide"
+                  }
+                },
+                "landmarkLabel": {
+                  "$": "landmarkLabel"
+                }
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "FaqFinder",
+                      "props": {
+                        "items": {
+                          "$": "items"
+                        },
+                        "labels": {
+                          "$": "labels"
+                        },
+                        "topics": {
+                          "$": "topics"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "aside": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "MediaFrame",
+                      "props": {
+                        "alt": {
+                          "$": "title"
+                        },
+                        "ratio": "4/3"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    },
+    {
+      "from": "FaqList",
+      "names": [
+        "FaqTab"
+      ]
+    }
+  ]
+}

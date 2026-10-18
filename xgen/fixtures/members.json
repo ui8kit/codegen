@@ -1,0 +1,278 @@
+{
+  "collection": "members",
+  "kind": "member",
+  "entries": [
+    {
+      "id": "member-ava",
+      "locale": "en",
+      "kind": "member",
+      "status": "published",
+      "visibility": "public",
+      "slug": "ava",
+      "title": "Ava Moreno",
+      "metadata": {
+        "role": {
+          "value": "Founder and CEO"
+        },
+        "dept": {
+          "value": "leadership"
+        },
+        "location": {
+          "value": "Lisbon"
+        },
+        "bio": {
+          "value": "Started the company after ten years of building tools for other teams."
+        },
+        "skills": {
+          "value": [
+            "Strategy",
+            "Hiring",
+            "Sales"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-03T09:00:00Z",
+      "published_at": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "member-noah",
+      "locale": "en",
+      "kind": "member",
+      "status": "published",
+      "visibility": "public",
+      "slug": "noah",
+      "title": "Noah Becker",
+      "metadata": {
+        "role": {
+          "value": "Head of Engineering"
+        },
+        "dept": {
+          "value": "engineering"
+        },
+        "location": {
+          "value": "Berlin"
+        },
+        "bio": {
+          "value": "Keeps the build fast and the releases boring."
+        },
+        "skills": {
+          "value": [
+            "Platform",
+            "TypeScript",
+            "Reviews"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-05T09:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "member-mia",
+      "locale": "en",
+      "kind": "member",
+      "status": "published",
+      "visibility": "public",
+      "slug": "mia",
+      "title": "Mia Laurent",
+      "metadata": {
+        "role": {
+          "value": "Design Lead"
+        },
+        "dept": {
+          "value": "design"
+        },
+        "location": {
+          "value": "Paris"
+        },
+        "bio": {
+          "value": "Draws the system before anyone writes a line of code."
+        },
+        "skills": {
+          "value": [
+            "Design systems",
+            "Research",
+            "Motion"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T10:00:00Z"
+    },
+    {
+      "id": "member-liam",
+      "locale": "en",
+      "kind": "member",
+      "status": "published",
+      "visibility": "public",
+      "slug": "liam",
+      "title": "Liam Okafor",
+      "metadata": {
+        "role": {
+          "value": "Product Manager"
+        },
+        "dept": {
+          "value": "product"
+        },
+        "location": {
+          "value": "London"
+        },
+        "bio": {
+          "value": "Talks to customers every week and writes it all down."
+        },
+        "skills": {
+          "value": [
+            "Roadmaps",
+            "Interviews",
+            "Analytics"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-08T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T10:00:00Z"
+    },
+    {
+      "id": "member-zoe",
+      "locale": "en",
+      "kind": "member",
+      "status": "published",
+      "visibility": "public",
+      "slug": "zoe",
+      "title": "Zoe Tanaka",
+      "metadata": {
+        "role": {
+          "value": "Frontend Engineer"
+        },
+        "dept": {
+          "value": "engineering"
+        },
+        "location": {
+          "value": "Remote"
+        },
+        "bio": {
+          "value": "Owns the component library and its tests."
+        },
+        "skills": {
+          "value": [
+            "Svelte",
+            "React",
+            "Accessibility"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-10T09:00:00Z",
+      "updated_at": "2026-03-11T09:00:00Z",
+      "published_at": "2026-03-11T10:00:00Z"
+    },
+    {
+      "id": "member-omar",
+      "locale": "en",
+      "kind": "member",
+      "status": "published",
+      "visibility": "public",
+      "slug": "omar",
+      "title": "Omar Haddad",
+      "metadata": {
+        "role": {
+          "value": "Customer Success"
+        },
+        "dept": {
+          "value": "support"
+        },
+        "location": {
+          "value": "Toronto"
+        },
+        "bio": {
+          "value": "Turns tricky tickets into fixes and guides."
+        },
+        "skills": {
+          "value": [
+            "Onboarding",
+            "Docs",
+            "Training"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-12T09:00:00Z",
+      "updated_at": "2026-03-13T09:00:00Z",
+      "published_at": "2026-03-13T10:00:00Z"
+    },
+    {
+      "id": "member-elena",
+      "locale": "en",
+      "kind": "member",
+      "status": "published",
+      "visibility": "public",
+      "slug": "elena",
+      "title": "Elena Rossi",
+      "metadata": {
+        "role": {
+          "value": "Brand Designer"
+        },
+        "dept": {
+          "value": "design"
+        },
+        "location": {
+          "value": "Milan"
+        },
+        "bio": {
+          "value": "Makes the pages, the slides and the swag look like one brand."
+        },
+        "skills": {
+          "value": [
+            "Branding",
+            "Illustration",
+            "Type"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-14T09:00:00Z",
+      "updated_at": "2026-03-15T09:00:00Z",
+      "published_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "member-sam",
+      "locale": "en",
+      "kind": "member",
+      "status": "published",
+      "visibility": "public",
+      "slug": "sam",
+      "title": "Sam Carter",
+      "metadata": {
+        "role": {
+          "value": "Backend Engineer"
+        },
+        "dept": {
+          "value": "engineering"
+        },
+        "location": {
+          "value": "Austin"
+        },
+        "bio": {
+          "value": "Builds the APIs and keeps the database happy."
+        },
+        "skills": {
+          "value": [
+            "Go",
+            "Postgres",
+            "Queues"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-16T09:00:00Z",
+      "updated_at": "2026-03-17T09:00:00Z",
+      "published_at": "2026-03-17T10:00:00Z"
+    }
+  ]
+}

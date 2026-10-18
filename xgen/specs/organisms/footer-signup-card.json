@@ -1,0 +1,192 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.footer-signup-card",
+  "name": "FooterSignupCard",
+  "docs": "The newsletter sign-up of FooterSplit in a card: a title with a glyph, the email field and button, and a note.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "docs": "ties the email label to its field"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "FooterSplitLabels"
+      },
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "4",
+        "Align": "stretch",
+        "Class": "rounded bg-card inset-ring inset-ring-border p-6"
+      },
+      "attrs": {
+        "data-testid": "signup"
+      },
+      "children": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Align": "center"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "mail",
+                "Size": 16
+              }
+            },
+            {
+              "use": "Text",
+              "props": {
+                "Size": "sm",
+                "Weight": "semibold"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.signup"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Form",
+          "props": {
+            "Method": "dialog",
+            "Class": {
+              "op": "cn",
+              "args": [
+                "w-full max-w-md",
+                {
+                  "op": "cond",
+                  "args": [
+                    false,
+                    "mx-auto",
+                    ""
+                  ]
+                }
+              ]
+            }
+          },
+          "attrs": {
+            "data-testid": "email-form"
+          },
+          "children": [
+            {
+              "use": "Label",
+              "props": {
+                "HTMLFor": {
+                  "op": "tpl",
+                  "args": [
+                    "{0}-email",
+                    {
+                      "$": "id"
+                    }
+                  ]
+                },
+                "Class": "sr-only"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.email"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "2",
+                "Align": "start",
+                "Class": "w-full flex-wrap"
+              },
+              "children": [
+                {
+                  "use": "Input",
+                  "props": {
+                    "Type": "email",
+                    "Name": "email",
+                    "Class": "min-w-0 flex-1"
+                  },
+                  "attrs": {
+                    "id": {
+                      "op": "tpl",
+                      "args": [
+                        "{0}-email",
+                        {
+                          "$": "id"
+                        }
+                      ]
+                    },
+                    "data-testid": "field"
+                  }
+                },
+                {
+                  "use": "Button",
+                  "props": {
+                    "Variant": "default",
+                    "Size": "default",
+                    "Type": "submit"
+                  },
+                  "attrs": {
+                    "data-testid": "submit"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "labels.subscribe"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Text",
+          "props": {
+            "Size": "xs",
+            "Class": "text-muted-foreground"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "labels.note"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FooterSplit",
+      "names": [
+        "FooterExtras",
+        "FooterSplitLabels"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.site-footer",
+  "name": "SiteFooter",
+  "docs": "The page footer: the copyright line and the same two links. Axes: layout (minimal, centered), density (default, compact).",
+  "records": {
+    "SiteFooterLabels": [
+      {
+        "name": "copyright",
+        "type": "string"
+      },
+      {
+        "name": "nav",
+        "type": "string"
+      },
+      {
+        "name": "home",
+        "type": "string"
+      },
+      {
+        "name": "pricing",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "labels",
+      "type": {
+        "record": "SiteFooterLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "routes",
+      "type": {
+        "ts": "SiteRoutes"
+      },
+      "docs": "the addresses of the two pages, from the app; none: text, not links"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"minimal\" | \"centered\""
+      },
+      "default": "minimal",
+      "docs": "minimal: one row; centered: stacked and centered"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "footer",
+        "Class": "mt-12 border-t border-border"
+      },
+      "attrs": {
+        "data-testid": "site-footer",
+        "data-layout": {
+          "$": "layout"
+        },
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "use": "Container",
+          "props": {
+            "Class": {
+              "op": "cn",
+              "args": [
+                "mx-auto w-full max-w-6xl px-4",
+                "flex flex-wrap items-center gap-4",
+                {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "density"
+                        },
+                        "compact"
+                      ]
+                    },
+                    "py-4",
+                    "py-6"
+                  ]
+                },
+                {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "layout"
+                        },
+                        "centered"
+                      ]
+                    },
+                    "flex-col text-center",
+                    "justify-between"
+                  ]
+                }
+              ]
+            }
+          },
+          "attrs": {
+            "data-slot": "container"
+          },
+          "children": [
+            {
+              "use": "Text",
+              "props": {
+                "Size": "sm",
+                "Class": "text-muted-foreground"
+              },
+              "attrs": {
+                "data-testid": "copyright"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.copyright"
+                  }
+                }
+              ]
+            },
+            {
+              "organism": "NavBlock",
+              "props": {
+                "label": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "landmarkLabel"
+                    },
+                    {
+                      "op": "uniq",
+                      "args": [
+                        {
+                          "op": "tpl",
+                          "args": [
+                            "{0}, {1}",
+                            {
+                              "$": "labels.nav"
+                            },
+                            {
+                              "$": "landmarkLabel"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "$": "labels.nav"
+                    }
+                  ]
+                }
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "4"
+                      },
+                      "children": [
+                        {
+                          "organism": "MenuEntry",
+                          "props": {
+                            "href": {
+                              "$": "routes.home"
+                            },
+                            "className": "font-semibold"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "text": {
+                                    "$": "labels.home"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "organism": "MenuEntry",
+                          "props": {
+                            "href": {
+                              "$": "routes.pricing"
+                            },
+                            "className": "font-semibold"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "text": {
+                                    "$": "labels.pricing"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "SiteHeader",
+      "names": [
+        "SiteRoutes"
+      ]
+    }
+  ]
+}

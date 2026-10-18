@@ -1,0 +1,128 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.product",
+  "name": "Product page",
+  "docs": "The gallery and the buy box of one product.",
+  "theme": "commerce",
+  "group": "product",
+  "organism": "ProductDetail",
+  "axes": {
+    "layout": [
+      "split",
+      "stacked"
+    ],
+    "mediaSide": [
+      "start",
+      "end"
+    ],
+    "thumbs": [
+      "none",
+      "below"
+    ],
+    "buy": [
+      "full",
+      "compact"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "roomy"
+    ]
+  },
+  "defaults": {
+    "layout": "split",
+    "mediaSide": "start",
+    "thumbs": "below",
+    "buy": "full",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "split",
+      "set": {}
+    },
+    {
+      "id": "splitEnd",
+      "set": {
+        "mediaSide": "end"
+      }
+    },
+    {
+      "id": "stacked",
+      "set": {
+        "layout": "stacked",
+        "thumbs": "none"
+      }
+    },
+    {
+      "id": "compact",
+      "set": {
+        "buy": "compact",
+        "thumbs": "none"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "roomy"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "NumberField",
+    "ProductGallery",
+    "ProductPrice",
+    "Rating",
+    "SectionFrame"
+  ],
+  "data": [
+    {
+      "as": "products",
+      "collection": "products",
+      "kind": "product",
+      "record": "Product",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "summary": "metadata.summary.value",
+        "price": "metadata.price.value",
+        "currency": "metadata.currency.value",
+        "rating": "metadata.rating.value",
+        "reviews": "metadata.reviews.value",
+        "badge": "metadata.badge.value",
+        "category": "terms|term:product_category",
+        "inStock": "metadata.inStock.value",
+        "compareAt": "metadata.compare_at.value",
+        "href": "slug|route",
+        "image": "featured_media_id|media"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "product",
+      "product": {
+        "op": "pick",
+        "args": [
+          {
+            "$": "products"
+          },
+          "product-lamp"
+        ]
+      },
+      "labels": {
+        "$": "ui.commerce.detail"
+      },
+      "badges": {
+        "$": "ui.commerce.badges"
+      }
+    }
+  }
+}

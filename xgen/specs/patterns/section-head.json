@@ -1,0 +1,224 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.section-head",
+  "name": "SectionHead",
+  "docs": "A sidebar section heading with optional right actions. Set `expanded` and it becomes a disclosure button (aria-expanded, the toggle event).",
+  "records": {},
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "ts": "\"default\" | \"lg\""
+      },
+      "docs": "row height",
+      "default": "default"
+    },
+    {
+      "name": "expanded",
+      "type": "boolean",
+      "docs": "set: the head is a disclosure button"
+    },
+    {
+      "name": "controls",
+      "type": "string",
+      "docs": "id of the region the button opens"
+    }
+  ],
+  "className": true,
+  "children": true,
+  "recipes": {
+    "sectionHead": "section-head"
+  },
+  "derived": [
+    {
+      "name": "cls",
+      "value": {
+        "op": "cn",
+        "args": [
+          {
+            "op": "recipe",
+            "args": [
+              "sectionHead",
+              "size",
+              {
+                "$": "size"
+              }
+            ]
+          },
+          "rounded text-foreground in-data-[nav=collapsed]:hidden",
+          {
+            "$": "className"
+          }
+        ]
+      }
+    }
+  ],
+  "slots": [
+    {
+      "name": "right",
+      "args": [],
+      "docs": "right-hand actions"
+    }
+  ],
+  "events": [
+    {
+      "name": "toggle",
+      "args": [],
+      "docs": "the disclosure button was pressed"
+    }
+  ],
+  "view": [
+    {
+      "when": {
+        "op": "has",
+        "args": [
+          {
+            "$": "expanded"
+          }
+        ]
+      },
+      "then": [
+        {
+          "use": "ButtonPlain",
+          "props": {
+            "Type": "button",
+            "Class": {
+              "op": "cn",
+              "args": [
+                {
+                  "$": "cls"
+                },
+                "w-full text-left"
+              ]
+            }
+          },
+          "attrs": {
+            "aria-expanded": {
+              "$": "expanded"
+            },
+            "aria-controls": {
+              "$": "controls"
+            },
+            "data-slot": "section-head",
+            "data-expanded": {
+              "$": "expanded"
+            }
+          },
+          "on": {
+            "click": {
+              "call": "emit.toggle",
+              "args": []
+            }
+          },
+          "children": [
+            {
+              "use": "Inline",
+              "attrs": {
+                "data-slot": "section-head-title"
+              },
+              "children": [
+                {
+                  "slot": "children"
+                }
+              ]
+            },
+            {
+              "when": {
+                "$": "right"
+              },
+              "then": [
+                {
+                  "use": "Inline",
+                  "props": {
+                    "Class": "flex items-center gap-2"
+                  },
+                  "attrs": {
+                    "data-slot": "section-head-right"
+                  },
+                  "children": [
+                    {
+                      "slot": "right"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "use": "Box",
+          "props": {
+            "Class": {
+              "$": "cls"
+            }
+          },
+          "attrs": {
+            "data-slot": "section-head"
+          },
+          "children": [
+            {
+              "use": "Inline",
+              "attrs": {
+                "data-slot": "section-head-title"
+              },
+              "children": [
+                {
+                  "slot": "children"
+                }
+              ]
+            },
+            {
+              "when": {
+                "$": "right"
+              },
+              "then": [
+                {
+                  "use": "Inline",
+                  "props": {
+                    "Class": "flex items-center gap-2"
+                  },
+                  "attrs": {
+                    "data-slot": "section-head-right"
+                  },
+                  "children": [
+                    {
+                      "slot": "right"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "examples": [
+    {
+      "id": "size.default",
+      "props": {
+        "size": "default"
+      }
+    },
+    {
+      "id": "size.lg",
+      "props": {
+        "size": "lg"
+      }
+    },
+    {
+      "id": "disclosure",
+      "props": {
+        "expanded": true,
+        "controls": "section-body"
+      }
+    }
+  ]
+}

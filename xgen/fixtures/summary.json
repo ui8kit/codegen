@@ -1,0 +1,102 @@
+{
+  "collection": "summary",
+  "kind": "summaryrow",
+  "entries": [
+    {
+      "id": "summaryrow-subtotal",
+      "locale": "en",
+      "kind": "summaryrow",
+      "status": "published",
+      "visibility": "public",
+      "slug": "subtotal",
+      "title": "Subtotal",
+      "metadata": {
+        "amount": {
+          "value": 28800
+        },
+        "currency": {
+          "value": "USD"
+        },
+        "strong": {
+          "value": false
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "summaryrow-shipping",
+      "locale": "en",
+      "kind": "summaryrow",
+      "status": "published",
+      "visibility": "public",
+      "slug": "shipping",
+      "title": "Shipping",
+      "metadata": {
+        "amount": {
+          "value": 1200
+        },
+        "currency": {
+          "value": "USD"
+        },
+        "strong": {
+          "value": false
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "summaryrow-tax",
+      "locale": "en",
+      "kind": "summaryrow",
+      "status": "published",
+      "visibility": "public",
+      "slug": "tax",
+      "title": "Tax",
+      "metadata": {
+        "amount": {
+          "value": 2400
+        },
+        "currency": {
+          "value": "USD"
+        },
+        "strong": {
+          "value": false
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "summaryrow-total",
+      "locale": "en",
+      "kind": "summaryrow",
+      "status": "published",
+      "visibility": "public",
+      "slug": "total",
+      "title": "Total",
+      "metadata": {
+        "amount": {
+          "value": 32400
+        },
+        "currency": {
+          "value": "USD"
+        },
+        "strong": {
+          "value": true
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    }
+  ]
+}

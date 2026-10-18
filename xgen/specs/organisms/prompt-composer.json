@@ -1,0 +1,324 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.prompt-composer",
+  "name": "PromptComposer",
+  "docs": "A prompt box on a dark band: attachment chips, the prompt line, a plus button, the model pill and a send button. Static links only; a host adds behavior.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "docs": "the prompt line (To Build Site)"
+    },
+    {
+      "name": "attachLabel",
+      "type": "string",
+      "docs": "attachment chip label"
+    },
+    {
+      "name": "modelLabel",
+      "type": "string",
+      "docs": "model pill label"
+    },
+    {
+      "name": "send",
+      "type": "string",
+      "docs": "accessible name of the send button"
+    },
+    {
+      "name": "href",
+      "type": "string"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            "mx-auto flex w-full flex-col gap-4 bg-background/10 p-6 inset-ring inset-ring-background/30",
+            {
+              "op": "preset",
+              "args": [
+                "defaults",
+                "hero.composer"
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "email-form"
+      },
+      "children": [
+        {
+          "when": {
+            "$": "attachLabel"
+          },
+          "then": [
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "2",
+                "Align": "center"
+              },
+              "attrs": {
+                "data-testid": "composer-attachments"
+              },
+              "children": [
+                {
+                  "use": "Button",
+                  "props": {
+                    "Variant": "ghost",
+                    "Size": "sm",
+                    "Class": {
+                      "op": "cn",
+                      "args": [
+                        "gap-2 overflow-hidden bg-background/10 text-background hover:bg-background/20",
+                        {
+                          "op": "preset",
+                          "args": [
+                            "defaults",
+                            "hero.attach"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "attrs": {
+                    "data-testid": "composer-attach"
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": "file-text",
+                        "Size": 16
+                      }
+                    },
+                    {
+                      "text": {
+                        "$": "attachLabel"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Button",
+                  "props": {
+                    "Variant": "ghost",
+                    "Size": "sm",
+                    "Class": {
+                      "op": "cn",
+                      "args": [
+                        "gap-2 overflow-hidden bg-background/10 text-background hover:bg-background/20",
+                        {
+                          "op": "preset",
+                          "args": [
+                            "defaults",
+                            "hero.attach"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "attrs": {
+                    "data-testid": "composer-attach"
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": "paperclip",
+                        "Size": 16
+                      }
+                    },
+                    {
+                      "text": {
+                        "$": "attachLabel"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Text",
+          "props": {
+            "Size": "xs",
+            "Weight": "semibold",
+            "Class": {
+              "op": "cn",
+              "args": [
+                "flex w-full items-center leading-5 text-background/80",
+                {
+                  "op": "preset",
+                  "args": [
+                    "defaults",
+                    "hero.promptLine"
+                  ]
+                }
+              ]
+            }
+          },
+          "attrs": {
+            "data-testid": "field"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "label"
+              }
+            }
+          ]
+        },
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Align": "center",
+            "Justify": "between",
+            "Class": "h-8 w-full"
+          },
+          "attrs": {
+            "data-testid": "composer-tools"
+          },
+          "children": [
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "2",
+                "Align": "center"
+              },
+              "children": [
+                {
+                  "use": "Button",
+                  "props": {
+                    "Variant": "ghost",
+                    "Size": "sm",
+                    "Layout": "icon",
+                    "Class": "bg-background/10 text-background hover:bg-background/20"
+                  },
+                  "attrs": {
+                    "data-testid": "composer-plus",
+                    "aria-label": {
+                      "op": "coalesce",
+                      "args": [
+                        {
+                          "$": "attachLabel"
+                        },
+                        "Attach"
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": "plus",
+                        "Size": 16
+                      }
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "$": "modelLabel"
+                  },
+                  "then": [
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "ghost",
+                        "Size": "sm",
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "gap-2 bg-background/10 text-background hover:bg-background/20",
+                            {
+                              "op": "preset",
+                              "args": [
+                                "defaults",
+                                "hero.model"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "attrs": {
+                        "data-testid": "composer-model"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "sparkles",
+                            "Size": 16
+                          }
+                        },
+                        {
+                          "text": {
+                            "$": "modelLabel"
+                          }
+                        },
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "chevron-down",
+                            "Size": 16
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "use": "Button",
+              "props": {
+                "Href": {
+                  "$": "href"
+                },
+                "Variant": "secondary",
+                "Size": "sm",
+                "Layout": "icon"
+              },
+              "attrs": {
+                "data-testid": "submit",
+                "aria-label": {
+                  "op": "coalesce",
+                  "args": [
+                    {
+                      "$": "send"
+                    },
+                    "Send"
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": "arrow-up",
+                    "Size": 16
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

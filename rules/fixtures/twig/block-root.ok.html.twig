@@ -1,0 +1,5 @@
+{#- Self-test fixture of the rules group, detector block-root (clean). -#}
+{%- set c_9 -%}
+  {{ ui_text(v_title) }}
+{%- endset -%}
+{{ include('ui/block/block.html.twig', {'p': {'Tag': 'section'}, 'children': c_9}, with_context = false) }}

@@ -1,0 +1,147 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.featureshowcase",
+  "name": "Feature cards with a picture",
+  "docs": "Cards with a picture on top and a read link, or with a muted glyph panel on top like an index of categories, in three or four columns.",
+  "theme": "marketing",
+  "group": "features",
+  "organism": "FeatureShowcase",
+  "axes": {
+    "item": [
+      "picture",
+      "panel"
+    ],
+    "cols": [
+      "3",
+      "4"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "item": "picture",
+    "cols": "3",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "pictureCards3",
+      "set": {},
+      "props": {
+        "features": {
+          "$": "values"
+        }
+      }
+    },
+    {
+      "id": "panelCards4",
+      "set": {
+        "item": "panel",
+        "cols": "4"
+      }
+    },
+    {
+      "id": "pictureCards4",
+      "set": {
+        "cols": "4",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "panelCards3",
+      "set": {
+        "item": "panel"
+      },
+      "props": {
+        "features": {
+          "$": "values"
+        }
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame",
+    "MenuEntry",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"showcase-card\"]",
+      "n": "@values",
+      "when": {
+        "cols": "3"
+      }
+    },
+    {
+      "sel": "[data-testid=\"showcase-card\"]",
+      "n": "@features",
+      "when": {
+        "cols": "4"
+      }
+    },
+    {
+      "sel": "[data-testid=\"showcase-panel\"]",
+      "n": 0,
+      "when": {
+        "item": "picture"
+      }
+    },
+    {
+      "sel": "[data-testid=\"read\"]",
+      "n": 0,
+      "when": {
+        "item": "panel"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "features",
+      "collection": "features",
+      "kind": "feature",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "values",
+      "collection": "values",
+      "kind": "value",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "featureshowcase",
+      "title": {
+        "$": "ui.marketing.featureShowcase.title"
+      },
+      "lead": {
+        "$": "ui.marketing.featureShowcase.lead"
+      },
+      "features": {
+        "$": "features"
+      },
+      "empty": {
+        "$": "ui.empty.features"
+      },
+      "more": {
+        "$": "ui.marketing.featureShowcase.more"
+      }
+    }
+  }
+}

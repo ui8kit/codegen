@@ -1,0 +1,116 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.productinfo",
+  "name": "Product details",
+  "docs": "Texts in an accordion beside a card of specs.",
+  "theme": "commerce",
+  "group": "product",
+  "organism": "ProductInfo",
+  "axes": {
+    "layout": [
+      "split",
+      "stacked"
+    ],
+    "expand": [
+      "first",
+      "none"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "split",
+    "expand": "first",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "split",
+      "set": {}
+    },
+    {
+      "id": "stacked",
+      "set": {
+        "layout": "stacked"
+      }
+    },
+    {
+      "id": "closed",
+      "set": {
+        "expand": "none",
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "details",
+      "n": "@details"
+    },
+    {
+      "sel": "[data-testid=\"spec\"]",
+      "n": "@specs"
+    },
+    {
+      "sel": "details[open]",
+      "n": 1,
+      "when": {
+        "expand": "first"
+      }
+    },
+    {
+      "sel": "details[open]",
+      "n": 0,
+      "when": {
+        "expand": "none"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "details",
+      "collection": "details",
+      "kind": "detail",
+      "record": "Detail",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value"
+      }
+    },
+    {
+      "as": "specs",
+      "collection": "specs",
+      "kind": "spec",
+      "record": "Spec",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "productinfo",
+      "title": {
+        "$": "ui.commerce.info.title"
+      },
+      "details": {
+        "$": "details"
+      },
+      "specs": {
+        "$": "specs"
+      },
+      "labels": {
+        "$": "ui.commerce.info"
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "collection": "subnav",
+  "kind": "menu_item",
+  "entries": [
+    {
+      "id": "subitem-all",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "orders-all",
+      "title": "All orders",
+      "metadata": {
+        "location": {
+          "value": "subnav"
+        },
+        "icon": {
+          "value": "inbox"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-03T09:00:00Z",
+      "published_at": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "subitem-drafts",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "drafts",
+      "title": "Drafts",
+      "metadata": {
+        "location": {
+          "value": "subnav"
+        },
+        "icon": {
+          "value": "file-text"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-05T09:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "subitem-shipping",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "shipping",
+      "title": "Shipping",
+      "metadata": {
+        "location": {
+          "value": "subnav"
+        },
+        "icon": {
+          "value": "truck"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T10:00:00Z"
+    },
+    {
+      "id": "subitem-returns",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "returns",
+      "title": "Returns",
+      "metadata": {
+        "location": {
+          "value": "subnav"
+        },
+        "icon": {
+          "value": "rotate-ccw"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-08T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T10:00:00Z"
+    },
+    {
+      "id": "subitem-archive",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "archive",
+      "title": "Archive",
+      "metadata": {
+        "location": {
+          "value": "subnav"
+        },
+        "icon": {
+          "value": "package"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-10T09:00:00Z",
+      "updated_at": "2026-03-11T09:00:00Z",
+      "published_at": "2026-03-11T10:00:00Z"
+    }
+  ]
+}

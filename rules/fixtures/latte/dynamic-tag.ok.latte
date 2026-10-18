@@ -1,0 +1,5 @@
+{* Self-test fixture of the rules group, detector dynamic-tag (clean). *}
+{capture $c_9}
+  {=ui_include('ui/box/box.latte', ['p' => ['Tag' => 'div']])|noescape}
+{/capture}
+{=ui_include('ui/block/block.latte', ['p' => ['Tag' => 'section'], 'children' => $c_9])|noescape}

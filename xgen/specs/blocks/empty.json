@@ -1,0 +1,163 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.empty",
+  "name": "Empty state",
+  "docs": "A list with nothing in it, with an optional action.",
+  "theme": "dashboard",
+  "group": "states",
+  "organism": "EmptyPanel",
+  "axes": {
+    "layout": [
+      "card",
+      "plain"
+    ],
+    "actions": [
+      "button",
+      "none"
+    ],
+    "visual": [
+      "icon",
+      "image"
+    ],
+    "size": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "card",
+    "actions": "button",
+    "visual": "icon",
+    "size": "default"
+  },
+  "variants": [
+    {
+      "id": "illustrated",
+      "set": {
+        "visual": "image"
+      },
+      "props": {
+        "title": {
+          "$": "ui.dashboard.empty.tour.title"
+        },
+        "text": {
+          "$": "ui.dashboard.empty.tour.text"
+        },
+        "cta": {
+          "$": "ui.dashboard.empty.tour.cta"
+        }
+      }
+    },
+    {
+      "id": "orders",
+      "set": {},
+      "props": {
+        "icon": "shopping-bag",
+        "title": {
+          "$": "ui.dashboard.empty.orders.title"
+        },
+        "text": {
+          "$": "ui.dashboard.empty.orders.text"
+        },
+        "cta": {
+          "$": "ui.dashboard.empty.orders.cta"
+        }
+      }
+    },
+    {
+      "id": "results",
+      "set": {
+        "layout": "plain"
+      },
+      "props": {
+        "icon": "search",
+        "title": {
+          "$": "ui.dashboard.empty.results.title"
+        },
+        "text": {
+          "$": "ui.dashboard.empty.results.text"
+        },
+        "cta": {
+          "$": "ui.dashboard.empty.results.cta"
+        }
+      }
+    },
+    {
+      "id": "inbox",
+      "set": {
+        "actions": "none"
+      },
+      "props": {
+        "icon": "inbox",
+        "title": {
+          "$": "ui.dashboard.empty.inbox.title"
+        },
+        "text": {
+          "$": "ui.dashboard.empty.inbox.text"
+        },
+        "cta": {
+          "$": "ui.dashboard.empty.inbox.cta"
+        }
+      }
+    },
+    {
+      "id": "compact",
+      "set": {
+        "size": "compact"
+      },
+      "props": {
+        "icon": "inbox",
+        "title": {
+          "$": "ui.dashboard.empty.inbox.title"
+        },
+        "text": {
+          "$": "ui.dashboard.empty.inbox.text"
+        },
+        "cta": {
+          "$": "ui.dashboard.empty.inbox.cta"
+        }
+      }
+    },
+    {
+      "id": "plainNoAction",
+      "set": {
+        "layout": "plain",
+        "actions": "none",
+        "size": "compact"
+      },
+      "props": {
+        "icon": "search",
+        "title": {
+          "$": "ui.dashboard.empty.results.title"
+        },
+        "text": {
+          "$": "ui.dashboard.empty.results.text"
+        },
+        "cta": {
+          "$": "ui.dashboard.empty.results.cta"
+        }
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame"
+  ],
+  "data": [],
+  "sample": {
+    "props": {
+      "id": "empty",
+      "title": {
+        "$": "ui.dashboard.empty.orders.title"
+      },
+      "text": {
+        "$": "ui.dashboard.empty.orders.text"
+      },
+      "cta": {
+        "$": "ui.dashboard.empty.orders.cta"
+      },
+      "ctaHref": "#/"
+    }
+  }
+}

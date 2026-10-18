@@ -1,0 +1,416 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.article-body",
+  "name": "ArticleBody",
+  "docs": "A long read: sections with headings, text and an optional pull quote, in one reading column or beside a table of contents that links to each section. Axes: layout (column, toc), quotes (show, hide), tone. Highlighting the section being read is a port contract.",
+  "records": {
+    "Section": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "name": "quote",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "sections",
+      "type": {
+        "ts": "Section[]"
+      },
+      "required": true
+    },
+    {
+      "name": "empty",
+      "type": "string",
+      "default": "",
+      "docs": "the text of the empty state (no records), from the dictionary"
+    },
+    {
+      "name": "tocTitle",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"column\" | \"toc\""
+      },
+      "default": "column"
+    },
+    {
+      "name": "quotes",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "show"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "sections"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "file-text",
+                    "title": {
+                      "$": "empty"
+                    }
+                  }
+                }
+              ],
+              "else": [
+                {
+                  "use": "Grid",
+                  "props": {
+                    "Cols": "1",
+                    "Class": {
+                      "op": "cn",
+                      "args": [
+                        "items-start gap-8",
+                        {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "layout"
+                                },
+                                "toc"
+                              ]
+                            },
+                            "md:grid-cols-[14rem_minmax(0,1fr)]",
+                            ""
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "layout"
+                          },
+                          "toc"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "NavBlock",
+                          "props": {
+                            "label": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "$": "landmarkLabel"
+                                },
+                                {
+                                  "op": "uniq",
+                                  "args": [
+                                    {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}, {1}",
+                                        {
+                                          "$": "tocTitle"
+                                        },
+                                        {
+                                          "$": "landmarkLabel"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "$": "tocTitle"
+                                }
+                              ]
+                            },
+                            "className": "md:sticky md:top-4",
+                            "testid": "toc"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "use": "Stack",
+                                  "props": {
+                                    "Gap": "2"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Weight": "semibold"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "tocTitle"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "List",
+                                      "props": {
+                                        "Class": "m-0 flex list-none flex-col gap-2 p-0"
+                                      },
+                                      "children": [
+                                        {
+                                          "each": {
+                                            "$": "sections"
+                                          },
+                                          "as": "s",
+                                          "key": {
+                                            "$": "s.id"
+                                          },
+                                          "do": [
+                                            {
+                                              "use": "ListItem",
+                                              "children": [
+                                                {
+                                                  "use": "Link",
+                                                  "props": {
+                                                    "Href": {
+                                                      "op": "tpl",
+                                                      "args": [
+                                                        "#{0}-{1}",
+                                                        {
+                                                          "$": "id"
+                                                        },
+                                                        {
+                                                          "$": "s.id"
+                                                        }
+                                                      ]
+                                                    },
+                                                    "Variant": "default",
+                                                    "Class": "text-sm text-muted-foreground"
+                                                  },
+                                                  "attrs": {
+                                                    "data-testid": "toc-link"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "text": {
+                                                        "$": "s.title"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "8",
+                        "Align": "stretch",
+                        "Class": "mx-auto w-full max-w-2xl min-w-0"
+                      },
+                      "attrs": {
+                        "data-testid": "article"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "sections"
+                          },
+                          "as": "s",
+                          "key": {
+                            "$": "s.id"
+                          },
+                          "do": [
+                            {
+                              "use": "Box",
+                              "props": {
+                                "Class": "flex flex-col gap-4"
+                              },
+                              "attrs": {
+                                "id": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-{1}",
+                                    {
+                                      "$": "id"
+                                    },
+                                    {
+                                      "$": "s.id"
+                                    }
+                                  ]
+                                },
+                                "data-testid": "item"
+                              },
+                              "children": [
+                                {
+                                  "use": "Title",
+                                  "props": {
+                                    "As": 3,
+                                    "Size": "2xl",
+                                    "Weight": "bold"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "s.title"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "base"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "s.text"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "when": {
+                                    "op": "eq",
+                                    "args": [
+                                      {
+                                        "$": "quotes"
+                                      },
+                                      "show"
+                                    ]
+                                  },
+                                  "then": [
+                                    {
+                                      "when": {
+                                        "$": "s.quote"
+                                      },
+                                      "then": [
+                                        {
+                                          "use": "Text",
+                                          "props": {
+                                            "Tag": "blockquote",
+                                            "Class": "m-0 border-l border-border pl-4 text-lg"
+                                          },
+                                          "attrs": {
+                                            "data-testid": "quote"
+                                          },
+                                          "children": [
+                                            {
+                                              "text": {
+                                                "$": "s.quote"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

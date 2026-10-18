@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.about",
+  "name": "About the company",
+  "docs": "The culture: a strip of pictures, figures and values.",
+  "theme": "marketing",
+  "group": "company",
+  "organism": "AboutCompany",
+  "axes": {
+    "layout": [
+      "split",
+      "stacked"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "split",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "split",
+      "set": {}
+    },
+    {
+      "id": "stacked",
+      "set": {
+        "layout": "stacked"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"stat\"]",
+      "n": "@stats"
+    },
+    {
+      "sel": "[data-testid=\"value\"]",
+      "n": "@values"
+    }
+  ],
+  "data": [
+    {
+      "as": "stats",
+      "collection": "stats",
+      "kind": "stat",
+      "record": "Stat",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value|number",
+        "icon": "metadata.icon.value",
+        "hint": "metadata.hint.value"
+      }
+    },
+    {
+      "as": "values",
+      "collection": "values",
+      "kind": "value",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "about",
+      "title": {
+        "$": "ui.company.about.title"
+      },
+      "lead": {
+        "$": "ui.company.about.lead"
+      },
+      "stats": {
+        "$": "stats"
+      },
+      "values": {
+        "$": "values"
+      }
+    }
+  }
+}

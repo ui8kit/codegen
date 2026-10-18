@@ -1,0 +1,5 @@
+{#- Self-test fixture of the rules group, detector block-root (violating). -#}
+{%- set c_1 -%}
+  {{ ui_text(v_title) }}
+{%- endset -%}
+{{ include('ui/box/box.html.twig', {'p': {'Class': 'p-4'}, 'children': c_1}, with_context = false) }}

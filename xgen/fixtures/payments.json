@@ -1,0 +1,90 @@
+{
+  "collection": "payments",
+  "kind": "payment",
+  "entries": [
+    {
+      "id": "payment-card",
+      "locale": "en",
+      "kind": "payment",
+      "status": "published",
+      "visibility": "public",
+      "slug": "card",
+      "title": "Card online",
+      "metadata": {
+        "text": {
+          "value": "Pay on a secure page after you confirm the order."
+        },
+        "icon": {
+          "value": "credit-card"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-03T09:00:00Z",
+      "published_at": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "payment-wallet",
+      "locale": "en",
+      "kind": "payment",
+      "status": "published",
+      "visibility": "public",
+      "slug": "wallet",
+      "title": "Phone wallet",
+      "metadata": {
+        "text": {
+          "value": "Confirm in the wallet on your phone, no card details to type."
+        },
+        "icon": {
+          "value": "smartphone"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-05T09:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "payment-courier",
+      "locale": "en",
+      "kind": "payment",
+      "status": "published",
+      "visibility": "public",
+      "slug": "courier",
+      "title": "Card on delivery",
+      "metadata": {
+        "text": {
+          "value": "The courier brings a card terminal."
+        },
+        "icon": {
+          "value": "wallet"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T10:00:00Z"
+    },
+    {
+      "id": "payment-cash",
+      "locale": "en",
+      "kind": "payment",
+      "status": "published",
+      "visibility": "public",
+      "slug": "cash",
+      "title": "Cash on delivery",
+      "metadata": {
+        "text": {
+          "value": "Tell us the note you will pay with in the comment."
+        },
+        "icon": {
+          "value": "banknote"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-08T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T10:00:00Z"
+    }
+  ]
+}

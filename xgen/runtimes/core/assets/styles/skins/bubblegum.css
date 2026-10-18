@@ -1,0 +1,100 @@
+/* Skin "bubblegum" (Bubblegum): the tweakcn preset "bubblegum" (Apache-2.0, see NOTICE.md), written by xgen/runtimes/core/tools/tweakcn-skins.ts.
+   On when data-skin="bubblegum" is on <html> (the page) or on any element (a tile of /skins/). Values as tweakcn exports them;
+   the spacing scale stays the kit's 0.25rem. Fonts: Poppins (Google Fonts, loaded when the skin is on). */
+[data-skin="bubblegum"] {
+  --background: hsl(330 47.1% 93.3%);
+  --foreground: hsl(0 0% 36%);
+  --card: hsl(42 93% 89%);
+  --card-foreground: hsl(0 0% 36%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(0 0% 36%);
+  --primary: hsl(325.3 52% 51.8%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(182 44% 68%);
+  --secondary-foreground: hsl(0 0% 20%);
+  --muted: hsl(191 59% 81%);
+  --muted-foreground: hsl(0 0% 36.5%);
+  --accent: hsl(42 91% 82%);
+  --accent-foreground: hsl(0 0% 20%);
+  --destructive: hsl(357.8 56.8% 53.7%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(325.6 57.8% 56.3%);
+  --input: hsl(0 0% 89%);
+  --ring: hsl(330 70% 67%);
+  --chart-1: hsl(330 70% 67%);
+  --chart-2: hsl(190 62% 70%);
+  --chart-3: hsl(42 91% 82%);
+  --chart-4: hsl(330 78% 79%);
+  --chart-5: hsl(330.6 64.1% 56.3%);
+  --sidebar: hsl(326 70% 91%);
+  --sidebar-foreground: hsl(0 0% 20%);
+  --sidebar-primary: hsl(330.4 81.2% 60.4%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(327.4 87.1% 81.8%);
+  --sidebar-accent-foreground: hsl(0 0% 20%);
+  --sidebar-border: hsl(268.7 100% 95.5%);
+  --sidebar-ring: hsl(330.4 81.2% 60.4%);
+  --font-sans: Poppins, sans-serif;
+  --font-serif: Lora, serif;
+  --font-mono: Fira Code, monospace;
+  --radius: 0.4rem;
+  --shadow-2xs: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 0.50);
+  --shadow-xs: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 0.50);
+  --shadow-sm: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 1.00), 3px 1px 2px -1px hsl(325.7800 58.1800% 56.8600% / 1.00);
+  --shadow: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 1.00), 3px 1px 2px -1px hsl(325.7800 58.1800% 56.8600% / 1.00);
+  --shadow-md: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 1.00), 3px 2px 4px -1px hsl(325.7800 58.1800% 56.8600% / 1.00);
+  --shadow-lg: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 1.00), 3px 4px 6px -1px hsl(325.7800 58.1800% 56.8600% / 1.00);
+  --shadow-xl: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 1.00), 3px 8px 10px -1px hsl(325.7800 58.1800% 56.8600% / 1.00);
+  --shadow-2xl: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 2.50);
+}
+
+:is(.dark, [data-theme="dark"]) [data-skin="bubblegum"],
+[data-skin="bubblegum"]:is(.dark, [data-theme="dark"]) {
+  --background: hsl(201.4 43.8% 12.5%);
+  --foreground: hsl(334 40% 92%);
+  --card: hsl(201.4 33.3% 16.5%);
+  --card-foreground: hsl(334 40% 92%);
+  --popover: hsl(201.4 33.3% 16.5%);
+  --popover-foreground: hsl(334 40% 92%);
+  --primary: hsl(42 91% 82%);
+  --primary-foreground: hsl(201.4 43.8% 12.5%);
+  --secondary: hsl(346.4 55% 76.5%);
+  --secondary-foreground: hsl(201.4 43.8% 12.5%);
+  --muted: hsl(214.3 8.9% 15.5%);
+  --muted-foreground: hsl(346.4 55% 76.5%);
+  --accent: hsl(337.2 30.7% 45.3%);
+  --accent-foreground: hsl(334 40% 92%);
+  --destructive: hsl(328.4 70.4% 62.9%);
+  --destructive-foreground: hsl(201.4 43.8% 12.5%);
+  --border: hsl(206 28% 27%);
+  --input: hsl(201 31% 18%);
+  --ring: hsl(184 41% 51%);
+  --chart-1: hsl(184 41% 51%);
+  --chart-2: hsl(346.4 55% 76.5%);
+  --chart-3: hsl(338 40% 63%);
+  --chart-4: hsl(191.3 64.9% 25.7%);
+  --chart-5: hsl(214.3 8.9% 15.5%);
+  --sidebar: hsl(203 43% 11%);
+  --sidebar-foreground: hsl(220 14% 96%);
+  --sidebar-primary: hsl(330.4 81.2% 60.4%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(327.4 87.1% 81.8%);
+  --sidebar-accent-foreground: hsl(215 28% 17%);
+  --sidebar-border: hsl(217 19% 27%);
+  --sidebar-ring: hsl(330.4 81.2% 60.4%);
+  --shadow-2xs: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 0.50);
+  --shadow-xs: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 0.50);
+  --shadow-sm: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1.00), 3px 1px 2px -1px hsl(206.1538 28.0576% 27.2549% / 1.00);
+  --shadow: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1.00), 3px 1px 2px -1px hsl(206.1538 28.0576% 27.2549% / 1.00);
+  --shadow-md: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1.00), 3px 2px 4px -1px hsl(206.1538 28.0576% 27.2549% / 1.00);
+  --shadow-lg: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1.00), 3px 4px 6px -1px hsl(206.1538 28.0576% 27.2549% / 1.00);
+  --shadow-xl: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 1.00), 3px 8px 10px -1px hsl(206.1538 28.0576% 27.2549% / 1.00);
+  --shadow-2xl: 3px 3px 0px 0px hsl(206.1538 28.0576% 27.2549% / 2.50);
+}
+
+[data-skin="bubblegum"] .shadow-xs { --tw-shadow: var(--shadow-xs); }
+[data-skin="bubblegum"] .shadow-sm { --tw-shadow: var(--shadow-sm); }
+[data-skin="bubblegum"] .shadow { --tw-shadow: var(--shadow); }
+[data-skin="bubblegum"] .shadow-md { --tw-shadow: var(--shadow-md); }
+[data-skin="bubblegum"] .shadow-lg { --tw-shadow: var(--shadow-lg); }
+[data-skin="bubblegum"] .shadow-xl { --tw-shadow: var(--shadow-xl); }

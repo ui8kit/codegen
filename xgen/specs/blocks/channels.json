@@ -1,0 +1,95 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.channels",
+  "name": "Support channels",
+  "docs": "Ways to get help: email, chat, docs.",
+  "theme": "support",
+  "group": "contact",
+  "organism": "SupportChannels",
+  "axes": {
+    "layout": [
+      "grid",
+      "list"
+    ],
+    "cols": [
+      "1-2",
+      "1-3"
+    ],
+    "action": [
+      "link",
+      "none"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "grid",
+    "cols": "1-3",
+    "action": "link",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "grid",
+      "set": {}
+    },
+    {
+      "id": "twoUp",
+      "set": {
+        "cols": "1-2"
+      }
+    },
+    {
+      "id": "list",
+      "set": {
+        "layout": "list"
+      }
+    },
+    {
+      "id": "plain",
+      "set": {
+        "action": "none",
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MenuEntry",
+    "SectionFrame"
+  ],
+  "data": [
+    {
+      "as": "channels",
+      "collection": "channels",
+      "kind": "channel",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "channels",
+      "title": {
+        "$": "ui.support.channels.title"
+      },
+      "channels": {
+        "$": "channels"
+      },
+      "empty": {
+        "$": "ui.empty.channels"
+      },
+      "open": {
+        "$": "ui.support.channels.open"
+      }
+    }
+  }
+}

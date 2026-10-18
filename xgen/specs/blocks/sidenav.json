@@ -1,0 +1,116 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.sidenav",
+  "name": "Sidebar navigation",
+  "docs": "A vertical navigation with the brand on top and the user at the bottom: full, or icons only.",
+  "theme": "dashboard",
+  "group": "navigation",
+  "organism": "SidebarNav",
+  "axes": {
+    "width": [
+      "full",
+      "compact"
+    ],
+    "user": [
+      "show",
+      "hide"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "width": "full",
+    "user": "show",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "full",
+      "set": {}
+    },
+    {
+      "id": "compact",
+      "set": {
+        "width": "compact"
+      }
+    },
+    {
+      "id": "noUser",
+      "set": {
+        "user": "hide"
+      }
+    },
+    {
+      "id": "dense",
+      "set": {
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "MediaFrame",
+    "MenuEntry",
+    "NavBlock"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@sidenav"
+    },
+    {
+      "sel": "[data-testid=\"user\"]",
+      "n": 1,
+      "when": {
+        "user": "show"
+      }
+    },
+    {
+      "sel": "[data-testid=\"user\"]",
+      "n": 0,
+      "when": {
+        "user": "hide"
+      }
+    },
+    {
+      "sel": "[aria-current=\"page\"]",
+      "n": 1
+    }
+  ],
+  "data": [
+    {
+      "as": "sidenav",
+      "collection": "sidenav",
+      "kind": "menu_item",
+      "record": "NavLink",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value",
+        "href": "slug|route"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "label": {
+        "$": "ui.vibe.sidebar.label"
+      },
+      "brand": {
+        "$": "ui.site.header.brand"
+      },
+      "links": {
+        "$": "sidenav"
+      },
+      "current": "item-orders",
+      "userName": {
+        "$": "ui.vibe.sidebar.userName"
+      },
+      "userEmail": {
+        "$": "ui.vibe.sidebar.userEmail"
+      }
+    }
+  }
+}

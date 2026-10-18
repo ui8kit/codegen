@@ -1,0 +1,604 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.product-detail",
+  "name": "ProductDetail",
+  "docs": "A product page: a gallery (the main picture and optional thumbnails) beside the buy box (badge, rating, price, stock, quantity, add button, shipping and returns notes). Axes: layout (split, stacked), media side, thumbs (none, below), buy (full, compact), tone, density.",
+  "records": {
+    "ProductDetailLabels": [
+      {
+        "name": "add",
+        "type": "string"
+      },
+      {
+        "name": "soldOut",
+        "type": "string"
+      },
+      {
+        "name": "inStock",
+        "type": "string"
+      },
+      {
+        "name": "qty",
+        "type": "string"
+      },
+      {
+        "name": "decrease",
+        "type": "string"
+      },
+      {
+        "name": "increase",
+        "type": "string"
+      },
+      {
+        "name": "reviews",
+        "type": "string"
+      },
+      {
+        "name": "ratingLabel",
+        "type": "string"
+      },
+      {
+        "name": "shipping",
+        "type": "string"
+      },
+      {
+        "name": "returns",
+        "type": "string"
+      },
+      {
+        "name": "was",
+        "type": "string"
+      },
+      {
+        "name": "empty",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "product",
+      "type": {
+        "ts": "Product"
+      },
+      "docs": "the product; without one, the empty state (labels.empty)"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "ProductDetailLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "badges",
+      "type": {
+        "ts": "Record<string, string>"
+      },
+      "required": true
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 1
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"split\" | \"stacked\""
+      },
+      "default": "split"
+    },
+    {
+      "name": "mediaSide",
+      "type": {
+        "ts": "\"start\" | \"end\""
+      },
+      "default": "start"
+    },
+    {
+      "name": "thumbs",
+      "type": {
+        "ts": "\"none\" | \"below\""
+      },
+      "default": "below"
+    },
+    {
+      "name": "buy",
+      "type": {
+        "ts": "\"full\" | \"compact\""
+      },
+      "default": "full"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"roomy\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "add",
+      "args": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "docs": "the add button was pressed"
+    }
+  ],
+  "view": [
+    {
+      "when": {
+        "op": "not",
+        "args": [
+          {
+            "$": "product"
+          }
+        ]
+      },
+      "then": [
+        {
+          "organism": "SectionFrame",
+          "props": {
+            "id": {
+              "$": "id"
+            },
+            "tone": {
+              "$": "tone"
+            },
+            "density": {
+              "$": "density"
+            },
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          },
+          "slots": {
+            "children": {
+              "args": [],
+              "do": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "package",
+                    "title": {
+                      "$": "labels.empty"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "else": [
+        {
+          "organism": "SectionFrame",
+          "props": {
+            "id": {
+              "$": "id"
+            },
+            "title": {
+              "$": "product.name"
+            },
+            "lead": {
+              "$": "product.summary"
+            },
+            "heading": {
+              "level": {
+                "$": "level"
+              }
+            },
+            "layout": {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "layout"
+                    },
+                    "split"
+                  ]
+                },
+                "split",
+                "stack"
+              ]
+            },
+            "media": {
+              "show": true,
+              "side": {
+                "$": "mediaSide"
+              },
+              "align": "start"
+            },
+            "tone": {
+              "$": "tone"
+            },
+            "density": {
+              "$": "density"
+            },
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          },
+          "slots": {
+            "children": {
+              "args": [],
+              "do": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "stretch"
+                  },
+                  "attrs": {
+                    "data-testid": "buy-box"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "$": "product.category"
+                      },
+                      "then": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "xs",
+                            "Class": "uppercase tracking-wide text-muted-foreground"
+                          },
+                          "attrs": {
+                            "data-testid": "category"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "product.category"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "organism": "ProductPrice",
+                      "props": {
+                        "price": {
+                          "$": "product.price"
+                        },
+                        "compareAt": {
+                          "$": "product.compareAt"
+                        },
+                        "currency": {
+                          "$": "product.currency"
+                        },
+                        "badge": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "$": "product.badge"
+                            },
+                            {
+                              "op": "at",
+                              "args": [
+                                {
+                                  "$": "badges"
+                                },
+                                {
+                                  "$": "product.badge"
+                                }
+                              ]
+                            },
+                            ""
+                          ]
+                        },
+                        "was": {
+                          "$": "labels.was"
+                        }
+                      }
+                    },
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "2"
+                      },
+                      "children": [
+                        {
+                          "organism": "Rating",
+                          "props": {
+                            "value": {
+                              "$": "product.rating"
+                            },
+                            "label": {
+                              "op": "tpl",
+                              "args": [
+                                {
+                                  "$": "labels.ratingLabel"
+                                },
+                                {
+                                  "$": "product.rating"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "tpl",
+                                "args": [
+                                  {
+                                    "$": "labels.reviews"
+                                  },
+                                  {
+                                    "$": "product.reviews"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Weight": "medium",
+                        "Class": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "$": "product.inStock"
+                            },
+                            "text-foreground",
+                            "text-destructive"
+                          ]
+                        }
+                      },
+                      "attrs": {
+                        "data-testid": "stock"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "op": "cond",
+                            "args": [
+                              {
+                                "$": "product.inStock"
+                              },
+                              {
+                                "$": "labels.inStock"
+                              },
+                              {
+                                "$": "labels.soldOut"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "4",
+                        "Class": "flex-wrap"
+                      },
+                      "children": [
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "buy"
+                              },
+                              "full"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "NumberField",
+                              "props": {
+                                "value": "1",
+                                "name": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-qty",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                },
+                                "min": "1",
+                                "label": {
+                                  "$": "labels.qty"
+                                },
+                                "decrease": {
+                                  "$": "labels.decrease"
+                                },
+                                "increase": {
+                                  "$": "labels.increase"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Button",
+                          "props": {
+                            "Disabled": {
+                              "op": "not",
+                              "args": [
+                                {
+                                  "$": "product.inStock"
+                                }
+                              ]
+                            }
+                          },
+                          "attrs": {
+                            "data-testid": "add"
+                          },
+                          "on": {
+                            "click": {
+                              "call": "emit.add",
+                              "args": [
+                                {
+                                  "$": "product.id"
+                                }
+                              ]
+                            }
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.add"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "buy"
+                          },
+                          "full"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "use": "List",
+                          "props": {
+                            "Tag": "ul",
+                            "Class": "flex flex-col gap-2 text-sm text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "use": "ListItem",
+                              "props": {
+                                "Class": "flex items-center gap-2"
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": "truck",
+                                    "Size": 16
+                                  }
+                                },
+                                {
+                                  "use": "Inline",
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "labels.shipping"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "use": "ListItem",
+                              "props": {
+                                "Class": "flex items-center gap-2"
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": "shield-check",
+                                    "Size": 16
+                                  }
+                                },
+                                {
+                                  "use": "Inline",
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "labels.returns"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "aside": {
+              "args": [],
+              "do": [
+                {
+                  "organism": "ProductGallery",
+                  "props": {
+                    "name": {
+                      "$": "product.name"
+                    },
+                    "image": {
+                      "$": "product.image"
+                    },
+                    "thumbs": {
+                      "$": "thumbs"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "ProductCard",
+      "names": [
+        "Product"
+      ]
+    }
+  ]
+}

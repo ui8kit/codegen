@@ -1,0 +1,7 @@
+{#- Self-test fixture of the rules group, detector block-root (violating). -#}
+{%- for v_item in ui_l(v_items) %}
+{%- set c_1 -%}
+  {{ ui_text(v_item) }}
+{%- endset -%}
+{{ include('ui/block/block.html.twig', {'p': {'Tag': 'section'}, 'children': c_1}, with_context = false) }}
+{%- endfor %}

@@ -1,0 +1,94 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.sidebar-panel",
+  "name": "SidebarPanel",
+  "docs": "The app sidebar panel: width, padding and gap per kit sidebar type. Colours come from the middle layer.",
+  "records": {},
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "ts": "\"chat\" | \"creator\""
+      },
+      "docs": "sidebar type"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "className": true,
+  "children": true,
+  "recipes": {
+    "sidebarPanel": "sidebar-panel"
+  },
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "aside",
+        "Class": {
+          "op": "cn",
+          "args": [
+            {
+              "op": "recipe",
+              "args": [
+                "sidebarPanel",
+                "variant",
+                {
+                  "$": "variant"
+                }
+              ]
+            },
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-slot": "sidebar-panel",
+        "data-variant": {
+          "op": "coalesce",
+          "args": [
+            {
+              "$": "variant"
+            },
+            "chat"
+          ]
+        },
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "slot": "children"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "frame": true,
+  "examples": [
+    {
+      "id": "variant.chat",
+      "props": {
+        "variant": "chat"
+      }
+    },
+    {
+      "id": "variant.creator",
+      "props": {
+        "variant": "creator"
+      }
+    }
+  ]
+}

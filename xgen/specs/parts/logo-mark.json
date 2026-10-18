@@ -1,0 +1,32 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.logo-mark",
+  "name": "LogoMark",
+  "docs": "The app logo mark in a 32 px frame: a disc or a tile with the logo glyph.",
+  "records": {},
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "ts": "\"disc\" | \"tile\""
+      },
+      "docs": "frame of the mark",
+      "default": "disc"
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "brand glyph data: the mark is the app's own brand; the app supplies the mark through a slot (see LogoSidebar)"
+    },
+    "react": {
+      "portable": false,
+      "reason": "brand glyph data: the mark is the app's own brand; the app supplies the mark through a slot (see LogoSidebar)"
+    }
+  }
+}

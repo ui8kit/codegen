@@ -1,0 +1,205 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.media-contacts",
+  "name": "MediaContacts",
+  "docs": "The ways to get help of MediaList as wide outline buttons, then three support figures as rows in a card.",
+  "records": {},
+  "props": [
+    {
+      "name": "extras",
+      "type": {
+        "ts": "MediaExtras"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "MediaListLabels"
+      },
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "6",
+        "Align": "stretch"
+      },
+      "children": [
+        {
+          "use": "Stack",
+          "props": {
+            "Gap": "2",
+            "Align": "stretch"
+          },
+          "children": [
+            {
+              "use": "Text",
+              "props": {
+                "Size": "sm",
+                "Weight": "semibold"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.list"
+                  }
+                }
+              ]
+            },
+            {
+              "each": {
+                "$": "extras.channels"
+              },
+              "as": "c",
+              "key": {
+                "$": "c.id"
+              },
+              "do": [
+                {
+                  "use": "Button",
+                  "props": {
+                    "Variant": "outline",
+                    "Size": "default",
+                    "Href": {
+                      "$": "c.href"
+                    },
+                    "Class": "w-full gap-2"
+                  },
+                  "attrs": {
+                    "data-testid": "media-channel"
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": {
+                          "$": "c.icon"
+                        },
+                        "Size": 16
+                      }
+                    },
+                    {
+                      "text": {
+                        "$": "c.title"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        },
+        {
+          "use": "Stack",
+          "props": {
+            "Gap": "2",
+            "Align": "stretch",
+            "Class": "rounded bg-card inset-ring inset-ring-border p-4"
+          },
+          "children": [
+            {
+              "use": "Text",
+              "props": {
+                "Size": "sm",
+                "Weight": "semibold"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.figures"
+                  }
+                }
+              ]
+            },
+            {
+              "each": {
+                "$": "extras.stats"
+              },
+              "as": "s",
+              "key": {
+                "$": "s.id"
+              },
+              "do": [
+                {
+                  "when": {
+                    "op": "lt",
+                    "args": [
+                      {
+                        "$": "i"
+                      },
+                      3
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "4",
+                        "Align": "center",
+                        "Justify": "between"
+                      },
+                      "attrs": {
+                        "data-testid": "media-stat"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.label"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Weight": "semibold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.value"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "MediaList",
+      "names": [
+        "MediaExtras",
+        "MediaListLabels"
+      ]
+    }
+  ]
+}

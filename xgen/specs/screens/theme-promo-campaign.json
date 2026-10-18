@@ -1,0 +1,237 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.theme-promo-campaign",
+  "name": "ThemePromoCampaignScreen",
+  "kind": "composed",
+  "docs": "Campaign pages: announcement bars in every position and tone, sign-up forms, calls to action with a pattern, and the cookie notice.",
+  "routes": [
+    {
+      "path": "",
+      "area": "home"
+    },
+    {
+      "path": "launch",
+      "area": "launch"
+    },
+    {
+      "path": "offer",
+      "area": "offer"
+    },
+    {
+      "path": "notices",
+      "area": "notices"
+    }
+  ],
+  "frame": {
+    "before": [
+      {
+        "block": "navbar",
+        "variant": "inline",
+        "props": {
+          "brandHref": "#/",
+          "links": {
+            "$": "nav.links"
+          },
+          "current": {
+            "$": "nav.current"
+          },
+          "skip": {
+            "$": "ui.site.header.skip"
+          },
+          "actions": {
+            "themeLabel": {
+              "$": "ui.theme.toggle"
+            }
+          }
+        }
+      }
+    ],
+    "after": [
+      {
+        "block": "footersplit",
+        "variant": "newsletterStart"
+      }
+    ]
+  },
+  "areas": {
+    "home": [
+      {
+        "block": "hero",
+        "variant": "cluster",
+        "props": {
+          "title": {
+            "$": "ui.pages.promoCampaign.home.title"
+          },
+          "text": {
+            "$": "ui.pages.promoCampaign.home.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.promoCampaign.home.cta"
+            },
+            "href": "#/launch"
+          }
+        }
+      },
+      {
+        "block": "announcement",
+        "variant": "badge"
+      },
+      {
+        "block": "newsletter",
+        "variant": "split"
+      },
+      {
+        "block": "cta",
+        "variant": "form"
+      },
+      {
+        "block": "cookie",
+        "variant": "card"
+      }
+    ],
+    "launch": [
+      {
+        "block": "hero",
+        "variant": "saas",
+        "props": {
+          "title": {
+            "$": "ui.pages.promoCampaign.launch.title"
+          },
+          "text": {
+            "$": "ui.pages.promoCampaign.launch.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.promoCampaign.launch.cta"
+            },
+            "href": "#/offer"
+          }
+        }
+      },
+      {
+        "block": "announcement",
+        "variant": "bar"
+      },
+      {
+        "block": "newsletter",
+        "variant": "inline"
+      },
+      {
+        "block": "logos",
+        "variant": "tiles4"
+      },
+      {
+        "block": "cta",
+        "variant": "saas"
+      }
+    ],
+    "offer": [
+      {
+        "block": "pagehead",
+        "variant": "center",
+        "props": {
+          "title": {
+            "$": "ui.pages.promoCampaign.offer.title"
+          },
+          "text": {
+            "$": "ui.pages.promoCampaign.offer.text"
+          },
+          "cta": {
+            "$": "ui.pages.promoCampaign.offer.cta"
+          },
+          "href": "#/notices"
+        }
+      },
+      {
+        "block": "announcement",
+        "variant": "badge"
+      },
+      {
+        "block": "announcement",
+        "variant": "split"
+      },
+      {
+        "block": "announcement",
+        "variant": "shop"
+      },
+      {
+        "block": "cta",
+        "variant": "shop"
+      },
+      {
+        "block": "newsletter",
+        "variant": "consent"
+      }
+    ],
+    "notices": [
+      {
+        "block": "pagehead",
+        "variant": "start",
+        "props": {
+          "title": {
+            "$": "ui.pages.promoCampaign.notices.title"
+          },
+          "text": {
+            "$": "ui.pages.promoCampaign.notices.text"
+          },
+          "cta": {
+            "$": "ui.pages.promoCampaign.notices.cta"
+          },
+          "href": "#/"
+        }
+      },
+      {
+        "block": "announcement",
+        "variant": "dismissible"
+      },
+      {
+        "block": "announcement",
+        "variant": "bottom"
+      },
+      {
+        "block": "cookie",
+        "variant": "settings"
+      },
+      {
+        "block": "cookie",
+        "variant": "bar"
+      },
+      {
+        "block": "newsletter",
+        "variant": "muted"
+      }
+    ]
+  },
+  "chunks": true,
+  "requireH1": true,
+  "nameLandmarks": true,
+  "nav": true,
+  "menu": [
+    {
+      "id": "home",
+      "path": "",
+      "titleKey": "pages.promoCampaign.home.nav"
+    },
+    {
+      "id": "launch",
+      "path": "launch",
+      "titleKey": "pages.promoCampaign.launch.nav"
+    },
+    {
+      "id": "offer",
+      "path": "offer",
+      "titleKey": "pages.promoCampaign.offer.nav"
+    },
+    {
+      "id": "notices",
+      "path": "notices",
+      "titleKey": "pages.promoCampaign.notices.nav"
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

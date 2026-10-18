@@ -1,0 +1,116 @@
+/* Skin "sky": white and navy with an orange primary, Istok Web, 0.5rem (8px) corners, soft shadows.
+   On when <html data-skin="sky"> (see skins.css); the font is loaded by bootScreen only for this skin.
+   Only the shadcn tokens change: plain `rounded` reads --radius, the body font reads --font-sans, the tracking
+   utilities read --tracking-*; the shadow utilities print literal values, so the few the kit uses are pointed at the
+   skin's --shadow-* below. */
+:root[data-skin="sky"] {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(214.4262 100% 11.9608%);
+  --card: hsl(210 16.6667% 97.6471%);
+  --card-foreground: hsl(214.4262 100% 11.9608%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(214.4262 100% 11.9608%);
+  --primary: hsl(23.4 100% 39.2%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(209.0323 100% 93.9216%);
+  --secondary-foreground: hsl(214.4262 100% 11.9608%);
+  --muted: hsl(210 100% 98.0392%);
+  --muted-foreground: hsl(215.2941 39.0805% 34.1176%);
+  --accent: hsl(209.0323 100% 93.9216%);
+  --accent-foreground: hsl(214.4262 100% 11.9608%);
+  --destructive: hsl(358 69% 51%);
+  --destructive-foreground: hsl(210 40% 98.0392%);
+  /* a barely visible hairline: just darker than the card fill (97.6%), so card edges stay faintly readable on white;
+     fields keep the stronger line (--input, inset-ring-input in the kit) so they read as fields */
+  --border: hsl(214 32% 94%);
+  --input: hsl(214.2857 31.8182% 91.3725%);
+  --ring: hsl(214.4262 100% 11.9608%);
+  --chart-1: hsl(219.8684 90.4762% 67.0588%);
+  --chart-2: hsl(24.8908 100% 55.098%);
+  --chart-3: hsl(215.2941 25% 26.6667%);
+  --chart-4: hsl(32.2059 91.8919% 70.9804%);
+  --chart-5: hsl(213.4884 84.3137% 90%);
+  --sidebar: hsl(0 0% 100%);
+  --sidebar-foreground: hsl(214.4262 100% 11.9608%);
+  --sidebar-primary: hsl(29.1429 100% 51.9608%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(209.0323 100% 93.9216%);
+  --sidebar-accent-foreground: hsl(214.4262 100% 11.9608%);
+  --sidebar-border: hsl(214.2857 31.8182% 91.3725%);
+  --sidebar-ring: hsl(214.4262 100% 11.9608%);
+  --font-sans: "Istok Web", system-ui, sans-serif;
+  /* Istok Web ships 400 and 700 only: medium (500) and semibold (600) would ask for faces that do not exist,
+     and some engines (WebKit) then draw that text in the fallback system font; map them onto real faces */
+  --font-weight-medium: 400;
+  --font-weight-semibold: 700;
+  --font-serif: Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --radius: 0.5rem;
+  --shadow-2xs: 0px 4px 10px 0px hsl(0 0% 0% / 0.03);
+  --shadow-xs: 0px 4px 10px 0px hsl(0 0% 0% / 0.03);
+  --shadow-sm: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.05);
+  --shadow: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.05);
+  --shadow-md: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 2px 4px -1px hsl(0 0% 0% / 0.05);
+  --shadow-lg: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 4px 6px -1px hsl(0 0% 0% / 0.05);
+  --shadow-xl: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 8px 10px -1px hsl(0 0% 0% / 0.05);
+  --shadow-2xl: 0px 4px 10px 0px hsl(0 0% 0% / 0.13);
+  /* the tracking scale follows --tracking-normal */
+  --tracking-normal: -0.01em;
+  --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
+  --tracking-tight: calc(var(--tracking-normal) - 0.025em);
+  --tracking-wide: calc(var(--tracking-normal) + 0.025em);
+  --tracking-wider: calc(var(--tracking-normal) + 0.05em);
+  --tracking-widest: calc(var(--tracking-normal) + 0.1em);
+  --spacing: 0.25rem;
+}
+
+:root[data-skin="sky"]:is(.dark, [data-theme="dark"]) {
+  --background: hsl(220 23.0769% 5.098%);
+  --foreground: hsl(210 16.6667% 97.6471%);
+  --card: hsl(220 18.3673% 9.6078%);
+  --card-foreground: hsl(210 16.6667% 97.6471%);
+  --popover: hsl(220 23.0769% 5.098%);
+  --popover-foreground: hsl(210 16.6667% 97.6471%);
+  --primary: hsl(21.8 100% 40%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(217.2414 32.5843% 17.451%);
+  --secondary-foreground: hsl(210 16.6667% 97.6471%);
+  --muted: hsl(217.2414 32.5843% 17.451%);
+  --muted-foreground: hsl(215 20.2247% 65.098%);
+  --accent: hsl(214.4262 100% 11.9608%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 62.8205% 30.5882%);
+  --destructive-foreground: hsl(210 40% 98.0392%);
+  --border: hsl(217.2414 32.5843% 17.451%);
+  --input: hsl(217.2414 32.5843% 17.451%);
+  --ring: hsl(24.8908 100% 55.098%);
+  --chart-1: hsl(24.8908 100% 55.098%);
+  --chart-2: hsl(217.2193 91.2195% 59.8039%);
+  --chart-3: hsl(160.1183 84.0796% 39.4118%);
+  --chart-4: hsl(37.6923 92.126% 50.1961%);
+  --chart-5: hsl(238.7324 83.5294% 66.6667%);
+  --sidebar: hsl(220 23.0769% 5.098%);
+  --sidebar-foreground: hsl(210 16.6667% 97.6471%);
+  --sidebar-primary: hsl(24.8908 100% 55.098%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(0 0% 100%);
+  --sidebar-accent-foreground: hsl(210 23.7288% 23.1373%);
+  --sidebar-border: hsl(217.2414 32.5843% 17.451%);
+  --sidebar-ring: hsl(24.8908 100% 55.098%);
+  --shadow-2xs: 0px 4px 15px 0px hsl(0 0% 0% / 0.2);
+  --shadow-xs: 0px 4px 15px 0px hsl(0 0% 0% / 0.2);
+  --shadow-sm: 0px 4px 15px 0px hsl(0 0% 0% / 0.4), 0px 1px 2px -1px hsl(0 0% 0% / 0.4);
+  --shadow: 0px 4px 15px 0px hsl(0 0% 0% / 0.4), 0px 1px 2px -1px hsl(0 0% 0% / 0.4);
+  --shadow-md: 0px 4px 15px 0px hsl(0 0% 0% / 0.4), 0px 2px 4px -1px hsl(0 0% 0% / 0.4);
+  --shadow-lg: 0px 4px 15px 0px hsl(0 0% 0% / 0.4), 0px 4px 6px -1px hsl(0 0% 0% / 0.4);
+  --shadow-xl: 0px 4px 15px 0px hsl(0 0% 0% / 0.4), 0px 8px 10px -1px hsl(0 0% 0% / 0.4);
+  --shadow-2xl: 0px 4px 15px 0px hsl(0 0% 0% / 1);
+}
+
+:root[data-skin="sky"] body { letter-spacing: var(--tracking-normal); }
+:root[data-skin="sky"] .shadow-xs { --tw-shadow: var(--shadow-xs); }
+:root[data-skin="sky"] .shadow-sm { --tw-shadow: var(--shadow-sm); }
+:root[data-skin="sky"] .shadow { --tw-shadow: var(--shadow); }
+:root[data-skin="sky"] .shadow-md { --tw-shadow: var(--shadow-md); }
+:root[data-skin="sky"] .shadow-lg { --tw-shadow: var(--shadow-lg); }
+:root[data-skin="sky"] .shadow-xl { --tw-shadow: var(--shadow-xl); }

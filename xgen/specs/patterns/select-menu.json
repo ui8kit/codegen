@@ -1,0 +1,73 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.select-menu",
+  "name": "SelectMenu",
+  "docs": "A custom select: a button that opens a listbox of options.",
+  "records": {
+    "SelectOption": [
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "options",
+      "type": {
+        "ts": "SelectOption[]"
+      },
+      "required": true
+    },
+    {
+      "name": "value",
+      "type": "string"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "docs": "form field name"
+    },
+    {
+      "name": "width",
+      "type": {
+        "ts": "\"auto\" | \"full\""
+      }
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [
+    {
+      "name": "change",
+      "args": [
+        {
+          "name": "value",
+          "type": "string"
+        }
+      ],
+      "docs": "an option was chosen"
+    }
+  ],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "a listbox with keyboard selection, type-ahead and a hidden form value: state and focus handling (moveFocus and dismissable of the utils)"
+    },
+    "react": {
+      "portable": false,
+      "reason": "a listbox with keyboard selection, type-ahead and a hidden form value: state and focus handling (moveFocus and dismissable of the utils)"
+    }
+  }
+}

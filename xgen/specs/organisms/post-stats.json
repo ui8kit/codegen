@@ -1,0 +1,189 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.post-stats",
+  "name": "PostStats",
+  "docs": "The reading figures of a post: minutes to read, views and likes, each with its glyph.",
+  "records": {},
+  "props": [
+    {
+      "name": "post",
+      "type": {
+        "ts": "Post"
+      },
+      "required": true
+    },
+    {
+      "name": "extras",
+      "type": {
+        "ts": "PostExtras"
+      },
+      "required": true,
+      "docs": "the author's role and bio, the reading figures, the tags and the outline"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "PostSplitLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "align",
+      "type": {
+        "ts": "\"start\" | \"center\""
+      },
+      "default": "start"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Group",
+      "props": {
+        "Gap": "4",
+        "Align": "center",
+        "Justify": {
+          "$": "align"
+        },
+        "Class": "flex-wrap text-muted-foreground"
+      },
+      "attrs": {
+        "data-testid": "post-stats"
+      },
+      "children": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Align": "center"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "clock",
+                "Size": 16
+              }
+            },
+            {
+              "use": "Text",
+              "props": {
+                "Size": "sm"
+              },
+              "children": [
+                {
+                  "text": {
+                    "op": "tpl",
+                    "args": [
+                      {
+                        "$": "labels.minutes"
+                      },
+                      {
+                        "$": "post.minutes"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Align": "center"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "eye",
+                "Size": 16
+              }
+            },
+            {
+              "use": "Text",
+              "props": {
+                "Size": "sm"
+              },
+              "children": [
+                {
+                  "text": {
+                    "op": "tpl",
+                    "args": [
+                      {
+                        "$": "labels.views"
+                      },
+                      {
+                        "$": "extras.views"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Align": "center"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "heart",
+                "Size": 16
+              }
+            },
+            {
+              "use": "Text",
+              "props": {
+                "Size": "sm"
+              },
+              "children": [
+                {
+                  "text": {
+                    "op": "tpl",
+                    "args": [
+                      {
+                        "$": "labels.likes"
+                      },
+                      {
+                        "$": "extras.likes"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PostCard",
+      "names": [
+        "Post"
+      ]
+    },
+    {
+      "from": "PostSplit",
+      "names": [
+        "PostExtras",
+        "PostSplitLabels"
+      ]
+    }
+  ]
+}

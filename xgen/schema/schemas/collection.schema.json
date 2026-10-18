@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xgen.dev/schemas/collection.schema.json",
+  "title": "xgen fixture: a Codex v0.4 collection (entries: https://schema.buildy.tw/entry.schema.json)",
+  "type": "object",
+  "properties": {
+    "collection": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "locale": {
+            "type": "string",
+            "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "excerpt": {
+            "type": "string"
+          },
+          "author_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "the id of the entry of kind user that wrote this one (Codex v0.4 core field)"
+          },
+          "parent_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "the id of the parent entry of the same kind (a page under a page: the breadcrumb chain; Codex v0.4 core field)"
+          },
+          "order": {
+            "type": "integer",
+            "description": "the position among the entries of one parent (a menu item among its siblings; Codex v0.4 core field)"
+          },
+          "featured_media_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "the id of the entry of kind media that pictures this one (Codex v0.4 core field)"
+          },
+          "terms": {
+            "type": "array",
+            "description": "term references (Codex v0.4 core field); the terms live in fixtures/taxonomies",
+            "items": {
+              "type": "object",
+              "properties": {
+                "taxonomy": {
+                  "type": "string"
+                },
+                "term_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "taxonomy",
+                "term_id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "oneOf": [
+                    {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean"
+                      ]
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "version": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "locale",
+          "kind",
+          "status",
+          "visibility",
+          "slug",
+          "title",
+          "metadata",
+          "version",
+          "created_at",
+          "updated_at",
+          "published_at"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "collection",
+    "kind",
+    "entries"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,11 @@
+{#- Self-test fixture of the rules group, detector raw-native-tag (clean). -#}
+{%- set c_3 -%}
+  {%- set c_1 -%}
+    {%- set c_2 -%}
+      {{ ui_text(v_title) }}
+    {%- endset -%}
+    {{ ui_include('ui/inline/inline.html.j2', {'p': {}, 'children': c_2}) }}
+  {%- endset -%}
+  {{ ui_include('ui/box/box.html.j2', {'p': {'Class': 'p-4'}, 'children': c_1}) }}
+{%- endset -%}
+{{ ui_include('ui/block/block.html.j2', {'p': {'Tag': 'section'}, 'children': c_3}) }}

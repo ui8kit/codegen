@@ -1,0 +1,104 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.faq-disclosures",
+  "name": "FaqDisclosures",
+  "docs": "The questions of FaqSplit as native disclosures, one open at a time.",
+  "records": {},
+  "props": [
+    {
+      "name": "items",
+      "type": {
+        "ts": "Question[]"
+      },
+      "required": true
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "docs": "the group name of the disclosures (one open at a time)"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "0",
+        "Align": "stretch"
+      },
+      "attrs": {
+        "data-testid": "faq"
+      },
+      "children": [
+        {
+          "each": {
+            "$": "items"
+          },
+          "as": "q",
+          "key": {
+            "$": "q.id"
+          },
+          "do": [
+            {
+              "use": "Disclosure",
+              "props": {
+                "Variant": "item",
+                "Name": {
+                  "$": "name"
+                }
+              },
+              "attrs": {
+                "data-testid": "faq-item"
+              },
+              "children": [
+                {
+                  "use": "Summary",
+                  "props": {
+                    "Variant": "item"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "q.question"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm",
+                    "Class": "pb-4 text-muted-foreground"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "q.answer"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FaqSplit",
+      "names": [
+        "Question",
+        "FaqSplitLabels"
+      ]
+    }
+  ]
+}

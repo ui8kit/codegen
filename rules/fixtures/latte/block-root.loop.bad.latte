@@ -1,0 +1,7 @@
+{* Self-test fixture of the rules group, detector block-root (violating). *}
+{foreach ui_l($v_items) as $v_item}
+{capture $c_1}
+  {=ui_text($v_item)}
+{/capture}
+{=ui_include('ui/block/block.latte', ['p' => ['Tag' => 'section'], 'children' => $c_1])|noescape}
+{/foreach}

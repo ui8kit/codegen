@@ -1,0 +1,334 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.chart-panel",
+  "name": "ChartPanel",
+  "docs": "A panel with a chart of one series: vertical bars with captions, or meter rows with a percent. Axes: chart (bars, meters), size (default, compact), tone (default, muted).",
+  "records": {
+    "Point": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "value",
+        "type": "number"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true,
+      "docs": "the sentence under the title"
+    },
+    {
+      "name": "series",
+      "type": {
+        "ts": "Point[]"
+      },
+      "required": true
+    },
+    {
+      "name": "empty",
+      "type": "string",
+      "default": "",
+      "docs": "the text of the empty state (no records), from the dictionary"
+    },
+    {
+      "name": "summary",
+      "type": "string",
+      "required": true,
+      "docs": "the chart's accessible summary"
+    },
+    {
+      "name": "percent",
+      "type": "string",
+      "required": true,
+      "docs": "template of a meter caption, e.g. `{0}%`"
+    },
+    {
+      "name": "chart",
+      "type": {
+        "ts": "\"bars\" | \"meters\""
+      },
+      "default": "bars"
+    },
+    {
+      "name": "size",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "section"
+      },
+      "attrs": {
+        "aria-labelledby": {
+          "op": "cond",
+          "args": [
+            {
+              "$": "landmarkLabel"
+            },
+            {
+              "op": "undef",
+              "args": []
+            },
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "and",
+                  "args": [
+                    {
+                      "$": "title"
+                    },
+                    {
+                      "$": "id"
+                    }
+                  ]
+                },
+                {
+                  "op": "tpl",
+                  "args": [
+                    "{0}-t",
+                    {
+                      "$": "id"
+                    }
+                  ]
+                },
+                {
+                  "op": "undef",
+                  "args": []
+                }
+              ]
+            }
+          ]
+        },
+        "data-testid": "panel-section",
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "use": "Container",
+          "props": {
+            "Class": "mx-auto w-full max-w-6xl px-4 py-8"
+          },
+          "attrs": {
+            "data-slot": "container"
+          },
+          "children": [
+            {
+              "organism": "Panel",
+              "props": {
+                "title": {
+                  "$": "title"
+                },
+                "description": {
+                  "$": "text"
+                },
+                "id": {
+                  "$": "id"
+                },
+                "className": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "tone"
+                        },
+                        "muted"
+                      ]
+                    },
+                    "bg-muted",
+                    ""
+                  ]
+                }
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "series"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "EmptyState",
+                          "props": {
+                            "icon": "chart-column",
+                            "title": {
+                              "$": "empty"
+                            }
+                          }
+                        }
+                      ],
+                      "else": [
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "chart"
+                              },
+                              "bars"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "BarChart",
+                              "props": {
+                                "bars": {
+                                  "$": "series"
+                                },
+                                "label": {
+                                  "$": "summary"
+                                },
+                                "height": {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "size"
+                                        },
+                                        "compact"
+                                      ]
+                                    },
+                                    96,
+                                    176
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "else": [
+                            {
+                              "use": "Stack",
+                              "props": {
+                                "Gap": {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "size"
+                                        },
+                                        "compact"
+                                      ]
+                                    },
+                                    "0",
+                                    "2"
+                                  ]
+                                },
+                                "Align": "stretch"
+                              },
+                              "attrs": {
+                                "data-testid": "items"
+                              },
+                              "children": [
+                                {
+                                  "each": {
+                                    "$": "series"
+                                  },
+                                  "as": "s",
+                                  "key": {
+                                    "$": "s.id"
+                                  },
+                                  "do": [
+                                    {
+                                      "organism": "MeterRow",
+                                      "props": {
+                                        "label": {
+                                          "$": "s.label"
+                                        },
+                                        "value": {
+                                          "$": "s.value"
+                                        },
+                                        "caption": {
+                                          "op": "tpl",
+                                          "args": [
+                                            {
+                                              "$": "percent"
+                                            },
+                                            {
+                                              "$": "s.value"
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

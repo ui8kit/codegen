@@ -1,0 +1,293 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.post-author",
+  "name": "PostAuthor",
+  "docs": "The author of a post: the portrait, the name and role, and the date or the share and save buttons; as a line, a card, or a card with the bio.",
+  "records": {},
+  "props": [
+    {
+      "name": "post",
+      "type": {
+        "ts": "Post"
+      },
+      "required": true
+    },
+    {
+      "name": "extras",
+      "type": {
+        "ts": "PostExtras"
+      },
+      "required": true,
+      "docs": "the author's role and bio, the reading figures, the tags and the outline"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "PostSplitLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "mode",
+      "type": {
+        "ts": "\"line\" | \"card\" | \"bio\""
+      },
+      "default": "line"
+    },
+    {
+      "name": "share",
+      "type": "boolean",
+      "default": false,
+      "docs": "share and save buttons instead of the date"
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "4",
+        "Align": "stretch",
+        "Class": {
+          "op": "cn",
+          "args": [
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "mode"
+                    },
+                    "line"
+                  ]
+                },
+                "",
+                "rounded bg-card inset-ring inset-ring-border p-4"
+              ]
+            },
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "post-author"
+      },
+      "children": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "4",
+            "Align": "center"
+          },
+          "children": [
+            {
+              "organism": "MediaFrame",
+              "props": {
+                "alt": {
+                  "$": "post.author"
+                },
+                "ratio": "1/1",
+                "className": "size-10 shrink-0 rounded-full"
+              }
+            },
+            {
+              "use": "Stack",
+              "props": {
+                "Gap": "0",
+                "Align": "start",
+                "Class": "min-w-0 flex-1 text-start"
+              },
+              "children": [
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm",
+                    "Weight": "semibold"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "post.author"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "xs",
+                    "Class": "text-muted-foreground"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "extras.role"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "$": "share"
+              },
+              "then": [
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "2"
+                  },
+                  "children": [
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "ghost",
+                        "Size": "default",
+                        "Class": "gap-2"
+                      },
+                      "attrs": {
+                        "data-testid": "post-share"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "share-2",
+                            "Size": 16
+                          }
+                        },
+                        {
+                          "text": {
+                            "$": "labels.share"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "ghost",
+                        "Size": "default",
+                        "Class": "gap-2"
+                      },
+                      "attrs": {
+                        "data-testid": "post-save"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "bookmark",
+                            "Size": 16
+                          }
+                        },
+                        {
+                          "text": {
+                            "$": "labels.save"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "else": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "text-muted-foreground"
+                  },
+                  "children": [
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "2",
+                        "Align": "center"
+                      },
+                      "children": [
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "calendar",
+                            "Size": 16
+                          }
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "post.date"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "mode"
+              },
+              "bio"
+            ]
+          },
+          "then": [
+            {
+              "use": "Text",
+              "props": {
+                "Size": "sm",
+                "Class": "text-muted-foreground"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "extras.bio"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PostCard",
+      "names": [
+        "Post"
+      ]
+    },
+    {
+      "from": "PostSplit",
+      "names": [
+        "PostExtras",
+        "PostSplitLabels"
+      ]
+    }
+  ]
+}

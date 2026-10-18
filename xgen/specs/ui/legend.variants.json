@@ -1,0 +1,23 @@
+{
+  "id": "ui.legend",
+  "base": "font-bold",
+  "keys": [
+    "size",
+    "variant"
+  ],
+  "defaults": {
+    "size": "default",
+    "variant": "default"
+  },
+  "byKey": {
+    "size": {
+      "sm": "text-xs",
+      "default": "text-sm",
+      "lg": "text-base"
+    },
+    "variant": {
+      "default": "",
+      "muted": "text-muted-foreground"
+    }
+  }
+}

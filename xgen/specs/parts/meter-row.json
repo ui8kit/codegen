@@ -1,0 +1,238 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.meter-row",
+  "name": "MeterRow",
+  "docs": "A name, a value caption and a progress bar (completeness by section, issues by rule, stock by warehouse). With `href` the whole row is a link.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "docs": "0 to 100",
+      "required": true
+    },
+    {
+      "name": "caption",
+      "type": "string",
+      "docs": "the caption on the right, e.g. \"72%\"",
+      "required": true
+    },
+    {
+      "name": "hint",
+      "type": "string"
+    },
+    {
+      "name": "href",
+      "type": "string"
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            "min-w-0",
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-slot": "meter-row"
+      },
+      "children": [
+        {
+          "when": {
+            "$": "href"
+          },
+          "then": [
+            {
+              "use": "Link",
+              "props": {
+                "Href": {
+                  "$": "href"
+                },
+                "Variant": "block",
+                "Class": "flex min-w-0 flex-col gap-2 rounded p-2 text-foreground no-underline hover:bg-muted"
+              },
+              "children": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "flex items-baseline justify-between gap-4"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 min-w-0 truncate text-sm font-bold text-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "label"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 shrink-0 text-xs font-semibold tabular-nums text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "caption"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Progress",
+                  "props": {
+                    "Value": {
+                      "op": "str",
+                      "args": [
+                        {
+                          "$": "value"
+                        }
+                      ]
+                    },
+                    "Max": "100"
+                  },
+                  "attrs": {
+                    "aria-label": {
+                      "$": "label"
+                    }
+                  }
+                },
+                {
+                  "when": {
+                    "$": "hint"
+                  },
+                  "then": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 text-xs font-medium text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "hint"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "else": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": "flex min-w-0 flex-col gap-2 p-2"
+              },
+              "children": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "flex items-baseline justify-between gap-4"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 min-w-0 truncate text-sm font-bold text-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "label"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 shrink-0 text-xs font-semibold tabular-nums text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "caption"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Progress",
+                  "props": {
+                    "Value": {
+                      "op": "str",
+                      "args": [
+                        {
+                          "$": "value"
+                        }
+                      ]
+                    },
+                    "Max": "100"
+                  },
+                  "attrs": {
+                    "aria-label": {
+                      "$": "label"
+                    }
+                  }
+                },
+                {
+                  "when": {
+                    "$": "hint"
+                  },
+                  "then": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "m-0 text-xs font-medium text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "hint"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

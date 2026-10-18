@@ -1,0 +1,535 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.medialist",
+  "name": "List beside a picture",
+  "docs": "Four figures, figures with a featured review, numbered steps, the latest posts, topic rows, or contact buttons with support figures, beside a picture.",
+  "theme": "marketing",
+  "group": "proof",
+  "organism": "MediaList",
+  "axes": {
+    "layout": [
+      "figures",
+      "proof",
+      "steps",
+      "posts",
+      "topics",
+      "contact"
+    ],
+    "mediaSide": [
+      "end",
+      "start"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "figures",
+    "mediaSide": "end",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "figuresStart",
+      "set": {
+        "mediaSide": "start"
+      },
+      "props": {
+        "title": {
+          "$": "ui.marketing.mediaList.figures.title"
+        },
+        "lead": {
+          "$": "ui.marketing.mediaList.figures.lead"
+        },
+        "badge": {
+          "$": "ui.marketing.mediaList.figures.badge"
+        },
+        "labels": {
+          "list": {
+            "$": "ui.marketing.mediaList.figures.list"
+          },
+          "count": {
+            "$": "ui.marketing.mediaList.count"
+          },
+          "minutes": {
+            "$": "ui.content.labels.minutes"
+          },
+          "featured": {
+            "$": "ui.marketing.mediaList.featured"
+          },
+          "rating": {
+            "$": "ui.testimonials.rating"
+          },
+          "figures": {
+            "$": "ui.marketing.mediaList.supportFigures"
+          }
+        },
+        "actions": {
+          "mode": "one",
+          "cta": {
+            "$": "ui.marketing.mediaList.figures.cta"
+          },
+          "href": "#/start"
+        }
+      }
+    },
+    {
+      "id": "proofReview",
+      "set": {
+        "layout": "proof"
+      },
+      "props": {
+        "title": {
+          "$": "ui.marketing.mediaList.proof.title"
+        },
+        "lead": {
+          "$": "ui.marketing.mediaList.proof.lead"
+        },
+        "badge": {
+          "$": "ui.marketing.mediaList.proof.badge"
+        },
+        "labels": {
+          "list": {
+            "$": "ui.marketing.mediaList.proof.list"
+          },
+          "count": {
+            "$": "ui.marketing.mediaList.count"
+          },
+          "minutes": {
+            "$": "ui.content.labels.minutes"
+          },
+          "featured": {
+            "$": "ui.marketing.mediaList.featured"
+          },
+          "rating": {
+            "$": "ui.testimonials.rating"
+          },
+          "figures": {
+            "$": "ui.marketing.mediaList.supportFigures"
+          }
+        },
+        "actions": {
+          "mode": "two",
+          "cta": {
+            "$": "ui.marketing.mediaList.proof.cta"
+          },
+          "href": "#/start",
+          "secondary": {
+            "$": "ui.marketing.mediaList.proof.secondary"
+          },
+          "secondaryHref": "#/more"
+        }
+      }
+    },
+    {
+      "id": "stepsRows",
+      "set": {
+        "layout": "steps"
+      },
+      "props": {
+        "title": {
+          "$": "ui.marketing.mediaList.steps.title"
+        },
+        "lead": {
+          "$": "ui.marketing.mediaList.steps.lead"
+        },
+        "badge": {
+          "$": "ui.marketing.mediaList.steps.badge"
+        },
+        "labels": {
+          "list": {
+            "$": "ui.marketing.mediaList.steps.list"
+          },
+          "count": {
+            "$": "ui.marketing.mediaList.count"
+          },
+          "minutes": {
+            "$": "ui.content.labels.minutes"
+          },
+          "featured": {
+            "$": "ui.marketing.mediaList.featured"
+          },
+          "rating": {
+            "$": "ui.testimonials.rating"
+          },
+          "figures": {
+            "$": "ui.marketing.mediaList.supportFigures"
+          }
+        },
+        "actions": {
+          "mode": "one",
+          "cta": {
+            "$": "ui.marketing.mediaList.steps.cta"
+          },
+          "href": "#/start"
+        }
+      }
+    },
+    {
+      "id": "latestPosts",
+      "set": {
+        "layout": "posts",
+        "tone": "muted"
+      },
+      "props": {
+        "title": {
+          "$": "ui.marketing.mediaList.posts.title"
+        },
+        "lead": {
+          "$": "ui.marketing.mediaList.posts.lead"
+        },
+        "badge": {
+          "$": "ui.marketing.mediaList.posts.badge"
+        },
+        "labels": {
+          "list": {
+            "$": "ui.marketing.mediaList.posts.list"
+          },
+          "count": {
+            "$": "ui.marketing.mediaList.count"
+          },
+          "minutes": {
+            "$": "ui.content.labels.minutes"
+          },
+          "featured": {
+            "$": "ui.marketing.mediaList.featured"
+          },
+          "rating": {
+            "$": "ui.testimonials.rating"
+          },
+          "figures": {
+            "$": "ui.marketing.mediaList.supportFigures"
+          }
+        },
+        "actions": {
+          "mode": "one",
+          "cta": {
+            "$": "ui.marketing.mediaList.posts.cta"
+          },
+          "href": "#/start"
+        }
+      }
+    },
+    {
+      "id": "topicRows",
+      "set": {
+        "layout": "topics"
+      },
+      "props": {
+        "title": {
+          "$": "ui.marketing.mediaList.topics.title"
+        },
+        "lead": {
+          "$": "ui.marketing.mediaList.topics.lead"
+        },
+        "badge": {
+          "$": "ui.marketing.mediaList.topics.badge"
+        },
+        "labels": {
+          "list": {
+            "$": "ui.marketing.mediaList.topics.list"
+          },
+          "count": {
+            "$": "ui.marketing.mediaList.count"
+          },
+          "minutes": {
+            "$": "ui.content.labels.minutes"
+          },
+          "featured": {
+            "$": "ui.marketing.mediaList.featured"
+          },
+          "rating": {
+            "$": "ui.testimonials.rating"
+          },
+          "figures": {
+            "$": "ui.marketing.mediaList.supportFigures"
+          }
+        },
+        "actions": {
+          "mode": "one",
+          "cta": {
+            "$": "ui.marketing.mediaList.topics.cta"
+          },
+          "href": "#/start"
+        }
+      }
+    },
+    {
+      "id": "contactStart",
+      "set": {
+        "layout": "contact",
+        "mediaSide": "start"
+      },
+      "props": {
+        "title": {
+          "$": "ui.marketing.mediaList.contact.title"
+        },
+        "lead": {
+          "$": "ui.marketing.mediaList.contact.lead"
+        },
+        "badge": {
+          "$": "ui.marketing.mediaList.contact.badge"
+        },
+        "labels": {
+          "list": {
+            "$": "ui.marketing.mediaList.contact.list"
+          },
+          "count": {
+            "$": "ui.marketing.mediaList.count"
+          },
+          "minutes": {
+            "$": "ui.content.labels.minutes"
+          },
+          "featured": {
+            "$": "ui.marketing.mediaList.featured"
+          },
+          "rating": {
+            "$": "ui.testimonials.rating"
+          },
+          "figures": {
+            "$": "ui.marketing.mediaList.supportFigures"
+          }
+        },
+        "actions": {
+          "mode": "one",
+          "cta": {
+            "$": "ui.marketing.mediaList.contact.cta"
+          },
+          "href": "#/start"
+        }
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "MediaContacts",
+    "MediaFigures",
+    "MediaFrame",
+    "MediaPosts",
+    "MediaReview",
+    "MediaSteps",
+    "MediaTopics",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"media-stat\"]",
+      "n": 4,
+      "when": {
+        "layout": "figures"
+      }
+    },
+    {
+      "sel": "[data-testid=\"media-stat\"]",
+      "n": 3,
+      "when": {
+        "layout": [
+          "proof",
+          "contact"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"media-review\"]",
+      "n": 1,
+      "when": {
+        "layout": "proof"
+      }
+    },
+    {
+      "sel": "[data-testid=\"media-step\"]",
+      "n": "@steps",
+      "when": {
+        "layout": "steps"
+      }
+    },
+    {
+      "sel": "[data-testid=\"media-post\"]",
+      "n": 3,
+      "when": {
+        "layout": "posts"
+      }
+    },
+    {
+      "sel": "[data-testid=\"media-topic\"]",
+      "n": 5,
+      "when": {
+        "layout": "topics"
+      }
+    },
+    {
+      "sel": "[data-testid=\"media-channel\"]",
+      "n": "@channels",
+      "when": {
+        "layout": "contact"
+      }
+    },
+    {
+      "sel": "[data-testid=\"action-primary\"]",
+      "n": 1,
+      "when": {
+        "layout": [
+          "figures",
+          "proof",
+          "steps",
+          "posts",
+          "topics"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"action-primary\"]",
+      "n": 0,
+      "when": {
+        "layout": "contact"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "stats",
+      "collection": "stats",
+      "kind": "stat",
+      "record": "Stat",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value|number",
+        "icon": "metadata.icon.value",
+        "hint": "metadata.hint.value"
+      }
+    },
+    {
+      "as": "steps",
+      "collection": "steps",
+      "kind": "step",
+      "record": "Step",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "posts",
+      "collection": "posts",
+      "kind": "post",
+      "record": "Post",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "excerpt": "excerpt",
+        "category": "terms|term:category",
+        "author": "author_id|author",
+        "date": "metadata.date.value|date",
+        "minutes": "metadata.minutes.value",
+        "icon": "metadata.icon.value",
+        "href": "slug|route",
+        "image": "featured_media_id|media"
+      }
+    },
+    {
+      "as": "categories",
+      "collection": "categories",
+      "kind": "menu_item",
+      "record": "Category",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value",
+        "count": "metadata.count.value",
+        "href": "slug|route"
+      }
+    },
+    {
+      "as": "channels",
+      "collection": "channels",
+      "kind": "channel",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "reviews",
+      "collection": "reviews",
+      "kind": "review",
+      "record": "Review",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "author": "author_id|author",
+        "rating": "metadata.rating.value",
+        "text": "metadata.text.value",
+        "date": "metadata.date.value|date"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "medialist",
+      "title": {
+        "$": "ui.marketing.mediaList.figures.title"
+      },
+      "lead": {
+        "$": "ui.marketing.mediaList.figures.lead"
+      },
+      "badge": {
+        "$": "ui.marketing.mediaList.figures.badge"
+      },
+      "labels": {
+        "list": {
+          "$": "ui.marketing.mediaList.figures.list"
+        },
+        "count": {
+          "$": "ui.marketing.mediaList.count"
+        },
+        "minutes": {
+          "$": "ui.content.labels.minutes"
+        },
+        "featured": {
+          "$": "ui.marketing.mediaList.featured"
+        },
+        "rating": {
+          "$": "ui.testimonials.rating"
+        },
+        "figures": {
+          "$": "ui.marketing.mediaList.supportFigures"
+        }
+      },
+      "actions": {
+        "mode": "one",
+        "cta": {
+          "$": "ui.marketing.mediaList.figures.cta"
+        },
+        "href": "#/start"
+      },
+      "extras": {
+        "stats": {
+          "$": "stats"
+        },
+        "steps": {
+          "$": "steps"
+        },
+        "posts": {
+          "$": "posts"
+        },
+        "topics": {
+          "$": "categories"
+        },
+        "channels": {
+          "$": "channels"
+        },
+        "reviews": {
+          "$": "reviews"
+        }
+      }
+    }
+  }
+}

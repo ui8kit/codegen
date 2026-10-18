@@ -1,0 +1,181 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.nav-links",
+  "name": "NavLinks",
+  "docs": "The links of a top bar in a row; the current one carries aria-current. side: all, or the first or second half of the list.",
+  "records": {},
+  "props": [
+    {
+      "name": "links",
+      "type": {
+        "ts": "NavLink[]"
+      },
+      "required": true
+    },
+    {
+      "name": "current",
+      "type": "string",
+      "default": "",
+      "docs": "id of the current link"
+    },
+    {
+      "name": "side",
+      "type": {
+        "ts": "\"all\" | \"left\" | \"right\""
+      },
+      "default": "all"
+    }
+  ],
+  "derived": [
+    {
+      "name": "count",
+      "value": {
+        "op": "len",
+        "args": [
+          {
+            "$": "links"
+          }
+        ]
+      }
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "gt",
+        "args": [
+          {
+            "op": "len",
+            "args": [
+              {
+                "$": "links"
+              }
+            ]
+          },
+          0
+        ]
+      },
+      "then": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "4",
+            "Align": "center",
+            "Class": "flex-wrap"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "links"
+              },
+              "as": "l",
+              "key": {
+                "$": "l.id"
+              },
+              "do": [
+                {
+                  "when": {
+                    "op": "or",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "side"
+                          },
+                          "all"
+                        ]
+                      },
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "op": "lt",
+                            "args": [
+                              {
+                                "op": "mul",
+                                "args": [
+                                  {
+                                    "$": "i"
+                                  },
+                                  2
+                                ]
+                              },
+                              {
+                                "$": "count"
+                              }
+                            ]
+                          },
+                          {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "side"
+                              },
+                              "left"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "MenuEntry",
+                      "props": {
+                        "href": {
+                          "$": "l.href"
+                        },
+                        "className": "text-sm",
+                        "current": {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "l.id"
+                            },
+                            {
+                              "$": "current"
+                            }
+                          ]
+                        },
+                        "testid": "nav-link"
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "text": {
+                                "$": "l.name"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "NavBar",
+      "names": [
+        "NavLink"
+      ]
+    }
+  ]
+}

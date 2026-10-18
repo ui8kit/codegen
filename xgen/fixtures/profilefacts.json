@@ -1,0 +1,78 @@
+{
+  "collection": "profilefacts",
+  "kind": "profilefact",
+  "entries": [
+    {
+      "id": "profilefact-role",
+      "locale": "en",
+      "kind": "profilefact",
+      "status": "published",
+      "visibility": "public",
+      "slug": "role",
+      "title": "Role",
+      "metadata": {
+        "value": {
+          "value": "Product designer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-03T09:00:00Z",
+      "published_at": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "profilefact-based",
+      "locale": "en",
+      "kind": "profilefact",
+      "status": "published",
+      "visibility": "public",
+      "slug": "based",
+      "title": "Based in",
+      "metadata": {
+        "value": {
+          "value": "Lisbon"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-05T09:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "profilefact-years",
+      "locale": "en",
+      "kind": "profilefact",
+      "status": "published",
+      "visibility": "public",
+      "slug": "years",
+      "title": "Experience",
+      "metadata": {
+        "value": {
+          "value": "9 years"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T10:00:00Z"
+    },
+    {
+      "id": "profilefact-status",
+      "locale": "en",
+      "kind": "profilefact",
+      "status": "published",
+      "visibility": "public",
+      "slug": "status",
+      "title": "Status",
+      "metadata": {
+        "value": {
+          "value": "Open to projects"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-08T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T10:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.locations",
+  "name": "Store locations",
+  "docs": "The stores with address, hours, phone and services.",
+  "theme": "commerce",
+  "group": "delivery",
+  "organism": "StoreLocations",
+  "axes": {
+    "layout": [
+      "cards",
+      "list",
+      "map"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "cards",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "cards",
+      "set": {}
+    },
+    {
+      "id": "list",
+      "set": {
+        "layout": "list",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "map",
+      "set": {
+        "layout": "map"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@stores"
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 1,
+      "when": {
+        "layout": "map"
+      }
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 0,
+      "when": {
+        "layout": [
+          "cards",
+          "list"
+        ]
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "stores",
+      "collection": "stores",
+      "kind": "store",
+      "record": "Store",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "kind": "metadata.store_kind.value",
+        "address": "metadata.address.value",
+        "hours": "metadata.hours.value",
+        "phone": "metadata.phone.value",
+        "note": "metadata.note.value",
+        "services": "metadata.services.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "locations",
+      "title": {
+        "$": "ui.commerce.stores.title"
+      },
+      "lead": {
+        "$": "ui.commerce.stores.lead"
+      },
+      "stores": {
+        "$": "stores"
+      },
+      "empty": {
+        "$": "ui.empty.stores"
+      },
+      "kinds": {
+        "$": "ui.commerce.stores.kinds"
+      },
+      "labels": {
+        "$": "ui.commerce.stores"
+      }
+    }
+  }
+}

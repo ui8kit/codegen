@@ -1,0 +1,394 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.feature-tabs",
+  "name": "FeatureTabs",
+  "docs": "Features behind a tab list: the chosen tab shows its text and a picture. The page keeps the chosen tab (`active`, empty for the first) and updates it on the `select` event. Axes: panel (split: text beside the picture, stack: picture below), tone, density.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "features",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true
+    },
+    {
+      "name": "empty",
+      "type": "string",
+      "default": "",
+      "docs": "the text of the empty state (no records), from the dictionary"
+    },
+    {
+      "name": "tabsLabel",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "active",
+      "type": "string",
+      "default": "",
+      "docs": "id of the chosen feature; empty: the first"
+    },
+    {
+      "name": "panel",
+      "type": {
+        "ts": "\"split\" | \"stack\""
+      },
+      "default": "split"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "select",
+      "args": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "docs": "a tab was chosen"
+    }
+  ],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "features"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "layout-grid",
+                    "title": {
+                      "$": "empty"
+                    }
+                  }
+                }
+              ],
+              "else": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "6",
+                    "Align": "stretch"
+                  },
+                  "children": [
+                    {
+                      "organism": "Switcher",
+                      "props": {
+                        "label": {
+                          "$": "tabsLabel"
+                        },
+                        "className": "w-fit max-w-full flex-wrap"
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "each": {
+                                "$": "features"
+                              },
+                              "as": "f",
+                              "key": {
+                                "$": "f.id"
+                              },
+                              "do": [
+                                {
+                                  "organism": "SwitcherItem",
+                                  "props": {
+                                    "active": {
+                                      "op": "or",
+                                      "args": [
+                                        {
+                                          "op": "eq",
+                                          "args": [
+                                            {
+                                              "$": "f.id"
+                                            },
+                                            {
+                                              "$": "active"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "op": "and",
+                                          "args": [
+                                            {
+                                              "op": "eq",
+                                              "args": [
+                                                {
+                                                  "$": "active"
+                                                },
+                                                ""
+                                              ]
+                                            },
+                                            {
+                                              "op": "eq",
+                                              "args": [
+                                                {
+                                                  "$": "i"
+                                                },
+                                                0
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "on": {
+                                    "click": {
+                                      "call": "emit.select",
+                                      "args": [
+                                        {
+                                          "$": "f.id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "text": {
+                                            "$": "f.title"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ],
+                              "index": "i"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "each": {
+                        "$": "features"
+                      },
+                      "as": "f",
+                      "key": {
+                        "$": "f.id"
+                      },
+                      "do": [
+                        {
+                          "when": {
+                            "op": "or",
+                            "args": [
+                              {
+                                "op": "eq",
+                                "args": [
+                                  {
+                                    "$": "f.id"
+                                  },
+                                  {
+                                    "$": "active"
+                                  }
+                                ]
+                              },
+                              {
+                                "op": "and",
+                                "args": [
+                                  {
+                                    "op": "eq",
+                                    "args": [
+                                      {
+                                        "$": "active"
+                                      },
+                                      ""
+                                    ]
+                                  },
+                                  {
+                                    "op": "eq",
+                                    "args": [
+                                      {
+                                        "$": "i"
+                                      },
+                                      0
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "Grid",
+                              "props": {
+                                "Cols": {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "panel"
+                                        },
+                                        "split"
+                                      ]
+                                    },
+                                    "1-2",
+                                    "1"
+                                  ]
+                                },
+                                "Class": "items-center gap-8"
+                              },
+                              "attrs": {
+                                "data-testid": "tab-panel",
+                                "role": "tabpanel"
+                              },
+                              "children": [
+                                {
+                                  "use": "Stack",
+                                  "props": {
+                                    "Gap": "4"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "LucideIcon",
+                                      "props": {
+                                        "Name": {
+                                          "$": "f.icon"
+                                        },
+                                        "Size": 24
+                                      }
+                                    },
+                                    {
+                                      "use": "Title",
+                                      "props": {
+                                        "As": 3,
+                                        "Size": "2xl",
+                                        "Weight": "bold"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "f.title"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "base",
+                                        "Class": "text-muted-foreground"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "f.text"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "organism": "MediaFrame",
+                                  "props": {
+                                    "alt": {
+                                      "$": "f.title"
+                                    },
+                                    "ratio": "4/3"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "index": "i"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    }
+  ]
+}

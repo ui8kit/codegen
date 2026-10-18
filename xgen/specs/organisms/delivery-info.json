@@ -1,0 +1,484 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.delivery-info",
+  "name": "DeliveryInfo",
+  "docs": "How delivery works: the facts as icon cards, then the zones with their time and the order that ships free. Axes: layout (full: facts over zone cards, facts: the facts only, split: the facts beside a list of zones), tone, density.",
+  "records": {
+    "DeliveryLabels": [
+      {
+        "name": "zones",
+        "type": "string"
+      },
+      {
+        "name": "freeFrom",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "lead",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "facts",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true
+    },
+    {
+      "name": "zones",
+      "type": {
+        "ts": "Zone[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "DeliveryLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"full\" | \"facts\" | \"split\""
+      },
+      "default": "full"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "lead": {
+          "$": "lead"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    "grid grid-cols-1 gap-8",
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "split"
+                          ]
+                        },
+                        "items-start md:grid-cols-2",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "when": {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "facts"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Grid",
+                      "props": {
+                        "Cols": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "layout"
+                                },
+                                "split"
+                              ]
+                            },
+                            "1-2",
+                            "1-4"
+                          ]
+                        },
+                        "Class": "gap-4"
+                      },
+                      "attrs": {
+                        "data-testid": "facts"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "facts"
+                          },
+                          "as": "f",
+                          "key": {
+                            "$": "f.id"
+                          },
+                          "do": [
+                            {
+                              "use": "Stack",
+                              "props": {
+                                "Gap": "4",
+                                "Class": "rounded bg-card inset-ring inset-ring-border p-6"
+                              },
+                              "attrs": {
+                                "data-testid": "fact"
+                              },
+                              "children": [
+                                {
+                                  "use": "Box",
+                                  "props": {
+                                    "Class": "flex size-10 shrink-0 items-center justify-center rounded bg-muted"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "LucideIcon",
+                                      "props": {
+                                        "Name": {
+                                          "$": "f.icon"
+                                        },
+                                        "Size": 20
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Stack",
+                                  "props": {
+                                    "Gap": "2"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Weight": "semibold"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "f.title"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Class": "text-muted-foreground"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "f.text"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "ne",
+                        "args": [
+                          {
+                            "$": "layout"
+                          },
+                          "facts"
+                        ]
+                      },
+                      {
+                        "op": "gt",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "zones"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "4",
+                        "Align": "stretch"
+                      },
+                      "children": [
+                        {
+                          "use": "Title",
+                          "props": {
+                            "As": 3,
+                            "Size": "lg",
+                            "Weight": "bold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.zones"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Box",
+                          "props": {
+                            "Class": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "layout"
+                                    },
+                                    "split"
+                                  ]
+                                },
+                                "flex flex-col gap-4",
+                                "grid grid-cols-1 gap-4 md:grid-cols-3"
+                              ]
+                            }
+                          },
+                          "children": [
+                            {
+                              "each": {
+                                "$": "zones"
+                              },
+                              "as": "z",
+                              "key": {
+                                "$": "z.id"
+                              },
+                              "do": [
+                                {
+                                  "use": "Stack",
+                                  "props": {
+                                    "Gap": "2",
+                                    "Class": {
+                                      "op": "cond",
+                                      "args": [
+                                        {
+                                          "op": "eq",
+                                          "args": [
+                                            {
+                                              "$": "layout"
+                                            },
+                                            "split"
+                                          ]
+                                        },
+                                        "border-b border-border pb-4",
+                                        "rounded bg-card inset-ring inset-ring-border p-6"
+                                      ]
+                                    }
+                                  },
+                                  "attrs": {
+                                    "data-testid": "zone"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Group",
+                                      "props": {
+                                        "Gap": "4",
+                                        "Align": "baseline",
+                                        "Justify": "between"
+                                      },
+                                      "children": [
+                                        {
+                                          "use": "Text",
+                                          "props": {
+                                            "Size": "sm",
+                                            "Weight": "semibold"
+                                          },
+                                          "children": [
+                                            {
+                                              "text": {
+                                                "$": "z.name"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "use": "Badge",
+                                          "props": {
+                                            "Variant": "secondary",
+                                            "Size": "default"
+                                          },
+                                          "children": [
+                                            {
+                                              "text": {
+                                                "$": "z.time"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Class": "text-muted-foreground"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "z.area"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Weight": "medium"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "op": "tpl",
+                                            "args": [
+                                              {
+                                                "$": "labels.freeFrom"
+                                              },
+                                              {
+                                                "op": "money",
+                                                "args": [
+                                                  {
+                                                    "$": "z.freeFrom"
+                                                  },
+                                                  {
+                                                    "$": "z.currency"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    },
+    {
+      "from": "ZoneTable",
+      "names": [
+        "Zone"
+      ]
+    }
+  ]
+}

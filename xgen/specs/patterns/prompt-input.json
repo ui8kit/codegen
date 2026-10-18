@@ -1,0 +1,63 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.prompt-input",
+  "name": "PromptInput",
+  "docs": "A prompt box: a growing text area with attachments, a footer and an overlay.",
+  "records": {},
+  "props": [
+    {
+      "name": "placeholder",
+      "type": "string"
+    },
+    {
+      "name": "value",
+      "type": "string"
+    },
+    {
+      "name": "label",
+      "type": "string"
+    }
+  ],
+  "className": true,
+  "slots": [
+    {
+      "name": "attachments",
+      "args": [],
+      "docs": "attached items"
+    },
+    {
+      "name": "footer",
+      "args": [],
+      "docs": "send button and tools"
+    },
+    {
+      "name": "overlay",
+      "args": [],
+      "docs": "suggestions above the box"
+    }
+  ],
+  "events": [
+    {
+      "name": "input",
+      "args": [
+        {
+          "name": "value",
+          "type": "string"
+        }
+      ],
+      "docs": "the text changed"
+    }
+  ],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "a text area that grows with its content and keeps its caret: DOM measurement and focus handling, written by the programmer"
+    },
+    "react": {
+      "portable": false,
+      "reason": "a text area that grows with its content and keeps its caret: DOM measurement and focus handling, written by the programmer"
+    }
+  }
+}

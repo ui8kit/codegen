@@ -1,0 +1,112 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.zones",
+  "name": "Delivery zones",
+  "docs": "Delivery zones and their prices as a table or as cards.",
+  "theme": "commerce",
+  "group": "delivery",
+  "organism": "ZoneTable",
+  "axes": {
+    "layout": [
+      "table",
+      "cards"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "table",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "table",
+      "set": {}
+    },
+    {
+      "id": "cards",
+      "set": {
+        "layout": "cards"
+      }
+    },
+    {
+      "id": "tableMuted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "SectionFrame",
+    "ZoneRows"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@zones"
+    },
+    {
+      "sel": "[data-testid=\"zone-table\"]",
+      "n": 1,
+      "when": {
+        "layout": "table"
+      }
+    },
+    {
+      "sel": "[data-testid=\"zone-table\"]",
+      "n": 0,
+      "when": {
+        "layout": "cards"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "zones",
+      "collection": "zones",
+      "kind": "zone",
+      "record": "Zone",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "area": "metadata.area.value",
+        "price": "metadata.price.value",
+        "freeFrom": "metadata.freeFrom.value",
+        "minOrder": "metadata.minOrder.value",
+        "time": "metadata.time.value",
+        "express": "metadata.express.value",
+        "currency": "metadata.currency.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "zones",
+      "title": {
+        "$": "ui.commerce.zones.title"
+      },
+      "lead": {
+        "$": "ui.commerce.zones.lead"
+      },
+      "zones": {
+        "$": "zones"
+      },
+      "empty": {
+        "$": "ui.empty.zones"
+      },
+      "labels": {
+        "$": "ui.commerce.zones"
+      }
+    }
+  }
+}

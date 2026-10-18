@@ -1,0 +1,408 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.feature-split",
+  "name": "FeatureSplit",
+  "docs": "Features beside a picture. Axes: layout (grid: four plain features in two columns, cards: four features as cards and the actions, stats: two figure cards over three checked rows beside a square picture, metrics: four metric cards and the actions), mediaSide, tone.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "lead",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "badge",
+      "type": "string",
+      "default": "",
+      "docs": "a short pill above the heading"
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 2
+    },
+    {
+      "name": "features",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true
+    },
+    {
+      "name": "stats",
+      "type": {
+        "ts": "Stat[]"
+      },
+      "required": true
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "LinkActions"
+      },
+      "required": true,
+      "docs": "shown in the cards and metrics layouts"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"grid\" | \"cards\" | \"stats\" | \"metrics\""
+      },
+      "default": "grid"
+    },
+    {
+      "name": "mediaSide",
+      "type": {
+        "ts": "\"end\" | \"start\""
+      },
+      "default": "end"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "lead": {
+          "$": "lead"
+        },
+        "heading": {
+          "badge": {
+            "$": "badge"
+          },
+          "level": {
+            "$": "level"
+          }
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "layout": "split",
+        "media": {
+          "show": true,
+          "side": {
+            "$": "mediaSide"
+          }
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "layout"
+                  },
+                  "grid"
+                ]
+              },
+              "then": [
+                {
+                  "when": {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "features"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "FeaturePairs",
+                      "props": {
+                        "features": {
+                          "$": "features"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "layout"
+                  },
+                  "cards"
+                ]
+              },
+              "then": [
+                {
+                  "when": {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "features"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "FeatureCards",
+                      "props": {
+                        "features": {
+                          "$": "features"
+                        },
+                        "cols": "1-2",
+                        "item": "tile"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "layout"
+                  },
+                  "stats"
+                ]
+              },
+              "then": [
+                {
+                  "when": {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "features"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "FeatureStatRows",
+                      "props": {
+                        "features": {
+                          "$": "features"
+                        },
+                        "stats": {
+                          "$": "stats"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "layout"
+                  },
+                  "metrics"
+                ]
+              },
+              "then": [
+                {
+                  "when": {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "stats"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "FeatureMetricCards",
+                      "props": {
+                        "stats": {
+                          "$": "stats"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "layout"
+                      },
+                      "cards"
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "layout"
+                      },
+                      "metrics"
+                    ]
+                  }
+                ]
+              },
+              "then": [
+                {
+                  "organism": "ActionGroup",
+                  "props": {
+                    "primary": {
+                      "$": "actions.cta"
+                    },
+                    "primaryHref": {
+                      "$": "actions.href"
+                    },
+                    "secondary": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "actions.mode"
+                            },
+                            "two"
+                          ]
+                        },
+                        {
+                          "$": "actions.secondary"
+                        },
+                        {
+                          "op": "undef",
+                          "args": []
+                        }
+                      ]
+                    },
+                    "secondaryHref": {
+                      "$": "actions.secondaryHref"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "aside": {
+          "args": [],
+          "do": [
+            {
+              "organism": "MediaFrame",
+              "props": {
+                "alt": {
+                  "$": "title"
+                },
+                "ratio": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "layout"
+                        },
+                        "stats"
+                      ]
+                    },
+                    "1/1",
+                    "4/3"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    },
+    {
+      "from": "StatsBand",
+      "names": [
+        "Stat"
+      ]
+    },
+    {
+      "from": "ErrorPage",
+      "names": [
+        "LinkActions"
+      ]
+    }
+  ]
+}

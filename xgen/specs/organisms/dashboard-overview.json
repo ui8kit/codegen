@@ -1,0 +1,401 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.dashboard-overview",
+  "name": "DashboardOverview",
+  "docs": "The first screen of an app: counters, a chart and recent activity. Axes: layout (split: the chart and the activity side by side, stacked: one below the other), cols (2, 4), tone, density.",
+  "records": {
+    "OverviewChart": [
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "optional": false
+      },
+      {
+        "name": "summary",
+        "type": "string",
+        "optional": false,
+        "docs": "the chart's accessible summary"
+      },
+      {
+        "name": "series",
+        "type": "Point[]",
+        "optional": false,
+        "docs": "the bars"
+      }
+    ],
+    "OverviewActivity": [
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "optional": false
+      },
+      {
+        "name": "events",
+        "type": "Event[]",
+        "optional": false
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "metrics",
+      "type": {
+        "ts": "Metric[]"
+      },
+      "required": true
+    },
+    {
+      "name": "chart",
+      "type": {
+        "record": "OverviewChart"
+      },
+      "required": true
+    },
+    {
+      "name": "activity",
+      "type": {
+        "record": "OverviewActivity"
+      },
+      "required": true
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"split\" | \"stacked\""
+      },
+      "default": "split"
+    },
+    {
+      "name": "cols",
+      "type": {
+        "ts": "\"2\" | \"4\""
+      },
+      "default": "4"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "use": "Stack",
+              "props": {
+                "Gap": "6",
+                "Align": "stretch"
+              },
+              "children": [
+                {
+                  "when": {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "metrics"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Grid",
+                      "props": {
+                        "Cols": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "cols"
+                                },
+                                "2"
+                              ]
+                            },
+                            "1-2",
+                            "1-4"
+                          ]
+                        },
+                        "Class": "gap-4"
+                      },
+                      "attrs": {
+                        "data-testid": "items"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "metrics"
+                          },
+                          "as": "m",
+                          "key": {
+                            "$": "m.id"
+                          },
+                          "do": [
+                            {
+                              "use": "Box",
+                              "props": {},
+                              "attrs": {
+                                "data-testid": "item"
+                              },
+                              "children": [
+                                {
+                                  "organism": "StatTile",
+                                  "props": {
+                                    "label": {
+                                      "$": "m.label"
+                                    },
+                                    "value": {
+                                      "$": "m.value"
+                                    },
+                                    "icon": {
+                                      "$": "m.icon"
+                                    },
+                                    "hint": {
+                                      "$": "m.hint"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Grid",
+                  "props": {
+                    "Cols": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "split"
+                          ]
+                        },
+                        "1-2",
+                        "1"
+                      ]
+                    },
+                    "Class": "items-stretch gap-4"
+                  },
+                  "attrs": {
+                    "data-testid": "panels"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "gt",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "chart.series"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "Panel",
+                          "props": {
+                            "title": {
+                              "$": "chart.title"
+                            },
+                            "description": {
+                              "$": "chart.text"
+                            },
+                            "id": {
+                              "op": "tpl",
+                              "args": [
+                                "{0}-chart",
+                                {
+                                  "$": "id"
+                                }
+                              ]
+                            },
+                            "className": "h-full"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "organism": "BarChart",
+                                  "props": {
+                                    "bars": {
+                                      "$": "chart.series"
+                                    },
+                                    "label": {
+                                      "$": "chart.summary"
+                                    },
+                                    "height": 144
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "when": {
+                        "op": "gt",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "activity.events"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "Panel",
+                          "props": {
+                            "title": {
+                              "$": "activity.title"
+                            },
+                            "description": {
+                              "$": "activity.text"
+                            },
+                            "id": {
+                              "op": "tpl",
+                              "args": [
+                                "{0}-feed",
+                                {
+                                  "$": "id"
+                                }
+                              ]
+                            },
+                            "className": "h-full"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "organism": "Timeline",
+                                  "props": {
+                                    "items": {
+                                      "$": "activity.events"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "MetricRow",
+      "names": [
+        "Metric"
+      ]
+    },
+    {
+      "from": "ChartPanel",
+      "names": [
+        "Point"
+      ]
+    },
+    {
+      "from": "ActivityFeed",
+      "names": [
+        "Event"
+      ]
+    }
+  ]
+}

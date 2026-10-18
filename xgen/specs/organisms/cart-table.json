@@ -1,0 +1,544 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.cart-table",
+  "name": "CartTable",
+  "docs": "The lines of a cart as a table (the table layout of CartList): product, price, quantity, line total and a remove button.",
+  "records": {},
+  "props": [
+    {
+      "name": "lines",
+      "type": {
+        "ts": "CartLine[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "CartLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "media",
+      "type": {
+        "ts": "\"image\" | \"none\""
+      },
+      "default": "image"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "field",
+      "type": "string",
+      "default": "qty",
+      "docs": "prefix of the quantity field names (one name per line: <field>-<line id>)"
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "remove",
+      "args": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "docs": "the remove button of a line was pressed"
+    }
+  ],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": "w-full overflow-x-auto"
+      },
+      "children": [
+        {
+          "use": "Table",
+          "props": {
+            "Class": "w-full text-left text-sm"
+          },
+          "attrs": {
+            "data-testid": "cart-table"
+          },
+          "children": [
+            {
+              "use": "TableCaption",
+              "props": {
+                "Class": "sr-only"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.caption"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "TableHead",
+              "children": [
+                {
+                  "use": "TableRow",
+                  "children": [
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "py-2"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.product"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "hidden py-2 sm:table-cell"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.price"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "py-2"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.qty"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "py-2"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.total"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "py-2"
+                      },
+                      "children": [
+                        {
+                          "use": "Inline",
+                          "props": {
+                            "Class": "sr-only"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.remove"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "use": "TableBody",
+              "children": [
+                {
+                  "each": {
+                    "$": "lines"
+                  },
+                  "as": "line",
+                  "key": {
+                    "$": "line.id"
+                  },
+                  "do": [
+                    {
+                      "use": "TableRow",
+                      "props": {
+                        "Class": "border-t border-border"
+                      },
+                      "attrs": {
+                        "data-testid": "item"
+                      },
+                      "children": [
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": {
+                              "op": "cn",
+                              "args": [
+                                {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "density"
+                                        },
+                                        "compact"
+                                      ]
+                                    },
+                                    "py-2",
+                                    "py-4"
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "children": [
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "4",
+                                "Align": "center"
+                              },
+                              "children": [
+                                {
+                                  "when": {
+                                    "op": "eq",
+                                    "args": [
+                                      {
+                                        "$": "media"
+                                      },
+                                      "image"
+                                    ]
+                                  },
+                                  "then": [
+                                    {
+                                      "organism": "MediaFrame",
+                                      "props": {
+                                        "alt": {
+                                          "$": "line.name"
+                                        },
+                                        "ratio": "1/1",
+                                        "className": "hidden size-14 shrink-0 sm:block"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Stack",
+                                  "props": {
+                                    "Gap": "0"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Weight": "semibold"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "line.name"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "xs",
+                                        "Class": "text-muted-foreground"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "line.variant"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": "hidden sm:table-cell"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "money",
+                                "args": [
+                                  {
+                                    "$": "line.price"
+                                  },
+                                  {
+                                    "$": "line.currency"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": ""
+                          },
+                          "children": [
+                            {
+                              "organism": "NumberField",
+                              "props": {
+                                "value": {
+                                  "op": "str",
+                                  "args": [
+                                    {
+                                      "$": "line.qty"
+                                    }
+                                  ]
+                                },
+                                "name": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-{1}",
+                                    {
+                                      "$": "field"
+                                    },
+                                    {
+                                      "$": "line.id"
+                                    }
+                                  ]
+                                },
+                                "min": "1",
+                                "label": {
+                                  "$": "labels.qty"
+                                },
+                                "decrease": {
+                                  "$": "labels.decrease"
+                                },
+                                "increase": {
+                                  "$": "labels.increase"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": "font-semibold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "money",
+                                "args": [
+                                  {
+                                    "op": "mul",
+                                    "args": [
+                                      {
+                                        "$": "line.price"
+                                      },
+                                      {
+                                        "$": "line.qty"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "$": "line.currency"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": "text-right"
+                          },
+                          "children": [
+                            {
+                              "use": "Button",
+                              "props": {
+                                "Variant": "ghost",
+                                "Size": "sm",
+                                "Layout": "icon",
+                                "AriaLabel": {
+                                  "$": "labels.remove"
+                                }
+                              },
+                              "attrs": {
+                                "data-testid": "remove"
+                              },
+                              "on": {
+                                "click": {
+                                  "call": "emit.remove",
+                                  "args": [
+                                    {
+                                      "$": "line.id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": "x",
+                                    "Size": 16
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "when": {
+        "op": "gt",
+        "args": [
+          {
+            "op": "len",
+            "args": [
+              {
+                "$": "lines"
+              }
+            ]
+          },
+          0
+        ]
+      },
+      "then": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "4",
+            "Align": "center",
+            "Justify": "between",
+            "Class": "mt-4 flex-wrap border-t border-border pt-4"
+          },
+          "attrs": {
+            "data-testid": "cart-footer"
+          },
+          "children": [
+            {
+              "use": "Text",
+              "props": {
+                "Size": "base",
+                "Weight": "bold"
+              },
+              "attrs": {
+                "data-testid": "subtotal"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.subtotal"
+                  }
+                },
+                {
+                  "text": " "
+                },
+                {
+                  "text": {
+                    "op": "money",
+                    "args": [
+                      {
+                        "op": "sumBy",
+                        "args": [
+                          {
+                            "$": "lines"
+                          },
+                          "price",
+                          "qty"
+                        ]
+                      },
+                      {
+                        "op": "firstOf",
+                        "args": [
+                          {
+                            "$": "lines"
+                          },
+                          "currency"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Button",
+              "props": {
+                "Variant": "default",
+                "Size": "default"
+              },
+              "attrs": {
+                "data-testid": "checkout"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.checkout"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "CartList",
+      "names": [
+        "CartLine",
+        "CartLabels"
+      ]
+    }
+  ]
+}

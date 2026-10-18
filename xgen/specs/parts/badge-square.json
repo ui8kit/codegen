@@ -1,0 +1,76 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.badge-square",
+  "name": "BadgeSquare",
+  "docs": "A keyboard hint or counter in a small pill. Colours come from the middle layer (.badge-kbd).",
+  "records": {},
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "ts": "\"sm\" | \"default\""
+      },
+      "docs": "height",
+      "default": "default"
+    }
+  ],
+  "className": true,
+  "children": true,
+  "recipes": {
+    "badgeSquare": "badge-square"
+  },
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Inline",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            {
+              "op": "recipe",
+              "args": [
+                "badgeSquare",
+                "size",
+                {
+                  "$": "size"
+                }
+              ]
+            },
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-slot": "badge-square"
+      },
+      "children": [
+        {
+          "slot": "children"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "examples": [
+    {
+      "id": "size.sm",
+      "props": {
+        "size": "sm"
+      }
+    },
+    {
+      "id": "size.default",
+      "props": {
+        "size": "default"
+      }
+    }
+  ]
+}

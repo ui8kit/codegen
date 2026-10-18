@@ -1,0 +1,3990 @@
+{
+  "collection": "deckitems",
+  "kind": "deck_item",
+  "entries": [
+    {
+      "id": "deck-01-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-01-item-1",
+      "title": "Plan",
+      "metadata": {
+        "deck": {
+          "value": "deck-01"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Map the moments that matter."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-01-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-01-item-2",
+      "title": "Shape",
+      "metadata": {
+        "deck": {
+          "value": "deck-01"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Turn sketches into parts."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-01-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-01-item-3",
+      "title": "Ship",
+      "metadata": {
+        "deck": {
+          "value": "deck-01"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Release in small, sure steps."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-02-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-02-item-1",
+      "title": "Focus",
+      "metadata": {
+        "deck": {
+          "value": "deck-02"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "One screen for one task."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-02-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-02-item-2",
+      "title": "Flow",
+      "metadata": {
+        "deck": {
+          "value": "deck-02"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Hand work over without friction."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-02-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-02-item-3",
+      "title": "Finish",
+      "metadata": {
+        "deck": {
+          "value": "deck-02"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Close loops, not tabs."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-03-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-03-item-1",
+      "title": "Collect",
+      "metadata": {
+        "deck": {
+          "value": "deck-03"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Catch every thought."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-03-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-03-item-2",
+      "title": "Connect",
+      "metadata": {
+        "deck": {
+          "value": "deck-03"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Link what belongs together."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-03-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-03-item-3",
+      "title": "Grow",
+      "metadata": {
+        "deck": {
+          "value": "deck-03"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Let good ideas compound."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-04-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-04-item-1",
+      "title": "Sketch",
+      "metadata": {
+        "deck": {
+          "value": "deck-04"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Start from a blank grid."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-04-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-04-item-2",
+      "title": "Assemble",
+      "metadata": {
+        "deck": {
+          "value": "deck-04"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Snap parts into place."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-04-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-04-item-3",
+      "title": "Launch",
+      "metadata": {
+        "deck": {
+          "value": "deck-04"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Share a link in seconds."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-05-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-05-item-1",
+      "title": "Material",
+      "metadata": {
+        "deck": {
+          "value": "deck-05"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Chosen to age well."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-05-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-05-item-2",
+      "title": "Hand",
+      "metadata": {
+        "deck": {
+          "value": "deck-05"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Finished by a person."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-05-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-05-item-3",
+      "title": "Care",
+      "metadata": {
+        "deck": {
+          "value": "deck-05"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Repaired for life."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-06-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-06-item-1",
+      "title": "Watch",
+      "metadata": {
+        "deck": {
+          "value": "deck-06"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "See changes as they land."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-06-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-06-item-2",
+      "title": "Alert",
+      "metadata": {
+        "deck": {
+          "value": "deck-06"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Know before others ask."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-06-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-06-item-3",
+      "title": "Explain",
+      "metadata": {
+        "deck": {
+          "value": "deck-06"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Find the why in a click."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-07-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-07-item-1",
+      "title": "Sow",
+      "metadata": {
+        "deck": {
+          "value": "deck-07"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Know when to start."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-07-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-07-item-2",
+      "title": "Tend",
+      "metadata": {
+        "deck": {
+          "value": "deck-07"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Water with a plan."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-07-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-07-item-3",
+      "title": "Harvest",
+      "metadata": {
+        "deck": {
+          "value": "deck-07"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Pick at the peak."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-08-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-08-item-1",
+      "title": "Measure",
+      "metadata": {
+        "deck": {
+          "value": "deck-08"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Pick the numbers that matter."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-08-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-08-item-2",
+      "title": "Share",
+      "metadata": {
+        "deck": {
+          "value": "deck-08"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Send one link, not ten files."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-08-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-08-item-3",
+      "title": "Decide",
+      "metadata": {
+        "deck": {
+          "value": "deck-08"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Agree on what the data says."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-09-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-09-item-1",
+      "title": "Private",
+      "metadata": {
+        "deck": {
+          "value": "deck-09"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Only you hold the keys."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-09-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-09-item-2",
+      "title": "Simple",
+      "metadata": {
+        "deck": {
+          "value": "deck-09"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Share with a single tap."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-09-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-09-item-3",
+      "title": "Lasting",
+      "metadata": {
+        "deck": {
+          "value": "deck-09"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Files outlive formats."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-10-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-10-item-1",
+      "title": "Meet",
+      "metadata": {
+        "deck": {
+          "value": "deck-10"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Find people near you."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-10-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-10-item-2",
+      "title": "Plan",
+      "metadata": {
+        "deck": {
+          "value": "deck-10"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Pick a time that works."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-10-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-10-item-3",
+      "title": "Show up",
+      "metadata": {
+        "deck": {
+          "value": "deck-10"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Small groups, real faces."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-11-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-11-item-1",
+      "title": "Clear",
+      "metadata": {
+        "deck": {
+          "value": "deck-11"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Every action in reach."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-11-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-11-item-2",
+      "title": "Quick",
+      "metadata": {
+        "deck": {
+          "value": "deck-11"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Keyboard first, mouse friendly."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-11-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-11-item-3",
+      "title": "Quiet",
+      "metadata": {
+        "deck": {
+          "value": "deck-11"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "No noise, no nags."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-12-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-12-item-1",
+      "title": "Pair",
+      "metadata": {
+        "deck": {
+          "value": "deck-12"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Plan side by side."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-12-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-12-item-2",
+      "title": "Note",
+      "metadata": {
+        "deck": {
+          "value": "deck-12"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Leave short, clear trails."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-12-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-12-item-3",
+      "title": "Sync",
+      "metadata": {
+        "deck": {
+          "value": "deck-12"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Meet less, align more."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-13-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-13-item-1",
+      "title": "Steady",
+      "metadata": {
+        "deck": {
+          "value": "deck-13"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Boring in the best way."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-13-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-13-item-2",
+      "title": "Scaled",
+      "metadata": {
+        "deck": {
+          "value": "deck-13"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Grows when you do."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-13-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-13-item-3",
+      "title": "Visible",
+      "metadata": {
+        "deck": {
+          "value": "deck-13"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Every request on record."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-14-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-14-item-1",
+      "title": "Mix",
+      "metadata": {
+        "deck": {
+          "value": "deck-14"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Blend colours by feel."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-14-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-14-item-2",
+      "title": "Match",
+      "metadata": {
+        "deck": {
+          "value": "deck-14"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Find pairs that sing."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-14-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-14-item-3",
+      "title": "Make",
+      "metadata": {
+        "deck": {
+          "value": "deck-14"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Export to any tool."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-15-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-15-item-1",
+      "title": "Draw",
+      "metadata": {
+        "deck": {
+          "value": "deck-15"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Lines that land where meant."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-15-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-15-item-2",
+      "title": "Snap",
+      "metadata": {
+        "deck": {
+          "value": "deck-15"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "A grid that helps, never fights."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-15-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-15-item-3",
+      "title": "Export",
+      "metadata": {
+        "deck": {
+          "value": "deck-15"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Clean files every time."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-16-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-16-item-1",
+      "title": "Listen",
+      "metadata": {
+        "deck": {
+          "value": "deck-16"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Hear the real problem."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-16-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-16-item-2",
+      "title": "Make",
+      "metadata": {
+        "deck": {
+          "value": "deck-16"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Prototype early and often."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-16-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-16-item-3",
+      "title": "Care",
+      "metadata": {
+        "deck": {
+          "value": "deck-16"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Stay after launch."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-17-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-17-item-1",
+      "title": "Sync",
+      "metadata": {
+        "deck": {
+          "value": "deck-17"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Changes everywhere in seconds."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-17-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-17-item-2",
+      "title": "Offline",
+      "metadata": {
+        "deck": {
+          "value": "deck-17"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Keep working without signal."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-17-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-17-item-3",
+      "title": "Restore",
+      "metadata": {
+        "deck": {
+          "value": "deck-17"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Go back to any day."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-18-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-18-item-1",
+      "title": "Brief",
+      "metadata": {
+        "deck": {
+          "value": "deck-18"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Agree on the goal first."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-18-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-18-item-2",
+      "title": "Review",
+      "metadata": {
+        "deck": {
+          "value": "deck-18"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Comments that point at pixels."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-18-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-18-item-3",
+      "title": "Deliver",
+      "metadata": {
+        "deck": {
+          "value": "deck-18"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Final files, no hunting."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-19-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-19-item-1",
+      "title": "Batch",
+      "metadata": {
+        "deck": {
+          "value": "deck-19"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Updates arrive together."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-19-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-19-item-2",
+      "title": "Focus",
+      "metadata": {
+        "deck": {
+          "value": "deck-19"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Deep work by default."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-19-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-19-item-3",
+      "title": "Review",
+      "metadata": {
+        "deck": {
+          "value": "deck-19"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Catch up in minutes."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-20-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-20-item-1",
+      "title": "Split",
+      "metadata": {
+        "deck": {
+          "value": "deck-20"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Fork an idea in one move."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-20-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-20-item-2",
+      "title": "Compare",
+      "metadata": {
+        "deck": {
+          "value": "deck-20"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Place versions side by side."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-20-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-20-item-3",
+      "title": "Choose",
+      "metadata": {
+        "deck": {
+          "value": "deck-20"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Keep the best, archive the rest."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-21-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-21-item-1",
+      "title": "Outline",
+      "metadata": {
+        "deck": {
+          "value": "deck-21"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Structure before sentences."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-21-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-21-item-2",
+      "title": "Cite",
+      "metadata": {
+        "deck": {
+          "value": "deck-21"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "References that stay linked."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-21-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-21-item-3",
+      "title": "Export",
+      "metadata": {
+        "deck": {
+          "value": "deck-21"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Print ready in one step."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-22-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-22-item-1",
+      "title": "Pick",
+      "metadata": {
+        "deck": {
+          "value": "deck-22"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Choose by mood and time."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-22-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-22-item-2",
+      "title": "Shop",
+      "metadata": {
+        "deck": {
+          "value": "deck-22"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "A list sorted by aisle."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-22-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-22-item-3",
+      "title": "Cook",
+      "metadata": {
+        "deck": {
+          "value": "deck-22"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Steps that fit on one screen."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-23-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-23-item-1",
+      "title": "One",
+      "metadata": {
+        "deck": {
+          "value": "deck-23"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "A single clear job."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-23-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-23-item-2",
+      "title": "Done",
+      "metadata": {
+        "deck": {
+          "value": "deck-23"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Finished, not sprawling."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-23-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-23-item-3",
+      "title": "Kept",
+      "metadata": {
+        "deck": {
+          "value": "deck-23"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Maintained for years."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-24-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-24-item-1",
+      "title": "Route",
+      "metadata": {
+        "deck": {
+          "value": "deck-24"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "The best way, not the fastest."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-24-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-24-item-2",
+      "title": "Share",
+      "metadata": {
+        "deck": {
+          "value": "deck-24"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Seats for friends and neighbours."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-24-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-24-item-3",
+      "title": "Arrive",
+      "metadata": {
+        "deck": {
+          "value": "deck-24"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Live updates for everyone."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-25-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-25-item-1",
+      "title": "Write",
+      "metadata": {
+        "deck": {
+          "value": "deck-25"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Draft in a quiet room."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-25-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-25-item-2",
+      "title": "Publish",
+      "metadata": {
+        "deck": {
+          "value": "deck-25"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Every channel in one click."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-25-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-25-item-3",
+      "title": "Grow",
+      "metadata": {
+        "deck": {
+          "value": "deck-25"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Readers who stay."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-26-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-26-item-1",
+      "title": "Desk",
+      "metadata": {
+        "deck": {
+          "value": "deck-26"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "A place that is yours."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-26-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-26-item-2",
+      "title": "Studio",
+      "metadata": {
+        "deck": {
+          "value": "deck-26"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Doors that close."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-26-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-26-item-3",
+      "title": "Commons",
+      "metadata": {
+        "deck": {
+          "value": "deck-26"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Coffee and good company."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-27-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-27-item-1",
+      "title": "Cache",
+      "metadata": {
+        "deck": {
+          "value": "deck-27"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Close to every visitor."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-27-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-27-item-2",
+      "title": "Trim",
+      "metadata": {
+        "deck": {
+          "value": "deck-27"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Ship only what is used."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-27-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-27-item-3",
+      "title": "Watch",
+      "metadata": {
+        "deck": {
+          "value": "deck-27"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Speed tracked per page."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-28-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-28-item-1",
+      "title": "Explore",
+      "metadata": {
+        "deck": {
+          "value": "deck-28"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Try before you commit."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-28-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-28-item-2",
+      "title": "Learn",
+      "metadata": {
+        "deck": {
+          "value": "deck-28"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Short lessons, real projects."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-28-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-28-item-3",
+      "title": "Grow",
+      "metadata": {
+        "deck": {
+          "value": "deck-28"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Mentors who have done it."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-29-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-29-item-1",
+      "title": "Gather",
+      "metadata": {
+        "deck": {
+          "value": "deck-29"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Pull in every thread."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-29-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-29-item-2",
+      "title": "Weave",
+      "metadata": {
+        "deck": {
+          "value": "deck-29"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "See how parts connect."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-29-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-29-item-3",
+      "title": "Finish",
+      "metadata": {
+        "deck": {
+          "value": "deck-29"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Tie off loose ends."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-30-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-30-item-1",
+      "title": "Wake",
+      "metadata": {
+        "deck": {
+          "value": "deck-30"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Gentle light at sunrise."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-30-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-30-item-2",
+      "title": "Focus",
+      "metadata": {
+        "deck": {
+          "value": "deck-30"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Cool light for deep work."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-30-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-30-item-3",
+      "title": "Rest",
+      "metadata": {
+        "deck": {
+          "value": "deck-30"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Warm light at night."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-31-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-31-item-1",
+      "title": "Tokens",
+      "metadata": {
+        "deck": {
+          "value": "deck-31"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "One set of decisions."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-31-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-31-item-2",
+      "title": "Parts",
+      "metadata": {
+        "deck": {
+          "value": "deck-31"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Built once, used everywhere."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-31-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-31-item-3",
+      "title": "Rules",
+      "metadata": {
+        "deck": {
+          "value": "deck-31"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Patterns that scale."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-32-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-32-item-1",
+      "title": "Arrive",
+      "metadata": {
+        "deck": {
+          "value": "deck-32"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Settle in, no rush."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-32-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-32-item-2",
+      "title": "Wander",
+      "metadata": {
+        "deck": {
+          "value": "deck-32"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Paths only locals know."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-32-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-32-item-3",
+      "title": "Return",
+      "metadata": {
+        "deck": {
+          "value": "deck-32"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Leave a little changed."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-33-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-33-item-1",
+      "title": "Play",
+      "metadata": {
+        "deck": {
+          "value": "deck-33"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Short sessions, big smiles."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-33-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-33-item-2",
+      "title": "Learn",
+      "metadata": {
+        "deck": {
+          "value": "deck-33"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Ideas hidden in play."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-33-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-33-item-3",
+      "title": "Make",
+      "metadata": {
+        "deck": {
+          "value": "deck-33"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Tools to build your own."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-34-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-34-item-1",
+      "title": "Pause",
+      "metadata": {
+        "deck": {
+          "value": "deck-34"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Ten quiet minutes."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-34-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-34-item-2",
+      "title": "Notice",
+      "metadata": {
+        "deck": {
+          "value": "deck-34"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Feel the day settle."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-34-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-34-item-3",
+      "title": "Return",
+      "metadata": {
+        "deck": {
+          "value": "deck-34"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Back with a clear head."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-35-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-35-item-1",
+      "title": "Invoice",
+      "metadata": {
+        "deck": {
+          "value": "deck-35"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Send and get paid faster."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-35-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-35-item-2",
+      "title": "Track",
+      "metadata": {
+        "deck": {
+          "value": "deck-35"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Every cost in its place."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-35-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-35-item-3",
+      "title": "File",
+      "metadata": {
+        "deck": {
+          "value": "deck-35"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Taxes ready on time."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-36-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-36-item-1",
+      "title": "Write",
+      "metadata": {
+        "deck": {
+          "value": "deck-36"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Docs that stay current."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-36-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-36-item-2",
+      "title": "Plan",
+      "metadata": {
+        "deck": {
+          "value": "deck-36"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Goals everyone can see."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-36-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-36-item-3",
+      "title": "Decide",
+      "metadata": {
+        "deck": {
+          "value": "deck-36"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Choices with context."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-37-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-37-item-1",
+      "title": "Watch",
+      "metadata": {
+        "deck": {
+          "value": "deck-37"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Live cams and charts."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-37-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-37-item-2",
+      "title": "Plan",
+      "metadata": {
+        "deck": {
+          "value": "deck-37"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "The best window this week."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-37-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-37-item-3",
+      "title": "Go",
+      "metadata": {
+        "deck": {
+          "value": "deck-37"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Know before you leave."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-38-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-38-item-1",
+      "title": "Upload",
+      "metadata": {
+        "deck": {
+          "value": "deck-38"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Drop in your work."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-38-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-38-item-2",
+      "title": "Arrange",
+      "metadata": {
+        "deck": {
+          "value": "deck-38"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "A grid that adapts."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-38-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-38-item-3",
+      "title": "Share",
+      "metadata": {
+        "deck": {
+          "value": "deck-38"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "One link to send."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-39-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-39-item-1",
+      "title": "Store",
+      "metadata": {
+        "deck": {
+          "value": "deck-39"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Any shape of data."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-39-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-39-item-2",
+      "title": "Query",
+      "metadata": {
+        "deck": {
+          "value": "deck-39"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Plain and fast."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-39-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-39-item-3",
+      "title": "Scale",
+      "metadata": {
+        "deck": {
+          "value": "deck-39"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Without a migration."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-40-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-40-item-1",
+      "title": "Read",
+      "metadata": {
+        "deck": {
+          "value": "deck-40"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Short and thoughtful."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-40-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-40-item-2",
+      "title": "Think",
+      "metadata": {
+        "deck": {
+          "value": "deck-40"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "One idea per issue."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-40-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-40-item-3",
+      "title": "Reply",
+      "metadata": {
+        "deck": {
+          "value": "deck-40"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Letters get answers."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-41-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-41-item-1",
+      "title": "Free shipping",
+      "metadata": {
+        "deck": {
+          "value": "deck-41"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "On orders over 50"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-41-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-41-item-2",
+      "title": "Quality promise",
+      "metadata": {
+        "deck": {
+          "value": "deck-41"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "30-day return policy"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-41-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-41-item-3",
+      "title": "Secure payments",
+      "metadata": {
+        "deck": {
+          "value": "deck-41"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Fully protected"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-41-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-41-item-4",
+      "title": "Friendly support",
+      "metadata": {
+        "deck": {
+          "value": "deck-41"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "We are here to help"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-42-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-42-item-1",
+      "title": "Wide choice",
+      "metadata": {
+        "deck": {
+          "value": "deck-42"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "From compact to roomy"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-42-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-42-item-2",
+      "title": "Fair prices",
+      "metadata": {
+        "deck": {
+          "value": "deck-42"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Clear rates, no extras"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-42-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-42-item-3",
+      "title": "Safe and secure",
+      "metadata": {
+        "deck": {
+          "value": "deck-42"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Insured on every trip"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-42-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-42-item-4",
+      "title": "Flexible plans",
+      "metadata": {
+        "deck": {
+          "value": "deck-42"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "By the hour, day or week"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-43-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-43-item-1",
+      "title": "Choose",
+      "metadata": {
+        "deck": {
+          "value": "deck-43"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Pick from the daily menu"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-43-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-43-item-2",
+      "title": "Confirm",
+      "metadata": {
+        "deck": {
+          "value": "deck-43"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Review your basket"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-43-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-43-item-3",
+      "title": "Enjoy",
+      "metadata": {
+        "deck": {
+          "value": "deck-43"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Hot at your door"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-43-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-43-item-4",
+      "title": "Rate",
+      "metadata": {
+        "deck": {
+          "value": "deck-43"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "Tell us how it went"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-44-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-44-item-1",
+      "title": "Enter the number",
+      "metadata": {
+        "deck": {
+          "value": "deck-44"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Find it on the dashboard or the door frame."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-44-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-44-item-2",
+      "title": "Run the check",
+      "metadata": {
+        "deck": {
+          "value": "deck-44"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "We compare every public record."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-44-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-44-item-3",
+      "title": "Read the report",
+      "metadata": {
+        "deck": {
+          "value": "deck-44"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Get the full history at once."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-44-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-44-item-4",
+      "title": "Decide",
+      "metadata": {
+        "deck": {
+          "value": "deck-44"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "Buy with confidence."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-45-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-45-item-1",
+      "title": "Buy",
+      "metadata": {
+        "deck": {
+          "value": "deck-45"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Find a place to stay for good"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-45-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-45-item-2",
+      "title": "Rent",
+      "metadata": {
+        "deck": {
+          "value": "deck-45"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Flexible terms, clear costs"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-45-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-45-item-3",
+      "title": "Sell",
+      "metadata": {
+        "deck": {
+          "value": "deck-45"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "A fair price, handled well"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-45-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-45-item-4",
+      "title": "Invest",
+      "metadata": {
+        "deck": {
+          "value": "deck-45"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "Grow with steady returns"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-46-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-46-item-1",
+      "title": "Safe and secure",
+      "metadata": {
+        "deck": {
+          "value": "deck-46"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Certified guides and careful planning"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-46-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-46-item-2",
+      "title": "Expert guides",
+      "metadata": {
+        "deck": {
+          "value": "deck-46"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Local people who know the trail"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-46-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-46-item-3",
+      "title": "Mindful travel",
+      "metadata": {
+        "deck": {
+          "value": "deck-46"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Light on the places we visit"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-46-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-46-item-4",
+      "title": "Made for you",
+      "metadata": {
+        "deck": {
+          "value": "deck-46"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "Trips shaped around your pace"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-47-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-47-item-1",
+      "title": "Free shipping",
+      "metadata": {
+        "deck": {
+          "value": "deck-47"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "On orders over 50"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-47-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-47-item-2",
+      "title": "Easy returns",
+      "metadata": {
+        "deck": {
+          "value": "deck-47"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Hassle-free exchange"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-47-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-47-item-3",
+      "title": "Premium quality",
+      "metadata": {
+        "deck": {
+          "value": "deck-47"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Made to last"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-47-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-47-item-4",
+      "title": "Secure payment",
+      "metadata": {
+        "deck": {
+          "value": "deck-47"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "Safe and protected"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-48-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-48-item-1",
+      "title": "Grand touring",
+      "metadata": {
+        "deck": {
+          "value": "deck-48"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Refined comfort for long journeys"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-48-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-48-item-2",
+      "title": "Executive SUV",
+      "metadata": {
+        "deck": {
+          "value": "deck-48"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Space and presence for every day"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-48-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-48-item-3",
+      "title": "Electric performance",
+      "metadata": {
+        "deck": {
+          "value": "deck-48"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Quiet power for a cleaner tomorrow"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-48-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-48-item-4",
+      "title": "City compact",
+      "metadata": {
+        "deck": {
+          "value": "deck-48"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "Easy to park, easy to love"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-49-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-49-item-1",
+      "title": "Effortless elegance",
+      "metadata": {
+        "deck": {
+          "value": "deck-49"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Everyday styles for a brighter you."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-49-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-49-item-2",
+      "title": "Modern essentials",
+      "metadata": {
+        "deck": {
+          "value": "deck-49"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Premium pieces for every occasion."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-49-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-49-item-3",
+      "title": "Free shipping",
+      "metadata": {
+        "deck": {
+          "value": "deck-49"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "On all orders over 99"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-49-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-49-item-4",
+      "title": "Easy returns",
+      "metadata": {
+        "deck": {
+          "value": "deck-49"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "Hassle-free shopping"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-50-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-50-item-1",
+      "title": "Air one",
+      "metadata": {
+        "deck": {
+          "value": "deck-50"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "$149"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-50-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-50-item-2",
+      "title": "Air two",
+      "metadata": {
+        "deck": {
+          "value": "deck-50"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "$129"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-50-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-50-item-3",
+      "title": "Air three",
+      "metadata": {
+        "deck": {
+          "value": "deck-50"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "$135"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-50-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-50-item-4",
+      "title": "Air four",
+      "metadata": {
+        "deck": {
+          "value": "deck-50"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "$119"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-item-1",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-item-1",
+      "title": "Real-time conversion",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 1
+        },
+        "text": {
+          "value": "Live exchange rates, instantly."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-item-2",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-item-2",
+      "title": "Worldwide users",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 2
+        },
+        "text": {
+          "value": "Join people in every region."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-item-3",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-item-3",
+      "title": "Instant transfers",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 3
+        },
+        "text": {
+          "value": "Real-time payments with zero delay."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-item-4",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-item-4",
+      "title": "Smart wallet",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 4
+        },
+        "text": {
+          "value": "Track every transaction in one place."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-item-5",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-item-5",
+      "title": "Virtual cards",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 5
+        },
+        "text": {
+          "value": "Pay bills securely with a few taps."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-item-6",
+      "locale": "en",
+      "kind": "deck_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-item-6",
+      "title": "Clear insights",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 6
+        },
+        "text": {
+          "value": "See where your money goes."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    }
+  ]
+}

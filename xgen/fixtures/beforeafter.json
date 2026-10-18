@@ -1,0 +1,90 @@
+{
+  "collection": "beforeafter",
+  "kind": "point",
+  "entries": [
+    {
+      "id": "point-setup",
+      "locale": "en",
+      "kind": "point",
+      "status": "published",
+      "visibility": "public",
+      "slug": "setup",
+      "title": "Setup",
+      "metadata": {
+        "before": {
+          "value": "Weeks of wiring"
+        },
+        "after": {
+          "value": "One command"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "point-pages",
+      "locale": "en",
+      "kind": "point",
+      "status": "published",
+      "visibility": "public",
+      "slug": "pages",
+      "title": "Pages",
+      "metadata": {
+        "before": {
+          "value": "Copied by hand"
+        },
+        "after": {
+          "value": "Composed from blocks"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "point-themes",
+      "locale": "en",
+      "kind": "point",
+      "status": "published",
+      "visibility": "public",
+      "slug": "themes",
+      "title": "Themes",
+      "metadata": {
+        "before": {
+          "value": "Colors set one by one"
+        },
+        "after": {
+          "value": "Tokens shared by every block"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "point-checks",
+      "locale": "en",
+      "kind": "point",
+      "status": "published",
+      "visibility": "public",
+      "slug": "checks",
+      "title": "Checks",
+      "metadata": {
+        "before": {
+          "value": "Review by eye"
+        },
+        "after": {
+          "value": "Automatic on every build"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    }
+  ]
+}

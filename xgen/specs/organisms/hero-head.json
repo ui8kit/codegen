@@ -1,0 +1,385 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.hero-head",
+  "name": "HeroHead",
+  "docs": "The head row of a hero band: skip link, brand, menu links (the current one carries aria-current), login and a call to action.",
+  "records": {},
+  "props": [
+    {
+      "name": "brand",
+      "type": "string",
+      "docs": "brand word"
+    },
+    {
+      "name": "brandHref",
+      "type": "string",
+      "docs": "the address of the home page; none: the brand is text"
+    },
+    {
+      "name": "links",
+      "type": {
+        "ts": "NavLink[]"
+      },
+      "docs": "menu links"
+    },
+    {
+      "name": "current",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "login",
+      "type": "string"
+    },
+    {
+      "name": "loginHref",
+      "type": "string",
+      "docs": "the address of the login page; none: a button"
+    },
+    {
+      "name": "cta",
+      "type": "string",
+      "docs": "call to action label"
+    },
+    {
+      "name": "href",
+      "type": "string"
+    },
+    {
+      "name": "skip",
+      "type": "string",
+      "docs": "skip link text"
+    },
+    {
+      "name": "navLabel",
+      "type": "string",
+      "docs": "accessible name of the menu"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "header",
+        "Class": {
+          "op": "cn",
+          "args": [
+            "flex w-full flex-wrap items-center justify-between pr-4",
+            {
+              "op": "preset",
+              "args": [
+                "defaults",
+                "hero.head"
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "hero-head",
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "when": {
+            "$": "skip"
+          },
+          "then": [
+            {
+              "use": "LinkPlain",
+              "props": {
+                "Href": "#main-content",
+                "Class": "sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:text-foreground focus:inset-ring focus:inset-ring-border"
+              },
+              "attrs": {
+                "data-testid": "skip-link"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "skip"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "organism": "MenuEntry",
+          "props": {
+            "href": {
+              "$": "brandHref"
+            },
+            "className": {
+              "op": "cn",
+              "args": [
+                {
+                  "op": "preset",
+                  "args": [
+                    "defaults",
+                    "text.small"
+                  ]
+                },
+                "font-medium leading-6 text-background"
+              ]
+            },
+            "testid": "brand"
+          },
+          "slots": {
+            "children": {
+              "args": [],
+              "do": [
+                {
+                  "text": {
+                    "$": "brand"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "when": {
+            "op": "and",
+            "args": [
+              {
+                "$": "links"
+              },
+              {
+                "op": "gt",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "links"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              }
+            ]
+          },
+          "then": [
+            {
+              "organism": "NavBlock",
+              "props": {
+                "label": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "landmarkLabel"
+                    },
+                    {
+                      "op": "uniq",
+                      "args": [
+                        {
+                          "op": "tpl",
+                          "args": [
+                            "{0}, {1}",
+                            {
+                              "$": "navLabel"
+                            },
+                            {
+                              "$": "landmarkLabel"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "$": "navLabel"
+                    }
+                  ]
+                },
+                "testid": "site-nav"
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "8",
+                        "Align": "center",
+                        "Class": "flex-wrap"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "links"
+                          },
+                          "as": "l",
+                          "key": {
+                            "$": "l.id"
+                          },
+                          "do": [
+                            {
+                              "when": {
+                                "$": "l.href"
+                              },
+                              "then": [
+                                {
+                                  "use": "Link",
+                                  "props": {
+                                    "Href": {
+                                      "$": "l.href"
+                                    },
+                                    "Variant": "default",
+                                    "AriaCurrent": {
+                                      "op": "cond",
+                                      "args": [
+                                        {
+                                          "op": "eq",
+                                          "args": [
+                                            {
+                                              "$": "l.id"
+                                            },
+                                            {
+                                              "$": "current"
+                                            }
+                                          ]
+                                        },
+                                        "page",
+                                        {
+                                          "op": "undef",
+                                          "args": []
+                                        }
+                                      ]
+                                    },
+                                    "Class": "text-xs font-medium leading-5 text-background"
+                                  },
+                                  "attrs": {
+                                    "data-testid": "nav-link"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "l.name"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ],
+                              "else": [
+                                {
+                                  "use": "Inline",
+                                  "props": {
+                                    "Class": "text-xs font-medium leading-5 text-background"
+                                  },
+                                  "attrs": {
+                                    "data-testid": "nav-link"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "l.name"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Align": "center"
+          },
+          "children": [
+            {
+              "when": {
+                "$": "login"
+              },
+              "then": [
+                {
+                  "use": "Button",
+                  "props": {
+                    "Href": {
+                      "$": "loginHref"
+                    },
+                    "Variant": "ghost",
+                    "Size": "sm",
+                    "Class": "text-background hover:bg-background/10"
+                  },
+                  "attrs": {
+                    "data-testid": "nav-login"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "login"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "$": "cta"
+              },
+              "then": [
+                {
+                  "use": "Button",
+                  "props": {
+                    "Href": {
+                      "$": "href"
+                    },
+                    "Variant": "secondary",
+                    "Size": "sm"
+                  },
+                  "attrs": {
+                    "data-testid": "header-cta"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "cta"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "frame": true,
+  "typeImports": [
+    {
+      "from": "NavBar",
+      "names": [
+        "NavLink"
+      ]
+    }
+  ]
+}

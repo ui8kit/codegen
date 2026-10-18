@@ -1,0 +1,111 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.steps",
+  "name": "How it works",
+  "docs": "Numbered or icon steps in a row or a column.",
+  "theme": "marketing",
+  "group": "how-it-works",
+  "organism": "StepsList",
+  "axes": {
+    "layout": [
+      "row",
+      "column"
+    ],
+    "marker": [
+      "number",
+      "icon"
+    ],
+    "align": [
+      "start",
+      "center"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "roomy",
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "row",
+    "marker": "number",
+    "align": "start",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "row",
+      "set": {}
+    },
+    {
+      "id": "rowIcons",
+      "set": {
+        "marker": "icon"
+      }
+    },
+    {
+      "id": "column",
+      "set": {
+        "layout": "column"
+      }
+    },
+    {
+      "id": "centered",
+      "set": {
+        "align": "center",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "columnIcons",
+      "set": {
+        "layout": "column",
+        "marker": "icon",
+        "density": "roomy"
+      }
+    },
+    {
+      "id": "compact",
+      "set": {
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "SectionFrame"
+  ],
+  "data": [
+    {
+      "as": "steps",
+      "collection": "steps",
+      "kind": "step",
+      "record": "Step",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "steps",
+      "title": {
+        "$": "ui.marketing.steps.title"
+      },
+      "steps": {
+        "$": "steps"
+      },
+      "empty": {
+        "$": "ui.empty.steps"
+      }
+    }
+  }
+}

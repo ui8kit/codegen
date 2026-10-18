@@ -1,0 +1,5 @@
+{#- Self-test fixture of the rules group, detector block-root (clean): a macro imported with from and used with call is a component. -#}
+{%- from 'ui/block/block.html.j2' import block -%}
+{%- call block({'Tag': 'section'}) -%}
+  {{ ui_text(v_title) }}
+{%- endcall -%}

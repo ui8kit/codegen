@@ -1,0 +1,17 @@
+{#- Self-test fixture of the rules group, detector block-root (clean). -#}
+{%- if ui_t(v_open) %}
+{%- set c_1 -%}
+  {{ ui_text(v_title) }}
+{%- endset -%}
+{{ ui_include('ui/block/block.html.j2', {'p': {'Tag': 'section'}, 'children': c_1}) }}
+{%- elif ui_t(ui_len(v_items)) %}
+{%- set c_2 -%}
+  {{ ui_text(v_title) }}
+{%- endset -%}
+{{ ui_include('ui/block/block.html.j2', {'p': {'Tag': 'aside'}, 'children': c_2}) }}
+{%- else %}
+{%- set c_3 -%}
+  {{ ui_text(v_title) }}
+{%- endset -%}
+{{ ui_include('ui/block/block.html.j2', {'p': {'Tag': 'section'}, 'children': c_3}) }}
+{%- endif %}

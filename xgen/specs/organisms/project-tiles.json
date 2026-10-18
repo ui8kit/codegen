@@ -1,0 +1,484 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.project-tiles",
+  "name": "ProjectTiles",
+  "docs": "The projects of ProjectGrid as tiles: cards (picture, featured badge, category and year, title, summary, tags, two links), compact cards in four columns, captions over the pictures, or a bento where the first project takes a big tile.",
+  "records": {},
+  "props": [
+    {
+      "name": "projects",
+      "type": {
+        "ts": "Project[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "ProjectLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"cards\" | \"compact\" | \"overlay\" | \"bento\" | \"list\""
+      },
+      "default": "cards"
+    }
+  ],
+  "derived": [
+    {
+      "name": "over",
+      "value": {
+        "op": "cond",
+        "args": [
+          {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "overlay"
+            ]
+          },
+          true,
+          {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "bento"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "compact"
+              ]
+            },
+            "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4",
+            "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "items"
+      },
+      "children": [
+        {
+          "each": {
+            "$": "projects"
+          },
+          "as": "p",
+          "key": {
+            "$": "p.id"
+          },
+          "do": [
+            {
+              "organism": "ArticleBlock",
+              "props": {
+                "className": {
+                  "op": "cn",
+                  "args": [
+                    "flex flex-col gap-4",
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "$": "over"
+                        },
+                        "relative",
+                        "rounded bg-card inset-ring inset-ring-border p-4"
+                      ]
+                    },
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "and",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "layout"
+                                },
+                                "bento"
+                              ]
+                            },
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "i"
+                                },
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        "sm:col-span-2 lg:row-span-2",
+                        ""
+                      ]
+                    }
+                  ]
+                },
+                "testid": "item"
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "$": "over"
+                            },
+                            "h-full",
+                            "relative"
+                          ]
+                        }
+                      },
+                      "children": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "p.title"
+                            },
+                            "ratio": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "layout"
+                                    },
+                                    "compact"
+                                  ]
+                                },
+                                "1/1",
+                                {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "$": "over"
+                                    },
+                                    "3/4",
+                                    "4/3"
+                                  ]
+                                }
+                              ]
+                            },
+                            "className": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "$": "over"
+                                },
+                                "h-full",
+                                ""
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "when": {
+                            "op": "and",
+                            "args": [
+                              {
+                                "$": "p.featured"
+                              },
+                              {
+                                "op": "ne",
+                                "args": [
+                                  {
+                                    "$": "layout"
+                                  },
+                                  "compact"
+                                ]
+                              }
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "Badge",
+                              "props": {
+                                "Variant": "default",
+                                "Size": "default",
+                                "Class": "absolute left-4 top-4"
+                              },
+                              "attrs": {
+                                "data-testid": "featured"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "labels.featured"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "2",
+                        "Align": "stretch",
+                        "Class": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "$": "over"
+                            },
+                            "absolute right-4 bottom-4 left-4 rounded bg-background p-4",
+                            ""
+                          ]
+                        }
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "xs",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "tpl",
+                                "args": [
+                                  "{0}, {1}",
+                                  {
+                                    "$": "p.category"
+                                  },
+                                  {
+                                    "$": "p.year"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Title",
+                          "props": {
+                            "As": 3,
+                            "Size": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "layout"
+                                    },
+                                    "compact"
+                                  ]
+                                },
+                                "sm",
+                                "lg"
+                              ]
+                            },
+                            "Weight": "semibold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "p.title"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "ne",
+                            "args": [
+                              {
+                                "$": "layout"
+                              },
+                              "compact"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Size": "sm",
+                                "Class": "text-muted-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "p.summary"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "layout"
+                              },
+                              "cards"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "2",
+                                "Class": "flex-wrap"
+                              },
+                              "children": [
+                                {
+                                  "each": {
+                                    "$": "p.tags"
+                                  },
+                                  "as": "k",
+                                  "key": {
+                                    "$": "k"
+                                  },
+                                  "do": [
+                                    {
+                                      "use": "Badge",
+                                      "props": {
+                                        "Variant": "secondary",
+                                        "Size": "sm"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "k"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "4",
+                                "Class": "pt-2"
+                              },
+                              "children": [
+                                {
+                                  "organism": "MenuEntry",
+                                  "props": {
+                                    "href": {
+                                      "$": "p.href"
+                                    },
+                                    "className": "inline-flex items-center gap-2 text-sm font-medium"
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "text": {
+                                            "$": "labels.case"
+                                          }
+                                        },
+                                        {
+                                          "use": "LucideIcon",
+                                          "props": {
+                                            "Name": "arrow-right",
+                                            "Size": 16
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "organism": "MenuEntry",
+                                  "props": {
+                                    "href": {
+                                      "$": "p.href"
+                                    },
+                                    "className": "inline-flex items-center gap-2 text-sm font-medium"
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "text": {
+                                            "$": "labels.view"
+                                          }
+                                        },
+                                        {
+                                          "use": "LucideIcon",
+                                          "props": {
+                                            "Name": "external-link",
+                                            "Size": 16
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "index": "i"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "ProjectGrid",
+      "names": [
+        "Project",
+        "ProjectLabels"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "defaultScope": "layout",
+  "scopes": [
+    {
+      "name": "controls",
+      "files": [
+        ".ui8px/extract/specs/ui/button.*",
+        ".ui8px/extract/specs/ui/button-plain.*",
+        ".ui8px/extract/specs/ui/badge.*",
+        ".ui8px/extract/specs/ui/iconbadge.*",
+        ".ui8px/extract/specs/ui/checkbox.*",
+        ".ui8px/extract/specs/ui/radio.*",
+        ".ui8px/extract/specs/ui/switch.*",
+        ".ui8px/extract/specs/ui/select.*",
+        ".ui8px/extract/specs/ui/input.*",
+        ".ui8px/extract/specs/ui/textarea.*",
+        ".ui8px/extract/specs/ui/range.*",
+        ".ui8px/extract/specs/ui/label.*",
+        ".ui8px/extract/specs/ui/meter.*",
+        ".ui8px/extract/specs/ui/progress.*",
+        ".ui8px/extract/specs/ui/summary.*",
+        ".ui8px/extract/specs/recipes/badge-square.*",
+        ".ui8px/extract/specs/recipes/icon-tab.*",
+        ".ui8px/extract/specs/recipes/switcher.*",
+        ".ui8px/extract/specs/recipes/switcher-item.*",
+        ".ui8px/extract/specs/recipes/nav-item.*",
+        ".ui8px/extract/specs/recipes/nav-item-content.*",
+        ".ui8px/extract/specs/recipes/file-tree-item.*",
+        ".ui8px/extract/specs/parts/badge-square.*",
+        ".ui8px/extract/specs/parts/pill.*",
+        ".ui8px/extract/specs/parts/search-field.*",
+        ".ui8px/extract/specs/organisms/number-field.*",
+        ".ui8px/extract/specs/patterns/icon-tab.*",
+        ".ui8px/extract/specs/patterns/switcher.*",
+        ".ui8px/extract/specs/patterns/switcher-item.*",
+        ".ui8px/extract/specs/patterns/dropdown-item.*",
+        ".ui8px/extract/specs/patterns/editor-tab.*",
+        ".ui8px/extract/specs/patterns/select-menu.*",
+        ".ui8px/extract/specs/patterns/nav-item.*",
+        ".ui8px/extract/specs/patterns/file-tree-item.*",
+        ".ui8px/extract/specs/ui/icon.*",
+        ".ui8px/extract/specs/patterns/nav-item-row.*",
+        ".ui8px/extract/specs/organisms/search-palette.*"
+      ],
+      "spacing": "control"
+    },
+    {
+      "name": "layout",
+      "files": [
+        ".ui8px/extract/**",
+        "packages/*/ui/src/**",
+        "xgen/**",
+        "apps/**"
+      ],
+      "spacing": "layout"
+    }
+  ]
+}

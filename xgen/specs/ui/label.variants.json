@@ -1,0 +1,7 @@
+{
+  "id": "ui.label",
+  "base": "text-xs font-bold text-foreground",
+  "keys": [],
+  "defaults": {},
+  "byKey": {}
+}

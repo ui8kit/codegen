@@ -1,0 +1,528 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.shopping-cart",
+  "name": "ShoppingCart",
+  "docs": "The cart as a page: the lines as cards (picture, name, variant, price, quantity, line total, remove) with the way back, beside the order summary with a promo code and the free-delivery bar. Static markup. Axes: layout (split: the summary beside the lines, stacked: below them), promo (show, hide), progress (show, hide), tone.",
+  "records": {
+    "ShoppingCartLabels": [
+      {
+        "name": "back",
+        "type": "string"
+      },
+      {
+        "name": "clear",
+        "type": "string"
+      },
+      {
+        "name": "empty",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "lines",
+      "type": {
+        "ts": "CartLine[]"
+      },
+      "required": true
+    },
+    {
+      "name": "rows",
+      "type": {
+        "ts": "SummaryRow[]"
+      },
+      "required": true
+    },
+    {
+      "name": "promos",
+      "type": {
+        "ts": "Promo[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "CartLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "totals",
+      "type": {
+        "ts": "CartSummaryLabels"
+      },
+      "required": true,
+      "docs": "labels of the order summary"
+    },
+    {
+      "name": "actions",
+      "type": {
+        "record": "ShoppingCartLabels"
+      },
+      "required": true,
+      "docs": "labels of the buttons under the lines, and the empty-cart title"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"split\" | \"stacked\""
+      },
+      "default": "split"
+    },
+    {
+      "name": "promo",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "show"
+    },
+    {
+      "name": "progress",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "show"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "layout"
+                        },
+                        "split"
+                      ]
+                    },
+                    "grid grid-cols-1 items-start gap-8 lg:grid-cols-3",
+                    "grid grid-cols-1 gap-8"
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "stretch",
+                    "Class": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "split"
+                          ]
+                        },
+                        "lg:col-span-2",
+                        ""
+                      ]
+                    }
+                  },
+                  "attrs": {
+                    "data-testid": "lines"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "lines"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "EmptyState",
+                          "props": {
+                            "icon": "shopping-cart",
+                            "title": {
+                              "$": "actions.empty"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "each": {
+                        "$": "lines"
+                      },
+                      "as": "line",
+                      "key": {
+                        "$": "line.id"
+                      },
+                      "do": [
+                        {
+                          "use": "Group",
+                          "props": {
+                            "Gap": "4",
+                            "Align": "center",
+                            "Class": "rounded bg-card inset-ring inset-ring-border flex-wrap p-4"
+                          },
+                          "attrs": {
+                            "data-testid": "item"
+                          },
+                          "children": [
+                            {
+                              "organism": "MediaFrame",
+                              "props": {
+                                "alt": {
+                                  "$": "line.name"
+                                },
+                                "ratio": "1/1",
+                                "className": "size-20 shrink-0"
+                              }
+                            },
+                            {
+                              "use": "Stack",
+                              "props": {
+                                "Gap": "0",
+                                "Class": "min-w-40 flex-1"
+                              },
+                              "children": [
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "sm",
+                                    "Weight": "semibold"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "line.name"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "xs",
+                                    "Class": "text-muted-foreground"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "line.variant"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "sm"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "op": "money",
+                                        "args": [
+                                          {
+                                            "$": "line.price"
+                                          },
+                                          {
+                                            "$": "line.currency"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "organism": "NumberField",
+                              "props": {
+                                "value": {
+                                  "op": "str",
+                                  "args": [
+                                    {
+                                      "$": "line.qty"
+                                    }
+                                  ]
+                                },
+                                "name": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-qty-{1}",
+                                    {
+                                      "$": "id"
+                                    },
+                                    {
+                                      "$": "line.id"
+                                    }
+                                  ]
+                                },
+                                "min": "1",
+                                "label": {
+                                  "$": "labels.qty"
+                                },
+                                "decrease": {
+                                  "$": "labels.decrease"
+                                },
+                                "increase": {
+                                  "$": "labels.increase"
+                                }
+                              }
+                            },
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Size": "base",
+                                "Weight": "bold",
+                                "Class": "w-24 text-right"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "op": "money",
+                                    "args": [
+                                      {
+                                        "op": "mul",
+                                        "args": [
+                                          {
+                                            "$": "line.price"
+                                          },
+                                          {
+                                            "$": "line.qty"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "$": "line.currency"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Button",
+                              "props": {
+                                "Variant": "ghost",
+                                "Size": "sm",
+                                "Layout": "icon",
+                                "AriaLabel": {
+                                  "$": "labels.remove"
+                                }
+                              },
+                              "attrs": {
+                                "data-testid": "remove"
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": "trash",
+                                    "Size": 16
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "4",
+                        "Justify": "between",
+                        "Class": "flex-wrap"
+                      },
+                      "children": [
+                        {
+                          "use": "Button",
+                          "props": {
+                            "Variant": "outline",
+                            "Size": "default"
+                          },
+                          "children": [
+                            {
+                              "use": "LucideIcon",
+                              "props": {
+                                "Name": "arrow-left",
+                                "Size": 16
+                              }
+                            },
+                            {
+                              "text": {
+                                "$": "actions.back"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Button",
+                          "props": {
+                            "Variant": "ghost",
+                            "Size": "default"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "actions.clear"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "split"
+                          ]
+                        },
+                        "lg:sticky lg:top-8",
+                        ""
+                      ]
+                    }
+                  },
+                  "attrs": {
+                    "data-testid": "aside"
+                  },
+                  "children": [
+                    {
+                      "organism": "CartSummaryCard",
+                      "props": {
+                        "field": {
+                          "op": "tpl",
+                          "args": [
+                            "{0}-promo",
+                            {
+                              "$": "id"
+                            }
+                          ]
+                        },
+                        "lines": {
+                          "$": "lines"
+                        },
+                        "rows": {
+                          "$": "rows"
+                        },
+                        "promos": {
+                          "$": "promos"
+                        },
+                        "labels": {
+                          "$": "totals"
+                        },
+                        "promo": {
+                          "$": "promo"
+                        },
+                        "progress": {
+                          "$": "progress"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "CartList",
+      "names": [
+        "CartLine",
+        "CartLabels"
+      ]
+    },
+    {
+      "from": "OrderSummary",
+      "names": [
+        "SummaryRow"
+      ]
+    },
+    {
+      "from": "CartSummaryCard",
+      "names": [
+        "Promo",
+        "CartSummaryLabels"
+      ]
+    }
+  ]
+}

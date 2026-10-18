@@ -1,0 +1,103 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.sticky",
+  "name": "Sticky feature list",
+  "docs": "A picture that stays in view beside a list of features. Following the section being read is a port contract (ScrollSpy).",
+  "theme": "marketing",
+  "group": "features",
+  "organism": "FeatureSticky",
+  "axes": {
+    "mediaSide": [
+      "end",
+      "start"
+    ],
+    "item": [
+      "plain",
+      "card"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "mediaSide": "end",
+    "item": "plain",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "end",
+      "set": {}
+    },
+    {
+      "id": "start",
+      "set": {
+        "mediaSide": "start"
+      }
+    },
+    {
+      "id": "card",
+      "set": {
+        "item": "card"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@features"
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 1
+    }
+  ],
+  "data": [
+    {
+      "as": "features",
+      "collection": "features",
+      "kind": "feature",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "sticky",
+      "title": {
+        "$": "ui.vibe.sticky.title"
+      },
+      "features": {
+        "$": "features"
+      },
+      "empty": {
+        "$": "ui.empty.features"
+      },
+      "active": "feature-clear"
+    }
+  }
+}

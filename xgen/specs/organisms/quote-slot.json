@@ -1,0 +1,91 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.quote-slot",
+  "name": "QuoteSlot",
+  "docs": "One quote of QuoteSplit: a QuoteCard with the author's picture and the stars, as a card or a plain figure, in a box that can span grid rows.",
+  "records": {},
+  "props": [
+    {
+      "name": "q",
+      "type": {
+        "ts": "Quote"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "QuoteLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "kind",
+      "type": {
+        "ts": "\"card\" | \"plain\""
+      },
+      "default": "card"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"grid\" | \"single\" | \"stack\""
+      },
+      "default": "grid"
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "$": "className"
+        }
+      },
+      "attrs": {
+        "data-testid": "quote"
+      },
+      "children": [
+        {
+          "organism": "QuoteCard",
+          "props": {
+            "q": {
+              "$": "q"
+            },
+            "labels": {
+              "$": "labels"
+            },
+            "item": {
+              "kind": {
+                "$": "kind"
+              },
+              "avatar": "image",
+              "rating": "show",
+              "mark": "none"
+            },
+            "layout": {
+              "$": "layout"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "TestimonialGrid",
+      "names": [
+        "Quote",
+        "QuoteLabels"
+      ]
+    }
+  ]
+}

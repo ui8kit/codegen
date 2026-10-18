@@ -1,0 +1,135 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.checkout-submit",
+  "name": "CheckoutSubmit",
+  "docs": "The end of the checkout form: the consent checkbox, the submit button and the legal line.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "docs": "id of the form block (the checkbox id is <id>-consent)"
+    },
+    {
+      "name": "consent",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "submit",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "legal",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "4",
+        "Align": "start"
+      },
+      "children": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Align": "center",
+            "Class": {
+              "op": "cn",
+              "args": [
+                "w-fit",
+                ""
+              ]
+            }
+          },
+          "children": [
+            {
+              "use": "Checkbox",
+              "props": {
+                "Name": "consent"
+              },
+              "attrs": {
+                "id": {
+                  "op": "tpl",
+                  "args": [
+                    "{0}-consent",
+                    {
+                      "$": "id"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "use": "Label",
+              "props": {
+                "HTMLFor": {
+                  "op": "tpl",
+                  "args": [
+                    "{0}-consent",
+                    {
+                      "$": "id"
+                    }
+                  ]
+                },
+                "Class": "text-sm"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "consent"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Button",
+          "props": {
+            "Variant": "default",
+            "Size": "lg",
+            "Type": "submit"
+          },
+          "attrs": {
+            "data-testid": "submit"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "submit"
+              }
+            }
+          ]
+        },
+        {
+          "use": "Text",
+          "props": {
+            "Size": "xs",
+            "Class": "text-muted-foreground"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "legal"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

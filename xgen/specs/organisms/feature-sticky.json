@@ -1,0 +1,344 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.feature-sticky",
+  "name": "FeatureSticky",
+  "docs": "A picture that stays in view while the feature descriptions scroll beside it. `active` marks the description that is current (the page follows the scroll; that is a port contract). Axes: mediaSide (end, start), item (plain, card), tone, density.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "features",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true
+    },
+    {
+      "name": "empty",
+      "type": "string",
+      "default": "",
+      "docs": "the text of the empty state (no records), from the dictionary"
+    },
+    {
+      "name": "active",
+      "type": "string",
+      "default": "",
+      "docs": "id of the current feature"
+    },
+    {
+      "name": "mediaSide",
+      "type": {
+        "ts": "\"end\" | \"start\""
+      },
+      "default": "end"
+    },
+    {
+      "name": "item",
+      "type": {
+        "ts": "\"plain\" | \"card\""
+      },
+      "default": "plain"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "features"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "layout-grid",
+                    "title": {
+                      "$": "empty"
+                    }
+                  }
+                }
+              ],
+              "else": [
+                {
+                  "use": "Grid",
+                  "props": {
+                    "Cols": "1-2",
+                    "Class": "items-start gap-8"
+                  },
+                  "attrs": {
+                    "data-testid": "sticky"
+                  },
+                  "children": [
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "md:sticky md:top-8",
+                            {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "mediaSide"
+                                    },
+                                    "start"
+                                  ]
+                                },
+                                "md:order-first",
+                                "md:order-last"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "attrs": {
+                        "data-testid": "sticky-media"
+                      },
+                      "children": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "title"
+                            },
+                            "ratio": "4/3"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "density"
+                                },
+                                "compact"
+                              ]
+                            },
+                            "4",
+                            "8"
+                          ]
+                        },
+                        "Align": "stretch"
+                      },
+                      "attrs": {
+                        "data-testid": "items"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "features"
+                          },
+                          "as": "f",
+                          "key": {
+                            "$": "f.id"
+                          },
+                          "do": [
+                            {
+                              "use": "Stack",
+                              "props": {
+                                "Gap": "2",
+                                "Class": {
+                                  "op": "cn",
+                                  "args": [
+                                    {
+                                      "op": "cond",
+                                      "args": [
+                                        {
+                                          "op": "eq",
+                                          "args": [
+                                            {
+                                              "$": "item"
+                                            },
+                                            "card"
+                                          ]
+                                        },
+                                        "rounded bg-card inset-ring inset-ring-border p-6",
+                                        "py-4"
+                                      ]
+                                    },
+                                    {
+                                      "op": "cond",
+                                      "args": [
+                                        {
+                                          "op": "eq",
+                                          "args": [
+                                            {
+                                              "$": "f.id"
+                                            },
+                                            {
+                                              "$": "active"
+                                            }
+                                          ]
+                                        },
+                                        "inset-ring inset-ring-foreground",
+                                        ""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "attrs": {
+                                "data-testid": "item",
+                                "aria-current": {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "f.id"
+                                        },
+                                        {
+                                          "$": "active"
+                                        }
+                                      ]
+                                    },
+                                    "true",
+                                    {
+                                      "op": "undef",
+                                      "args": []
+                                    }
+                                  ]
+                                }
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": {
+                                      "$": "f.icon"
+                                    },
+                                    "Size": 24
+                                  }
+                                },
+                                {
+                                  "use": "Title",
+                                  "props": {
+                                    "As": 3,
+                                    "Size": "2xl",
+                                    "Weight": "bold"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "f.title"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "base",
+                                    "Class": "text-muted-foreground"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "f.text"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    }
+  ]
+}

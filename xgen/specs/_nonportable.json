@@ -1,0 +1,94 @@
+{
+  "$comment": "What does not carry over between Svelte, React and Vue, and the explicit contract that replaces it. `xgen check` fails when a marker shows up in generated code of its runtime.",
+  "features": [
+    {
+      "id": "svelte.context",
+      "runtime": "svelte",
+      "feature": "setContext / getContext: values handed down the tree without props",
+      "markers": [
+        "setContext",
+        "getContext"
+      ],
+      "replacement": "An explicit port. The URL is a UrlPort object created by the app and passed to the screen as the `url` prop (a rune store in Svelte, useSyncExternalStore in React); nothing is read from context."
+    },
+    {
+      "id": "svelte.bindable",
+      "runtime": "svelte",
+      "feature": "$bindable: two-way binding of a prop",
+      "markers": [
+        "$bindable",
+        "bind:"
+      ],
+      "replacement": "One-way `value` plus an event prop (`oninput` / `onChange`): the parent owns the state and the URL is the state."
+    },
+    {
+      "id": "svelte.attach",
+      "runtime": "svelte",
+      "feature": "{@attach}: behaviour attached to an element",
+      "markers": [
+        "{@attach"
+      ],
+      "replacement": "Not used. Behaviour lives in portable TypeScript (xgen/runtimes/core/assets/app) and in event props."
+    },
+    {
+      "id": "react.context",
+      "runtime": "react",
+      "feature": "createContext / useContext",
+      "markers": [
+        "createContext",
+        "useContext"
+      ],
+      "replacement": "The same explicit `url` prop as in Svelte."
+    },
+    {
+      "id": "svelte.html",
+      "runtime": "svelte",
+      "feature": "{@html}: an HTML string rendered as markup",
+      "markers": [
+        "{@html"
+      ],
+      "replacement": "Not used. Markup is built from kit primitives by the emitter; text comes from content as text (rules 02 and 06, group rules)."
+    },
+    {
+      "id": "react.html",
+      "runtime": "react",
+      "feature": "dangerouslySetInnerHTML: an HTML string rendered as markup",
+      "markers": [
+        "dangerouslySetInnerHTML"
+      ],
+      "replacement": "Not used. Markup is built from kit primitives by the emitter; text comes from content as text (rules 02 and 06, group rules)."
+    },
+    {
+      "id": "vue.html",
+      "runtime": "vue",
+      "feature": "v-html: an HTML string rendered as markup",
+      "markers": [
+        "v-html"
+      ],
+      "replacement": "Not used. Markup is built from kit primitives by the emitter; text comes from content as text (rules 02 and 06, group rules)."
+    },
+    {
+      "id": "vue.model",
+      "runtime": "vue",
+      "feature": "v-model: two-way binding of a prop",
+      "markers": [
+        "v-model"
+      ],
+      "replacement": "One-way `:value` plus an event prop (`@input`), as in Svelte and React: the parent owns the state and the URL is the state."
+    },
+    {
+      "id": "slot.arguments",
+      "runtime": "both",
+      "feature": "Slot with arguments: a Svelte snippet (`{#snippet footer(plan)}`) versus a React render function (`footer={(plan) => ...}`)",
+      "markers": [],
+      "replacement": "The organism spec declares slots with typed arguments (slots[].args). Each emitter prints its own form; the screen spec fills the slot with the same nodes, and the argument names are part of the contract."
+    },
+    {
+      "id": "children.snippet",
+      "runtime": "both",
+      "feature": "Children: a Svelte Snippet versus React ReactNode, and `asChild` (React only)",
+      "markers": [],
+      "replacement": "Bricks declare a `children` slot. `asChild` is a React-only option of the brick and is listed in its runtimeNotes; screens never use it."
+    }
+  ]
+}

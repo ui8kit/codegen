@@ -1,0 +1,509 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xgen.dev/schemas/composed.schema.json",
+  "title": "xgen composed screen: a page that is a list of block uses",
+  "type": "object",
+  "$defs": {
+    "value": {
+      "anyOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "$": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "$"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string"
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/value"
+              }
+            }
+          },
+          "required": [
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "a group of named values (a grouped prop)",
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "$"
+                ]
+              },
+              {
+                "required": [
+                  "op"
+                ]
+              }
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/value"
+          }
+        }
+      ]
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "specVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "kind": {
+      "const": "composed"
+    },
+    "docs": {
+      "type": "string"
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "area"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "frame": {
+      "type": "object",
+      "properties": {
+        "before": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "block": {
+                "type": "string"
+              },
+              "variant": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/value"
+                }
+              }
+            },
+            "required": [
+              "block"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "after": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "block": {
+                "type": "string"
+              },
+              "variant": {
+                "type": "string"
+              },
+              "props": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/value"
+                }
+              }
+            },
+            "required": [
+              "block"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "before",
+        "after"
+      ],
+      "additionalProperties": false
+    },
+    "areas": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "block": {
+              "type": "string"
+            },
+            "variant": {
+              "type": "string"
+            },
+            "props": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/value"
+              }
+            }
+          },
+          "required": [
+            "block"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "gallery": {
+      "type": "boolean"
+    },
+    "catalog": {
+      "type": "object",
+      "description": "the catalog: sections of categories (each a list of blocks, all their variants or the named ones) and full pages made of blocks",
+      "properties": {
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]*$"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9-]*$"
+                    },
+                    "entries": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "block": {
+                            "type": "string"
+                          },
+                          "variants": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 1
+                          }
+                        },
+                        "required": [
+                          "block"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "entries"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "id",
+              "categories"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]*$"
+              },
+              "uses": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "block": {
+                      "type": "string"
+                    },
+                    "variant": {
+                      "type": "string"
+                    },
+                    "props": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "$ref": "#/$defs/value"
+                      }
+                    }
+                  },
+                  "required": [
+                    "block"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "id",
+              "uses"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "sections",
+        "pages"
+      ],
+      "additionalProperties": false
+    },
+    "skins": {
+      "type": "object",
+      "description": "the Skins screen: tiles for the skins (data-skin values, default first), Google fonts with Latin and Cyrillic, and corner radii",
+      "properties": {
+        "skins": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        },
+        "fonts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]*$"
+              },
+              "family": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9 ]+$"
+              }
+            },
+            "required": [
+              "id",
+              "family"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "radii": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]*$"
+              },
+              "value": {
+                "type": "string",
+                "pattern": "^[0-9.]+(px|rem)$"
+              }
+            },
+            "required": [
+              "id",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "skins",
+        "fonts",
+        "radii"
+      ],
+      "additionalProperties": false
+    },
+    "chunks": {
+      "type": "boolean",
+      "description": "every area is its own page file next to the screen; the screen keeps the routes and the frame"
+    },
+    "requireH1": {
+      "type": "boolean"
+    },
+    "nameLandmarks": {
+      "type": "boolean"
+    },
+    "nav": {
+      "type": "boolean"
+    },
+    "menu": {
+      "type": "array",
+      "description": "The menu of the screen: the links of its navigation bar, in order. Every path is a route of the screen; titleKey is a key of the dictionary.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]*$"
+          },
+          "titleKey": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*(\\.[A-Za-z0-9]+)+$"
+          },
+          "icon": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "path",
+          "titleKey"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "portable": {
+      "type": "object",
+      "properties": {
+        "svelte": {
+          "oneOf": [
+            {
+              "const": true
+            },
+            {
+              "type": "object",
+              "properties": {
+                "portable": {
+                  "const": false
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 8
+                }
+              },
+              "required": [
+                "portable",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "react": {
+          "oneOf": [
+            {
+              "const": true
+            },
+            {
+              "type": "object",
+              "properties": {
+                "portable": {
+                  "const": false
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 8
+                }
+              },
+              "required": [
+                "portable",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "vue": {
+          "oneOf": [
+            {
+              "const": true
+            },
+            {
+              "type": "object",
+              "properties": {
+                "portable": {
+                  "const": false
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 8
+                }
+              },
+              "required": [
+                "portable",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "svelte",
+        "react"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "specVersion",
+    "id",
+    "name",
+    "kind",
+    "docs",
+    "routes",
+    "frame",
+    "areas",
+    "portable"
+  ],
+  "additionalProperties": false
+}

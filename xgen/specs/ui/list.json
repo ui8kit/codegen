@@ -1,0 +1,221 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.list",
+  "tier": "brick",
+  "dir": "list",
+  "docs": "List renders semantic ul, ol, dl, or menu lists with ListItem children.",
+  "variants": {
+    "list": "list.variants.json"
+  },
+  "parts": [
+    {
+      "name": "List",
+      "docs": "List renders a list container (ul, ol, dl, or menu).",
+      "recipeId": "list",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Tag",
+          "type": "string",
+          "cva": false,
+          "docs": "ul, ol, dl, or menu"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "resolved",
+          "fromProp": "Tag",
+          "fallback": "ul",
+          "group": "List"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "ul",
+          "(List)"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "ListItem",
+      "docs": "ListItem renders one li with optional value attribute.",
+      "recipeId": "list",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Tag",
+          "type": "string",
+          "cva": false,
+          "docs": "li, dt, or dd; defaults to li"
+        },
+        {
+          "name": "Value",
+          "type": "int",
+          "cva": false,
+          "docs": "optional li value for ordered contexts"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "resolved",
+          "fromProp": "Tag",
+          "fallback": "li",
+          "group": "ListItem"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "value",
+            "expr": {
+              "kind": "intToString",
+              "expr": {
+                "kind": "prop",
+                "name": "Value"
+              }
+            },
+            "when": {
+              "kind": "and",
+              "exprs": [
+                {
+                  "kind": "isSet",
+                  "expr": {
+                    "kind": "prop",
+                    "name": "Value"
+                  }
+                },
+                {
+                  "kind": "eq",
+                  "left": {
+                    "kind": "resolvedTag"
+                  },
+                  "right": {
+                    "kind": "lit",
+                    "value": "li"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "li",
+          "(ListItem)"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    }
+  ],
+  "examples": [
+    {
+      "id": "tag.dl",
+      "props": {
+        "Class": "grid grid-cols-[auto_1fr] gap-x-4 gap-y-2",
+        "Tag": "dl"
+      }
+    },
+    {
+      "id": "tag.ol",
+      "props": {
+        "Class": "list-decimal pl-4",
+        "Tag": "ol"
+      }
+    },
+    {
+      "id": "tag.ul",
+      "props": {
+        "Class": "gap-2",
+        "Tag": "ul"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

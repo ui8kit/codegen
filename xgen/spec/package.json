@@ -1,0 +1,21 @@
+{
+  "name": "@ui8kit/xgen-spec",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Spec loader: reads xgen/specs, validates and normalizes them into the typed brick model (props, render tree, recipes) and runs the canonical renderer.",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@ui8kit/xgen-schema": "workspace:*",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.7.0"
+  },
+  "scripts": {
+    "test": "bun test"
+  }
+}

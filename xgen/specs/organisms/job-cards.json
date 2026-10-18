@@ -1,0 +1,616 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.job-cards",
+  "name": "JobCards",
+  "docs": "The jobs of JobBoard as cards in two columns (title, department, place, type, optional salary, posted, apply) or as a table.",
+  "records": {},
+  "props": [
+    {
+      "name": "jobs",
+      "type": {
+        "ts": "Job[]"
+      },
+      "required": true
+    },
+    {
+      "name": "departments",
+      "type": {
+        "ts": "Department[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "JobLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"grid\" | \"grouped\" | \"table\""
+      },
+      "default": "grid"
+    },
+    {
+      "name": "salary",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "hide"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "layout"
+          },
+          "table"
+        ]
+      },
+      "then": [
+        {
+          "use": "Box",
+          "props": {
+            "Class": "w-full overflow-x-auto rounded inset-ring inset-ring-border"
+          },
+          "children": [
+            {
+              "use": "Table",
+              "props": {
+                "Class": "w-full text-left text-sm"
+              },
+              "attrs": {
+                "data-testid": "job-table"
+              },
+              "children": [
+                {
+                  "use": "TableCaption",
+                  "props": {
+                    "Class": "sr-only"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "labels.caption"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "TableHead",
+                  "props": {
+                    "Class": "bg-muted"
+                  },
+                  "children": [
+                    {
+                      "use": "TableRow",
+                      "children": [
+                        {
+                          "use": "TableHeadCell",
+                          "props": {
+                            "Scope": "col",
+                            "Class": "px-4 py-2"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.role"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableHeadCell",
+                          "props": {
+                            "Scope": "col",
+                            "Class": "hidden py-2 md:table-cell"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.team"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableHeadCell",
+                          "props": {
+                            "Scope": "col",
+                            "Class": "hidden py-2 sm:table-cell"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.location"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableHeadCell",
+                          "props": {
+                            "Scope": "col",
+                            "Class": "py-2"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "labels.type"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "salary"
+                              },
+                              "show"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "TableHeadCell",
+                              "props": {
+                                "Scope": "col",
+                                "Class": "hidden py-2 md:table-cell"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "labels.salary"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableHeadCell",
+                          "props": {
+                            "Scope": "col",
+                            "Class": "py-2 pr-4"
+                          },
+                          "children": [
+                            {
+                              "use": "Inline",
+                              "props": {
+                                "Class": "sr-only"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "labels.apply"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "TableBody",
+                  "children": [
+                    {
+                      "each": {
+                        "$": "jobs"
+                      },
+                      "as": "j",
+                      "key": {
+                        "$": "j.id"
+                      },
+                      "do": [
+                        {
+                          "use": "TableRow",
+                          "props": {
+                            "Class": "border-t border-border"
+                          },
+                          "attrs": {
+                            "data-testid": "item"
+                          },
+                          "children": [
+                            {
+                              "use": "TableCell",
+                              "props": {
+                                "Class": "px-4 py-4 font-medium"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "j.title"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "use": "TableCell",
+                              "props": {
+                                "Class": "hidden md:table-cell"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "op": "firstOf",
+                                    "args": [
+                                      {
+                                        "op": "where",
+                                        "args": [
+                                          {
+                                            "$": "departments"
+                                          },
+                                          "id",
+                                          {
+                                            "$": "j.dept"
+                                          }
+                                        ]
+                                      },
+                                      "name"
+                                    ]
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "use": "TableCell",
+                              "props": {
+                                "Class": "hidden sm:table-cell"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "j.location"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "use": "TableCell",
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "j.type"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "when": {
+                                "op": "eq",
+                                "args": [
+                                  {
+                                    "$": "salary"
+                                  },
+                                  "show"
+                                ]
+                              },
+                              "then": [
+                                {
+                                  "use": "TableCell",
+                                  "props": {
+                                    "Class": "hidden md:table-cell"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "j.salary"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "use": "TableCell",
+                              "props": {
+                                "Class": "pr-4 text-right"
+                              },
+                              "children": [
+                                {
+                                  "organism": "MenuEntry",
+                                  "props": {
+                                    "href": {
+                                      "$": "j.href"
+                                    },
+                                    "className": "font-medium"
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "text": {
+                                            "$": "labels.apply"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "use": "Grid",
+          "props": {
+            "Cols": "1-2",
+            "Class": "gap-4"
+          },
+          "attrs": {
+            "data-testid": "items"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "jobs"
+              },
+              "as": "j",
+              "key": {
+                "$": "j.id"
+              },
+              "do": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "4",
+                    "Class": "rounded bg-card inset-ring inset-ring-border p-6"
+                  },
+                  "attrs": {
+                    "data-testid": "item"
+                  },
+                  "children": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "2"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "lg",
+                            "Weight": "semibold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "j.title"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Group",
+                          "props": {
+                            "Gap": "4",
+                            "Class": "flex-wrap text-sm text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "2",
+                                "Align": "center"
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": "briefcase",
+                                    "Size": 16
+                                  }
+                                },
+                                {
+                                  "use": "Inline",
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "j.type"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "2",
+                                "Align": "center"
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": "map-pin",
+                                    "Size": 16
+                                  }
+                                },
+                                {
+                                  "use": "Inline",
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "j.location"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "2",
+                                "Align": "center"
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": "calendar",
+                                    "Size": 16
+                                  }
+                                },
+                                {
+                                  "use": "Inline",
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "j.posted"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "salary"
+                          },
+                          "show"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "base",
+                            "Weight": "semibold"
+                          },
+                          "attrs": {
+                            "data-testid": "salary"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "j.salary"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "4",
+                        "Align": "center",
+                        "Justify": "between",
+                        "Class": "mt-auto"
+                      },
+                      "children": [
+                        {
+                          "use": "Badge",
+                          "props": {
+                            "Variant": "secondary",
+                            "Size": "default"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "firstOf",
+                                "args": [
+                                  {
+                                    "op": "where",
+                                    "args": [
+                                      {
+                                        "$": "departments"
+                                      },
+                                      "id",
+                                      {
+                                        "$": "j.dept"
+                                      }
+                                    ]
+                                  },
+                                  "name"
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "organism": "MenuEntry",
+                          "props": {
+                            "href": {
+                              "$": "j.href"
+                            },
+                            "className": "inline-flex items-center gap-2 text-sm font-medium"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "text": {
+                                    "$": "labels.apply"
+                                  }
+                                },
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": "arrow-right",
+                                    "Size": 16
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "JobBoard",
+      "names": [
+        "Job",
+        "Department",
+        "JobLabels"
+      ]
+    }
+  ]
+}

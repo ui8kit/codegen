@@ -1,0 +1,5 @@
+{#- Self-test fixture of the rules group, detector raw-native-tag (violating). -#}
+{%- set c_9 -%}
+  <div class="p-4">{{ ui_text(v_title) }}</div>
+{%- endset -%}
+{{ ui_include('ui/block/block.html.j2', {'p': {'Tag': 'section'}, 'children': c_9}) }}

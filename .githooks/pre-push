@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Pre-push gate (tracked). Enable once per clone: git config core.hooksPath .githooks   (or: bun run hooks:install)
+#   1. bun run check: xgen check, every group, the rules group included (fast, no build of the hosts)
+#   2. packages/tooling/bin/audit.sh: no private/, shots/, .fig, design-kit assets, secrets or server addresses in the pushed commits
+# The full gate is bun run check:all; run it before a release.
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+bun run check
+bash packages/tooling/bin/audit.sh

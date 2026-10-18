@@ -1,0 +1,108 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.smartbox",
+  "name": "Smartbox",
+  "docs": "A browser-like address bar: back, forward, the address and reload.",
+  "records": {
+    "SmartboxLabels": [
+      {
+        "name": "group",
+        "type": "string"
+      },
+      {
+        "name": "back",
+        "type": "string"
+      },
+      {
+        "name": "forward",
+        "type": "string"
+      },
+      {
+        "name": "address",
+        "type": "string"
+      },
+      {
+        "name": "reload",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "url",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "SmartboxLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "width",
+      "type": {
+        "ts": "\"400\" | \"auto\""
+      },
+      "docs": "frame width",
+      "default": "auto"
+    }
+  ],
+  "className": true,
+  "recipes": {
+    "smartbox": "smartbox"
+  },
+  "slots": [
+    {
+      "name": "site",
+      "args": [],
+      "docs": "site icon or title"
+    }
+  ],
+  "events": [
+    {
+      "name": "navigate",
+      "args": [
+        {
+          "name": "url",
+          "type": "string"
+        }
+      ],
+      "docs": "an address was entered"
+    },
+    {
+      "name": "reload",
+      "args": [],
+      "docs": "reload was pressed"
+    }
+  ],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "an address input with navigation history; the history and the key handling are application logic behind the navigate and reload events"
+    },
+    "react": {
+      "portable": false,
+      "reason": "an address input with navigation history; the history and the key handling are application logic behind the navigate and reload events"
+    }
+  },
+  "examples": [
+    {
+      "id": "width.400",
+      "props": {
+        "url": "https://example.com",
+        "width": "400"
+      }
+    },
+    {
+      "id": "width.auto",
+      "props": {
+        "url": "https://example.com",
+        "width": "auto"
+      }
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.box",
+  "tier": "brick",
+  "dir": "box",
+  "docs": "Box is a generic layout wrapper for internal sections.\nNot for top-level landmarks — use Block for page regions.",
+  "variants": {
+    "box": "box.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Box",
+      "docs": "Box renders a div layout wrapper.",
+      "recipeId": "box",
+      "asChild": true,
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Tag",
+          "type": "string",
+          "cva": false,
+          "docs": "div only. Use Block for landmarks (aside, section, header, nav)."
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "resolved",
+          "fromProp": "Tag",
+          "fallback": "div",
+          "group": "BoxAllowed"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div",
+          "(BoxAllowed)"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    }
+  ],
+  "examples": [
+    {
+      "id": "tag.default",
+      "props": {
+        "Tag": "div"
+      }
+    },
+    {
+      "id": "class.padded",
+      "props": {
+        "Class": "p-4 rounded border border-border"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

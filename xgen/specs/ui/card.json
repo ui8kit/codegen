@@ -1,0 +1,431 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.card",
+  "tier": "brick",
+  "dir": "card",
+  "docs": "Card groups related content in one bordered surface.\nCard uses header, content, and footer slots.\nFor semantic root elements (section, article), use CardClasses on a manual wrapper.",
+  "variants": {
+    "card": "card.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Card",
+      "docs": "Card renders the bordered surface wrapper.",
+      "recipeId": "card",
+      "asChild": true,
+      "classes": {
+        "recipe": {
+          "variant": "Variant"
+        }
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Variant",
+          "type": "string",
+          "cva": true,
+          "docs": "surface: default, muted, ghost, compact"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "div"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "static",
+            "name": "data-slot",
+            "value": "card"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [
+        {
+          "name": "data-slot",
+          "kind": "static",
+          "value": "card"
+        }
+      ],
+      "tokens": [
+        "--border",
+        "--card",
+        "--card-foreground",
+        "--muted",
+        "--primary"
+      ]
+    },
+    {
+      "name": "CardHeader",
+      "docs": "CardHeader renders the top slot.",
+      "classes": {
+        "staticBase": "grid auto-rows-min items-start gap-2"
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "div"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "CardTitle",
+      "docs": "CardTitle renders heading text at the As level (default h2).",
+      "classes": {
+        "staticBase": "font-semibold leading-none"
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "As",
+          "type": "int",
+          "cva": false,
+          "enumValues": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "goType": "uiutils.HeadingLevel",
+          "docs": "maps to h1-h6 (default h2)"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "heading",
+          "fromProp": "As"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "CardDescription",
+      "docs": "CardDescription renders a muted subtitle in a p element.",
+      "classes": {
+        "staticBase": "text-sm text-muted-foreground"
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "p"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "p"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "CardContent",
+      "docs": "CardContent renders the padded main body slot.",
+      "classes": {
+        "staticBase": ""
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "div"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "CardFooter",
+      "docs": "CardFooter renders the bottom action slot.",
+      "classes": {
+        "staticBase": "flex items-center"
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "div"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    }
+  ],
+  "examples": [],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

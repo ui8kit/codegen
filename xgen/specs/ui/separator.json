@@ -1,0 +1,164 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.separator",
+  "tier": "brick",
+  "dir": "separator",
+  "docs": "Separator renders a semantic or decorative hr.",
+  "variants": {
+    "separator": "separator.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Separator",
+      "docs": "Separator renders hr with optional decorative semantics.",
+      "recipeId": "separator",
+      "classes": {
+        "recipe": {
+          "orientation": "Orientation",
+          "variant": "Variant"
+        }
+      },
+      "props": [
+        {
+          "name": "Variant",
+          "type": "string",
+          "cva": true,
+          "docs": "sets appearance preset"
+        },
+        {
+          "name": "Orientation",
+          "type": "string",
+          "cva": true,
+          "cvaKey": "orientation",
+          "docs": "horizontal or vertical"
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Decorative",
+          "type": "bool",
+          "cva": false,
+          "docs": "hides the rule from assistive technology"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "hr"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "role",
+            "expr": {
+              "kind": "lit",
+              "value": "presentation"
+            },
+            "when": {
+              "kind": "prop",
+              "name": "Decorative"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "aria-hidden",
+            "expr": {
+              "kind": "lit",
+              "value": "true"
+            },
+            "when": {
+              "kind": "prop",
+              "name": "Decorative"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "aria-orientation",
+            "expr": {
+              "kind": "lit",
+              "value": "vertical"
+            },
+            "when": {
+              "kind": "eq",
+              "left": {
+                "kind": "prop",
+                "name": "Orientation"
+              },
+              "right": {
+                "kind": "lit",
+                "value": "vertical"
+              }
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [],
+        "void": true
+      },
+      "slots": [],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "hr"
+        ],
+        "roles": [],
+        "aria": [
+          {
+            "name": "aria-hidden",
+            "kind": "expr"
+          },
+          {
+            "name": "aria-orientation",
+            "kind": "expr"
+          },
+          {
+            "name": "role",
+            "kind": "expr"
+          }
+        ],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [
+        "--border",
+        "--foreground",
+        "--muted"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "orientation.vertical",
+      "props": {
+        "Decorative": true,
+        "Orientation": "vertical"
+      }
+    },
+    {
+      "id": "variant.default",
+      "props": {
+        "Variant": "default"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

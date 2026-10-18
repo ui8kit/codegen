@@ -1,0 +1,143 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.logo-sidebar",
+  "name": "LogoSidebar",
+  "docs": "The brand row of a sidebar: a mark and the product name on the left, trailing actions on the right. The variant picks the padding (recipe).",
+  "records": {},
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "ts": "\"chat\" | \"creator\""
+      },
+      "docs": "padding of the row",
+      "default": "chat"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "docs": "product name",
+      "required": true
+    }
+  ],
+  "className": true,
+  "recipes": {
+    "logoSidebar": "logo-sidebar"
+  },
+  "slots": [
+    {
+      "name": "mark",
+      "args": [],
+      "docs": "the logo mark"
+    },
+    {
+      "name": "actions",
+      "args": [],
+      "docs": "trailing actions"
+    }
+  ],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            {
+              "op": "recipe",
+              "args": [
+                "logoSidebar",
+                "variant",
+                {
+                  "$": "variant"
+                }
+              ]
+            },
+            "in-data-[nav=collapsed]:w-full in-data-[nav=collapsed]:justify-center in-data-[nav=collapsed]:p-0",
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-slot": "logo-sidebar"
+      },
+      "children": [
+        {
+          "use": "Inline",
+          "props": {
+            "Class": "flex items-center gap-4"
+          },
+          "attrs": {
+            "data-slot": "logo-sidebar-brand"
+          },
+          "children": [
+            {
+              "slot": "mark"
+            },
+            {
+              "use": "Inline",
+              "props": {
+                "Class": "text-sm font-bold text-foreground in-data-[nav=collapsed]:hidden"
+              },
+              "attrs": {
+                "data-slot": "logo-sidebar-name"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "name"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "when": {
+            "$": "actions"
+          },
+          "then": [
+            {
+              "use": "Inline",
+              "props": {
+                "Class": "flex items-center gap-2 in-data-[nav=collapsed]:hidden"
+              },
+              "attrs": {
+                "data-slot": "logo-sidebar-actions"
+              },
+              "children": [
+                {
+                  "slot": "actions"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "examples": [
+    {
+      "id": "variant.chat",
+      "props": {
+        "name": "App",
+        "variant": "chat"
+      }
+    },
+    {
+      "id": "variant.creator",
+      "props": {
+        "name": "App",
+        "variant": "creator"
+      }
+    }
+  ]
+}

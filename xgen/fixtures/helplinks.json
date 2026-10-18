@@ -1,0 +1,90 @@
+{
+  "collection": "helplinks",
+  "kind": "menu_item",
+  "entries": [
+    {
+      "id": "helplink-help",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "help",
+      "title": "Help center",
+      "metadata": {
+        "location": {
+          "value": "help"
+        },
+        "icon": {
+          "value": "circle-question-mark"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-03T09:00:00Z",
+      "published_at": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "helplink-status",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "status",
+      "title": "System status",
+      "metadata": {
+        "location": {
+          "value": "help"
+        },
+        "icon": {
+          "value": "circle-check"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-05T09:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "helplink-privacy",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "privacy",
+      "title": "Privacy",
+      "metadata": {
+        "location": {
+          "value": "help"
+        },
+        "icon": {
+          "value": "lock"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T10:00:00Z"
+    },
+    {
+      "id": "helplink-terms",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "terms",
+      "title": "Terms",
+      "metadata": {
+        "location": {
+          "value": "help"
+        },
+        "icon": {
+          "value": "file-text"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-08T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T10:00:00Z"
+    }
+  ]
+}

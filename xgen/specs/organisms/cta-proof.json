@@ -1,0 +1,330 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.cta-proof",
+  "name": "CtaProof",
+  "docs": "A call to action with proof: a badge, the heading, a lead, the proof, one or two actions and an optional note. Axes: layout (center: everything centred, the proof above the actions; split: beside a picture), proof (logos, features, stats, rows, zones), mediaSide, tone.",
+  "records": {
+    "CtaContent": [
+      {
+        "name": "logos",
+        "type": "Logo[]"
+      },
+      {
+        "name": "features",
+        "type": "Feature[]"
+      },
+      {
+        "name": "stats",
+        "type": "Stat[]"
+      },
+      {
+        "name": "zones",
+        "type": "Zone[]"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "lead",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "badge",
+      "type": "string",
+      "default": "",
+      "docs": "a short pill above the heading"
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "LinkActions"
+      },
+      "required": true
+    },
+    {
+      "name": "content",
+      "type": {
+        "record": "CtaContent"
+      },
+      "required": true
+    },
+    {
+      "name": "note",
+      "type": "string",
+      "default": "",
+      "docs": "a small line under the actions"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"center\" | \"split\""
+      },
+      "default": "center"
+    },
+    {
+      "name": "proof",
+      "type": {
+        "ts": "\"logos\" | \"features\" | \"stats\" | \"rows\" | \"zones\""
+      },
+      "default": "stats"
+    },
+    {
+      "name": "mediaSide",
+      "type": {
+        "ts": "\"end\" | \"start\""
+      },
+      "default": "end"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "lead": {
+          "$": "lead"
+        },
+        "heading": {
+          "badge": {
+            "$": "badge"
+          }
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "align": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "center"
+              ]
+            },
+            "center",
+            "start"
+          ]
+        },
+        "layout": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "center"
+              ]
+            },
+            "stack",
+            "split"
+          ]
+        },
+        "media": {
+          "show": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "split"
+            ]
+          },
+          "side": {
+            "$": "mediaSide"
+          }
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "organism": "CtaProofItems",
+              "props": {
+                "content": {
+                  "$": "content"
+                },
+                "proof": {
+                  "$": "proof"
+                },
+                "center": {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "layout"
+                    },
+                    "center"
+                  ]
+                }
+              }
+            },
+            {
+              "organism": "ActionGroup",
+              "props": {
+                "primary": {
+                  "$": "actions.cta"
+                },
+                "primaryHref": {
+                  "$": "actions.href"
+                },
+                "secondary": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "actions.mode"
+                        },
+                        "two"
+                      ]
+                    },
+                    {
+                      "$": "actions.secondary"
+                    },
+                    {
+                      "op": "undef",
+                      "args": []
+                    }
+                  ]
+                },
+                "secondaryHref": {
+                  "$": "actions.secondaryHref"
+                },
+                "align": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "layout"
+                        },
+                        "center"
+                      ]
+                    },
+                    "center",
+                    "start"
+                  ]
+                }
+              }
+            },
+            {
+              "when": {
+                "$": "note"
+              },
+              "then": [
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "xs",
+                    "Class": "text-muted-foreground"
+                  },
+                  "attrs": {
+                    "data-testid": "cta-note"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "note"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "aside": {
+          "args": [],
+          "do": [
+            {
+              "organism": "MediaFrame",
+              "props": {
+                "alt": {
+                  "$": "title"
+                },
+                "ratio": "4/3"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "LogoCloud",
+      "names": [
+        "Logo"
+      ]
+    },
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    },
+    {
+      "from": "StatsBand",
+      "names": [
+        "Stat"
+      ]
+    },
+    {
+      "from": "ZoneTable",
+      "names": [
+        "Zone"
+      ]
+    },
+    {
+      "from": "ErrorPage",
+      "names": [
+        "LinkActions"
+      ]
+    }
+  ]
+}

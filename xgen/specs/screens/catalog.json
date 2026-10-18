@@ -1,0 +1,1156 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.catalog",
+  "name": "CatalogScreen",
+  "kind": "composed",
+  "docs": "The catalog: the blocks of the kit by section and category (Marketing, Content, Promo, Support, Commerce, App and dashboard), one page per category with every variant of its blocks, and whole pages composed of blocks. Built from the catalog tree and the blocks.",
+  "routes": [],
+  "frame": {
+    "before": [],
+    "after": []
+  },
+  "areas": {},
+  "catalog": {
+    "sections": [
+      {
+        "id": "marketing",
+        "categories": [
+          {
+            "id": "marketing-navigation",
+            "entries": [
+              {
+                "block": "header"
+              },
+              {
+                "block": "navbar"
+              },
+              {
+                "block": "megamenu"
+              }
+            ]
+          },
+          {
+            "id": "marketing-hero",
+            "entries": [
+              {
+                "block": "hero"
+              }
+            ]
+          },
+          {
+            "id": "marketing-hero-split",
+            "entries": [
+              {
+                "block": "herosplit"
+              }
+            ]
+          },
+          {
+            "id": "marketing-page-head",
+            "entries": [
+              {
+                "block": "pagehead"
+              }
+            ]
+          },
+          {
+            "id": "marketing-page-trail",
+            "entries": [
+              {
+                "block": "pagetrail"
+              }
+            ]
+          },
+          {
+            "id": "marketing-features",
+            "entries": [
+              {
+                "block": "features"
+              },
+              {
+                "block": "iconwall"
+              },
+              {
+                "block": "beforeafter"
+              }
+            ]
+          },
+          {
+            "id": "marketing-features-split",
+            "entries": [
+              {
+                "block": "featuresplit"
+              }
+            ]
+          },
+          {
+            "id": "marketing-feature-cards",
+            "entries": [
+              {
+                "block": "featureshowcase"
+              }
+            ]
+          },
+          {
+            "id": "marketing-media-list",
+            "entries": [
+              {
+                "block": "medialist"
+              }
+            ]
+          },
+          {
+            "id": "marketing-showcases",
+            "entries": [
+              {
+                "block": "bento"
+              },
+              {
+                "block": "featuretabs"
+              },
+              {
+                "block": "accordion"
+              },
+              {
+                "block": "sticky"
+              }
+            ]
+          },
+          {
+            "id": "marketing-how-it-works",
+            "entries": [
+              {
+                "block": "steps"
+              }
+            ]
+          },
+          {
+            "id": "marketing-proof",
+            "entries": [
+              {
+                "block": "logos"
+              },
+              {
+                "block": "proof"
+              },
+              {
+                "block": "videos"
+              }
+            ]
+          },
+          {
+            "id": "marketing-stats",
+            "entries": [
+              {
+                "block": "stats"
+              }
+            ]
+          },
+          {
+            "id": "marketing-testimonials",
+            "entries": [
+              {
+                "block": "testimonials"
+              }
+            ]
+          },
+          {
+            "id": "marketing-testimonials-split",
+            "entries": [
+              {
+                "block": "quotesplit"
+              }
+            ]
+          },
+          {
+            "id": "marketing-pricing",
+            "entries": [
+              {
+                "block": "pricing"
+              },
+              {
+                "block": "plan"
+              }
+            ]
+          },
+          {
+            "id": "marketing-pricing-tools",
+            "entries": [
+              {
+                "block": "compare"
+              },
+              {
+                "block": "credits"
+              },
+              {
+                "block": "usage"
+              }
+            ]
+          },
+          {
+            "id": "marketing-faq",
+            "entries": [
+              {
+                "block": "faq"
+              },
+              {
+                "block": "faqsplit"
+              }
+            ]
+          },
+          {
+            "id": "marketing-cta",
+            "entries": [
+              {
+                "block": "cta"
+              }
+            ]
+          },
+          {
+            "id": "marketing-cta-proof",
+            "entries": [
+              {
+                "block": "ctaproof"
+              }
+            ]
+          },
+          {
+            "id": "marketing-team",
+            "entries": [
+              {
+                "block": "team"
+              }
+            ]
+          },
+          {
+            "id": "marketing-about",
+            "entries": [
+              {
+                "block": "about"
+              },
+              {
+                "block": "aboutme"
+              }
+            ]
+          },
+          {
+            "id": "marketing-portfolio",
+            "entries": [
+              {
+                "block": "projects"
+              }
+            ]
+          },
+          {
+            "id": "marketing-careers",
+            "entries": [
+              {
+                "block": "jobs"
+              }
+            ]
+          },
+          {
+            "id": "marketing-gallery",
+            "entries": [
+              {
+                "block": "photos"
+              },
+              {
+                "block": "templates"
+              }
+            ]
+          },
+          {
+            "id": "marketing-footer",
+            "entries": [
+              {
+                "block": "footer"
+              },
+              {
+                "block": "sitemap"
+              }
+            ]
+          },
+          {
+            "id": "marketing-footer-split",
+            "entries": [
+              {
+                "block": "footersplit"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "content",
+        "categories": [
+          {
+            "id": "content-blog",
+            "entries": [
+              {
+                "block": "posts"
+              }
+            ]
+          },
+          {
+            "id": "content-post-showcase",
+            "entries": [
+              {
+                "block": "postshowcase"
+              }
+            ]
+          },
+          {
+            "id": "content-post-header",
+            "entries": [
+              {
+                "block": "postheader"
+              }
+            ]
+          },
+          {
+            "id": "content-post-header-split",
+            "entries": [
+              {
+                "block": "postsplit"
+              }
+            ]
+          },
+          {
+            "id": "content-article",
+            "entries": [
+              {
+                "block": "article"
+              }
+            ]
+          },
+          {
+            "id": "content-timeline",
+            "entries": [
+              {
+                "block": "timeline"
+              }
+            ]
+          },
+          {
+            "id": "content-story-tabs",
+            "entries": [
+              {
+                "block": "storytabs"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "promo",
+        "categories": [
+          {
+            "id": "promo-banners",
+            "entries": [
+              {
+                "block": "announcement"
+              },
+              {
+                "block": "cookie"
+              }
+            ]
+          },
+          {
+            "id": "promo-newsletter",
+            "entries": [
+              {
+                "block": "newsletter"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "support",
+        "categories": [
+          {
+            "id": "support-contact",
+            "entries": [
+              {
+                "block": "contact"
+              },
+              {
+                "block": "channels"
+              }
+            ]
+          },
+          {
+            "id": "support-states",
+            "entries": [
+              {
+                "block": "errorpage"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "commerce",
+        "categories": [
+          {
+            "id": "commerce-storefront",
+            "entries": [
+              {
+                "block": "hero",
+                "variants": [
+                  "shop"
+                ]
+              },
+              {
+                "block": "storehero"
+              },
+              {
+                "block": "usp"
+              }
+            ]
+          },
+          {
+            "id": "commerce-categories",
+            "entries": [
+              {
+                "block": "categories"
+              }
+            ]
+          },
+          {
+            "id": "commerce-products",
+            "entries": [
+              {
+                "block": "products"
+              }
+            ]
+          },
+          {
+            "id": "commerce-product",
+            "entries": [
+              {
+                "block": "product"
+              },
+              {
+                "block": "productinfo"
+              },
+              {
+                "block": "reviews"
+              }
+            ]
+          },
+          {
+            "id": "commerce-cart",
+            "entries": [
+              {
+                "block": "cart"
+              },
+              {
+                "block": "cartpage"
+              },
+              {
+                "block": "cartdrawer"
+              }
+            ]
+          },
+          {
+            "id": "commerce-checkout",
+            "entries": [
+              {
+                "block": "checkout"
+              },
+              {
+                "block": "summary"
+              },
+              {
+                "block": "stepper",
+                "variants": [
+                  "horizontal"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "commerce-delivery",
+            "entries": [
+              {
+                "block": "delivery"
+              },
+              {
+                "block": "zones"
+              },
+              {
+                "block": "slots"
+              },
+              {
+                "block": "locations"
+              }
+            ]
+          },
+          {
+            "id": "commerce-orders",
+            "entries": [
+              {
+                "block": "orders"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "app",
+        "categories": [
+          {
+            "id": "app-shell",
+            "entries": [
+              {
+                "block": "shell"
+              },
+              {
+                "block": "sidenav"
+              },
+              {
+                "block": "bottomnav"
+              }
+            ]
+          },
+          {
+            "id": "app-dashboard-shells",
+            "entries": [
+              {
+                "block": "dashshell"
+              }
+            ]
+          },
+          {
+            "id": "app-widgets",
+            "entries": [
+              {
+                "block": "metrics"
+              },
+              {
+                "block": "chart"
+              },
+              {
+                "block": "activity"
+              }
+            ]
+          },
+          {
+            "id": "app-boards",
+            "entries": [
+              {
+                "block": "overview"
+              },
+              {
+                "block": "kanban"
+              }
+            ]
+          },
+          {
+            "id": "app-states",
+            "entries": [
+              {
+                "block": "empty"
+              },
+              {
+                "block": "skeleton"
+              }
+            ]
+          },
+          {
+            "id": "app-auth",
+            "entries": [
+              {
+                "block": "auth"
+              },
+              {
+                "block": "wizard"
+              }
+            ]
+          },
+          {
+            "id": "app-auth-pages",
+            "entries": [
+              {
+                "block": "authpage"
+              }
+            ]
+          },
+          {
+            "id": "app-settings",
+            "entries": [
+              {
+                "block": "profile"
+              }
+            ]
+          },
+          {
+            "id": "app-onboarding",
+            "entries": [
+              {
+                "block": "checklist"
+              },
+              {
+                "block": "stepper"
+              }
+            ]
+          },
+          {
+            "id": "app-guidance",
+            "entries": [
+              {
+                "block": "tour"
+              },
+              {
+                "block": "videomodal"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "pages": [
+      {
+        "id": "saas-landing",
+        "uses": [
+          {
+            "block": "navbar",
+            "variant": "inline"
+          },
+          {
+            "block": "hero",
+            "variant": "saas",
+            "props": {
+              "level": 1
+            }
+          },
+          {
+            "block": "logos",
+            "variant": "row"
+          },
+          {
+            "block": "features",
+            "variant": "grid"
+          },
+          {
+            "block": "sticky",
+            "variant": "end"
+          },
+          {
+            "block": "stats",
+            "variant": "icons"
+          },
+          {
+            "block": "testimonials",
+            "variant": "grid3"
+          },
+          {
+            "block": "pricing",
+            "variant": "grid"
+          },
+          {
+            "block": "faq",
+            "variant": "list"
+          },
+          {
+            "block": "cta",
+            "variant": "card"
+          },
+          {
+            "block": "sitemap",
+            "variant": "columns"
+          }
+        ]
+      },
+      {
+        "id": "company",
+        "uses": [
+          {
+            "block": "navbar",
+            "variant": "inline"
+          },
+          {
+            "block": "pagehead",
+            "variant": "center",
+            "props": {
+              "title": {
+                "$": "ui.company.pages.companyTitle"
+              },
+              "text": {
+                "$": "ui.company.pages.companyLead"
+              },
+              "cta": ""
+            }
+          },
+          {
+            "block": "about",
+            "variant": "split"
+          },
+          {
+            "block": "timeline",
+            "variant": "split"
+          },
+          {
+            "block": "team",
+            "variant": "cards4"
+          },
+          {
+            "block": "photos",
+            "variant": "mosaic"
+          },
+          {
+            "block": "jobs",
+            "variant": "grouped"
+          },
+          {
+            "block": "cta",
+            "variant": "card"
+          },
+          {
+            "block": "sitemap",
+            "variant": "columns"
+          }
+        ]
+      },
+      {
+        "id": "portfolio",
+        "uses": [
+          {
+            "block": "navbar",
+            "variant": "inline"
+          },
+          {
+            "block": "aboutme",
+            "variant": "facts",
+            "props": {
+              "level": 1
+            }
+          },
+          {
+            "block": "projects",
+            "variant": "cards"
+          },
+          {
+            "block": "photos",
+            "variant": "masonry"
+          },
+          {
+            "block": "testimonials",
+            "variant": "grid3"
+          },
+          {
+            "block": "cta",
+            "variant": "card"
+          },
+          {
+            "block": "sitemap",
+            "variant": "columns"
+          }
+        ]
+      },
+      {
+        "id": "store-home",
+        "uses": [
+          {
+            "block": "announcement",
+            "variant": "shop"
+          },
+          {
+            "block": "navbar",
+            "variant": "search"
+          },
+          {
+            "block": "storehero",
+            "variant": "overlay",
+            "props": {
+              "level": 1
+            }
+          },
+          {
+            "block": "categories",
+            "variant": "tiles"
+          },
+          {
+            "block": "products",
+            "variant": "grid4",
+            "props": {
+              "title": {
+                "$": "ui.commerce.pages.bestsellers"
+              }
+            }
+          },
+          {
+            "block": "products",
+            "variant": "rail",
+            "props": {
+              "id": "deals",
+              "title": {
+                "$": "ui.commerce.rail.title"
+              }
+            }
+          },
+          {
+            "block": "usp",
+            "variant": "cards"
+          },
+          {
+            "block": "cta",
+            "variant": "shop"
+          },
+          {
+            "block": "sitemap",
+            "variant": "columns"
+          }
+        ]
+      },
+      {
+        "id": "store-home-2",
+        "uses": [
+          {
+            "block": "navbar",
+            "variant": "inline"
+          },
+          {
+            "block": "storehero",
+            "variant": "backdrop",
+            "props": {
+              "level": 1
+            }
+          },
+          {
+            "block": "usp",
+            "variant": "strip"
+          },
+          {
+            "block": "products",
+            "variant": "grid3"
+          },
+          {
+            "block": "delivery",
+            "variant": "full"
+          },
+          {
+            "block": "locations",
+            "variant": "map"
+          },
+          {
+            "block": "sitemap",
+            "variant": "columns"
+          }
+        ]
+      },
+      {
+        "id": "store-catalog",
+        "uses": [
+          {
+            "block": "navbar",
+            "variant": "search"
+          },
+          {
+            "block": "pagehead",
+            "variant": "start",
+            "props": {
+              "title": {
+                "$": "ui.commerce.pages.catalogTitle"
+              },
+              "text": {
+                "$": "ui.commerce.pages.catalogLead"
+              },
+              "cta": ""
+            }
+          },
+          {
+            "block": "categories",
+            "variant": "toolbar"
+          },
+          {
+            "block": "products",
+            "variant": "catalog"
+          },
+          {
+            "block": "usp",
+            "variant": "bar"
+          },
+          {
+            "block": "sitemap",
+            "variant": "columns"
+          }
+        ]
+      },
+      {
+        "id": "product-detail",
+        "uses": [
+          {
+            "block": "navbar",
+            "variant": "search"
+          },
+          {
+            "block": "product",
+            "variant": "split"
+          },
+          {
+            "block": "productinfo",
+            "variant": "split"
+          },
+          {
+            "block": "reviews",
+            "variant": "grid"
+          },
+          {
+            "block": "products",
+            "variant": "railCompact",
+            "props": {
+              "title": {
+                "$": "ui.commerce.pages.related"
+              }
+            }
+          },
+          {
+            "block": "sitemap",
+            "variant": "columns"
+          }
+        ]
+      },
+      {
+        "id": "cart",
+        "uses": [
+          {
+            "block": "navbar",
+            "variant": "search"
+          },
+          {
+            "block": "pagehead",
+            "variant": "start",
+            "props": {
+              "title": {
+                "$": "ui.commerce.cartPage.title"
+              },
+              "text": {
+                "$": "ui.commerce.pages.cartLead"
+              },
+              "cta": ""
+            }
+          },
+          {
+            "block": "cartpage",
+            "variant": "split",
+            "props": {
+              "title": {
+                "$": "ui.commerce.cart.caption"
+              }
+            }
+          },
+          {
+            "block": "products",
+            "variant": "railCompact",
+            "props": {
+              "title": {
+                "$": "ui.commerce.pages.related"
+              }
+            }
+          },
+          {
+            "block": "sitemap",
+            "variant": "columns"
+          }
+        ]
+      },
+      {
+        "id": "checkout",
+        "uses": [
+          {
+            "block": "navbar",
+            "variant": "search"
+          },
+          {
+            "block": "pagehead",
+            "variant": "start",
+            "props": {
+              "title": {
+                "$": "ui.commerce.checkout.title"
+              },
+              "text": {
+                "$": "ui.commerce.pages.checkoutLead"
+              },
+              "cta": ""
+            }
+          },
+          {
+            "block": "checkout",
+            "variant": "cards",
+            "props": {
+              "title": ""
+            }
+          },
+          {
+            "block": "sitemap",
+            "variant": "compact"
+          }
+        ]
+      },
+      {
+        "id": "shell-classic",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "classic",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-inset",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "inset",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-rail",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "rail",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-rail-footer",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "railFooter",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-collapsed",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "collapsed",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-two-level",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "twoLevel",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-two-level-full",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "twoLevelFull",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-end",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "end",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-rail-end",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "railEnd",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-top-only",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "topOnly",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-side-only",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "sideOnly",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "shell-collapsed-end",
+        "uses": [
+          {
+            "block": "dashshell",
+            "variant": "collapsedEnd",
+            "props": {
+              "frame": "page",
+              "level": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

@@ -1,22 +1,39 @@
+# CI: bun run verify (xgen check + typecheck of the generation layer + tests) with every runtime toolchain present
+# (Go for templ, PHP 8.4 + composer for Twig and Latte, Python 3.13 for Jinja2).
+# UI8KIT_REQUIRE_ALL_RUNTIMES=1 turns a skipped runtime group into a failure, so the template runtimes always run here.
 name: CI
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      UI8KIT_REQUIRE_ALL_RUNTIMES: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.25"
+          go-version-file: packages/templ/ui/go.mod
+          cache: false
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.3"
-          tools: composer
+          php-version: "8.4"
+          extensions: mbstring
+          tools: composer:v2
+          coverage: none
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: toolchains
+        run: bun --version && go version && php --version && composer --version && python3 --version
       - run: bun install --frozen-lockfile
       - run: bun run verify

@@ -1,0 +1,103 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.linebreak",
+  "tier": "brick",
+  "dir": "linebreak",
+  "docs": "Break renders br or wbr for controlled inline wrapping.",
+  "variants": {
+    "linebreak": "linebreak.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Break",
+      "docs": "Break renders br by default, or wbr when Type is wbr/word.",
+      "recipeId": "linebreak",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Type",
+          "type": "string",
+          "cva": false,
+          "docs": "br (default) or wbr/word"
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "mapped",
+          "expr": {
+            "kind": "mapOr",
+            "expr": {
+              "kind": "prop",
+              "name": "Type"
+            },
+            "mapping": {
+              "wbr": "wbr",
+              "word": "wbr"
+            },
+            "fallback": "br"
+          },
+          "tags": [
+            "wbr",
+            "br"
+          ]
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [],
+        "void": true
+      },
+      "slots": [],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "wbr",
+          "br"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    }
+  ],
+  "examples": [
+    {
+      "id": "type.br",
+      "props": {
+        "Type": "br"
+      }
+    },
+    {
+      "id": "type.wbr",
+      "props": {
+        "Type": "wbr"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

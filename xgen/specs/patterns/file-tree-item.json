@@ -1,0 +1,228 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.file-tree-item",
+  "name": "FileTreeItem",
+  "docs": "A row of a file tree: a folder with a disclosure chevron, or a file. The glyphs are Lucide.",
+  "records": {},
+  "props": [
+    {
+      "name": "kind",
+      "type": {
+        "ts": "\"folder\" | \"file\""
+      },
+      "docs": "folder or file",
+      "default": "file"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "docs": "the chosen row",
+      "default": false
+    },
+    {
+      "name": "expanded",
+      "type": "boolean",
+      "docs": "an open folder",
+      "default": false
+    }
+  ],
+  "className": true,
+  "recipes": {
+    "fileTreeItem": "file-tree-item"
+  },
+  "slots": [],
+  "events": [
+    {
+      "name": "click",
+      "args": [],
+      "docs": "the row was pressed"
+    }
+  ],
+  "view": [
+    {
+      "use": "ButtonPlain",
+      "props": {
+        "Type": "button",
+        "Role": "treeitem",
+        "Class": {
+          "op": "cn",
+          "args": [
+            {
+              "op": "recipe",
+              "args": [
+                "fileTreeItem",
+                "kind",
+                {
+                  "$": "kind"
+                }
+              ]
+            },
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "aria-selected": {
+          "$": "selected"
+        },
+        "tabindex": {
+          "op": "cond",
+          "args": [
+            {
+              "$": "selected"
+            },
+            0,
+            -1
+          ]
+        },
+        "aria-expanded": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "kind"
+                },
+                "folder"
+              ]
+            },
+            {
+              "$": "expanded"
+            },
+            {
+              "op": "undef",
+              "args": []
+            }
+          ]
+        },
+        "data-slot": "file-tree-item",
+        "data-kind": {
+          "$": "kind"
+        },
+        "data-state": {
+          "op": "cond",
+          "args": [
+            {
+              "$": "selected"
+            },
+            "selected",
+            "default"
+          ]
+        }
+      },
+      "on": {
+        "click": {
+          "call": "emit.click",
+          "args": []
+        }
+      },
+      "children": [
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "kind"
+              },
+              "folder"
+            ]
+          },
+          "then": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "expanded"
+                    },
+                    "chevron-down",
+                    "chevron-right"
+                  ]
+                },
+                "Size": 16
+              }
+            },
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "folder-open",
+                "Size": 16
+              }
+            }
+          ],
+          "else": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "file",
+                "Size": 16
+              }
+            }
+          ]
+        },
+        {
+          "use": "Inline",
+          "props": {
+            "Class": "whitespace-nowrap"
+          },
+          "attrs": {
+            "data-slot": "file-tree-label"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "label"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "examples": [
+    {
+      "id": "kind.folder",
+      "props": {
+        "label": "src",
+        "kind": "folder"
+      }
+    },
+    {
+      "id": "kind.file",
+      "props": {
+        "label": "src",
+        "kind": "file"
+      }
+    },
+    {
+      "id": "state.selected",
+      "props": {
+        "label": "index.ts",
+        "selected": true
+      }
+    },
+    {
+      "id": "state.expanded",
+      "props": {
+        "label": "src",
+        "kind": "folder",
+        "expanded": true
+      }
+    }
+  ]
+}

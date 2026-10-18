@@ -1,0 +1,101 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.summary",
+  "name": "Order summary",
+  "docs": "Subtotal, shipping, tax and the total.",
+  "theme": "commerce",
+  "group": "checkout",
+  "organism": "OrderSummary",
+  "axes": {
+    "layout": [
+      "card",
+      "plain"
+    ],
+    "cta": [
+      "show",
+      "hide"
+    ],
+    "note": [
+      "show",
+      "hide"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "card",
+    "cta": "show",
+    "note": "show",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "card",
+      "set": {}
+    },
+    {
+      "id": "plain",
+      "set": {
+        "layout": "plain",
+        "note": "hide"
+      }
+    },
+    {
+      "id": "noCta",
+      "set": {
+        "cta": "hide"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "SectionFrame"
+  ],
+  "data": [
+    {
+      "as": "summary",
+      "collection": "summary",
+      "kind": "summaryrow",
+      "record": "SummaryRow",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "amount": "metadata.amount.value",
+        "currency": "metadata.currency.value",
+        "strong": "metadata.strong.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "summary",
+      "title": {
+        "$": "ui.commerce.summary.title"
+      },
+      "rows": {
+        "$": "summary"
+      },
+      "empty": {
+        "$": "ui.empty.summary"
+      },
+      "labels": {
+        "$": "ui.commerce.summary"
+      }
+    }
+  }
+}

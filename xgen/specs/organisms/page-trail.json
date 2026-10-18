@@ -1,0 +1,323 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.page-trail",
+  "name": "PageTrail",
+  "docs": "The head of an inner page with breadcrumbs. Axes: aside (none, figure: one large figure such as a count or a total, note: a small card with a glyph such as a delivery promise or a document version, facts: four key facts in two columns), tone.",
+  "records": {
+    "PageExtras": [
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "caption",
+        "type": "string"
+      },
+      {
+        "name": "note",
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "type": "string"
+      },
+      {
+        "name": "facts",
+        "type": "Stat[]"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "lead",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "badge",
+      "type": "string",
+      "default": "",
+      "docs": "a short pill above the heading"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the breadcrumbs"
+    },
+    {
+      "name": "crumbs",
+      "type": {
+        "ts": "NavLink[]"
+      },
+      "required": true,
+      "docs": "the trail of pages (a parent_id chain): the parent pages, then the current page; empty: no breadcrumbs"
+    },
+    {
+      "name": "extras",
+      "type": {
+        "record": "PageExtras"
+      },
+      "required": true,
+      "docs": "the figure or note (value, caption, note, icon) and the facts"
+    },
+    {
+      "name": "aside",
+      "type": {
+        "ts": "\"none\" | \"figure\" | \"note\" | \"facts\""
+      },
+      "default": "none"
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 1
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "derived": [
+    {
+      "name": "titleId",
+      "value": {
+        "op": "add",
+        "args": [
+          {
+            "$": "id"
+          },
+          "-title"
+        ]
+      }
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "section",
+        "Class": {
+          "op": "cn",
+          "args": [
+            "py-8",
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "tone"
+                    },
+                    "muted"
+                  ]
+                },
+                "bg-muted",
+                ""
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "aria-labelledby": {
+          "op": "cond",
+          "args": [
+            {
+              "$": "landmarkLabel"
+            },
+            {
+              "op": "undef",
+              "args": []
+            },
+            {
+              "$": "titleId"
+            }
+          ]
+        },
+        "data-testid": "section",
+        "data-tone": {
+          "$": "tone"
+        },
+        "data-aside": {
+          "$": "aside"
+        },
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "use": "Container",
+          "props": {
+            "Class": {
+              "op": "cn",
+              "args": [
+                "mx-auto w-full max-w-6xl px-4",
+                "flex flex-col gap-6"
+              ]
+            }
+          },
+          "attrs": {
+            "data-slot": "container"
+          },
+          "children": [
+            {
+              "when": {
+                "op": "gt",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "crumbs"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "PageCrumbs",
+                  "props": {
+                    "label": {
+                      "$": "label"
+                    },
+                    "crumbs": {
+                      "$": "crumbs"
+                    },
+                    "landmarkLabel": {
+                      "$": "landmarkLabel"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Box",
+              "props": {
+                "Class": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "aside"
+                        },
+                        "facts"
+                      ]
+                    },
+                    "grid grid-cols-1 items-center gap-8 lg:grid-cols-2",
+                    "flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "start",
+                    "Class": "min-w-0"
+                  },
+                  "children": [
+                    {
+                      "organism": "SectionHeader",
+                      "props": {
+                        "titleId": {
+                          "$": "titleId"
+                        },
+                        "title": {
+                          "$": "title"
+                        },
+                        "heading": {
+                          "level": {
+                            "$": "level"
+                          },
+                          "badge": {
+                            "$": "badge"
+                          }
+                        },
+                        "lead": {
+                          "$": "lead"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "ne",
+                    "args": [
+                      {
+                        "$": "aside"
+                      },
+                      "none"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "PageAside",
+                      "props": {
+                        "extras": {
+                          "$": "extras"
+                        },
+                        "mode": {
+                          "$": "aside"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "NavBar",
+      "names": [
+        "NavLink"
+      ]
+    },
+    {
+      "from": "StatsBand",
+      "names": [
+        "Stat"
+      ]
+    }
+  ]
+}

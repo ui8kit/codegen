@@ -1,0 +1,116 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.categories",
+  "name": "Category navigation",
+  "docs": "Categories as chips, a bar, a side list, tiles, or chips under a toolbar.",
+  "theme": "commerce",
+  "group": "catalog",
+  "organism": "CategoryNav",
+  "axes": {
+    "layout": [
+      "chips",
+      "bar",
+      "sidebar",
+      "tiles",
+      "toolbar"
+    ],
+    "count": [
+      "show",
+      "hide"
+    ],
+    "icon": [
+      "show",
+      "hide"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "chips",
+    "count": "show",
+    "icon": "show",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "chips",
+      "set": {}
+    },
+    {
+      "id": "bar",
+      "set": {
+        "layout": "bar"
+      }
+    },
+    {
+      "id": "sidebar",
+      "set": {
+        "layout": "sidebar"
+      }
+    },
+    {
+      "id": "chipsPlain",
+      "set": {
+        "count": "hide",
+        "icon": "hide"
+      }
+    },
+    {
+      "id": "barCompact",
+      "set": {
+        "layout": "bar",
+        "icon": "hide",
+        "density": "compact"
+      }
+    },
+    {
+      "id": "tiles",
+      "set": {
+        "layout": "tiles"
+      }
+    },
+    {
+      "id": "toolbar",
+      "set": {
+        "layout": "toolbar",
+        "icon": "hide"
+      }
+    }
+  ],
+  "slots": [
+    "MenuEntry",
+    "SearchField"
+  ],
+  "data": [
+    {
+      "as": "categories",
+      "collection": "categories",
+      "kind": "menu_item",
+      "record": "Category",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value",
+        "count": "metadata.count.value",
+        "href": "slug|route"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "label": {
+        "$": "ui.commerce.nav.label"
+      },
+      "categories": {
+        "$": "categories"
+      },
+      "current": "category-all",
+      "tools": {
+        "$": "ui.commerce.tools"
+      }
+    }
+  }
+}

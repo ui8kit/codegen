@@ -1,0 +1,121 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.nav-item-row",
+  "name": "NavItemRow",
+  "docs": "The row inside NavItem: the icon and the label on the left, the right slot (or an empty 20 by 20 frame) on the right.",
+  "records": {},
+  "props": [
+    {
+      "name": "inner",
+      "type": "string",
+      "docs": "classes of the row (the nav-item-content recipe, worked out by NavItem)"
+    },
+    {
+      "name": "reserveRight",
+      "type": "boolean",
+      "docs": "keep the empty 20 by 20 frame on the right when there is no right content",
+      "default": false
+    }
+  ],
+  "children": true,
+  "slots": [
+    {
+      "name": "icon",
+      "args": [],
+      "docs": "leading icon"
+    },
+    {
+      "name": "right",
+      "args": [],
+      "docs": "trailing content"
+    }
+  ],
+  "events": [],
+  "view": [
+    {
+      "use": "Inline",
+      "props": {
+        "Class": {
+          "$": "inner"
+        }
+      },
+      "attrs": {
+        "data-slot": "nav-item-content"
+      },
+      "children": [
+        {
+          "use": "Inline",
+          "props": {
+            "Class": "flex min-w-0 flex-1 items-center gap-4 in-data-[nav=collapsed]:flex-none in-data-[nav=collapsed]:justify-center"
+          },
+          "attrs": {
+            "data-slot": "nav-item-left"
+          },
+          "children": [
+            {
+              "slot": "icon"
+            },
+            {
+              "use": "Inline",
+              "props": {
+                "Class": "min-w-0 flex-1 truncate in-data-[nav=collapsed]:hidden"
+              },
+              "attrs": {
+                "data-slot": "nav-item-label"
+              },
+              "children": [
+                {
+                  "slot": "children"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "when": {
+            "$": "right"
+          },
+          "then": [
+            {
+              "use": "Inline",
+              "props": {
+                "Class": "flex items-center gap-2 in-data-[nav=collapsed]:hidden"
+              },
+              "attrs": {
+                "data-slot": "nav-item-right"
+              },
+              "children": [
+                {
+                  "slot": "right"
+                }
+              ]
+            }
+          ],
+          "else": [
+            {
+              "when": {
+                "$": "reserveRight"
+              },
+              "then": [
+                {
+                  "use": "Inline",
+                  "props": {
+                    "Class": "size-5 shrink-0 in-data-[nav=collapsed]:hidden"
+                  },
+                  "attrs": {
+                    "data-slot": "nav-item-right"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

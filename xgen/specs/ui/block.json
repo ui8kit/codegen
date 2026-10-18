@@ -1,0 +1,140 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.block",
+  "tier": "brick",
+  "dir": "block",
+  "docs": "Block is the one semantic root of a file (div, section, article, aside, header, footer, main, nav, figure, search, hgroup).\nAny file (block, composite, screen) may open on one Block; never nest Block inside Block in one file, never repeat it in a loop.",
+  "variants": {
+    "block": "block.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Block",
+      "docs": "Block renders a resolved landmark element with children.",
+      "recipeId": "block",
+      "asChild": true,
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "ID",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Tag",
+          "type": "string",
+          "cva": false,
+          "docs": "semantic tag: div (default), section, article, aside, header, footer, main, nav, figure, search, hgroup"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "resolved",
+          "fromProp": "Tag",
+          "fallback": "div",
+          "group": "Layout"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "id",
+            "expr": {
+              "kind": "prop",
+              "name": "ID"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div",
+          "(Layout)"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    }
+  ],
+  "examples": [
+    {
+      "id": "tag.footer",
+      "props": {
+        "Class": "border-t border-border",
+        "Tag": "footer"
+      }
+    },
+    {
+      "id": "tag.header",
+      "props": {
+        "Class": "border-b border-border",
+        "Tag": "header"
+      }
+    },
+    {
+      "id": "tag.main",
+      "props": {
+        "Class": "min-h-screen",
+        "Tag": "main"
+      }
+    },
+    {
+      "id": "tag.nav",
+      "props": {
+        "Class": "py-2",
+        "Tag": "nav"
+      }
+    },
+    {
+      "id": "tag.section",
+      "props": {
+        "Class": "py-8",
+        "Tag": "section"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

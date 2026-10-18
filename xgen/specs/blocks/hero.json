@@ -1,0 +1,354 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.hero",
+  "name": "Hero",
+  "docs": "Heading, lead, one or two actions and optional media.",
+  "theme": "marketing",
+  "group": "hero",
+  "organism": "HeroClassic",
+  "alt": {
+    "axis": "chrome",
+    "values": [
+      "none",
+      "nav"
+    ],
+    "organism": "HeroPrompt"
+  },
+  "axes": {
+    "layout": [
+      "centered",
+      "split"
+    ],
+    "media.kind": [
+      "none",
+      "image",
+      "backdrop",
+      "code",
+      "cluster"
+    ],
+    "media.side": [
+      "end",
+      "start"
+    ],
+    "scale": [
+      "default",
+      "display"
+    ],
+    "tone": [
+      "default",
+      "muted",
+      "inverse"
+    ],
+    "density": [
+      "roomy",
+      "default",
+      "compact"
+    ],
+    "actions.mode": [
+      "one",
+      "two",
+      "form"
+    ],
+    "chrome": [
+      "none",
+      "nav"
+    ]
+  },
+  "defaults": {
+    "layout": "centered",
+    "media.kind": "none",
+    "media.side": "end",
+    "scale": "default",
+    "tone": "default",
+    "density": "roomy",
+    "actions.mode": "one",
+    "chrome": "none"
+  },
+  "variants": [
+    {
+      "id": "centered",
+      "set": {}
+    },
+    {
+      "id": "screenshot",
+      "set": {
+        "media.kind": "image"
+      }
+    },
+    {
+      "id": "backdrop",
+      "set": {
+        "media.kind": "backdrop",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "code",
+      "set": {
+        "layout": "split",
+        "media.kind": "code",
+        "actions.mode": "two"
+      }
+    },
+    {
+      "id": "cluster",
+      "set": {
+        "layout": "split",
+        "media.kind": "cluster"
+      }
+    },
+    {
+      "id": "display",
+      "set": {
+        "scale": "display",
+        "density": "roomy"
+      }
+    },
+    {
+      "id": "form",
+      "set": {
+        "actions.mode": "form"
+      }
+    },
+    {
+      "id": "prompt",
+      "set": {
+        "actions.mode": "form",
+        "scale": "display",
+        "density": "compact",
+        "tone": "inverse",
+        "chrome": "nav"
+      },
+      "props": {
+        "badge": {
+          "$": "ui.vibe.hero.badgeLabel"
+        },
+        "badgeMark": {
+          "$": "ui.vibe.hero.badgeMark"
+        },
+        "title": {
+          "$": "ui.vibe.hero.title"
+        },
+        "topics": {
+          "$": "prompts"
+        },
+        "actions": {
+          "emailLabel": {
+            "$": "ui.vibe.hero.promptLabel"
+          }
+        }
+      }
+    },
+    {
+      "id": "twoActions",
+      "set": {
+        "actions.mode": "two"
+      }
+    },
+    {
+      "id": "split",
+      "set": {
+        "layout": "split",
+        "media.kind": "image"
+      }
+    },
+    {
+      "id": "splitStart",
+      "set": {
+        "layout": "split",
+        "media.kind": "image",
+        "media.side": "start",
+        "actions.mode": "two"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "default"
+      }
+    },
+    {
+      "id": "saas",
+      "set": {
+        "layout": "split",
+        "media.kind": "image",
+        "actions.mode": "two"
+      },
+      "props": {
+        "title": {
+          "$": "ui.cases.saas.hero.title"
+        },
+        "text": {
+          "$": "ui.cases.saas.hero.text"
+        },
+        "actions": {
+          "cta": {
+            "$": "ui.cases.saas.hero.cta"
+          },
+          "secondary": {
+            "$": "ui.cases.saas.hero.secondary"
+          }
+        }
+      }
+    },
+    {
+      "id": "shop",
+      "set": {
+        "layout": "split",
+        "media.kind": "image",
+        "media.side": "start",
+        "tone": "muted"
+      },
+      "props": {
+        "title": {
+          "$": "ui.cases.shop.hero.title"
+        },
+        "text": {
+          "$": "ui.cases.shop.hero.text"
+        },
+        "actions": {
+          "cta": {
+            "$": "ui.cases.shop.hero.cta"
+          },
+          "secondary": {
+            "$": "ui.cases.shop.hero.secondary"
+          }
+        }
+      }
+    },
+    {
+      "id": "blog",
+      "set": {
+        "density": "compact"
+      },
+      "props": {
+        "title": {
+          "$": "ui.cases.blog.hero.title"
+        },
+        "text": {
+          "$": "ui.cases.blog.hero.text"
+        },
+        "actions": {
+          "cta": {
+            "$": "ui.cases.blog.hero.cta"
+          },
+          "secondary": {
+            "$": "ui.cases.blog.hero.secondary"
+          }
+        }
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "Backdrop",
+    "CodeWindow",
+    "HeroBadge",
+    "HeroHead",
+    "MediaFrame",
+    "PromptComposer",
+    "SectionFrame",
+    "TopicChips",
+    "WeightedTitle"
+  ],
+  "data": [
+    {
+      "as": "terminal",
+      "collection": "terminal",
+      "kind": "line",
+      "record": "CodeLine",
+      "fields": {
+        "id": "id",
+        "text": "title",
+        "kind": "metadata.line_kind.value"
+      }
+    },
+    {
+      "as": "prompts",
+      "collection": "prompts",
+      "kind": "prompt",
+      "record": "Topic",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "navlinks",
+      "collection": "navlinks",
+      "kind": "menu_item",
+      "record": "NavLink",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value",
+        "href": "slug|route"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "hero",
+      "title": {
+        "$": "ui.site.home.title"
+      },
+      "text": {
+        "$": "ui.site.home.text"
+      },
+      "actions": {
+        "cta": {
+          "$": "ui.site.home.cta"
+        },
+        "href": "#/pricing",
+        "secondary": {
+          "$": "ui.site.home.secondary"
+        },
+        "secondaryHref": "#/pricing",
+        "emailLabel": {
+          "$": "ui.promo.newsletter.label"
+        }
+      },
+      "media": {
+        "codeTitle": {
+          "$": "ui.vibe.code.title"
+        },
+        "prompt": {
+          "$": "ui.vibe.code.prompt"
+        },
+        "lines": {
+          "$": "terminal"
+        }
+      },
+      "composer": {
+        "attachLabel": {
+          "$": "ui.vibe.hero.attach"
+        },
+        "modelLabel": {
+          "$": "ui.vibe.hero.model"
+        }
+      },
+      "nav": {
+        "brand": {
+          "$": "ui.site.header.brand"
+        },
+        "links": {
+          "$": "navlinks"
+        },
+        "current": "link-product",
+        "skip": {
+          "$": "ui.site.header.skip"
+        },
+        "label": {
+          "$": "ui.site.header.nav"
+        },
+        "login": {
+          "$": "ui.site.header.login"
+        },
+        "loginHref": "#/login"
+      }
+    }
+  }
+}

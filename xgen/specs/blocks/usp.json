@@ -1,0 +1,103 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.usp",
+  "name": "Store promises",
+  "docs": "Free delivery, returns, warranty and help in one band.",
+  "theme": "commerce",
+  "group": "storefront",
+  "organism": "UspStrip",
+  "axes": {
+    "layout": [
+      "strip",
+      "cards",
+      "bar"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "strip",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "strip",
+      "set": {}
+    },
+    {
+      "id": "cards",
+      "set": {
+        "layout": "cards"
+      },
+      "props": {
+        "title": {
+          "$": "ui.commerce.usp.title"
+        }
+      }
+    },
+    {
+      "id": "stripCompact",
+      "set": {
+        "density": "compact"
+      }
+    },
+    {
+      "id": "bar",
+      "set": {
+        "layout": "bar",
+        "density": "compact"
+      }
+    },
+    {
+      "id": "barMuted",
+      "set": {
+        "layout": "bar",
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@perks"
+    }
+  ],
+  "data": [
+    {
+      "as": "perks",
+      "collection": "perks",
+      "kind": "perk",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "usp",
+      "perks": {
+        "$": "perks"
+      },
+      "empty": {
+        "$": "ui.empty.perks"
+      }
+    }
+  }
+}

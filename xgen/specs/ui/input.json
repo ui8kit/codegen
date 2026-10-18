@@ -1,0 +1,333 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.input",
+  "tier": "brick",
+  "dir": "input",
+  "docs": "Input is a single-line native text field.\nSupports types, validation attrs, and wireframe variant/size classes.",
+  "variants": {
+    "input": "input.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Input",
+      "docs": "Input renders a styled single-line form control.",
+      "recipeId": "input",
+      "classes": {
+        "recipe": {
+          "size": "Size",
+          "variant": "Variant"
+        }
+      },
+      "props": [
+        {
+          "name": "Variant",
+          "type": "string",
+          "cva": true,
+          "docs": "sets appearance preset"
+        },
+        {
+          "name": "Size",
+          "type": "string",
+          "cva": true,
+          "docs": "sets density preset"
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Type",
+          "type": "string",
+          "cva": false,
+          "docs": "input type; defaults to text"
+        },
+        {
+          "name": "Name",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Value",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Placeholder",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Disabled",
+          "type": "bool",
+          "cva": false
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "cva": false
+        },
+        {
+          "name": "Autocomplete",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Min",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Max",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "ID",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "element id"
+        },
+        {
+          "name": "Role",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "ARIA role override"
+        },
+        {
+          "name": "TabIndex",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "tab order override"
+        },
+        {
+          "name": "AriaLabel",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "accessible name for unlabeled controls"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "input"
+        },
+        "attrs": [
+          {
+            "kind": "expr",
+            "name": "id",
+            "expr": {
+              "kind": "prop",
+              "name": "ID"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "type",
+            "expr": {
+              "kind": "defaultIfEmpty",
+              "expr": {
+                "kind": "prop",
+                "name": "Type"
+              },
+              "fallback": "text"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "name",
+            "expr": {
+              "kind": "prop",
+              "name": "Name"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "value",
+            "expr": {
+              "kind": "prop",
+              "name": "Value"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "placeholder",
+            "expr": {
+              "kind": "prop",
+              "name": "Placeholder"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "autocomplete",
+            "expr": {
+              "kind": "prop",
+              "name": "Autocomplete"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "min",
+            "expr": {
+              "kind": "prop",
+              "name": "Min"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "max",
+            "expr": {
+              "kind": "prop",
+              "name": "Max"
+            }
+          },
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "bool",
+            "name": "disabled",
+            "expr": {
+              "kind": "prop",
+              "name": "Disabled"
+            }
+          },
+          {
+            "kind": "bool",
+            "name": "required",
+            "expr": {
+              "kind": "prop",
+              "name": "Required"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "role",
+            "expr": {
+              "kind": "prop",
+              "name": "Role"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "tabindex",
+            "expr": {
+              "kind": "prop",
+              "name": "TabIndex"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "aria-label",
+            "expr": {
+              "kind": "prop",
+              "name": "AriaLabel"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [],
+        "void": true
+      },
+      "slots": [],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "input"
+        ],
+        "roles": [],
+        "aria": [
+          {
+            "name": "aria-label",
+            "kind": "expr"
+          },
+          {
+            "name": "role",
+            "kind": "expr"
+          },
+          {
+            "name": "tabindex",
+            "kind": "expr"
+          }
+        ],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [
+        "--background",
+        "--border",
+        "--foreground",
+        "--muted",
+        "--muted-foreground",
+        "--ring"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "size.sm",
+      "props": {
+        "Name": "q",
+        "Placeholder": "Search",
+        "Size": "sm"
+      }
+    },
+    {
+      "id": "state.disabled",
+      "props": {
+        "Disabled": true,
+        "Name": "locked",
+        "Value": "Read only"
+      }
+    },
+    {
+      "id": "state.required",
+      "props": {
+        "Name": "name",
+        "Placeholder": "Required field",
+        "Required": true
+      }
+    },
+    {
+      "id": "type.email",
+      "props": {
+        "ID": "demo-email",
+        "Name": "email",
+        "Type": "email"
+      }
+    },
+    {
+      "id": "variant.default",
+      "props": {
+        "Name": "email",
+        "Placeholder": "name@example.com",
+        "Type": "text",
+        "Variant": "default"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

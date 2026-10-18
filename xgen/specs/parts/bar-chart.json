@@ -1,0 +1,276 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.bar-chart",
+  "name": "BarChart",
+  "docs": "A row of vertical bars (sales by day, orders by week) with a caption under each bar. The chart is one image for assistive technology: `label` carries the summary, the bar values are in the captions and titles.",
+  "records": {
+    "Bar": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "value",
+        "type": "number"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "optional": true
+      },
+      {
+        "name": "muted",
+        "type": "boolean",
+        "optional": true
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "bars",
+      "type": {
+        "ts": "Bar[]"
+      },
+      "docs": "id, caption, value; `title` is the tooltip, `muted` dims a period without data",
+      "required": true
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "docs": "the summary read to assistive technology",
+      "required": true
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "docs": "the value of a full-height bar; the largest value by default"
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "docs": "height of the plot area in px",
+      "default": 160
+    }
+  ],
+  "className": true,
+  "derived": [
+    {
+      "name": "top",
+      "value": {
+        "op": "max",
+        "args": [
+          1,
+          {
+            "op": "coalesce",
+            "args": [
+              {
+                "$": "max"
+              },
+              {
+                "op": "maxBy",
+                "args": [
+                  {
+                    "$": "bars"
+                  },
+                  "value"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            "min-w-0",
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-slot": "bar-chart"
+      },
+      "children": [
+        {
+          "use": "Box",
+          "props": {
+            "Class": "flex min-w-0 items-end gap-2"
+          },
+          "attrs": {
+            "role": "img",
+            "aria-label": {
+              "$": "label"
+            },
+            "style": {
+              "op": "css",
+              "args": [
+                "height",
+                {
+                  "$": "height"
+                },
+                "px"
+              ]
+            }
+          },
+          "children": [
+            {
+              "each": {
+                "$": "bars"
+              },
+              "as": "b",
+              "key": {
+                "$": "b.id"
+              },
+              "do": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "flex h-full min-w-0 flex-1 items-end"
+                  },
+                  "attrs": {
+                    "title": {
+                      "op": "coalesce",
+                      "args": [
+                        {
+                          "$": "b.title"
+                        },
+                        {
+                          "$": "b.label"
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "w-full rounded",
+                            {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "$": "b.muted"
+                                },
+                                "bg-muted-foreground",
+                                "bg-primary"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "attrs": {
+                        "style": {
+                          "op": "css",
+                          "args": [
+                            "height",
+                            {
+                              "op": "max",
+                              "args": [
+                                2,
+                                {
+                                  "op": "round",
+                                  "args": [
+                                    {
+                                      "op": "mul",
+                                      "args": [
+                                        {
+                                          "op": "div",
+                                          "args": [
+                                            {
+                                              "$": "b.value"
+                                            },
+                                            {
+                                              "$": "top"
+                                            }
+                                          ]
+                                        },
+                                        100
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "%"
+                          ]
+                        },
+                        "data-bar": {
+                          "$": "b.id"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Box",
+          "props": {
+            "Class": "mt-2 flex min-w-0 gap-2"
+          },
+          "attrs": {
+            "aria-hidden": "true"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "bars"
+              },
+              "as": "b",
+              "key": {
+                "$": "b.id"
+              },
+              "do": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "relative h-4 min-w-0 flex-1"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Class": "absolute left-1/2 top-0 m-0 -translate-x-1/2 whitespace-nowrap text-xs font-medium text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "b.label"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

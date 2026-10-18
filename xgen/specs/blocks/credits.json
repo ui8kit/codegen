@@ -1,0 +1,109 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.credits",
+  "name": "Credit packs",
+  "docs": "One-off packs of credits with a price: tiles in two or four columns, or rows.",
+  "theme": "marketing",
+  "group": "pricing",
+  "organism": "CreditPacks",
+  "axes": {
+    "cols": [
+      "2",
+      "4"
+    ],
+    "item": [
+      "tile",
+      "row"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "cols": "4",
+    "item": "tile",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "tiles4",
+      "set": {}
+    },
+    {
+      "id": "tiles2",
+      "set": {
+        "cols": "2"
+      }
+    },
+    {
+      "id": "rows",
+      "set": {
+        "item": "row"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@credits"
+    },
+    {
+      "sel": "[data-testid=\"buy\"]",
+      "n": "@credits"
+    }
+  ],
+  "data": [
+    {
+      "as": "credits",
+      "collection": "credits",
+      "kind": "pack",
+      "record": "Pack",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "credits": "metadata.credits.value",
+        "price": "metadata.price.value",
+        "currency": "metadata.currency.value",
+        "badge": "metadata.badge.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "credits",
+      "title": {
+        "$": "ui.vibe.credits.title"
+      },
+      "packs": {
+        "$": "credits"
+      },
+      "empty": {
+        "$": "ui.empty.packs"
+      },
+      "badges": {
+        "$": "ui.vibe.credits.badges"
+      },
+      "buy": {
+        "$": "ui.vibe.credits.buy"
+      }
+    }
+  }
+}

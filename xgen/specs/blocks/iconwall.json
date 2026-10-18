@@ -1,0 +1,112 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.iconwall",
+  "name": "Icon wall",
+  "docs": "Many small features as icons with a name: tiles or chips in three to six columns.",
+  "theme": "marketing",
+  "group": "features",
+  "organism": "IconWall",
+  "axes": {
+    "cols": [
+      "3",
+      "4",
+      "6"
+    ],
+    "item": [
+      "tile",
+      "chip"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "cols": "4",
+    "item": "tile",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "tiles4",
+      "set": {}
+    },
+    {
+      "id": "tiles3",
+      "set": {
+        "cols": "3"
+      }
+    },
+    {
+      "id": "chips6",
+      "set": {
+        "cols": "6",
+        "item": "chip"
+      }
+    },
+    {
+      "id": "chips4",
+      "set": {
+        "item": "chip"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@features"
+    },
+    {
+      "sel": "[data-testid=\"item\"]",
+      "cols": "$cols",
+      "when": {
+        "item": "tile"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "features",
+      "collection": "features",
+      "kind": "feature",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "wall",
+      "title": {
+        "$": "ui.vibe.wall.title"
+      },
+      "features": {
+        "$": "features"
+      },
+      "empty": {
+        "$": "ui.empty.features"
+      }
+    }
+  }
+}

@@ -1,0 +1,452 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.pricing-tiers",
+  "name": "PricingTiers",
+  "docs": "A section with a heading and one PricingCard per plan; an empty state when there are none. Axes: layout (grid, stack), columns, emphasis, billing (off: no toggle; monthly or annual: a toggle with that choice selected, and the prices of that period), density, tone.",
+  "records": {
+    "BillingLabels": [
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "monthly",
+        "type": "string"
+      },
+      {
+        "name": "annual",
+        "type": "string"
+      },
+      {
+        "name": "save",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "plans",
+      "type": {
+        "ts": "Plan[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "PricingCardLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "billingLabels",
+      "type": {
+        "record": "BillingLabels"
+      },
+      "required": true,
+      "docs": "the toggle's name and choices; unused while `billing` is off"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"grid\" | \"stack\""
+      },
+      "default": "grid",
+      "docs": "stack: one narrow column of cards"
+    },
+    {
+      "name": "cols",
+      "type": {
+        "ts": "\"1-2\" | \"1-3\" | \"1-4\""
+      },
+      "default": "1-3"
+    },
+    {
+      "name": "emphasis",
+      "type": {
+        "ts": "\"auto\" | \"off\""
+      },
+      "default": "auto"
+    },
+    {
+      "name": "billing",
+      "type": {
+        "ts": "\"off\" | \"monthly\" | \"annual\""
+      },
+      "default": "off"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"roomy\" | \"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "select",
+      "args": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "docs": "the call to action of a plan was pressed"
+    },
+    {
+      "name": "billing",
+      "args": [
+        {
+          "name": "period",
+          "type": "string"
+        }
+      ],
+      "docs": "the other billing period was chosen"
+    }
+  ],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "measure": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "stack"
+              ]
+            },
+            "md",
+            "default"
+          ]
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "ne",
+                "args": [
+                  {
+                    "$": "billing"
+                  },
+                  "off"
+                ]
+              },
+              "then": [
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "center",
+                    "Justify": "center",
+                    "Class": "flex-wrap"
+                  },
+                  "attrs": {
+                    "data-testid": "billing"
+                  },
+                  "children": [
+                    {
+                      "organism": "Switcher",
+                      "props": {
+                        "label": {
+                          "$": "billingLabels.label"
+                        }
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "organism": "SwitcherItem",
+                              "props": {
+                                "active": {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "billing"
+                                    },
+                                    "monthly"
+                                  ]
+                                }
+                              },
+                              "on": {
+                                "click": {
+                                  "call": "emit.billing",
+                                  "args": [
+                                    "monthly"
+                                  ]
+                                }
+                              },
+                              "slots": {
+                                "children": {
+                                  "args": [],
+                                  "do": [
+                                    {
+                                      "text": {
+                                        "$": "billingLabels.monthly"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "organism": "SwitcherItem",
+                              "props": {
+                                "active": {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "billing"
+                                    },
+                                    "annual"
+                                  ]
+                                }
+                              },
+                              "on": {
+                                "click": {
+                                  "call": "emit.billing",
+                                  "args": [
+                                    "annual"
+                                  ]
+                                }
+                              },
+                              "slots": {
+                                "children": {
+                                  "args": [],
+                                  "do": [
+                                    {
+                                      "text": {
+                                        "$": "billingLabels.annual"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "use": "Badge",
+                      "props": {
+                        "Variant": "default",
+                        "Size": "default"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "billingLabels.save"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "plans"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "layers",
+                    "title": {
+                      "$": "labels.empty"
+                    }
+                  }
+                }
+              ],
+              "else": [
+                {
+                  "use": "Grid",
+                  "props": {
+                    "Cols": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "stack"
+                          ]
+                        },
+                        "1",
+                        {
+                          "op": "fitCols",
+                          "args": [
+                            {
+                              "$": "cols"
+                            },
+                            {
+                              "op": "len",
+                              "args": [
+                                {
+                                  "$": "plans"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "Class": "gap-4"
+                  },
+                  "attrs": {
+                    "data-testid": "tiers"
+                  },
+                  "children": [
+                    {
+                      "each": {
+                        "$": "plans"
+                      },
+                      "as": "plan",
+                      "key": {
+                        "$": "plan.id"
+                      },
+                      "do": [
+                        {
+                          "organism": "PricingCard",
+                          "props": {
+                            "plan": {
+                              "$": "plan"
+                            },
+                            "labels": {
+                              "$": "labels"
+                            },
+                            "emphasis": {
+                              "$": "emphasis"
+                            },
+                            "billing": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "billing"
+                                    },
+                                    "annual"
+                                  ]
+                                },
+                                "annual",
+                                "monthly"
+                              ]
+                            },
+                            "density": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "density"
+                                    },
+                                    "compact"
+                                  ]
+                                },
+                                "compact",
+                                "default"
+                              ]
+                            }
+                          },
+                          "on": {
+                            "select": {
+                              "call": "emit.select",
+                              "args": [
+                                {
+                                  "$": "plan.id"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PricingCard",
+      "names": [
+        "Plan",
+        "PricingCardLabels"
+      ]
+    }
+  ]
+}

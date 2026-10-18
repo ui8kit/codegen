@@ -1,0 +1,279 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.page-aside",
+  "name": "PageAside",
+  "docs": "The aside at the end of a page head: one large figure with its caption, a note card with a glyph, or four key facts as cards in two columns.",
+  "records": {},
+  "props": [
+    {
+      "name": "extras",
+      "type": {
+        "ts": "PageExtras"
+      },
+      "required": true
+    },
+    {
+      "name": "mode",
+      "type": {
+        "ts": "\"none\" | \"figure\" | \"note\" | \"facts\""
+      },
+      "default": "figure"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "mode"
+          },
+          "figure"
+        ]
+      },
+      "then": [
+        {
+          "use": "Stack",
+          "props": {
+            "Gap": "0",
+            "Align": "end",
+            "Class": "text-end"
+          },
+          "attrs": {
+            "data-testid": "page-figure"
+          },
+          "children": [
+            {
+              "use": "Text",
+              "props": {
+                "Size": "4xl",
+                "Weight": "bold"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "extras.value"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Text",
+              "props": {
+                "Size": "xs",
+                "Class": "text-muted-foreground"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "extras.caption"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "mode"
+          },
+          "note"
+        ]
+      },
+      "then": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "4",
+            "Align": "start",
+            "Class": "rounded bg-card inset-ring inset-ring-border max-w-xs p-4"
+          },
+          "attrs": {
+            "data-testid": "page-note"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": {
+                  "$": "extras.icon"
+                },
+                "Size": 20
+              }
+            },
+            {
+              "use": "Stack",
+              "props": {
+                "Gap": "0"
+              },
+              "children": [
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "lg",
+                    "Weight": "bold"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "extras.value"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm",
+                    "Weight": "medium"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "extras.caption"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "xs",
+                    "Class": "text-muted-foreground"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "extras.note"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "mode"
+          },
+          "facts"
+        ]
+      },
+      "then": [
+        {
+          "use": "Box",
+          "props": {
+            "Class": "grid grid-cols-2 gap-4"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "extras.facts"
+              },
+              "as": "s",
+              "key": {
+                "$": "s.id"
+              },
+              "do": [
+                {
+                  "when": {
+                    "op": "lt",
+                    "args": [
+                      {
+                        "$": "i"
+                      },
+                      4
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "0",
+                        "Class": "rounded bg-card inset-ring inset-ring-border p-4"
+                      },
+                      "attrs": {
+                        "data-testid": "page-fact"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "lg",
+                            "Weight": "bold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.value"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "xs",
+                            "Weight": "medium"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.label"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "xs",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.hint"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PageTrail",
+      "names": [
+        "PageExtras"
+      ]
+    }
+  ]
+}

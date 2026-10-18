@@ -1,0 +1,113 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.quote-logo-tiles",
+  "name": "QuoteLogoTiles",
+  "docs": "Four customer names with their glyphs in tiles of two columns, under the quote of QuoteSplit.",
+  "records": {},
+  "props": [
+    {
+      "name": "extras",
+      "type": {
+        "ts": "QuoteExtras"
+      },
+      "required": true,
+      "docs": "the figures, logos and rating summary"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": "grid grid-cols-2 gap-4"
+      },
+      "attrs": {
+        "data-testid": "quote-logos"
+      },
+      "children": [
+        {
+          "each": {
+            "$": "extras.logos"
+          },
+          "as": "l",
+          "key": {
+            "$": "l.id"
+          },
+          "do": [
+            {
+              "when": {
+                "op": "lt",
+                "args": [
+                  {
+                    "$": "i"
+                  },
+                  4
+                ]
+              },
+              "then": [
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "2",
+                    "Align": "center",
+                    "Justify": "center",
+                    "Class": "rounded bg-card inset-ring inset-ring-border p-4 text-muted-foreground"
+                  },
+                  "attrs": {
+                    "data-testid": "quote-logo"
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": {
+                          "$": "l.icon"
+                        },
+                        "Size": 20
+                      }
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Weight": "semibold"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "l.name"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "index": "i"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "QuoteSplit",
+      "names": [
+        "QuoteExtras"
+      ]
+    },
+    {
+      "from": "TestimonialGrid",
+      "names": [
+        "QuoteLabels"
+      ]
+    }
+  ]
+}

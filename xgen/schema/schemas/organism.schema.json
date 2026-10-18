@@ -1,0 +1,747 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xgen.dev/schemas/organism.schema.json",
+  "title": "xgen organism",
+  "type": "object",
+  "$defs": {
+    "value": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "$": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "$"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string"
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/value"
+              }
+            }
+          },
+          "required": [
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "a group of named values (a grouped prop)",
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "$"
+                ]
+              },
+              {
+                "required": [
+                  "op"
+                ]
+              }
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/value"
+          }
+        }
+      ]
+    },
+    "node": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "use": {
+              "type": "string"
+            },
+            "props": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/value"
+              }
+            },
+            "attrs": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/value"
+              }
+            },
+            "on": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/value"
+                    }
+                  }
+                },
+                "required": [
+                  "call"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/node"
+              }
+            }
+          },
+          "required": [
+            "use"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "text": {
+              "$ref": "#/$defs/value"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "when": {
+              "$ref": "#/$defs/value"
+            },
+            "then": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/node"
+              }
+            },
+            "else": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/node"
+              }
+            }
+          },
+          "required": [
+            "when",
+            "then"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "each": {
+              "$ref": "#/$defs/value"
+            },
+            "as": {
+              "type": "string"
+            },
+            "key": {
+              "$ref": "#/$defs/value"
+            },
+            "do": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/node"
+              }
+            },
+            "index": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "each",
+            "as",
+            "key",
+            "do"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "slot": {
+              "type": "string"
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/value"
+              }
+            }
+          },
+          "required": [
+            "slot"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "organism": {
+              "type": "string"
+            },
+            "props": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/value"
+              }
+            },
+            "on": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/value"
+                    }
+                  }
+                },
+                "required": [
+                  "call"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "slots": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "do": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/node"
+                    }
+                  },
+                  "forward": {
+                    "type": "string",
+                    "description": "pass a slot of the enclosing organism on as this slot (args and do stay empty)"
+                  }
+                },
+                "required": [
+                  "args",
+                  "do"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "organism"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "outlet": {
+              "const": true
+            }
+          },
+          "required": [
+            "outlet"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "specVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^(organism|part|pattern)\\.[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9]*$"
+    },
+    "docs": {
+      "type": "string"
+    },
+    "records": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "description": "a data field type (string, number, boolean, string[]) or, in a grouped prop, a TypeScript type"
+            },
+            "optional": {
+              "type": "boolean"
+            },
+            "default": {
+              "type": [
+                "string",
+                "number",
+                "boolean"
+              ]
+            },
+            "docs": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "type"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "oneOf": [
+              {
+                "enum": [
+                  "string",
+                  "number",
+                  "boolean",
+                  "string[]"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "record": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "record"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "ts": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ts"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "docs": {
+            "type": "string"
+          },
+          "default": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "slots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "oneOf": [
+                    {
+                      "enum": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "string[]"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "record": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "record"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "ts": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "ts"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "docs": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "args"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "oneOf": [
+                    {
+                      "enum": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "string[]"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "record": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "record"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "ts": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "ts"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "docs": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "args"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "view": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "portable": {
+      "type": "object",
+      "properties": {
+        "svelte": {
+          "oneOf": [
+            {
+              "const": true
+            },
+            {
+              "type": "object",
+              "properties": {
+                "portable": {
+                  "const": false
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 8
+                }
+              },
+              "required": [
+                "portable",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "react": {
+          "oneOf": [
+            {
+              "const": true
+            },
+            {
+              "type": "object",
+              "properties": {
+                "portable": {
+                  "const": false
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 8
+                }
+              },
+              "required": [
+                "portable",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "vue": {
+          "oneOf": [
+            {
+              "const": true
+            },
+            {
+              "type": "object",
+              "properties": {
+                "portable": {
+                  "const": false
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 8
+                }
+              },
+              "required": [
+                "portable",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "svelte",
+        "react"
+      ],
+      "additionalProperties": false
+    },
+    "className": {
+      "type": "boolean"
+    },
+    "children": {
+      "type": "boolean"
+    },
+    "consts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    },
+    "derived": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "recipes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "props": {
+            "type": "object",
+            "additionalProperties": {
+              "type": [
+                "string",
+                "number",
+                "boolean"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "props"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "typeImports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "from",
+          "names"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "frame": {
+      "const": true,
+      "description": "a frame: a part whose whole job is the landmark of a region; it opens on one Block and is checked as a block file (blockRoot zone, rule 01)"
+    }
+  },
+  "required": [
+    "specVersion",
+    "id",
+    "name",
+    "docs",
+    "records",
+    "props",
+    "slots",
+    "events",
+    "view",
+    "portable"
+  ],
+  "additionalProperties": false
+}

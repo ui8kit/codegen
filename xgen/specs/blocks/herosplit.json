@@ -1,0 +1,341 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.herosplit",
+  "name": "Hero, split",
+  "docs": "A split hero with figures, faces, small cards or a quote under the lead, beside a picture, a floating card, a picture grid or plan cards.",
+  "theme": "marketing",
+  "group": "hero",
+  "organism": "HeroSplit",
+  "axes": {
+    "extra": [
+      "stats",
+      "avatars",
+      "minis",
+      "quote",
+      "none"
+    ],
+    "media": [
+      "picture",
+      "card",
+      "grid",
+      "plans"
+    ],
+    "mediaSide": [
+      "end",
+      "start"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "extra": "stats",
+    "media": "picture",
+    "mediaSide": "end",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "statsCards",
+      "set": {}
+    },
+    {
+      "id": "avatars",
+      "set": {
+        "extra": "avatars"
+      }
+    },
+    {
+      "id": "miniCards",
+      "set": {
+        "extra": "minis",
+        "media": "card",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "quoteStats",
+      "set": {
+        "extra": "quote",
+        "media": "card"
+      }
+    },
+    {
+      "id": "planCards",
+      "set": {
+        "extra": "none",
+        "media": "plans",
+        "mediaSide": "start"
+      }
+    },
+    {
+      "id": "pictureGrid",
+      "set": {
+        "media": "grid"
+      }
+    },
+    {
+      "id": "pictureGridStart",
+      "set": {
+        "extra": "avatars",
+        "media": "grid",
+        "mediaSide": "start"
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "HeroSplitExtras",
+    "HeroSplitMedia",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"hero-stat\"]",
+      "n": 3,
+      "when": {
+        "extra": [
+          "stats",
+          "quote"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-stat\"]",
+      "n": 0,
+      "when": {
+        "extra": [
+          "avatars",
+          "minis",
+          "none"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-proof\"]",
+      "n": 1,
+      "when": {
+        "extra": "avatars"
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-proof\"]",
+      "n": 0,
+      "when": {
+        "extra": [
+          "stats",
+          "minis",
+          "quote",
+          "none"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-mini\"]",
+      "n": 2,
+      "when": {
+        "extra": "minis"
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-mini\"]",
+      "n": 0,
+      "when": {
+        "extra": [
+          "stats",
+          "avatars",
+          "quote",
+          "none"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-quote\"]",
+      "n": 1,
+      "when": {
+        "extra": "quote"
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-quote\"]",
+      "n": 0,
+      "when": {
+        "extra": [
+          "stats",
+          "avatars",
+          "minis",
+          "none"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"offer-card\"]",
+      "n": 1,
+      "when": {
+        "media": "card"
+      }
+    },
+    {
+      "sel": "[data-testid=\"offer-card\"]",
+      "n": 0,
+      "when": {
+        "media": [
+          "picture",
+          "grid",
+          "plans"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-tile\"]",
+      "n": 4,
+      "when": {
+        "media": "grid"
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-tile\"]",
+      "n": 0,
+      "when": {
+        "media": [
+          "picture",
+          "card",
+          "plans"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-plan\"]",
+      "n": 2,
+      "when": {
+        "media": "plans"
+      }
+    },
+    {
+      "sel": "[data-testid=\"hero-plan\"]",
+      "n": 0,
+      "when": {
+        "media": [
+          "picture",
+          "card",
+          "grid"
+        ]
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "stats",
+      "collection": "stats",
+      "kind": "stat",
+      "record": "Stat",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value|number",
+        "icon": "metadata.icon.value",
+        "hint": "metadata.hint.value"
+      }
+    },
+    {
+      "as": "features",
+      "collection": "features",
+      "kind": "feature",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "testimonials",
+      "collection": "testimonials",
+      "kind": "testimonial",
+      "record": "Quote",
+      "fields": {
+        "id": "id",
+        "author": "title",
+        "role": "metadata.role.value",
+        "company": "metadata.company.value",
+        "quote": "metadata.quote.value",
+        "rating": "metadata.rating.value",
+        "handle": "metadata.handle.value",
+        "time": "metadata.time.value|ago-short",
+        "mark": "metadata.mark.value"
+      }
+    },
+    {
+      "as": "tiers",
+      "collection": "tiers",
+      "kind": "plan",
+      "record": "Plan",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "tagline": "metadata.tagline.value",
+        "price": "metadata.price.value",
+        "currency": "metadata.currency.value",
+        "seats": "metadata.seats.value",
+        "storage": "metadata.storage.value",
+        "highlighted": "metadata.highlighted.value",
+        "features": "metadata.features.value",
+        "yearly": "metadata.yearly.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "herosplit",
+      "title": {
+        "$": "ui.marketing.heroSplit.title"
+      },
+      "lead": {
+        "$": "ui.marketing.heroSplit.lead"
+      },
+      "badge": {
+        "$": "ui.marketing.heroSplit.badge"
+      },
+      "actions": {
+        "mode": "two",
+        "cta": {
+          "$": "ui.marketing.heroSplit.cta"
+        },
+        "href": "#/pricing",
+        "secondary": {
+          "$": "ui.marketing.heroSplit.secondary"
+        },
+        "secondaryHref": "#/features"
+      },
+      "content": {
+        "stats": {
+          "$": "stats"
+        },
+        "features": {
+          "$": "features"
+        },
+        "people": {
+          "$": "testimonials"
+        },
+        "plans": {
+          "$": "tiers"
+        },
+        "proof": {
+          "$": "ui.marketing.heroSplit.proof"
+        },
+        "card": {
+          "title": {
+            "$": "ui.marketing.heroSplit.cardTitle"
+          },
+          "text": {
+            "$": "ui.marketing.heroSplit.cardText"
+          },
+          "icon": "zap"
+        }
+      }
+    }
+  }
+}

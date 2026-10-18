@@ -1,0 +1,366 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.link",
+  "tier": "brick",
+  "dir": "link",
+  "docs": "Link renders a semantic anchor for navigation and prose.\nUse Button for actions; use Link for destinations.",
+  "variants": {
+    "link": "link.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Link",
+      "docs": "Link renders a semantic anchor element.",
+      "recipeId": "link",
+      "classes": {
+        "recipe": {
+          "size": "Size",
+          "variant": "Variant"
+        },
+        "state": [
+          {
+            "test": {
+              "kind": "prop",
+              "name": "Disabled"
+            },
+            "classes": "pointer-events-none opacity-50"
+          }
+        ]
+      },
+      "derived": {
+        "target": {
+          "kind": "cond",
+          "test": {
+            "kind": "isSet",
+            "expr": {
+              "kind": "prop",
+              "name": "Target"
+            }
+          },
+          "then": {
+            "kind": "prop",
+            "name": "Target"
+          },
+          "else": {
+            "kind": "cond",
+            "test": {
+              "kind": "prop",
+              "name": "External"
+            },
+            "then": {
+              "kind": "lit",
+              "value": "_blank"
+            },
+            "else": {
+              "kind": "lit",
+              "value": ""
+            }
+          }
+        },
+        "rel": {
+          "kind": "cond",
+          "test": {
+            "kind": "isSet",
+            "expr": {
+              "kind": "prop",
+              "name": "Rel"
+            }
+          },
+          "then": {
+            "kind": "prop",
+            "name": "Rel"
+          },
+          "else": {
+            "kind": "cond",
+            "test": {
+              "kind": "or",
+              "exprs": [
+                {
+                  "kind": "prop",
+                  "name": "External"
+                },
+                {
+                  "kind": "eq",
+                  "left": {
+                    "kind": "derivedRef",
+                    "name": "target"
+                  },
+                  "right": {
+                    "kind": "lit",
+                    "value": "_blank"
+                  }
+                }
+              ]
+            },
+            "then": {
+              "kind": "lit",
+              "value": "noopener noreferrer"
+            },
+            "else": {
+              "kind": "lit",
+              "value": ""
+            }
+          }
+        }
+      },
+      "props": [
+        {
+          "name": "Variant",
+          "type": "string",
+          "cva": true,
+          "docs": "sets appearance preset"
+        },
+        {
+          "name": "Size",
+          "type": "string",
+          "cva": true,
+          "docs": "sets density preset"
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Href",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Target",
+          "type": "string",
+          "cva": false,
+          "docs": "explicit target; External implies _blank"
+        },
+        {
+          "name": "Rel",
+          "type": "string",
+          "cva": false,
+          "docs": "explicit rel; external links default to noopener noreferrer"
+        },
+        {
+          "name": "Download",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "External",
+          "type": "bool",
+          "cva": false,
+          "docs": "opens in a new tab with safe rel defaults"
+        },
+        {
+          "name": "Disabled",
+          "type": "bool",
+          "cva": false,
+          "docs": "visually and semantically disables the link"
+        },
+        {
+          "name": "AriaCurrent",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "AriaLabel",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "ID",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Role",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "a"
+        },
+        "attrs": [
+          {
+            "kind": "expr",
+            "name": "href",
+            "expr": {
+              "kind": "prop",
+              "name": "Href"
+            }
+          },
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "id",
+            "expr": {
+              "kind": "prop",
+              "name": "ID"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "target",
+            "expr": {
+              "kind": "derivedRef",
+              "name": "target"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "rel",
+            "expr": {
+              "kind": "derivedRef",
+              "name": "rel"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "download",
+            "expr": {
+              "kind": "prop",
+              "name": "Download"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "role",
+            "expr": {
+              "kind": "prop",
+              "name": "Role"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "aria-label",
+            "expr": {
+              "kind": "prop",
+              "name": "AriaLabel"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "aria-current",
+            "expr": {
+              "kind": "prop",
+              "name": "AriaCurrent"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "aria-disabled",
+            "expr": {
+              "kind": "lit",
+              "value": "true"
+            },
+            "when": {
+              "kind": "prop",
+              "name": "Disabled"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "tabindex",
+            "expr": {
+              "kind": "lit",
+              "value": -1
+            },
+            "when": {
+              "kind": "prop",
+              "name": "Disabled"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "a"
+        ],
+        "roles": [],
+        "aria": [
+          {
+            "name": "aria-current",
+            "kind": "expr"
+          },
+          {
+            "name": "aria-disabled",
+            "kind": "expr"
+          },
+          {
+            "name": "aria-label",
+            "kind": "expr"
+          },
+          {
+            "name": "role",
+            "kind": "expr"
+          },
+          {
+            "name": "tabindex",
+            "kind": "expr"
+          }
+        ],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [
+        "--foreground",
+        "--muted-foreground"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "variant.default",
+      "props": {
+        "Href": "/docs"
+      }
+    },
+    {
+      "id": "variant.external",
+      "props": {
+        "External": true,
+        "Href": "https://example.com"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "ui.form-message",
+  "base": "text-xs font-semibold text-destructive",
+  "keys": [],
+  "defaults": {},
+  "byKey": {}
+}

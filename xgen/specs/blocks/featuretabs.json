@@ -1,0 +1,97 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.featuretabs",
+  "name": "Feature tabs",
+  "docs": "Features as tabs; the chosen one fills the panel beside or below the tab list.",
+  "theme": "marketing",
+  "group": "features",
+  "organism": "FeatureTabs",
+  "axes": {
+    "panel": [
+      "split",
+      "stack"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "panel": "split",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "split",
+      "set": {}
+    },
+    {
+      "id": "stack",
+      "set": {
+        "panel": "stack"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame",
+    "SectionFrame",
+    "Switcher",
+    "SwitcherItem"
+  ],
+  "facts": [
+    {
+      "sel": "[role=\"tab\"]",
+      "n": "@features"
+    },
+    {
+      "sel": "[role=\"tabpanel\"]",
+      "n": 1
+    }
+  ],
+  "data": [
+    {
+      "as": "features",
+      "collection": "features",
+      "kind": "feature",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "tabs",
+      "title": {
+        "$": "ui.vibe.tabs.title"
+      },
+      "features": {
+        "$": "features"
+      },
+      "empty": {
+        "$": "ui.empty.features"
+      },
+      "tabsLabel": {
+        "$": "ui.vibe.tabs.label"
+      },
+      "active": "feature-clear"
+    }
+  }
+}

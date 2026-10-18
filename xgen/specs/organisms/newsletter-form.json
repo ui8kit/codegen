@@ -1,0 +1,315 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.newsletter-form",
+  "name": "NewsletterForm",
+  "docs": "An email sign-up: heading, one sentence, an email field and a button, with an optional consent line and picture. Axes: layout (inline, stacked, split), terms (show, hide), tone (default, muted), align (start, center).",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the email field"
+    },
+    {
+      "name": "submit",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "consent",
+      "type": "string",
+      "docs": "the consent line, shown when `terms` is show"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"inline\" | \"stacked\" | \"split\""
+      },
+      "default": "inline"
+    },
+    {
+      "name": "terms",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "hide"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "align",
+      "type": {
+        "ts": "\"start\" | \"center\""
+      },
+      "default": "center"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "lead": {
+          "$": "text"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "align": {
+          "$": "align"
+        },
+        "layout": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "split"
+              ]
+            },
+            "split",
+            "stack"
+          ]
+        },
+        "media": {
+          "show": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "split"
+            ]
+          }
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "use": "Form",
+              "props": {
+                "Method": "dialog",
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    "w-full max-w-md",
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "align"
+                            },
+                            "center"
+                          ]
+                        },
+                        "mx-auto",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              },
+              "attrs": {
+                "data-testid": "newsletter-form"
+              },
+              "children": [
+                {
+                  "use": "Label",
+                  "props": {
+                    "HTMLFor": {
+                      "op": "tpl",
+                      "args": [
+                        "{0}-email",
+                        {
+                          "$": "id"
+                        }
+                      ]
+                    },
+                    "Class": "sr-only"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "label"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "2",
+                    "Align": "start",
+                    "Class": {
+                      "op": "cn",
+                      "args": [
+                        "w-full",
+                        {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "layout"
+                                },
+                                "stacked"
+                              ]
+                            },
+                            "flex-col items-stretch",
+                            "flex-wrap"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "use": "Input",
+                      "props": {
+                        "Type": "email",
+                        "Name": "email",
+                        "Class": "min-w-0 flex-1"
+                      },
+                      "attrs": {
+                        "id": {
+                          "op": "tpl",
+                          "args": [
+                            "{0}-email",
+                            {
+                              "$": "id"
+                            }
+                          ]
+                        },
+                        "data-testid": "field"
+                      }
+                    },
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "default",
+                        "Size": "default",
+                        "Type": "submit"
+                      },
+                      "attrs": {
+                        "data-testid": "submit"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "submit"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "terms"
+                          },
+                          "show"
+                        ]
+                      },
+                      {
+                        "$": "consent"
+                      }
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "xs",
+                        "Class": "text-muted-foreground"
+                      },
+                      "attrs": {
+                        "data-testid": "consent"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "consent"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "aside": {
+          "args": [],
+          "do": [
+            {
+              "organism": "MediaFrame",
+              "props": {
+                "alt": {
+                  "$": "title"
+                },
+                "ratio": "4/3"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

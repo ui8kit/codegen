@@ -1,0 +1,80 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.profile",
+  "name": "Profile form",
+  "docs": "Account settings: picture, name, email, bio and notifications.",
+  "theme": "account",
+  "group": "settings",
+  "organism": "ProfileForm",
+  "axes": {
+    "layout": [
+      "stacked",
+      "split"
+    ],
+    "avatar": [
+      "show",
+      "hide"
+    ],
+    "prefs": [
+      "show",
+      "hide"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "stacked",
+    "avatar": "show",
+    "prefs": "show",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "stacked",
+      "set": {}
+    },
+    {
+      "id": "split",
+      "set": {
+        "layout": "split"
+      }
+    },
+    {
+      "id": "minimal",
+      "set": {
+        "avatar": "hide",
+        "prefs": "hide"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "layout": "split",
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "Field",
+    "MediaFrame",
+    "Panel"
+  ],
+  "data": [],
+  "sample": {
+    "props": {
+      "id": "profile",
+      "title": {
+        "$": "ui.account.profile.title"
+      },
+      "text": {
+        "$": "ui.account.profile.text"
+      },
+      "labels": {
+        "$": "ui.account.profile.labels"
+      }
+    }
+  }
+}

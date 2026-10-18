@@ -1,0 +1,408 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.form",
+  "tier": "brick",
+  "dir": "form",
+  "docs": "Form primitives: form wrapper, field item, description, and validation message.\nComposes with Label, Input, and other controls.",
+  "variants": {
+    "form": "form.variants.json",
+    "form-item": "form-item.variants.json",
+    "form-description": "form-description.variants.json",
+    "form-message": "form-message.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Form",
+      "docs": "Form renders a vertical grid form container.",
+      "recipeId": "form",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "ID",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Action",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Method",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Enctype",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Autocomplete",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Name",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Target",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "NoValidate",
+          "type": "bool",
+          "cva": false
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "form"
+        },
+        "attrs": [
+          {
+            "kind": "expr",
+            "name": "id",
+            "expr": {
+              "kind": "prop",
+              "name": "ID"
+            }
+          },
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "action",
+            "expr": {
+              "kind": "prop",
+              "name": "Action"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "method",
+            "expr": {
+              "kind": "prop",
+              "name": "Method"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "enctype",
+            "expr": {
+              "kind": "prop",
+              "name": "Enctype"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "autocomplete",
+            "expr": {
+              "kind": "prop",
+              "name": "Autocomplete"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "name",
+            "expr": {
+              "kind": "prop",
+              "name": "Name"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "target",
+            "expr": {
+              "kind": "prop",
+              "name": "Target"
+            }
+          },
+          {
+            "kind": "bool",
+            "name": "novalidate",
+            "expr": {
+              "kind": "prop",
+              "name": "NoValidate"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "form"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "FormItem",
+      "docs": "FormItem groups a single field with spacing for label and control.",
+      "recipeId": "form-item",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "div"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "FormDescription",
+      "docs": "FormDescription renders muted helper copy below a control.",
+      "recipeId": "form-description",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "p"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "p"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [
+        "--muted-foreground"
+      ]
+    },
+    {
+      "name": "FormMessage",
+      "docs": "FormMessage renders destructive validation feedback.",
+      "recipeId": "form-message",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "p"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "static",
+            "name": "role",
+            "value": "alert"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "p"
+        ],
+        "roles": [
+          "alert"
+        ],
+        "aria": [
+          {
+            "name": "role",
+            "kind": "static",
+            "value": "alert"
+          }
+        ],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [
+        "--destructive"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "layout.field-with-label",
+      "props": {
+        "Method": "post"
+      }
+    },
+    {
+      "id": "layout.with-message",
+      "props": {}
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

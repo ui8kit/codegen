@@ -1,0 +1,113 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.empty-state",
+  "name": "EmptyState",
+  "docs": "Empty list or nothing found: a round icon, a title, a hint and an optional action.",
+  "records": {},
+  "props": [
+    {
+      "name": "icon",
+      "type": "string",
+      "docs": "Lucide name of the icon",
+      "default": "inbox"
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "docs": "the hint"
+    }
+  ],
+  "className": true,
+  "slots": [
+    {
+      "name": "action",
+      "args": [],
+      "docs": "an optional call to action"
+    }
+  ],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            "flex min-w-0 flex-col items-center gap-4 rounded bg-card px-6 py-14 text-center inset-ring inset-ring-border",
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "role": "status"
+      },
+      "children": [
+        {
+          "use": "IconBadge",
+          "props": {
+            "Size": "lg"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": {
+                  "$": "icon"
+                },
+                "Size": 20
+              }
+            }
+          ]
+        },
+        {
+          "use": "Text",
+          "props": {
+            "Class": "m-0 text-sm font-bold text-foreground"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "title"
+              }
+            }
+          ]
+        },
+        {
+          "when": {
+            "$": "text"
+          },
+          "then": [
+            {
+              "use": "Text",
+              "props": {
+                "Class": "m-0 max-w-80 text-xs font-medium text-muted-foreground"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "text"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slot": "action"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

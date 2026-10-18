@@ -1,0 +1,478 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.cta-band",
+  "name": "CtaBand",
+  "docs": "A closing call to action: a heading, one sentence and one or two links. Axes: layout (card, band, split picture, row: heading beside the button in a card), tone, actions (one, two, form: an email field), proof (none, quote), density.",
+  "records": {
+    "CtaQuote": [
+      {
+        "name": "text",
+        "type": "string",
+        "optional": true,
+        "docs": "a customer quote, shown when `proof` is quote"
+      },
+      {
+        "name": "by",
+        "type": "string",
+        "optional": true,
+        "docs": "who said it"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "ActionSet"
+      },
+      "required": true,
+      "docs": "the links (mode one or two) or the email field (mode form)"
+    },
+    {
+      "name": "quote",
+      "type": {
+        "record": "CtaQuote"
+      }
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"card\" | \"band\" | \"split\" | \"row\" | \"banner\""
+      },
+      "default": "card",
+      "docs": "card: boxed; band: full-width; split: text beside picture; row: heading beside button; banner: centered muted card with one button"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "muted"
+    },
+    {
+      "name": "proof",
+      "type": {
+        "ts": "\"none\" | \"quote\""
+      },
+      "default": "none"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"roomy\" | \"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "derived": [
+    {
+      "name": "center",
+      "value": {
+        "op": "or",
+        "args": [
+          {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "band"
+            ]
+          },
+          {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "banner"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "layout"
+          },
+          "banner"
+        ]
+      },
+      "then": [
+        {
+          "organism": "CtaBanner",
+          "props": {
+            "id": {
+              "$": "id"
+            },
+            "title": {
+              "$": "title"
+            },
+            "text": {
+              "$": "text"
+            },
+            "cta": {
+              "$": "actions.cta"
+            },
+            "href": {
+              "$": "actions.href"
+            },
+            "tone": {
+              "$": "tone"
+            },
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          }
+        }
+      ],
+      "else": [
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "row"
+            ]
+          },
+          "then": [
+            {
+              "use": "Block",
+              "props": {
+                "Tag": "section",
+                "Class": "py-8"
+              },
+              "attrs": {
+                "aria-labelledby": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "landmarkLabel"
+                    },
+                    {
+                      "op": "undef",
+                      "args": []
+                    },
+                    {
+                      "op": "tpl",
+                      "args": [
+                        "{0}-title",
+                        {
+                          "$": "id"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "data-testid": "section",
+                "data-tone": {
+                  "$": "tone"
+                },
+                "data-density": {
+                  "$": "density"
+                },
+                "aria-label": {
+                  "$": "landmarkLabel"
+                }
+              },
+              "children": [
+                {
+                  "use": "Container",
+                  "props": {
+                    "Class": "mx-auto w-full max-w-6xl px-4"
+                  },
+                  "attrs": {
+                    "data-slot": "container"
+                  },
+                  "children": [
+                    {
+                      "use": "Card",
+                      "props": {
+                        "Variant": "muted"
+                      },
+                      "children": [
+                        {
+                          "use": "CardContent",
+                          "props": {
+                            "Class": "flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+                          },
+                          "children": [
+                            {
+                              "use": "Stack",
+                              "props": {
+                                "Gap": "2",
+                                "Class": "min-w-0"
+                              },
+                              "children": [
+                                {
+                                  "use": "Title",
+                                  "props": {
+                                    "As": 2,
+                                    "Size": "2xl",
+                                    "Weight": "bold"
+                                  },
+                                  "attrs": {
+                                    "id": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-title",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "title"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "base",
+                                    "Class": "text-muted-foreground"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "text"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "when": {
+                                "op": "eq",
+                                "args": [
+                                  {
+                                    "$": "proof"
+                                  },
+                                  "quote"
+                                ]
+                              },
+                              "then": [
+                                {
+                                  "organism": "QuoteProof",
+                                  "props": {
+                                    "quote": {
+                                      "$": "quote.text"
+                                    },
+                                    "quoteBy": {
+                                      "$": "quote.by"
+                                    },
+                                    "center": {
+                                      "$": "center"
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "organism": "CtaActions",
+                              "props": {
+                                "id": {
+                                  "$": "id"
+                                },
+                                "actions": {
+                                  "$": "actions"
+                                },
+                                "center": {
+                                  "$": "center"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "else": [
+            {
+              "organism": "SectionFrame",
+              "props": {
+                "id": {
+                  "$": "id"
+                },
+                "title": {
+                  "$": "title"
+                },
+                "lead": {
+                  "$": "text"
+                },
+                "layout": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "layout"
+                        },
+                        "split"
+                      ]
+                    },
+                    "split",
+                    "stack"
+                  ]
+                },
+                "align": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "center"
+                    },
+                    "center",
+                    "start"
+                  ]
+                },
+                "boxed": {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "layout"
+                    },
+                    "card"
+                  ]
+                },
+                "media": {
+                  "show": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "layout"
+                      },
+                      "split"
+                    ]
+                  }
+                },
+                "tone": {
+                  "$": "tone"
+                },
+                "density": {
+                  "$": "density"
+                },
+                "landmarkLabel": {
+                  "$": "landmarkLabel"
+                }
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "proof"
+                          },
+                          "quote"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "QuoteProof",
+                          "props": {
+                            "quote": {
+                              "$": "quote.text"
+                            },
+                            "quoteBy": {
+                              "$": "quote.by"
+                            },
+                            "center": {
+                              "$": "center"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "organism": "CtaActions",
+                      "props": {
+                        "id": {
+                          "$": "id"
+                        },
+                        "actions": {
+                          "$": "actions"
+                        },
+                        "center": {
+                          "$": "center"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "aside": {
+                  "args": [],
+                  "do": [
+                    {
+                      "organism": "MediaFrame",
+                      "props": {
+                        "alt": {
+                          "$": "title"
+                        },
+                        "ratio": "4/3"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "CtaActions",
+      "names": [
+        "ActionSet"
+      ]
+    }
+  ]
+}

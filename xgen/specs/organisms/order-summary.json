@@ -1,0 +1,350 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.order-summary",
+  "name": "OrderSummary",
+  "docs": "The totals of an order: subtotal, shipping, tax and the total, with a checkout button and a note. Axes: layout (card, plain), cta (show, hide), note (show, hide), density, tone.",
+  "records": {
+    "SummaryRow": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "amount",
+        "type": "number"
+      },
+      {
+        "name": "currency",
+        "type": "string"
+      },
+      {
+        "name": "strong",
+        "type": "boolean"
+      }
+    ],
+    "SummaryLabels": [
+      {
+        "name": "checkout",
+        "type": "string"
+      },
+      {
+        "name": "note",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "rows",
+      "type": {
+        "ts": "SummaryRow[]"
+      },
+      "required": true
+    },
+    {
+      "name": "empty",
+      "type": "string",
+      "default": "",
+      "docs": "the text of the empty state (no records), from the dictionary"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "SummaryLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"card\" | \"plain\""
+      },
+      "default": "card"
+    },
+    {
+      "name": "cta",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "show"
+    },
+    {
+      "name": "note",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "show"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "measure": "md",
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "rows"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "receipt",
+                    "title": {
+                      "$": "empty"
+                    }
+                  }
+                }
+              ],
+              "else": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": {
+                      "op": "cn",
+                      "args": [
+                        {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "layout"
+                                },
+                                "card"
+                              ]
+                            },
+                            "rounded bg-card p-6 inset-ring inset-ring-border",
+                            ""
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "attrs": {
+                    "data-testid": "summary"
+                  },
+                  "children": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "4",
+                        "Align": "stretch"
+                      },
+                      "children": [
+                        {
+                          "use": "List",
+                          "props": {
+                            "Tag": "ul",
+                            "Class": "flex flex-col gap-4"
+                          },
+                          "children": [
+                            {
+                              "each": {
+                                "$": "rows"
+                              },
+                              "as": "row",
+                              "key": {
+                                "$": "row.id"
+                              },
+                              "do": [
+                                {
+                                  "use": "ListItem",
+                                  "props": {
+                                    "Class": {
+                                      "op": "cn",
+                                      "args": [
+                                        "flex items-center justify-between gap-4",
+                                        {
+                                          "op": "cond",
+                                          "args": [
+                                            {
+                                              "$": "row.strong"
+                                            },
+                                            "border-t border-border pt-4 text-base font-bold",
+                                            "text-sm text-muted-foreground"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "attrs": {
+                                    "data-testid": "item"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Inline",
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "row.label"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Inline",
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "op": "money",
+                                            "args": [
+                                              {
+                                                "$": "row.amount"
+                                              },
+                                              {
+                                                "$": "row.currency"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "cta"
+                              },
+                              "show"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "Button",
+                              "props": {
+                                "Variant": "default",
+                                "Size": "default",
+                                "Class": "w-full"
+                              },
+                              "attrs": {
+                                "data-testid": "checkout"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "labels.checkout"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "note"
+                              },
+                              "show"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Size": "xs",
+                                "Class": "text-muted-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "labels.note"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

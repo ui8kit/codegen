@@ -1,0 +1,395 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.theme-marketing-landing",
+  "name": "ThemeMarketingLandingScreen",
+  "kind": "composed",
+  "docs": "Landing pages of a product: five heroes (screenshot, form, code, display type, backdrop) each followed by proof, features and a call to action, then a company page, a portfolio and a page for teams built from the split blocks.",
+  "routes": [
+    {
+      "path": "",
+      "area": "home"
+    },
+    {
+      "path": "launch",
+      "area": "launch"
+    },
+    {
+      "path": "developers",
+      "area": "developers"
+    },
+    {
+      "path": "studio",
+      "area": "studio"
+    },
+    {
+      "path": "events",
+      "area": "events"
+    },
+    {
+      "path": "company",
+      "area": "company"
+    },
+    {
+      "path": "work",
+      "area": "work"
+    },
+    {
+      "path": "teams",
+      "area": "teams"
+    }
+  ],
+  "frame": {
+    "before": [
+      {
+        "block": "navbar",
+        "variant": "inline",
+        "props": {
+          "brandHref": "#/",
+          "links": {
+            "$": "nav.links"
+          },
+          "current": {
+            "$": "nav.current"
+          },
+          "skip": {
+            "$": "ui.site.header.skip"
+          },
+          "actions": {
+            "themeLabel": {
+              "$": "ui.theme.toggle"
+            }
+          }
+        }
+      }
+    ],
+    "after": [
+      {
+        "block": "sitemap",
+        "variant": "columns"
+      }
+    ]
+  },
+  "areas": {
+    "home": [
+      {
+        "block": "hero",
+        "variant": "screenshot",
+        "props": {
+          "title": {
+            "$": "ui.pages.marketingLanding.home.title"
+          },
+          "text": {
+            "$": "ui.pages.marketingLanding.home.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.marketingLanding.home.cta"
+            },
+            "href": "#/launch"
+          }
+        }
+      },
+      {
+        "block": "logos",
+        "variant": "row"
+      },
+      {
+        "block": "features",
+        "variant": "rowsAlternate"
+      },
+      {
+        "block": "steps",
+        "variant": "rowIcons"
+      },
+      {
+        "block": "stats",
+        "variant": "icons"
+      },
+      {
+        "block": "testimonials",
+        "variant": "single"
+      },
+      {
+        "block": "faq",
+        "variant": "list"
+      },
+      {
+        "block": "cta",
+        "variant": "band"
+      }
+    ],
+    "launch": [
+      {
+        "block": "hero",
+        "variant": "form",
+        "props": {
+          "title": {
+            "$": "ui.pages.marketingLanding.launch.title"
+          },
+          "text": {
+            "$": "ui.pages.marketingLanding.launch.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.marketingLanding.launch.cta"
+            },
+            "href": "#/developers"
+          }
+        }
+      },
+      {
+        "block": "iconwall",
+        "variant": "tiles4"
+      },
+      {
+        "block": "proof",
+        "variant": "above"
+      },
+      {
+        "block": "testimonials",
+        "variant": "grid3"
+      },
+      {
+        "block": "cta",
+        "variant": "form"
+      }
+    ],
+    "developers": [
+      {
+        "block": "hero",
+        "variant": "code",
+        "props": {
+          "title": {
+            "$": "ui.pages.marketingLanding.developers.title"
+          },
+          "text": {
+            "$": "ui.pages.marketingLanding.developers.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.marketingLanding.developers.cta"
+            },
+            "href": "#/studio"
+          }
+        }
+      },
+      {
+        "block": "bento",
+        "variant": "bento"
+      },
+      {
+        "block": "templates",
+        "variant": "grid4"
+      },
+      {
+        "block": "features",
+        "variant": "tiles4"
+      },
+      {
+        "block": "faq",
+        "variant": "tabs"
+      },
+      {
+        "block": "cta",
+        "variant": "split"
+      }
+    ],
+    "studio": [
+      {
+        "block": "hero",
+        "variant": "display",
+        "props": {
+          "title": {
+            "$": "ui.pages.marketingLanding.studio.title"
+          },
+          "text": {
+            "$": "ui.pages.marketingLanding.studio.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.marketingLanding.studio.cta"
+            },
+            "href": "#/events"
+          }
+        }
+      },
+      {
+        "block": "logos",
+        "variant": "grid4"
+      },
+      {
+        "block": "features",
+        "variant": "tiles4"
+      },
+      {
+        "block": "testimonials",
+        "variant": "masonry"
+      },
+      {
+        "block": "cta",
+        "variant": "band"
+      }
+    ],
+    "events": [
+      {
+        "block": "hero",
+        "variant": "backdrop",
+        "props": {
+          "title": {
+            "$": "ui.pages.marketingLanding.events.title"
+          },
+          "text": {
+            "$": "ui.pages.marketingLanding.events.text"
+          },
+          "actions": {
+            "cta": {
+              "$": "ui.pages.marketingLanding.events.cta"
+            },
+            "href": "#/company"
+          }
+        }
+      },
+      {
+        "block": "stats",
+        "variant": "cards"
+      },
+      {
+        "block": "testimonials",
+        "variant": "strip"
+      },
+      {
+        "block": "videos",
+        "variant": "overlay"
+      },
+      {
+        "block": "cta",
+        "variant": "agency"
+      }
+    ],
+    "company": [
+      {
+        "block": "pagehead",
+        "variant": "center",
+        "props": {
+          "title": {
+            "$": "ui.pages.marketingLanding.company.title"
+          },
+          "text": {
+            "$": "ui.pages.marketingLanding.company.text"
+          },
+          "cta": {
+            "$": "ui.pages.marketingLanding.company.cta"
+          },
+          "href": "#/work"
+        }
+      },
+      {
+        "block": "about",
+        "variant": "split"
+      },
+      {
+        "block": "storytabs",
+        "variant": "yearTabs"
+      },
+      {
+        "block": "timeline",
+        "variant": "split"
+      },
+      {
+        "block": "team",
+        "variant": "cards4"
+      },
+      {
+        "block": "jobs",
+        "variant": "grouped"
+      }
+    ],
+    "work": [
+      {
+        "block": "aboutme",
+        "variant": "facts"
+      },
+      {
+        "block": "projects",
+        "variant": "cards"
+      },
+      {
+        "block": "photos",
+        "variant": "masonry"
+      }
+    ],
+    "teams": [
+      {
+        "block": "herosplit",
+        "variant": "quoteStats"
+      },
+      {
+        "block": "logos",
+        "variant": "row"
+      },
+      {
+        "block": "faqsplit",
+        "variant": "helpCard"
+      },
+      {
+        "block": "quotesplit",
+        "variant": "ratingPanel"
+      },
+      {
+        "block": "ctaproof",
+        "variant": "splitStats"
+      }
+    ]
+  },
+  "chunks": true,
+  "requireH1": true,
+  "nameLandmarks": true,
+  "nav": true,
+  "menu": [
+    {
+      "id": "home",
+      "path": "",
+      "titleKey": "pages.marketingLanding.home.nav"
+    },
+    {
+      "id": "launch",
+      "path": "launch",
+      "titleKey": "pages.marketingLanding.launch.nav"
+    },
+    {
+      "id": "developers",
+      "path": "developers",
+      "titleKey": "pages.marketingLanding.developers.nav"
+    },
+    {
+      "id": "studio",
+      "path": "studio",
+      "titleKey": "pages.marketingLanding.studio.nav"
+    },
+    {
+      "id": "events",
+      "path": "events",
+      "titleKey": "pages.marketingLanding.events.nav"
+    },
+    {
+      "id": "company",
+      "path": "company",
+      "titleKey": "pages.marketingLanding.company.nav"
+    },
+    {
+      "id": "work",
+      "path": "work",
+      "titleKey": "pages.marketingLanding.work.nav"
+    },
+    {
+      "id": "teams",
+      "path": "teams",
+      "titleKey": "pages.marketingLanding.teams.nav"
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

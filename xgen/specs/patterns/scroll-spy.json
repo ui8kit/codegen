@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.scroll-spy",
+  "name": "ScrollSpy",
+  "docs": "Marks which section of the page is being read: it watches the sections by id and reports the one in view, so a table of contents or a sticky picture can follow.",
+  "records": {},
+  "props": [
+    {
+      "name": "ids",
+      "type": {
+        "ts": "string[]"
+      },
+      "docs": "ids of the sections, in page order",
+      "required": true
+    },
+    {
+      "name": "offset",
+      "type": "number",
+      "docs": "pixels from the top that count as being in view",
+      "default": 0
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "active",
+      "args": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "docs": "another section came into view"
+    }
+  ],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "an intersection observer on the page's sections; the page owns the state"
+    },
+    "react": {
+      "portable": false,
+      "reason": "an intersection observer on the page's sections; the page owns the state"
+    }
+  }
+}

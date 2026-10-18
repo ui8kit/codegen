@@ -1,0 +1,151 @@
+{
+  "collection": "stores",
+  "kind": "store",
+  "entries": [
+    {
+      "id": "store-market",
+      "locale": "en",
+      "kind": "store",
+      "status": "published",
+      "visibility": "public",
+      "slug": "market",
+      "title": "Market Street",
+      "metadata": {
+        "store_kind": {
+          "value": "pickup"
+        },
+        "address": {
+          "value": "18 Market Street"
+        },
+        "hours": {
+          "value": "Daily, 8:00 to 23:00"
+        },
+        "phone": {
+          "value": "+1 555 0145"
+        },
+        "note": {
+          "value": "Five minutes from Central station"
+        },
+        "services": {
+          "value": [
+            "Pickup in 30 minutes",
+            "Gift wrapping",
+            "Repairs"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-03T09:00:00Z",
+      "published_at": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "store-harbour",
+      "locale": "en",
+      "kind": "store",
+      "status": "published",
+      "visibility": "public",
+      "slug": "harbour",
+      "title": "Harbour Road",
+      "metadata": {
+        "store_kind": {
+          "value": "pickup"
+        },
+        "address": {
+          "value": "71 Harbour Road"
+        },
+        "hours": {
+          "value": "Daily, 8:00 to 22:00"
+        },
+        "phone": {
+          "value": "+1 555 0146"
+        },
+        "note": {
+          "value": "Parking at the back"
+        },
+        "services": {
+          "value": [
+            "Pickup in 30 minutes",
+            "Parking"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-05T09:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "store-hillside",
+      "locale": "en",
+      "kind": "store",
+      "status": "published",
+      "visibility": "public",
+      "slug": "hillside",
+      "title": "Hillside Mall",
+      "metadata": {
+        "store_kind": {
+          "value": "store"
+        },
+        "address": {
+          "value": "75 Hillside Avenue, level 2"
+        },
+        "hours": {
+          "value": "Daily, 9:00 to 22:00"
+        },
+        "phone": {
+          "value": "+1 555 0147"
+        },
+        "note": {
+          "value": "Inside the mall, next to the food court"
+        },
+        "services": {
+          "value": [
+            "Showroom",
+            "Parking"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T10:00:00Z"
+    },
+    {
+      "id": "store-depot",
+      "locale": "en",
+      "kind": "store",
+      "status": "published",
+      "visibility": "public",
+      "slug": "depot",
+      "title": "North Depot",
+      "metadata": {
+        "store_kind": {
+          "value": "pickup"
+        },
+        "address": {
+          "value": "6 Depot Lane"
+        },
+        "hours": {
+          "value": "Daily, 9:00 to 23:00"
+        },
+        "phone": {
+          "value": "+1 555 0148"
+        },
+        "note": {
+          "value": "Delivery hub with a pickup desk"
+        },
+        "services": {
+          "value": [
+            "Delivery hub",
+            "Returns desk"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-08T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T10:00:00Z"
+    }
+  ]
+}

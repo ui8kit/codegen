@@ -1,0 +1,227 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.feature-stat-rows",
+  "name": "FeatureStatRows",
+  "docs": "Two figures of FeatureSplit as cards, then three features as checked rows.",
+  "records": {},
+  "props": [
+    {
+      "name": "features",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true
+    },
+    {
+      "name": "stats",
+      "type": {
+        "ts": "Stat[]"
+      },
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "6",
+        "Align": "stretch"
+      },
+      "children": [
+        {
+          "use": "Box",
+          "props": {
+            "Class": "grid grid-cols-2 gap-4"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "stats"
+              },
+              "as": "s",
+              "key": {
+                "$": "s.id"
+              },
+              "do": [
+                {
+                  "when": {
+                    "op": "lt",
+                    "args": [
+                      {
+                        "$": "i"
+                      },
+                      2
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "0",
+                        "Class": "rounded bg-card inset-ring inset-ring-border p-4"
+                      },
+                      "attrs": {
+                        "data-testid": "feature-stat"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "2xl",
+                            "Weight": "bold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.value"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "xs",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.label"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        },
+        {
+          "use": "Stack",
+          "props": {
+            "Gap": "4",
+            "Align": "stretch"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "features"
+              },
+              "as": "f",
+              "key": {
+                "$": "f.id"
+              },
+              "do": [
+                {
+                  "when": {
+                    "op": "lt",
+                    "args": [
+                      {
+                        "$": "i"
+                      },
+                      3
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "4",
+                        "Align": "start"
+                      },
+                      "attrs": {
+                        "data-testid": "feature-item"
+                      },
+                      "children": [
+                        {
+                          "use": "Inline",
+                          "props": {
+                            "Class": "flex size-6 shrink-0 items-center justify-center rounded bg-primary text-primary-foreground"
+                          },
+                          "children": [
+                            {
+                              "use": "LucideIcon",
+                              "props": {
+                                "Name": "check",
+                                "Size": 16
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Stack",
+                          "props": {
+                            "Gap": "2",
+                            "Class": "min-w-0"
+                          },
+                          "children": [
+                            {
+                              "use": "Title",
+                              "props": {
+                                "As": 3,
+                                "Size": "sm",
+                                "Weight": "semibold"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "f.title"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Size": "sm",
+                                "Class": "text-muted-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "f.text"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    },
+    {
+      "from": "StatsBand",
+      "names": [
+        "Stat"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.navbar",
+  "name": "Navigation bar",
+  "docs": "A top bar in four shapes: inline, split around the brand, with a search field, and transparent over a picture.",
+  "theme": "marketing",
+  "group": "navigation",
+  "organism": "NavBar",
+  "axes": {
+    "layout": [
+      "inline",
+      "split",
+      "search"
+    ],
+    "over": [
+      "none",
+      "media"
+    ],
+    "actions.mode": [
+      "none",
+      "cta"
+    ],
+    "tone": [
+      "default",
+      "inverse"
+    ]
+  },
+  "defaults": {
+    "layout": "inline",
+    "over": "none",
+    "actions.mode": "cta",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "inline",
+      "set": {}
+    },
+    {
+      "id": "split",
+      "set": {
+        "layout": "split"
+      }
+    },
+    {
+      "id": "search",
+      "set": {
+        "layout": "search"
+      }
+    },
+    {
+      "id": "media",
+      "set": {
+        "over": "media"
+      }
+    },
+    {
+      "id": "plain",
+      "set": {
+        "actions.mode": "none"
+      }
+    },
+    {
+      "id": "inverse",
+      "set": {
+        "tone": "inverse"
+      },
+      "props": {
+        "actions": {
+          "login": {
+            "$": "ui.site.header.login"
+          },
+          "loginHref": "#/login"
+        }
+      }
+    }
+  ],
+  "slots": [
+    "MenuEntry",
+    "NavActions",
+    "NavBarMenu",
+    "NavBlock",
+    "NavLinks",
+    "OverMedia",
+    "SearchPalette"
+  ],
+  "events": {
+    "theme": "toggleTheme"
+  },
+  "facts": [
+    {
+      "sel": "[data-testid=\"nav-link\"]",
+      "n": "@navlinks"
+    },
+    {
+      "sel": "[data-testid=\"header-cta\"]",
+      "n": 1,
+      "when": {
+        "actions.mode": "cta"
+      }
+    },
+    {
+      "sel": "[data-testid=\"header-cta\"]",
+      "n": 0,
+      "when": {
+        "actions.mode": "none"
+      }
+    },
+    {
+      "sel": "[data-testid=\"palette\"]",
+      "n": 1,
+      "when": {
+        "layout": "search"
+      }
+    },
+    {
+      "sel": "[data-testid=\"palette\"]",
+      "n": 0,
+      "when": {
+        "layout": [
+          "inline",
+          "split"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"over\"]",
+      "n": 1,
+      "when": {
+        "over": "media"
+      }
+    },
+    {
+      "sel": "[data-testid=\"over\"]",
+      "n": 0,
+      "when": {
+        "over": "none"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "navlinks",
+      "collection": "navlinks",
+      "kind": "menu_item",
+      "record": "NavLink",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value",
+        "href": "slug|route"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "label": {
+        "$": "ui.vibe.nav.label"
+      },
+      "brand": {
+        "$": "ui.site.header.brand"
+      },
+      "links": {
+        "$": "navlinks"
+      },
+      "current": "link-product",
+      "actions": {
+        "cta": {
+          "$": "ui.site.header.cta"
+        },
+        "href": "#/",
+        "login": {
+          "$": "ui.site.header.login"
+        },
+        "loginHref": "#/login"
+      },
+      "search": {
+        "label": {
+          "$": "ui.vibe.nav.search"
+        },
+        "shortcut": {
+          "$": "ui.vibe.nav.shortcut"
+        }
+      }
+    }
+  }
+}

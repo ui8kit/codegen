@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.count-up",
+  "name": "CountUp",
+  "docs": "A figure that counts from zero to `value` when it first comes into view. Without script, and under a reduced-motion preference, it shows `value` at once; the figure in the markup is always the final one.",
+  "records": {},
+  "props": [
+    {
+      "name": "value",
+      "type": "number",
+      "docs": "the final figure",
+      "required": true
+    },
+    {
+      "name": "prefix",
+      "type": "string"
+    },
+    {
+      "name": "suffix",
+      "type": "string"
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "docs": "milliseconds",
+      "default": 1200
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "motion needs timers, animation frames or media APIs and a reduced-motion rule; it is written by the programmer behind this contract"
+    },
+    "react": {
+      "portable": false,
+      "reason": "motion needs timers, animation frames or media APIs and a reduced-motion rule; it is written by the programmer behind this contract"
+    }
+  }
+}

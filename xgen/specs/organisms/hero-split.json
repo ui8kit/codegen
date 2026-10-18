@@ -1,0 +1,265 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.hero-split",
+  "name": "HeroSplit",
+  "docs": "A split hero: a badge, the heading, a lead, an extra under it and one or two actions, beside the media. Axes: extra (stats: three figures, avatars: faces and a proof line, minis: two small feature cards, quote: a quote over three figures, none), media (picture, card: a floating card on the picture, grid: four pictures with captions, plans: two plan cards on the picture), mediaSide, tone.",
+  "records": {
+    "HeroContent": [
+      {
+        "name": "stats",
+        "type": "Stat[]"
+      },
+      {
+        "name": "features",
+        "type": "Feature[]"
+      },
+      {
+        "name": "people",
+        "type": "Quote[]"
+      },
+      {
+        "name": "plans",
+        "type": "Plan[]"
+      },
+      {
+        "name": "proof",
+        "type": "string"
+      },
+      {
+        "name": "card",
+        "type": "OfferCard"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "lead",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "badge",
+      "type": "string",
+      "default": "",
+      "docs": "a short pill above the heading"
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 1
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "LinkActions"
+      },
+      "required": true
+    },
+    {
+      "name": "content",
+      "type": {
+        "record": "HeroContent"
+      },
+      "required": true
+    },
+    {
+      "name": "extra",
+      "type": {
+        "ts": "\"stats\" | \"avatars\" | \"minis\" | \"quote\" | \"none\""
+      },
+      "default": "stats"
+    },
+    {
+      "name": "media",
+      "type": {
+        "ts": "\"picture\" | \"card\" | \"grid\" | \"plans\""
+      },
+      "default": "picture"
+    },
+    {
+      "name": "mediaSide",
+      "type": {
+        "ts": "\"end\" | \"start\""
+      },
+      "default": "end"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "lead": {
+          "$": "lead"
+        },
+        "heading": {
+          "badge": {
+            "$": "badge"
+          },
+          "level": {
+            "$": "level"
+          }
+        },
+        "layout": "split",
+        "media": {
+          "show": true,
+          "side": {
+            "$": "mediaSide"
+          }
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "organism": "HeroSplitExtras",
+              "props": {
+                "content": {
+                  "$": "content"
+                },
+                "extra": {
+                  "$": "extra"
+                }
+              }
+            },
+            {
+              "organism": "ActionGroup",
+              "props": {
+                "primary": {
+                  "$": "actions.cta"
+                },
+                "primaryHref": {
+                  "$": "actions.href"
+                },
+                "secondary": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "actions.mode"
+                        },
+                        "two"
+                      ]
+                    },
+                    {
+                      "$": "actions.secondary"
+                    },
+                    {
+                      "op": "undef",
+                      "args": []
+                    }
+                  ]
+                },
+                "secondaryHref": {
+                  "$": "actions.secondaryHref"
+                }
+              }
+            }
+          ]
+        },
+        "aside": {
+          "args": [],
+          "do": [
+            {
+              "organism": "HeroSplitMedia",
+              "props": {
+                "content": {
+                  "$": "content"
+                },
+                "alt": {
+                  "$": "title"
+                },
+                "media": {
+                  "$": "media"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "StatsBand",
+      "names": [
+        "Stat"
+      ]
+    },
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    },
+    {
+      "from": "TestimonialGrid",
+      "names": [
+        "Quote"
+      ]
+    },
+    {
+      "from": "StoreHero",
+      "names": [
+        "OfferCard"
+      ]
+    },
+    {
+      "from": "PricingCard",
+      "names": [
+        "Plan"
+      ]
+    },
+    {
+      "from": "ErrorPage",
+      "names": [
+        "LinkActions"
+      ]
+    }
+  ]
+}

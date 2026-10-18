@@ -1,0 +1,417 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.site-header",
+  "name": "SiteHeader",
+  "docs": "The page header: a skip link to the main content, the brand, the two navigation links (the current one carries aria-current) and the theme button. `current` is the route area. Axes: layout (inline, stacked), position (static, sticky), actions (none, cta).",
+  "records": {
+    "SiteHeaderLabels": [
+      {
+        "name": "skip",
+        "type": "string"
+      },
+      {
+        "name": "brand",
+        "type": "string"
+      },
+      {
+        "name": "nav",
+        "type": "string"
+      },
+      {
+        "name": "home",
+        "type": "string"
+      },
+      {
+        "name": "pricing",
+        "type": "string"
+      },
+      {
+        "name": "theme",
+        "type": "string"
+      }
+    ],
+    "SiteRoutes": [
+      {
+        "name": "home",
+        "type": "string",
+        "optional": true
+      },
+      {
+        "name": "pricing",
+        "type": "string",
+        "optional": true
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "labels",
+      "type": {
+        "record": "SiteHeaderLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "routes",
+      "type": {
+        "record": "SiteRoutes"
+      },
+      "docs": "the addresses of the two pages, from the app; none: the brand and the menu are text, not links"
+    },
+    {
+      "name": "current",
+      "type": "string",
+      "required": true,
+      "docs": "the area of the current route: home or pricing"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"inline\" | \"stacked\""
+      },
+      "default": "inline",
+      "docs": "inline: brand left, links and button right; stacked: all centered in rows"
+    },
+    {
+      "name": "position",
+      "type": {
+        "ts": "\"static\" | \"sticky\""
+      },
+      "default": "static",
+      "docs": "sticky: stays at the top while the page scrolls"
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "\"none\" | \"cta\""
+      },
+      "default": "none",
+      "docs": "cta: a call-to-action button after the navigation"
+    },
+    {
+      "name": "cta",
+      "type": "string",
+      "docs": "text of the call to action"
+    },
+    {
+      "name": "ctaHref",
+      "type": "string"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "theme",
+      "args": [],
+      "docs": "the theme button was pressed"
+    }
+  ],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "header",
+        "Class": {
+          "op": "cn",
+          "args": [
+            "border-b border-border bg-background",
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "position"
+                    },
+                    "sticky"
+                  ]
+                },
+                "sticky top-0 z-40",
+                ""
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "site-header",
+        "data-layout": {
+          "$": "layout"
+        },
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "use": "LinkPlain",
+          "props": {
+            "Href": "#main-content",
+            "Class": "sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:inset-ring focus:inset-ring-border"
+          },
+          "attrs": {
+            "data-testid": "skip-link"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "labels.skip"
+              }
+            }
+          ]
+        },
+        {
+          "use": "Container",
+          "props": {
+            "Class": {
+              "op": "cn",
+              "args": [
+                "mx-auto w-full max-w-6xl px-4",
+                "flex flex-wrap gap-4 py-4",
+                {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "layout"
+                        },
+                        "stacked"
+                      ]
+                    },
+                    "flex-col items-center",
+                    "items-center justify-between"
+                  ]
+                }
+              ]
+            }
+          },
+          "attrs": {
+            "data-slot": "container"
+          },
+          "children": [
+            {
+              "organism": "MenuEntry",
+              "props": {
+                "href": {
+                  "$": "routes.home"
+                },
+                "className": "text-lg font-medium",
+                "testid": "brand"
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "text": {
+                        "$": "labels.brand"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "organism": "NavBlock",
+              "props": {
+                "label": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "landmarkLabel"
+                    },
+                    {
+                      "op": "uniq",
+                      "args": [
+                        {
+                          "op": "tpl",
+                          "args": [
+                            "{0}, {1}",
+                            {
+                              "$": "labels.nav"
+                            },
+                            {
+                              "$": "landmarkLabel"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "$": "labels.nav"
+                    }
+                  ]
+                },
+                "testid": "site-nav"
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "4",
+                        "Align": "center"
+                      },
+                      "children": [
+                        {
+                          "organism": "MenuEntry",
+                          "props": {
+                            "href": {
+                              "$": "routes.home"
+                            },
+                            "className": "font-semibold",
+                            "current": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "current"
+                                },
+                                "home"
+                              ]
+                            },
+                            "testid": "nav-link"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "text": {
+                                    "$": "labels.home"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "organism": "MenuEntry",
+                          "props": {
+                            "href": {
+                              "$": "routes.pricing"
+                            },
+                            "className": "font-semibold",
+                            "current": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "current"
+                                },
+                                "pricing"
+                              ]
+                            },
+                            "testid": "nav-link"
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "text": {
+                                    "$": "labels.pricing"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "4",
+                "Align": "center"
+              },
+              "children": [
+                {
+                  "use": "Button",
+                  "props": {
+                    "Variant": "outline",
+                    "Size": "sm"
+                  },
+                  "attrs": {
+                    "data-testid": "theme-toggle"
+                  },
+                  "on": {
+                    "click": {
+                      "call": "emit.theme",
+                      "args": []
+                    }
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "labels.theme"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "actions"
+                          },
+                          "cta"
+                        ]
+                      },
+                      {
+                        "$": "cta"
+                      }
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "default",
+                        "Size": "sm",
+                        "Href": {
+                          "$": "ctaHref"
+                        }
+                      },
+                      "attrs": {
+                        "data-testid": "header-cta"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "cta"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

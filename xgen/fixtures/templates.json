@@ -1,0 +1,198 @@
+{
+  "collection": "templates",
+  "kind": "template",
+  "entries": [
+    {
+      "id": "template-store-front",
+      "locale": "en",
+      "kind": "template",
+      "status": "published",
+      "visibility": "public",
+      "slug": "store-front",
+      "title": "Store Front",
+      "metadata": {
+        "views": {
+          "value": 1200
+        },
+        "likes": {
+          "value": 96
+        },
+        "topic": {
+          "value": "landing"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "template-event-page",
+      "locale": "en",
+      "kind": "template",
+      "status": "published",
+      "visibility": "public",
+      "slug": "event-page",
+      "title": "Event Page",
+      "metadata": {
+        "views": {
+          "value": 3400
+        },
+        "likes": {
+          "value": 210
+        },
+        "topic": {
+          "value": "landing"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "template-team-dashboard",
+      "locale": "en",
+      "kind": "template",
+      "status": "published",
+      "visibility": "public",
+      "slug": "team-dashboard",
+      "title": "Team Dashboard",
+      "metadata": {
+        "views": {
+          "value": 860
+        },
+        "likes": {
+          "value": 48
+        },
+        "topic": {
+          "value": "dashboard"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "template-docs-site",
+      "locale": "en",
+      "kind": "template",
+      "status": "published",
+      "visibility": "public",
+      "slug": "docs-site",
+      "title": "Docs Site",
+      "metadata": {
+        "views": {
+          "value": 2100
+        },
+        "likes": {
+          "value": 133
+        },
+        "topic": {
+          "value": "code"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "template-portfolio",
+      "locale": "en",
+      "kind": "template",
+      "status": "published",
+      "visibility": "public",
+      "slug": "portfolio",
+      "title": "Portfolio",
+      "metadata": {
+        "views": {
+          "value": 5000
+        },
+        "likes": {
+          "value": 402
+        },
+        "topic": {
+          "value": "landing"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "template-course-page",
+      "locale": "en",
+      "kind": "template",
+      "status": "published",
+      "visibility": "public",
+      "slug": "course-page",
+      "title": "Course Page",
+      "metadata": {
+        "views": {
+          "value": 740
+        },
+        "likes": {
+          "value": 35
+        },
+        "topic": {
+          "value": "dashboard"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "template-status-board",
+      "locale": "en",
+      "kind": "template",
+      "status": "published",
+      "visibility": "public",
+      "slug": "status-board",
+      "title": "Status Board",
+      "metadata": {
+        "views": {
+          "value": 1800
+        },
+        "likes": {
+          "value": 120
+        },
+        "topic": {
+          "value": "bots"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "template-recipe-blog",
+      "locale": "en",
+      "kind": "template",
+      "status": "published",
+      "visibility": "public",
+      "slug": "recipe-blog",
+      "title": "Recipe Blog",
+      "metadata": {
+        "views": {
+          "value": 2600
+        },
+        "likes": {
+          "value": 188
+        },
+        "topic": {
+          "value": "data"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    }
+  ]
+}

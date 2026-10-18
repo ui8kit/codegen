@@ -1,0 +1,11 @@
+{* Self-test fixture of the rules group, detector raw-native-tag (clean). *}
+{capture $c_3}
+  {capture $c_1}
+    {capture $c_2}
+      {=ui_text($v_title)}
+    {/capture}
+    {=ui_include('ui/inline/inline.latte', ['p' => [], 'children' => $c_2])|noescape}
+  {/capture}
+  {=ui_include('ui/box/box.latte', ['p' => ['Class' => 'p-4'], 'children' => $c_1])|noescape}
+{/capture}
+{=ui_include('ui/block/block.latte', ['p' => ['Tag' => 'section'], 'children' => $c_3])|noescape}

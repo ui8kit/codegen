@@ -1,0 +1,316 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.post-header",
+  "name": "PostHeader",
+  "docs": "The top of a post page: category, title, excerpt, the author line and an optional wide cover. Axes: layout (start, center), cover (show, hide), meta (full, short), tone.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "post",
+      "type": {
+        "ts": "Post"
+      },
+      "docs": "the post; without one: the empty state"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "PostLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 1
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"start\" | \"center\""
+      },
+      "default": "start"
+    },
+    {
+      "name": "cover",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "show"
+    },
+    {
+      "name": "meta",
+      "type": {
+        "ts": "\"full\" | \"short\""
+      },
+      "default": "full"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "$": "post"
+      },
+      "then": [
+        {
+          "organism": "SectionFrame",
+          "props": {
+            "id": {
+              "$": "id"
+            },
+            "title": {
+              "$": "post.title"
+            },
+            "lead": {
+              "$": "post.excerpt"
+            },
+            "heading": {
+              "level": {
+                "$": "level"
+              }
+            },
+            "align": {
+              "$": "layout"
+            },
+            "tone": {
+              "$": "tone"
+            },
+            "media": {
+              "show": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "cover"
+                  },
+                  "show"
+                ]
+              }
+            },
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          },
+          "slots": {
+            "children": {
+              "args": [],
+              "do": [
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "center",
+                    "Justify": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "center"
+                          ]
+                        },
+                        "center",
+                        "start"
+                      ]
+                    },
+                    "Class": "flex-wrap"
+                  },
+                  "attrs": {
+                    "data-testid": "post-meta"
+                  },
+                  "children": [
+                    {
+                      "organism": "MediaFrame",
+                      "props": {
+                        "alt": {
+                          "$": "post.author"
+                        },
+                        "ratio": "1/1",
+                        "className": "size-10 shrink-0 rounded-full"
+                      }
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Weight": "semibold"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "post.author"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Class": "text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "post.date"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "meta"
+                          },
+                          "full"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "tpl",
+                                "args": [
+                                  {
+                                    "$": "labels.minutes"
+                                  },
+                                  {
+                                    "$": "post.minutes"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "organism": "Pill",
+                      "props": {
+                        "tone": "blue"
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "text": {
+                                "$": "post.category"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "aside": {
+              "args": [],
+              "do": [
+                {
+                  "organism": "MediaFrame",
+                  "props": {
+                    "alt": {
+                      "$": "post.title"
+                    },
+                    "src": {
+                      "$": "post.image"
+                    },
+                    "ratio": "21/9"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "else": [
+        {
+          "organism": "SectionFrame",
+          "props": {
+            "id": {
+              "$": "id"
+            },
+            "heading": {
+              "level": {
+                "$": "level"
+              }
+            },
+            "align": {
+              "$": "layout"
+            },
+            "tone": {
+              "$": "tone"
+            },
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          },
+          "slots": {
+            "children": {
+              "args": [],
+              "do": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "file-text",
+                    "title": {
+                      "$": "labels.empty"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PostCard",
+      "names": [
+        "Post",
+        "PostLabels"
+      ]
+    }
+  ]
+}

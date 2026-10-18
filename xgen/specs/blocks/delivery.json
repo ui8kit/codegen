@@ -1,0 +1,127 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.delivery",
+  "name": "Delivery info",
+  "docs": "How delivery works: the facts, then the zones.",
+  "theme": "commerce",
+  "group": "delivery",
+  "organism": "DeliveryInfo",
+  "axes": {
+    "layout": [
+      "full",
+      "facts",
+      "split"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "full",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "full",
+      "set": {}
+    },
+    {
+      "id": "split",
+      "set": {
+        "layout": "split"
+      }
+    },
+    {
+      "id": "facts",
+      "set": {
+        "layout": "facts",
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"fact\"]",
+      "n": "@deliveryfacts"
+    },
+    {
+      "sel": "[data-testid=\"zone\"]",
+      "n": "@zones",
+      "when": {
+        "layout": [
+          "full",
+          "split"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"zone\"]",
+      "n": 0,
+      "when": {
+        "layout": "facts"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "deliveryfacts",
+      "collection": "deliveryfacts",
+      "kind": "fact",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "zones",
+      "collection": "zones",
+      "kind": "zone",
+      "record": "Zone",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "area": "metadata.area.value",
+        "price": "metadata.price.value",
+        "freeFrom": "metadata.freeFrom.value",
+        "minOrder": "metadata.minOrder.value",
+        "time": "metadata.time.value",
+        "express": "metadata.express.value",
+        "currency": "metadata.currency.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "delivery",
+      "title": {
+        "$": "ui.commerce.delivery.title"
+      },
+      "lead": {
+        "$": "ui.commerce.delivery.lead"
+      },
+      "facts": {
+        "$": "deliveryfacts"
+      },
+      "zones": {
+        "$": "zones"
+      },
+      "labels": {
+        "$": "ui.commerce.delivery"
+      }
+    }
+  }
+}

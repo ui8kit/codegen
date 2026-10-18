@@ -1,0 +1,92 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.hero-badge",
+  "name": "HeroBadge",
+  "docs": "A composite badge on a dark band: an optional small mark beside a label.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "mark",
+      "type": "string",
+      "docs": "small inner pill text (NEW)"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Group",
+      "props": {
+        "Gap": "2",
+        "Align": "center",
+        "Class": {
+          "op": "cn",
+          "args": [
+            "h-8 justify-center rounded-full px-2 inset-ring inset-ring-background/30",
+            {
+              "op": "preset",
+              "args": [
+                "defaults",
+                "hero.badge"
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "section-badge"
+      },
+      "children": [
+        {
+          "when": {
+            "$": "mark"
+          },
+          "then": [
+            {
+              "use": "Badge",
+              "props": {
+                "Variant": "secondary",
+                "Size": "sm"
+              },
+              "attrs": {
+                "data-testid": "badge-mark"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "mark"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "use": "Text",
+          "props": {
+            "Size": "xs",
+            "Weight": "bold",
+            "Class": "leading-5 text-background"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "label"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

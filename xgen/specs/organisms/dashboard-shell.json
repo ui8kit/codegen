@@ -1,0 +1,541 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.dashboard-shell",
+  "name": "DashboardShell",
+  "docs": "The frame of a signed-in app around placeholder content. Axes: topbar (full: across the whole shell, inset: over the content column only, none), search (show, hide: the search field of the top bar), sidebar (wide, rail, collapsed: the static collapsed state, twolevel: a rail and a section panel, none: the top bar carries the links), side (start, end), footer (full, inset, none), content (grid, split, list), frame (window: a framed window in a section, page: the whole page). Collapsing the sidebar is a port contract.",
+  "records": {
+    "ShellNav": [
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "brand",
+        "type": "string"
+      },
+      {
+        "name": "links",
+        "type": "NavLink[]"
+      },
+      {
+        "name": "current",
+        "type": "string"
+      },
+      {
+        "name": "subTitle",
+        "type": "string"
+      },
+      {
+        "name": "sub",
+        "type": "NavLink[]"
+      },
+      {
+        "name": "subCurrent",
+        "type": "string"
+      },
+      {
+        "name": "search",
+        "type": "string"
+      },
+      {
+        "name": "shortcut",
+        "type": "string"
+      },
+      {
+        "name": "expand",
+        "type": "string"
+      },
+      {
+        "name": "userName",
+        "type": "string"
+      },
+      {
+        "name": "copyright",
+        "type": "string"
+      },
+      {
+        "name": "footerLabel",
+        "type": "string"
+      },
+      {
+        "name": "footer",
+        "type": "NavLink[]"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 2
+    },
+    {
+      "name": "nav",
+      "type": {
+        "ts": "ShellNav"
+      },
+      "required": true,
+      "docs": "the brand, the links of both levels and the texts of the shell"
+    },
+    {
+      "name": "topbar",
+      "type": {
+        "ts": "\"full\" | \"inset\" | \"none\""
+      },
+      "default": "full"
+    },
+    {
+      "name": "search",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "show"
+    },
+    {
+      "name": "sidebar",
+      "type": {
+        "ts": "\"wide\" | \"rail\" | \"collapsed\" | \"twolevel\" | \"none\""
+      },
+      "default": "wide"
+    },
+    {
+      "name": "side",
+      "type": {
+        "ts": "\"start\" | \"end\""
+      },
+      "default": "start"
+    },
+    {
+      "name": "footer",
+      "type": {
+        "ts": "\"full\" | \"inset\" | \"none\""
+      },
+      "default": "none"
+    },
+    {
+      "name": "content",
+      "type": {
+        "ts": "\"grid\" | \"split\" | \"list\""
+      },
+      "default": "grid"
+    },
+    {
+      "name": "frame",
+      "type": {
+        "ts": "\"window\" | \"page\""
+      },
+      "default": "window"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "derived": [
+    {
+      "name": "titleId",
+      "value": {
+        "op": "tpl",
+        "args": [
+          "{0}-title",
+          {
+            "$": "id"
+          }
+        ]
+      }
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "section",
+        "Class": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "frame"
+                },
+                "window"
+              ]
+            },
+            "bg-background py-12",
+            "bg-background"
+          ]
+        }
+      },
+      "attrs": {
+        "id": {
+          "$": "id"
+        },
+        "aria-labelledby": {
+          "op": "cond",
+          "args": [
+            {
+              "$": "landmarkLabel"
+            },
+            {
+              "op": "undef",
+              "args": []
+            },
+            {
+              "$": "titleId"
+            }
+          ]
+        },
+        "data-testid": "dashboard-shell",
+        "data-topbar": {
+          "$": "topbar"
+        },
+        "data-sidebar": {
+          "$": "sidebar"
+        },
+        "data-footer": {
+          "$": "footer"
+        },
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "use": "Box",
+          "props": {
+            "Class": {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "frame"
+                    },
+                    "window"
+                  ]
+                },
+                "mx-auto w-full max-w-6xl px-4",
+                ""
+              ]
+            }
+          },
+          "children": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    "flex flex-col overflow-hidden bg-background",
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "frame"
+                            },
+                            "window"
+                          ]
+                        },
+                        "min-h-160 rounded border border-border",
+                        "min-h-screen"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "attrs": {
+                "data-testid": "window"
+              },
+              "children": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "topbar"
+                      },
+                      "full"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "ShellTopbar",
+                      "props": {
+                        "nav": {
+                          "$": "nav"
+                        },
+                        "links": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "sidebar"
+                                },
+                                "none"
+                              ]
+                            },
+                            "show",
+                            "hide"
+                          ]
+                        },
+                        "search": {
+                          "$": "search"
+                        },
+                        "landmarkLabel": {
+                          "$": "landmarkLabel"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": {
+                      "op": "cn",
+                      "args": [
+                        "flex min-h-0 flex-1",
+                        {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "side"
+                                },
+                                "end"
+                              ]
+                            },
+                            "flex-row-reverse",
+                            ""
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "ne",
+                        "args": [
+                          {
+                            "$": "sidebar"
+                          },
+                          "none"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "ShellSidebar",
+                          "props": {
+                            "nav": {
+                              "$": "nav"
+                            },
+                            "mode": {
+                              "$": "sidebar"
+                            },
+                            "side": {
+                              "$": "side"
+                            },
+                            "brand": {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "topbar"
+                                    },
+                                    "full"
+                                  ]
+                                },
+                                "hide",
+                                "show"
+                              ]
+                            },
+                            "landmarkLabel": {
+                              "$": "landmarkLabel"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": "flex min-w-0 flex-1 flex-col"
+                      },
+                      "children": [
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "topbar"
+                              },
+                              "inset"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "ShellTopbar",
+                              "props": {
+                                "nav": {
+                                  "$": "nav"
+                                },
+                                "brand": {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "sidebar"
+                                        },
+                                        "none"
+                                      ]
+                                    },
+                                    "show",
+                                    "hide"
+                                  ]
+                                },
+                                "links": {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "sidebar"
+                                        },
+                                        "none"
+                                      ]
+                                    },
+                                    "show",
+                                    "hide"
+                                  ]
+                                },
+                                "search": {
+                                  "$": "search"
+                                },
+                                "landmarkLabel": {
+                                  "$": "landmarkLabel"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "organism": "ShellContent",
+                          "props": {
+                            "title": {
+                              "$": "title"
+                            },
+                            "titleId": {
+                              "$": "titleId"
+                            },
+                            "level": {
+                              "$": "level"
+                            },
+                            "content": {
+                              "$": "content"
+                            }
+                          }
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "footer"
+                              },
+                              "inset"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "ShellFooter",
+                              "props": {
+                                "nav": {
+                                  "$": "nav"
+                                },
+                                "place": "inset",
+                                "landmarkLabel": {
+                                  "$": "landmarkLabel"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "footer"
+                      },
+                      "full"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "ShellFooter",
+                      "props": {
+                        "nav": {
+                          "$": "nav"
+                        },
+                        "landmarkLabel": {
+                          "$": "landmarkLabel"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "NavBar",
+      "names": [
+        "NavLink"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.usage",
+  "name": "Usage calculator",
+  "docs": "A slider for how much is used and the price it gives. The estimate follows the slider; the page keeps the value.",
+  "theme": "marketing",
+  "group": "pricing",
+  "organism": "UsageCalculator",
+  "axes": {
+    "layout": [
+      "card",
+      "plain"
+    ],
+    "ends": [
+      "show",
+      "hide"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "card",
+    "ends": "show",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "card",
+      "set": {}
+    },
+    {
+      "id": "plain",
+      "set": {
+        "layout": "plain"
+      }
+    },
+    {
+      "id": "noEnds",
+      "set": {
+        "ends": "hide"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "input[type=\"range\"]",
+      "n": 1
+    },
+    {
+      "sel": "[data-testid=\"estimate\"]",
+      "n": 1
+    }
+  ],
+  "data": [],
+  "sample": {
+    "props": {
+      "id": "usage",
+      "title": {
+        "$": "ui.vibe.usage.title"
+      },
+      "text": {
+        "$": "ui.vibe.usage.text"
+      },
+      "usage": 5000,
+      "slider": {
+        "min": 100,
+        "max": 10000,
+        "label": {
+          "$": "ui.vibe.usage.slider"
+        },
+        "unit": {
+          "$": "ui.vibe.usage.unit"
+        }
+      },
+      "price": {
+        "rate": 1,
+        "currency": {
+          "$": "ui.vibe.usage.currency"
+        },
+        "label": {
+          "$": "ui.vibe.usage.estimate"
+        }
+      },
+      "cta": {
+        "$": "ui.vibe.usage.cta"
+      },
+      "href": "#/"
+    }
+  }
+}

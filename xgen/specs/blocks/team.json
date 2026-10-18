@@ -1,0 +1,144 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.team",
+  "name": "Team",
+  "docs": "The people of a team as cards, a minimal grid, detailed cards, rows beside a picture or a directory.",
+  "theme": "marketing",
+  "group": "company",
+  "organism": "TeamGrid",
+  "axes": {
+    "layout": [
+      "cards",
+      "minimal",
+      "detailed",
+      "list",
+      "directory"
+    ],
+    "cols": [
+      "1-3",
+      "1-4"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "cards",
+    "cols": "1-4",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "cards4",
+      "set": {}
+    },
+    {
+      "id": "cards3",
+      "set": {
+        "cols": "1-3",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "minimal",
+      "set": {
+        "layout": "minimal"
+      }
+    },
+    {
+      "id": "detailed",
+      "set": {
+        "layout": "detailed",
+        "cols": "1-3"
+      }
+    },
+    {
+      "id": "list",
+      "set": {
+        "layout": "list"
+      }
+    },
+    {
+      "id": "directory",
+      "set": {
+        "layout": "directory",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame",
+    "MemberRow",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@members"
+    },
+    {
+      "sel": "[data-slot=\"media\"]",
+      "n": 1,
+      "when": {
+        "layout": "list"
+      }
+    },
+    {
+      "sel": "[data-slot=\"media\"]",
+      "n": 0,
+      "when": {
+        "layout": [
+          "cards",
+          "minimal",
+          "detailed",
+          "directory"
+        ]
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "members",
+      "collection": "members",
+      "kind": "member",
+      "record": "Member",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "role": "metadata.role.value",
+        "dept": "metadata.dept.value",
+        "location": "metadata.location.value",
+        "bio": "metadata.bio.value",
+        "skills": "metadata.skills.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "team",
+      "title": {
+        "$": "ui.company.team.title"
+      },
+      "lead": {
+        "$": "ui.company.team.lead"
+      },
+      "members": {
+        "$": "members"
+      },
+      "empty": {
+        "$": "ui.empty.members"
+      },
+      "depts": {
+        "$": "ui.company.depts"
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{#- Self-test fixture of the rules group, detector dynamic-tag (clean). -#}
+{%- set c_9 -%}
+  {{ include('ui/box/box.html.twig', {'p': {'Tag': 'div'}}, with_context = false) }}
+{%- endset -%}
+{{ include('ui/block/block.html.twig', {'p': {'Tag': 'section'}, 'children': c_9}, with_context = false) }}

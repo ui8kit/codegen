@@ -1,0 +1,190 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.nav-actions",
+  "name": "NavActions",
+  "docs": "The buttons at the end of a top bar: login, the call to action and the theme button (it only reports the press). No wrapper: they sit in the row of the bar.",
+  "records": {},
+  "props": [
+    {
+      "name": "login",
+      "type": "string",
+      "docs": "text of the login link; none: no login"
+    },
+    {
+      "name": "loginHref",
+      "type": "string",
+      "docs": "the address of the login page; none: the login is a button with no address"
+    },
+    {
+      "name": "cta",
+      "type": "string"
+    },
+    {
+      "name": "ctaHref",
+      "type": "string"
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "\"none\" | \"cta\""
+      },
+      "default": "cta"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"inverse\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "themeLabel",
+      "type": "string",
+      "docs": "text of the theme button; none: no button"
+    }
+  ],
+  "slots": [],
+  "events": [
+    {
+      "name": "theme",
+      "args": [],
+      "docs": "the theme button was pressed"
+    }
+  ],
+  "view": [
+    {
+      "when": {
+        "$": "login"
+      },
+      "then": [
+        {
+          "use": "Button",
+          "props": {
+            "Variant": "ghost",
+            "Size": "sm",
+            "Href": {
+              "$": "loginHref"
+            },
+            "Class": {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "tone"
+                    },
+                    "inverse"
+                  ]
+                },
+                "text-background hover:bg-background/10",
+                ""
+              ]
+            }
+          },
+          "attrs": {
+            "data-testid": "nav-login"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "login"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "when": {
+        "op": "and",
+        "args": [
+          {
+            "op": "eq",
+            "args": [
+              {
+                "$": "actions"
+              },
+              "cta"
+            ]
+          },
+          {
+            "$": "cta"
+          }
+        ]
+      },
+      "then": [
+        {
+          "use": "Button",
+          "props": {
+            "Variant": {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "tone"
+                    },
+                    "inverse"
+                  ]
+                },
+                "secondary",
+                "default"
+              ]
+            },
+            "Size": "sm",
+            "Href": {
+              "$": "ctaHref"
+            }
+          },
+          "attrs": {
+            "data-testid": "header-cta"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "cta"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "when": {
+        "$": "themeLabel"
+      },
+      "then": [
+        {
+          "use": "Button",
+          "props": {
+            "Variant": "outline",
+            "Size": "sm"
+          },
+          "attrs": {
+            "data-testid": "theme-toggle"
+          },
+          "on": {
+            "click": {
+              "call": "emit.theme",
+              "args": []
+            }
+          },
+          "children": [
+            {
+              "text": {
+                "$": "themeLabel"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

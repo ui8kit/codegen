@@ -1,0 +1,249 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.ctaproof",
+  "name": "Call to action, with proof",
+  "docs": "A call to action with logos, features, figures, icon rows or delivery zones; centered or beside a picture.",
+  "theme": "marketing",
+  "group": "cta",
+  "organism": "CtaProof",
+  "axes": {
+    "layout": [
+      "center",
+      "split"
+    ],
+    "proof": [
+      "logos",
+      "features",
+      "stats",
+      "rows",
+      "zones"
+    ],
+    "mediaSide": [
+      "end",
+      "start"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "center",
+    "proof": "stats",
+    "mediaSide": "end",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "centerLogos",
+      "set": {
+        "proof": "logos"
+      }
+    },
+    {
+      "id": "centerFeatures",
+      "set": {
+        "proof": "features"
+      }
+    },
+    {
+      "id": "centerStats",
+      "set": {
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "splitStats",
+      "set": {
+        "layout": "split"
+      }
+    },
+    {
+      "id": "splitStatsStart",
+      "set": {
+        "layout": "split",
+        "mediaSide": "start"
+      },
+      "props": {
+        "note": {
+          "$": "ui.marketing.ctaProof.note"
+        }
+      }
+    },
+    {
+      "id": "splitRows",
+      "set": {
+        "layout": "split",
+        "proof": "rows"
+      }
+    },
+    {
+      "id": "splitZones",
+      "set": {
+        "layout": "split",
+        "proof": "zones",
+        "tone": "muted"
+      },
+      "props": {
+        "title": {
+          "$": "ui.marketing.ctaProof.zonesTitle"
+        },
+        "lead": {
+          "$": "ui.marketing.ctaProof.zonesLead"
+        }
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "CtaProofItems",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"cta-proof\"]",
+      "n": 1
+    },
+    {
+      "sel": "[data-testid=\"cta-item\"]",
+      "n": "@logos",
+      "when": {
+        "proof": "logos"
+      }
+    },
+    {
+      "sel": "[data-testid=\"cta-item\"]",
+      "n": "@features",
+      "when": {
+        "proof": [
+          "features",
+          "rows"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"cta-item\"]",
+      "n": 3,
+      "when": {
+        "proof": "stats"
+      }
+    },
+    {
+      "sel": "[data-testid=\"cta-item\"]",
+      "n": "@zones",
+      "when": {
+        "proof": "zones"
+      }
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 1,
+      "when": {
+        "layout": "split"
+      }
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 0,
+      "when": {
+        "layout": "center"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "logos",
+      "collection": "logos",
+      "kind": "logo",
+      "record": "Logo",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "features",
+      "collection": "features",
+      "kind": "feature",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "stats",
+      "collection": "stats",
+      "kind": "stat",
+      "record": "Stat",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value|number",
+        "icon": "metadata.icon.value",
+        "hint": "metadata.hint.value"
+      }
+    },
+    {
+      "as": "zones",
+      "collection": "zones",
+      "kind": "zone",
+      "record": "Zone",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "area": "metadata.area.value",
+        "price": "metadata.price.value",
+        "freeFrom": "metadata.freeFrom.value",
+        "minOrder": "metadata.minOrder.value",
+        "time": "metadata.time.value",
+        "express": "metadata.express.value",
+        "currency": "metadata.currency.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "ctaproof",
+      "title": {
+        "$": "ui.marketing.ctaProof.title"
+      },
+      "lead": {
+        "$": "ui.marketing.ctaProof.lead"
+      },
+      "badge": {
+        "$": "ui.marketing.ctaProof.badge"
+      },
+      "actions": {
+        "mode": "two",
+        "cta": {
+          "$": "ui.marketing.ctaProof.cta"
+        },
+        "href": "#/pricing",
+        "secondary": {
+          "$": "ui.marketing.ctaProof.secondary"
+        },
+        "secondaryHref": "#/contact"
+      },
+      "content": {
+        "logos": {
+          "$": "logos"
+        },
+        "features": {
+          "$": "features"
+        },
+        "stats": {
+          "$": "stats"
+        },
+        "zones": {
+          "$": "zones"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "collection": "jobs",
+  "kind": "job",
+  "entries": [
+    {
+      "id": "job-frontend",
+      "locale": "en",
+      "kind": "job",
+      "status": "published",
+      "visibility": "public",
+      "slug": "frontend",
+      "title": "Senior Frontend Engineer",
+      "metadata": {
+        "dept": {
+          "value": "department-engineering"
+        },
+        "location": {
+          "value": "Remote"
+        },
+        "type": {
+          "value": "Full time"
+        },
+        "salary": {
+          "value": "$120k to $150k"
+        },
+        "posted": {
+          "value": "2026-03-28T12:00:00Z"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-03T09:00:00Z",
+      "published_at": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "job-platform",
+      "locale": "en",
+      "kind": "job",
+      "status": "published",
+      "visibility": "public",
+      "slug": "platform",
+      "title": "Platform Engineer",
+      "metadata": {
+        "dept": {
+          "value": "department-engineering"
+        },
+        "location": {
+          "value": "Berlin"
+        },
+        "type": {
+          "value": "Full time"
+        },
+        "salary": {
+          "value": "$110k to $140k"
+        },
+        "posted": {
+          "value": "2026-03-23T12:00:00Z"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-05T09:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "job-designer",
+      "locale": "en",
+      "kind": "job",
+      "status": "published",
+      "visibility": "public",
+      "slug": "designer",
+      "title": "Product Designer",
+      "metadata": {
+        "dept": {
+          "value": "department-design"
+        },
+        "location": {
+          "value": "Paris"
+        },
+        "type": {
+          "value": "Full time"
+        },
+        "salary": {
+          "value": "$95k to $120k"
+        },
+        "posted": {
+          "value": "2026-03-27T12:00:00Z"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T10:00:00Z"
+    },
+    {
+      "id": "job-brand",
+      "locale": "en",
+      "kind": "job",
+      "status": "published",
+      "visibility": "public",
+      "slug": "brand",
+      "title": "Brand Designer",
+      "metadata": {
+        "dept": {
+          "value": "department-design"
+        },
+        "location": {
+          "value": "Remote"
+        },
+        "type": {
+          "value": "Contract"
+        },
+        "salary": {
+          "value": "$60 an hour"
+        },
+        "posted": {
+          "value": "2026-03-16T12:00:00Z"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-08T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T10:00:00Z"
+    },
+    {
+      "id": "job-success",
+      "locale": "en",
+      "kind": "job",
+      "status": "published",
+      "visibility": "public",
+      "slug": "success",
+      "title": "Customer Success Lead",
+      "metadata": {
+        "dept": {
+          "value": "department-support"
+        },
+        "location": {
+          "value": "Toronto"
+        },
+        "type": {
+          "value": "Full time"
+        },
+        "salary": {
+          "value": "$80k to $95k"
+        },
+        "posted": {
+          "value": "2026-03-25T12:00:00Z"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-10T09:00:00Z",
+      "updated_at": "2026-03-11T09:00:00Z",
+      "published_at": "2026-03-11T10:00:00Z"
+    },
+    {
+      "id": "job-writer",
+      "locale": "en",
+      "kind": "job",
+      "status": "published",
+      "visibility": "public",
+      "slug": "writer",
+      "title": "Technical Writer",
+      "metadata": {
+        "dept": {
+          "value": "department-support"
+        },
+        "location": {
+          "value": "Remote"
+        },
+        "type": {
+          "value": "Part time"
+        },
+        "salary": {
+          "value": "$50 an hour"
+        },
+        "posted": {
+          "value": "2026-03-29T12:00:00Z"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-12T09:00:00Z",
+      "updated_at": "2026-03-13T09:00:00Z",
+      "published_at": "2026-03-13T10:00:00Z"
+    }
+  ]
+}

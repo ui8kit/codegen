@@ -1,0 +1,340 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.zone-rows",
+  "name": "ZoneRows",
+  "docs": "The zones as a table (the table layout of ZoneTable): the zone and its areas, the price, free from, the minimum order, the time and an express badge.",
+  "records": {},
+  "props": [
+    {
+      "name": "zones",
+      "type": {
+        "ts": "Zone[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "ZoneLabels"
+      },
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": "w-full overflow-x-auto rounded inset-ring inset-ring-border"
+      },
+      "children": [
+        {
+          "use": "Table",
+          "props": {
+            "Class": "w-full text-left text-sm"
+          },
+          "attrs": {
+            "data-testid": "zone-table"
+          },
+          "children": [
+            {
+              "use": "TableCaption",
+              "props": {
+                "Class": "sr-only"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "labels.caption"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "TableHead",
+              "props": {
+                "Class": "bg-muted"
+              },
+              "children": [
+                {
+                  "use": "TableRow",
+                  "children": [
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "px-4 py-2"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.zone"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "py-2"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.price"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "py-2"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.freeFrom"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "hidden py-2 md:table-cell"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.minOrder"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "py-2"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.time"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "TableHeadCell",
+                      "props": {
+                        "Scope": "col",
+                        "Class": "hidden py-2 pr-4 sm:table-cell"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.express"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "use": "TableBody",
+              "children": [
+                {
+                  "each": {
+                    "$": "zones"
+                  },
+                  "as": "z",
+                  "key": {
+                    "$": "z.id"
+                  },
+                  "do": [
+                    {
+                      "use": "TableRow",
+                      "props": {
+                        "Class": "border-t border-border"
+                      },
+                      "attrs": {
+                        "data-testid": "item"
+                      },
+                      "children": [
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": "px-4 py-4"
+                          },
+                          "children": [
+                            {
+                              "use": "Stack",
+                              "props": {
+                                "Gap": "0"
+                              },
+                              "children": [
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "sm",
+                                    "Weight": "semibold"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "z.name"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "xs",
+                                    "Class": "text-muted-foreground"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "z.area"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": "font-medium"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "money",
+                                "args": [
+                                  {
+                                    "$": "z.price"
+                                  },
+                                  {
+                                    "$": "z.currency"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "children": [
+                            {
+                              "text": {
+                                "op": "money",
+                                "args": [
+                                  {
+                                    "$": "z.freeFrom"
+                                  },
+                                  {
+                                    "$": "z.currency"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": "hidden md:table-cell"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "op": "money",
+                                "args": [
+                                  {
+                                    "$": "z.minOrder"
+                                  },
+                                  {
+                                    "$": "z.currency"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "children": [
+                            {
+                              "text": {
+                                "$": "z.time"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "TableCell",
+                          "props": {
+                            "Class": "hidden pr-4 sm:table-cell"
+                          },
+                          "children": [
+                            {
+                              "when": {
+                                "$": "z.express"
+                              },
+                              "then": [
+                                {
+                                  "use": "Badge",
+                                  "props": {
+                                    "Variant": "secondary",
+                                    "Size": "default"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "z.express"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "ZoneTable",
+      "names": [
+        "Zone",
+        "ZoneLabels"
+      ]
+    }
+  ]
+}

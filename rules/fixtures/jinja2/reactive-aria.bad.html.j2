@@ -1,0 +1,8 @@
+{#- Self-test fixture of the rules group, detector reactive-aria (violating). -#}
+{%- set c_2 -%}
+  {%- set c_1 -%}
+    {{ ui_text(v_more) }}
+  {%- endset -%}
+  {{ ui_include('ui/button/button.html.j2', {'p': {'Attrs': ui_attrs(['aria-expanded', v_open])}, 'children': c_1}) }}
+{%- endset -%}
+{{ ui_include('ui/block/block.html.j2', {'p': {'Tag': 'section'}, 'children': c_2}) }}

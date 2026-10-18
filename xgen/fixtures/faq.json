@@ -1,0 +1,102 @@
+{
+  "collection": "faq",
+  "kind": "faq",
+  "entries": [
+    {
+      "id": "faq-trial",
+      "locale": "en",
+      "kind": "faq",
+      "status": "published",
+      "visibility": "public",
+      "slug": "trial",
+      "title": "Is there a free plan?",
+      "terms": [
+        {
+          "taxonomy": "faq_category",
+          "term_id": "faq-category-billing"
+        }
+      ],
+      "metadata": {
+        "answer": {
+          "value": "Yes. Solo is free and has no time limit."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-11T09:00:00Z",
+      "published_at": "2026-03-11T10:00:00Z"
+    },
+    {
+      "id": "faq-switch",
+      "locale": "en",
+      "kind": "faq",
+      "status": "published",
+      "visibility": "public",
+      "slug": "switch",
+      "title": "Can I change plans later?",
+      "terms": [
+        {
+          "taxonomy": "faq_category",
+          "term_id": "faq-category-account"
+        }
+      ],
+      "metadata": {
+        "answer": {
+          "value": "You can move up or down at any time; the change applies to the next month."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-12T09:00:00Z",
+      "published_at": "2026-03-12T10:00:00Z"
+    },
+    {
+      "id": "faq-export",
+      "locale": "en",
+      "kind": "faq",
+      "status": "published",
+      "visibility": "public",
+      "slug": "export",
+      "title": "Can I export my data?",
+      "terms": [
+        {
+          "taxonomy": "faq_category",
+          "term_id": "faq-category-account"
+        }
+      ],
+      "metadata": {
+        "answer": {
+          "value": "Every plan can export all content as files."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-13T09:00:00Z",
+      "published_at": "2026-03-13T10:00:00Z"
+    },
+    {
+      "id": "faq-support",
+      "locale": "en",
+      "kind": "faq",
+      "status": "published",
+      "visibility": "public",
+      "slug": "support",
+      "title": "How fast is support?",
+      "terms": [
+        {
+          "taxonomy": "faq_category",
+          "term_id": "faq-category-billing"
+        }
+      ],
+      "metadata": {
+        "answer": {
+          "value": "Team answers within one working day, Scale within four hours."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-14T09:00:00Z",
+      "published_at": "2026-03-14T10:00:00Z"
+    }
+  ]
+}

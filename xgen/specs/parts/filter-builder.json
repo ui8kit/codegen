@@ -1,0 +1,88 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.filter-builder",
+  "name": "FilterBuilder",
+  "docs": "Rows \"field, operator, value\" joined by AND. Operators depend on the field type, the value control too. Every change reports the whole list; the list lives in the URL of the caller.",
+  "records": {
+    "FilterField": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "type",
+        "type": "string"
+      }
+    ],
+    "FilterCond": [
+      {
+        "name": "field",
+        "type": "string"
+      },
+      {
+        "name": "op",
+        "type": "string"
+      },
+      {
+        "name": "value",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "fields",
+      "type": {
+        "ts": "FilterField[]"
+      },
+      "required": true
+    },
+    {
+      "name": "filters",
+      "type": {
+        "ts": "FilterCond[]"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "Record<string, string>"
+      },
+      "docs": "every word: add, remove, field, operator, value, none, clear, and, yes, no and one per operator",
+      "required": true
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [
+    {
+      "name": "change",
+      "args": [
+        {
+          "name": "filters",
+          "type": {
+            "ts": "FilterCond[]"
+          }
+        }
+      ],
+      "docs": "the whole list after any change"
+    }
+  ],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "state and branching on the field type (operator tables, value controls per type) are logic: the markup of one row is generated from Field, Select and Input, the reducer is the programmer's behind the `change` port"
+    },
+    "react": {
+      "portable": false,
+      "reason": "state and branching on the field type (operator tables, value controls per type) are logic: the markup of one row is generated from Field, Select and Input, the reducer is the programmer's behind the `change` port"
+    }
+  }
+}

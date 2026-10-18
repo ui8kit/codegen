@@ -1,0 +1,126 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.footer-figures",
+  "name": "FooterFigures",
+  "docs": "Three figures in a row under the brand of FooterSplit.",
+  "records": {},
+  "props": [
+    {
+      "name": "extras",
+      "type": {
+        "ts": "FooterExtras"
+      },
+      "required": true,
+      "docs": "the figures, points, contacts and channels"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "gt",
+        "args": [
+          {
+            "op": "len",
+            "args": [
+              {
+                "$": "extras.stats"
+              }
+            ]
+          },
+          0
+        ]
+      },
+      "then": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "8",
+            "Class": "flex-wrap"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "extras.stats"
+              },
+              "as": "s",
+              "key": {
+                "$": "s.id"
+              },
+              "do": [
+                {
+                  "when": {
+                    "op": "lt",
+                    "args": [
+                      {
+                        "$": "i"
+                      },
+                      3
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "0"
+                      },
+                      "attrs": {
+                        "data-testid": "footer-stat"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "xl",
+                            "Weight": "bold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.value"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "xs",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "s.label"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FooterSplit",
+      "names": [
+        "FooterExtras",
+        "FooterSplitLabels"
+      ]
+    }
+  ]
+}

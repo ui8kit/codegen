@@ -1,0 +1,323 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.cookie-banner",
+  "name": "CookieBanner",
+  "docs": "A consent notice: an icon, a heading, one paragraph and the buttons accept, decline and (optionally) settings. Axes: layout (bar, card), actions (two, three), tone (default, muted).",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "accept",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "decline",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "settings",
+      "type": "string",
+      "docs": "text of the third button, shown when `actions` is three"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"bar\" | \"card\""
+      },
+      "default": "bar"
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "\"two\" | \"three\""
+      },
+      "default": "two"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "section"
+      },
+      "attrs": {
+        "aria-labelledby": {
+          "op": "cond",
+          "args": [
+            {
+              "$": "landmarkLabel"
+            },
+            {
+              "op": "undef",
+              "args": []
+            },
+            {
+              "op": "tpl",
+              "args": [
+                "{0}-title",
+                {
+                  "$": "id"
+                }
+              ]
+            }
+          ]
+        },
+        "data-testid": "cookie",
+        "data-layout": {
+          "$": "layout"
+        },
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "use": "Container",
+          "props": {
+            "Class": {
+              "op": "cn",
+              "args": [
+                "mx-auto w-full max-w-6xl px-4",
+                "py-4"
+              ]
+            }
+          },
+          "attrs": {
+            "data-slot": "container"
+          },
+          "children": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    "flex flex-col gap-4 rounded p-6 inset-ring inset-ring-border",
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "tone"
+                            },
+                            "muted"
+                          ]
+                        },
+                        "bg-muted",
+                        "bg-card"
+                      ]
+                    },
+                    {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "bar"
+                          ]
+                        },
+                        "md:flex-row md:items-center md:justify-between",
+                        "mx-auto w-full max-w-md"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "4",
+                    "Align": "start",
+                    "Class": "min-w-0"
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": "cookie",
+                        "Size": 24
+                      }
+                    },
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "2"
+                      },
+                      "children": [
+                        {
+                          "use": "Title",
+                          "props": {
+                            "As": 2,
+                            "Size": "base",
+                            "Weight": "bold"
+                          },
+                          "attrs": {
+                            "id": {
+                              "op": "tpl",
+                              "args": [
+                                "{0}-title",
+                                {
+                                  "$": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "title"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "text"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "use": "Group",
+                  "props": {
+                    "Gap": "2",
+                    "Class": "shrink-0 flex-wrap"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "and",
+                        "args": [
+                          {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "actions"
+                              },
+                              "three"
+                            ]
+                          },
+                          {
+                            "$": "settings"
+                          }
+                        ]
+                      },
+                      "then": [
+                        {
+                          "use": "Button",
+                          "props": {
+                            "Variant": "ghost",
+                            "Size": "sm",
+                            "Type": "button"
+                          },
+                          "attrs": {
+                            "data-testid": "cookie-settings"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "settings"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "outline",
+                        "Size": "sm",
+                        "Type": "button"
+                      },
+                      "attrs": {
+                        "data-testid": "cookie-decline"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "decline"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "default",
+                        "Size": "sm",
+                        "Type": "button"
+                      },
+                      "attrs": {
+                        "data-testid": "cookie-accept"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "accept"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

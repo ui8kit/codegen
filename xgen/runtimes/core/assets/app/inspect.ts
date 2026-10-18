@@ -1,0 +1,152 @@
+// Preview tooling, not kit output: the "Ins" button of the preview (VITE_INSPECT=1 builds only).
+// Ins -> pick mode (crosshair, hover outline; click or tap captures, Esc cancels) -> POST /__inspect with two PNGs
+// (the element with 16px around it, the viewport with a red frame) and where the element sits. Nothing is fixed here.
+import { domToCanvas } from "modern-screenshot";
+
+const PAD = 16;
+const MARK = "data-inspect-ui";
+let picking = false;
+let hovered: Element | null = null;
+
+function toast(text: string): void {
+  const t = Object.assign(document.createElement("div"), { textContent: text });
+  t.setAttribute(MARK, "");
+  Object.assign(t.style, { position: "fixed", left: "50%", bottom: "24px", transform: "translateX(-50%)", zIndex: "2147483647", padding: "8px 16px",
+    borderRadius: "8px", background: "#111", color: "#fff", font: "500 14px system-ui, sans-serif", pointerEvents: "none" });
+  document.body.append(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+function outline(el: Element | null): void {
+  if (hovered) (hovered as HTMLElement).style.removeProperty("outline");
+  hovered = el;
+  if (el) { (el as HTMLElement).style.setProperty("outline", "2px solid #ef4444"); (el as HTMLElement).style.setProperty("outline-offset", "-2px"); }
+}
+
+function selectorOf(el: Element): string {
+  const parts: string[] = [];
+  for (let e: Element | null = el; e && e !== document.documentElement; e = e.parentElement) {
+    let s = e.tagName.toLowerCase();
+    const id = e.getAttribute("id"), tid = e.getAttribute("data-testid");
+    if (id) { parts.unshift(`${s}#${id}`); break; }
+    if (tid) s += `[data-testid="${tid}"]`;
+    else if (e.parentElement) {
+      const same = [...e.parentElement.children].filter((c) => c.tagName === e!.tagName);
+      if (same.length > 1) s += `:nth-of-type(${same.indexOf(e) + 1})`;
+    }
+    parts.unshift(s);
+  }
+  return parts.join(" > ");
+}
+
+const brief = (e: Element) => ({ tag: e.tagName.toLowerCase(), classes: e.getAttribute("class") ?? "", testid: e.getAttribute("data-testid") ?? undefined, slot: e.getAttribute("data-slot") ?? undefined });
+
+function metaOf(el: Element) {
+  const r = el.getBoundingClientRect();
+  const parent = el.parentElement;
+  const pr = parent?.getBoundingClientRect();
+  const cs = getComputedStyle(el);
+  const block = el.closest("[data-block]");
+  const section = el.closest('[data-testid="section"], section[aria-labelledby]');
+  const ancestors: ReturnType<typeof brief>[] = [];
+  for (let e = el.parentElement; e && ancestors.length < 3; e = e.parentElement) ancestors.push(brief(e));
+  const root = document.documentElement;
+  return {
+    time: new Date().toISOString(),
+    url: location.href,
+    screen: location.pathname.split("/").filter(Boolean)[0] ?? "",
+    route: location.hash.replace(/^#/, "") || "/",
+    block: block?.getAttribute("data-block") ?? (location.pathname.includes("/blocks") ? location.hash.replace(/^#\//, "").split(/[/?]/)[0] : undefined),
+    category: location.pathname.includes("/catalog") ? location.hash.replace(/^#\//, "").split(/[/?]/)[0] || undefined : undefined,
+    variant: block?.getAttribute("data-variant") ?? undefined,
+    section: section?.getAttribute("aria-labelledby") ?? section?.getAttribute("id") ?? undefined,
+    selector: selectorOf(el),
+    element: { ...brief(el), text: (el.textContent ?? "").trim().slice(0, 80) },
+    ancestors,
+    rect: { x: Math.round(r.left + scrollX), y: Math.round(r.top + scrollY), width: Math.round(r.width), height: Math.round(r.height), viewportX: Math.round(r.left), viewportY: Math.round(r.top) },
+    box: {
+      width: cs.width, marginLeft: cs.marginLeft, marginRight: cs.marginRight,
+      parentWidth: pr ? Math.round(pr.width) : undefined,
+      leftInParent: pr ? Math.round(r.left - pr.left) : undefined,
+      rightInParent: pr ? Math.round(pr.right - r.right) : undefined,
+      overflowsParent: pr ? r.left < pr.left - 0.5 || r.right > pr.right + 0.5 : undefined,
+    },
+    viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio, scrollX: Math.round(scrollX), scrollY: Math.round(scrollY) },
+    skin: root.dataset.skin ?? "default",
+    theme: root.classList.contains("dark") || root.dataset.theme === "dark" ? "dark" : "light",
+    userAgent: navigator.userAgent,
+  };
+}
+
+async function capture(el: Element): Promise<void> {
+  outline(null);
+  const r = el.getBoundingClientRect();
+  const scale = Math.min(devicePixelRatio || 1, 2);
+  const t0 = performance.now();
+  const page = await domToCanvas(document.documentElement, { scale, timeout: 2000, filter: (n) => !(n instanceof Element && n.hasAttribute(MARK)) });
+  console.debug(`inspect: page drawn in ${Math.round(performance.now() - t0)} ms`);
+  // the page canvas covers the whole document: cut the viewport out of it
+  const vw = innerWidth, vh = innerHeight;
+  const view = document.createElement("canvas");
+  view.width = Math.round(vw * scale); view.height = Math.round(vh * scale);
+  const v = view.getContext("2d")!;
+  v.drawImage(page, scrollX * scale, scrollY * scale, vw * scale, vh * scale, 0, 0, vw * scale, vh * scale);
+  const x0 = Math.max(0, r.left - PAD), y0 = Math.max(0, r.top - PAD), x1 = Math.min(vw, r.right + PAD), y1 = Math.min(vh, r.bottom + PAD);
+  const crop = document.createElement("canvas");
+  crop.width = Math.max(1, Math.round((x1 - x0) * scale)); crop.height = Math.max(1, Math.round((y1 - y0) * scale));
+  crop.getContext("2d")!.drawImage(view, x0 * scale, y0 * scale, crop.width, crop.height, 0, 0, crop.width, crop.height);
+  v.strokeStyle = "#ef4444"; v.lineWidth = 3 * scale;
+  v.strokeRect(r.left * scale, r.top * scale, r.width * scale, r.height * scale);
+  const body = JSON.stringify({ meta: metaOf(el), element: crop.toDataURL("image/png"), viewport: view.toDataURL("image/png") });
+  const res = await fetch("/__inspect", { method: "POST", headers: { "content-type": "application/json" }, credentials: "same-origin", body });
+  const out = (await res.json().catch(() => ({}))) as { n?: number; error?: string };
+  toast(res.ok && out.n ? `Saved #${out.n}` : `Not saved: ${out.error ?? res.status}`);
+}
+
+function stop(): void {
+  picking = false;
+  outline(null);
+  document.documentElement.style.removeProperty("cursor");
+  document.removeEventListener("pointermove", onMove, true);
+  document.removeEventListener("click", onClick, true);
+  document.removeEventListener("keydown", onKey, true);
+}
+
+const target = (e: Event) => { const t = e.target as Element | null; return t && !t.closest(`[${MARK}]`) ? t : null; };
+function onMove(e: PointerEvent): void { const t = document.elementFromPoint(e.clientX, e.clientY); outline(t && !t.closest(`[${MARK}]`) ? t : null); }
+function onKey(e: KeyboardEvent): void { if (e.key === "Escape") { e.preventDefault(); stop(); toast("Cancelled"); } }
+function onClick(e: MouseEvent): void {
+  // an icon reports its owner (the button, the link), not a path inside the svg
+  const hit = target(e);
+  const t = hit?.closest("svg")?.parentElement ?? hit;
+  if (!t) return;
+  e.preventDefault(); e.stopPropagation();
+  stop();
+  capture(t).catch((err) => toast(`Not saved: ${String(err).slice(0, 60)}`));
+}
+
+function start(): void {
+  if (picking) { stop(); return; }
+  picking = true;
+  document.documentElement.style.setProperty("cursor", "crosshair");
+  document.addEventListener("pointermove", onMove, true);
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("keydown", onKey, true);
+}
+
+/** keep an Ins button right after every theme toggle, styled like it but ghost */
+export function mountInspect(): void {
+  const place = () => {
+    for (const tg of document.querySelectorAll<HTMLElement>('[data-testid="theme-toggle"]')) {
+      if (tg.nextElementSibling?.hasAttribute(MARK)) continue;
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = "Ins"; b.className = tg.className; b.title = "Inspect: pick an element to report";
+      b.setAttribute(MARK, ""); b.setAttribute("aria-label", "Inspect an element");
+      Object.assign(b.style, { background: "transparent", boxShadow: "none", marginInlineStart: "4px" });
+      b.addEventListener("click", (e) => { e.stopPropagation(); start(); });
+      tg.after(b);
+    }
+  };
+  place();
+  new MutationObserver(place).observe(document.body, { childList: true, subtree: true });
+}

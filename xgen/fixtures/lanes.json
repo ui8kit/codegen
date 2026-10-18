@@ -1,0 +1,48 @@
+{
+  "collection": "lanes",
+  "kind": "lane",
+  "entries": [
+    {
+      "id": "lane-todo",
+      "locale": "en",
+      "kind": "lane",
+      "status": "published",
+      "visibility": "public",
+      "slug": "todo",
+      "title": "To do",
+      "metadata": {},
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "lane-doing",
+      "locale": "en",
+      "kind": "lane",
+      "status": "published",
+      "visibility": "public",
+      "slug": "doing",
+      "title": "In progress",
+      "metadata": {},
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "lane-done",
+      "locale": "en",
+      "kind": "lane",
+      "status": "published",
+      "visibility": "public",
+      "slug": "done",
+      "title": "Done",
+      "metadata": {},
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    }
+  ]
+}

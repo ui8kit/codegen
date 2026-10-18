@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "moduleDetection": "force",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "skipLibCheck": true
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.switcher",
+  "name": "Switcher",
+  "docs": "A segmented switcher: a tab list whose items (SwitcherItem) share size and layout. Canary handed these down through context; here each item takes the same two props. Arrow keys: attach `moveFocus` to the keydown (horizontal, activate).",
+  "records": {},
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "ts": "\"sm\" | \"default\" | \"lg\""
+      },
+      "docs": "height",
+      "default": "default"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"text\" | \"icon\""
+      },
+      "docs": "text or icon items",
+      "default": "text"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "docs": "accessible name"
+    }
+  ],
+  "className": true,
+  "children": true,
+  "recipes": {
+    "switcher": "switcher"
+  },
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            {
+              "op": "recipe",
+              "args": [
+                "switcher",
+                "size",
+                {
+                  "$": "size"
+                },
+                "layout",
+                {
+                  "$": "layout"
+                }
+              ]
+            },
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "role": "tablist",
+        "aria-label": {
+          "$": "label"
+        },
+        "data-slot": "switcher"
+      },
+      "children": [
+        {
+          "slot": "children"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "examples": [
+    {
+      "id": "size.sm",
+      "props": {
+        "size": "sm"
+      }
+    },
+    {
+      "id": "size.default",
+      "props": {
+        "size": "default"
+      }
+    },
+    {
+      "id": "size.lg",
+      "props": {
+        "size": "lg"
+      }
+    },
+    {
+      "id": "layout.text",
+      "props": {
+        "layout": "text"
+      }
+    },
+    {
+      "id": "layout.icon",
+      "props": {
+        "layout": "icon"
+      }
+    }
+  ]
+}

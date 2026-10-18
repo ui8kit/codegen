@@ -1,0 +1,65 @@
+{
+  "definition": {
+    "id": "product_category",
+    "locale": "en",
+    "label": "Product category",
+    "mode": "flat",
+    "assigned_to_kinds": [
+      "product"
+    ],
+    "public": true,
+    "version": 1
+  },
+  "terms": [
+    {
+      "id": "product-category-light",
+      "locale": "en",
+      "taxonomy_id": "product_category",
+      "name": "Light",
+      "slug": "light",
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z"
+    },
+    {
+      "id": "product-category-bags",
+      "locale": "en",
+      "taxonomy_id": "product_category",
+      "name": "Bags",
+      "slug": "bags",
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z"
+    },
+    {
+      "id": "product-category-audio",
+      "locale": "en",
+      "taxonomy_id": "product_category",
+      "name": "Audio",
+      "slug": "audio",
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z"
+    },
+    {
+      "id": "product-category-desk",
+      "locale": "en",
+      "taxonomy_id": "product_category",
+      "name": "Desk",
+      "slug": "desk",
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z"
+    },
+    {
+      "id": "product-category-gifts",
+      "locale": "en",
+      "taxonomy_id": "product_category",
+      "name": "Gifts",
+      "slug": "gifts",
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z"
+    }
+  ]
+}

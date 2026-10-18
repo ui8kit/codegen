@@ -1,0 +1,461 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.sidebar-nav",
+  "name": "SidebarNav",
+  "docs": "A vertical navigation: the brand at the top, the links stacked, the user at the bottom. Axes: width (full: icon and name, compact: icons only with the name hidden), user (show, hide), density.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "brand",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "links",
+      "type": {
+        "ts": "NavLink[]"
+      },
+      "required": true
+    },
+    {
+      "name": "current",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "userName",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "userEmail",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "width",
+      "type": {
+        "ts": "\"full\" | \"compact\""
+      },
+      "default": "full"
+    },
+    {
+      "name": "user",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "show"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "aside",
+        "Class": {
+          "op": "cn",
+          "args": [
+            "flex min-h-96 flex-col gap-6 rounded bg-card p-4 inset-ring inset-ring-border",
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "width"
+                    },
+                    "compact"
+                  ]
+                },
+                "w-20 items-center",
+                "w-64"
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "aria-label": {
+          "op": "coalesce",
+          "args": [
+            {
+              "$": "landmarkLabel"
+            },
+            {
+              "$": "brand"
+            }
+          ]
+        },
+        "data-testid": "sidebar",
+        "data-width": {
+          "$": "width"
+        }
+      },
+      "children": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "2",
+            "Align": "center"
+          },
+          "children": [
+            {
+              "use": "LucideIcon",
+              "props": {
+                "Name": "layers",
+                "Size": 24
+              }
+            },
+            {
+              "use": "Text",
+              "props": {
+                "Size": "base",
+                "Weight": "bold",
+                "Class": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "width"
+                        },
+                        "compact"
+                      ]
+                    },
+                    "sr-only",
+                    ""
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "brand"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "gt",
+            "args": [
+              {
+                "op": "len",
+                "args": [
+                  {
+                    "$": "links"
+                  }
+                ]
+              },
+              0
+            ]
+          },
+          "then": [
+            {
+              "organism": "NavBlock",
+              "props": {
+                "label": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "landmarkLabel"
+                    },
+                    {
+                      "op": "uniq",
+                      "args": [
+                        {
+                          "op": "tpl",
+                          "args": [
+                            "{0}, {1}",
+                            {
+                              "$": "label"
+                            },
+                            {
+                              "$": "landmarkLabel"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "$": "label"
+                    }
+                  ]
+                },
+                "className": "flex-1"
+              },
+              "slots": {
+                "children": {
+                  "args": [],
+                  "do": [
+                    {
+                      "use": "List",
+                      "props": {
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "m-0 flex list-none flex-col p-0",
+                            {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "density"
+                                    },
+                                    "compact"
+                                  ]
+                                },
+                                "gap-0",
+                                "gap-2"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "attrs": {
+                        "data-testid": "items"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "links"
+                          },
+                          "as": "l",
+                          "key": {
+                            "$": "l.id"
+                          },
+                          "do": [
+                            {
+                              "use": "ListItem",
+                              "children": [
+                                {
+                                  "organism": "MenuEntry",
+                                  "props": {
+                                    "href": {
+                                      "$": "l.href"
+                                    },
+                                    "className": {
+                                      "op": "cn",
+                                      "args": [
+                                        "flex items-center gap-4 rounded px-4 text-sm",
+                                        "py-2",
+                                        {
+                                          "op": "cond",
+                                          "args": [
+                                            {
+                                              "op": "eq",
+                                              "args": [
+                                                {
+                                                  "$": "l.id"
+                                                },
+                                                {
+                                                  "$": "current"
+                                                }
+                                              ]
+                                            },
+                                            "bg-muted font-semibold",
+                                            ""
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "current": {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "l.id"
+                                        },
+                                        {
+                                          "$": "current"
+                                        }
+                                      ]
+                                    },
+                                    "testid": "item"
+                                  },
+                                  "slots": {
+                                    "children": {
+                                      "args": [],
+                                      "do": [
+                                        {
+                                          "use": "LucideIcon",
+                                          "props": {
+                                            "Name": {
+                                              "$": "l.icon"
+                                            },
+                                            "Size": 16
+                                          }
+                                        },
+                                        {
+                                          "use": "Inline",
+                                          "props": {
+                                            "Class": {
+                                              "op": "cond",
+                                              "args": [
+                                                {
+                                                  "op": "eq",
+                                                  "args": [
+                                                    {
+                                                      "$": "width"
+                                                    },
+                                                    "compact"
+                                                  ]
+                                                },
+                                                "sr-only",
+                                                ""
+                                              ]
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "text": {
+                                                "$": "l.name"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "when": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "user"
+              },
+              "show"
+            ]
+          },
+          "then": [
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "4",
+                "Align": "center",
+                "Class": "border-t border-border pt-4"
+              },
+              "attrs": {
+                "data-testid": "user"
+              },
+              "children": [
+                {
+                  "organism": "MediaFrame",
+                  "props": {
+                    "alt": {
+                      "$": "userName"
+                    },
+                    "ratio": "1/1",
+                    "className": "size-10 shrink-0 rounded-full"
+                  }
+                },
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "0",
+                    "Class": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "width"
+                            },
+                            "compact"
+                          ]
+                        },
+                        "sr-only",
+                        "min-w-0"
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Weight": "semibold"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "userName"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "xs",
+                        "Class": "text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "userEmail"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "NavBar",
+      "names": [
+        "NavLink"
+      ]
+    }
+  ]
+}

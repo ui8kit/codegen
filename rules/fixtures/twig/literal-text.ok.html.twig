@@ -1,0 +1,9 @@
+{#- Self-test fixture of the rules group, detector literal-text (clean). -#}
+{%- set c_2 -%}
+  {%- set c_1 -%}
+    {{ ui_text(v_title) }}
+  {%- endset -%}
+  {{ include('ui/text/text.html.twig', {'p': {}, 'children': c_1}, with_context = false) }}
+  {{ include('ui/input/input.html.twig', {'p': {'Placeholder': ui_text(v_hint)}}, with_context = false) }}
+{%- endset -%}
+{{ include('ui/block/block.html.twig', {'p': {'Tag': 'section'}, 'children': c_2}, with_context = false) }}

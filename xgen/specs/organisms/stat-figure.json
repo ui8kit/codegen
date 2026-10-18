@@ -1,0 +1,222 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.stat-figure",
+  "name": "StatFigure",
+  "docs": "One key number of StatsBand: a card (StatTile), or the value over its label, optionally under a Lucide icon.",
+  "records": {},
+  "props": [
+    {
+      "name": "stat",
+      "type": {
+        "ts": "Stat"
+      },
+      "required": true
+    },
+    {
+      "name": "item",
+      "type": {
+        "ts": "\"plain\" | \"card\" | \"icon\""
+      },
+      "default": "plain"
+    },
+    {
+      "name": "align",
+      "type": {
+        "ts": "\"start\" | \"center\""
+      },
+      "default": "center"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "item"
+          },
+          "card"
+        ]
+      },
+      "then": [
+        {
+          "organism": "StatTile",
+          "props": {
+            "label": {
+              "$": "stat.label"
+            },
+            "value": {
+              "$": "stat.value"
+            },
+            "icon": {
+              "$": "stat.icon"
+            },
+            "hint": {
+              "$": "stat.hint"
+            }
+          }
+        }
+      ],
+      "else": [
+        {
+          "use": "Stack",
+          "props": {
+            "Gap": "6",
+            "Align": {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "align"
+                    },
+                    "center"
+                  ]
+                },
+                "center",
+                "start"
+              ]
+            },
+            "Class": {
+              "op": "cn",
+              "args": [
+                {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "align"
+                        },
+                        "center"
+                      ]
+                    },
+                    "text-center",
+                    ""
+                  ]
+                },
+                {
+                  "op": "preset",
+                  "args": [
+                    "defaults",
+                    "stats.column"
+                  ]
+                }
+              ]
+            }
+          },
+          "attrs": {
+            "data-testid": "item"
+          },
+          "children": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "item"
+                  },
+                  "icon"
+                ]
+              },
+              "then": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": {
+                      "$": "stat.icon"
+                    },
+                    "Size": 24
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Stack",
+              "props": {
+                "Gap": "2",
+                "Align": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "align"
+                        },
+                        "center"
+                      ]
+                    },
+                    "center",
+                    "start"
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "5xl",
+                    "Weight": "medium",
+                    "Class": {
+                      "op": "cn",
+                      "args": [
+                        "flex items-center",
+                        {
+                          "op": "preset",
+                          "args": [
+                            "defaults",
+                            "stats.figure"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "stat.value"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm",
+                    "Weight": "semibold",
+                    "Class": "leading-5 text-muted-foreground"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "stat.label"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "StatsBand",
+      "names": [
+        "Stat"
+      ]
+    }
+  ]
+}

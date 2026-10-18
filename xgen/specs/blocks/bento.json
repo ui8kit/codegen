@@ -1,0 +1,113 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.bento",
+  "name": "Bento grid",
+  "docs": "Tiles of different sizes in one grid; the large tiles hold the main features.",
+  "theme": "marketing",
+  "group": "features",
+  "organism": "BentoGrid",
+  "axes": {
+    "layout": [
+      "bento",
+      "even"
+    ],
+    "media": [
+      "none",
+      "image"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "bento",
+    "media": "none",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "bento",
+      "set": {}
+    },
+    {
+      "id": "even",
+      "set": {
+        "layout": "even"
+      }
+    },
+    {
+      "id": "images",
+      "set": {
+        "media": "image"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@bento"
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 1,
+      "when": {
+        "media": "image"
+      }
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 0,
+      "when": {
+        "media": "none"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "bento",
+      "collection": "bento",
+      "kind": "tile",
+      "record": "Tile",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value",
+        "size": "metadata.size.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "bento",
+      "title": {
+        "$": "ui.vibe.bento.title"
+      },
+      "tiles": {
+        "$": "bento"
+      },
+      "empty": {
+        "$": "ui.empty.tiles"
+      }
+    }
+  }
+}

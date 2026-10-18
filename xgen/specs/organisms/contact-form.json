@@ -1,0 +1,645 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.contact-form",
+  "name": "ContactForm",
+  "docs": "A contact section: a form (name, email, subject, message, consent) and, in the split layout, the ways to reach us beside it. Axes: layout (single, split), fields (short: email and message, full), terms (show, hide), tone (default, muted).",
+  "records": {
+    "ContactLabels": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "subject",
+        "type": "string"
+      },
+      {
+        "name": "message",
+        "type": "string"
+      },
+      {
+        "name": "consent",
+        "type": "string"
+      },
+      {
+        "name": "submit",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "ContactLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "details",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true,
+      "docs": "the ways to reach us, shown beside the form in the split layout"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"single\" | \"split\""
+      },
+      "default": "single"
+    },
+    {
+      "name": "fields",
+      "type": {
+        "ts": "\"short\" | \"full\""
+      },
+      "default": "full"
+    },
+    {
+      "name": "terms",
+      "type": {
+        "ts": "\"show\" | \"hide\""
+      },
+      "default": "hide"
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 2
+    },
+    {
+      "name": "page",
+      "type": {
+        "ts": "\"section\" | \"full\""
+      },
+      "default": "section",
+      "docs": "full: a page of its own, a narrow form in the middle with a roomy heading"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "lead": {
+          "$": "text"
+        },
+        "heading": {
+          "level": {
+            "$": "level"
+          }
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "page"
+                },
+                "full"
+              ]
+            },
+            "roomy",
+            "default"
+          ]
+        },
+        "align": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "page"
+                },
+                "full"
+              ]
+            },
+            "center",
+            "start"
+          ]
+        },
+        "measure": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "single"
+              ]
+            },
+            "xl",
+            "default"
+          ]
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "use": "Grid",
+              "props": {
+                "Cols": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "layout"
+                        },
+                        "split"
+                      ]
+                    },
+                    "1-2",
+                    "1"
+                  ]
+                },
+                "Class": "items-start gap-8"
+              },
+              "children": [
+                {
+                  "use": "Form",
+                  "props": {
+                    "Method": "dialog",
+                    "Class": "w-full gap-4"
+                  },
+                  "attrs": {
+                    "data-testid": "contact-form"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "fields"
+                          },
+                          "full"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "Field",
+                          "props": {
+                            "label": {
+                              "$": "labels.name"
+                            },
+                            "htmlFor": {
+                              "op": "tpl",
+                              "args": [
+                                "{0}-name",
+                                {
+                                  "$": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "use": "Input",
+                                  "props": {
+                                    "Type": "text",
+                                    "Name": "name",
+                                    "Autocomplete": "name"
+                                  },
+                                  "attrs": {
+                                    "id": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-name",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    },
+                                    "data-testid": "field"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "organism": "Field",
+                      "props": {
+                        "label": {
+                          "$": "labels.email"
+                        },
+                        "htmlFor": {
+                          "op": "tpl",
+                          "args": [
+                            "{0}-email",
+                            {
+                              "$": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "use": "Input",
+                              "props": {
+                                "Type": "email",
+                                "Name": "email",
+                                "Autocomplete": "email"
+                              },
+                              "attrs": {
+                                "id": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-email",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                },
+                                "data-testid": "field"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "fields"
+                          },
+                          "full"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "Field",
+                          "props": {
+                            "label": {
+                              "$": "labels.subject"
+                            },
+                            "htmlFor": {
+                              "op": "tpl",
+                              "args": [
+                                "{0}-subject",
+                                {
+                                  "$": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "slots": {
+                            "children": {
+                              "args": [],
+                              "do": [
+                                {
+                                  "use": "Input",
+                                  "props": {
+                                    "Type": "text",
+                                    "Name": "subject"
+                                  },
+                                  "attrs": {
+                                    "id": {
+                                      "op": "tpl",
+                                      "args": [
+                                        "{0}-subject",
+                                        {
+                                          "$": "id"
+                                        }
+                                      ]
+                                    },
+                                    "data-testid": "field"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "organism": "Field",
+                      "props": {
+                        "label": {
+                          "$": "labels.message"
+                        },
+                        "htmlFor": {
+                          "op": "tpl",
+                          "args": [
+                            "{0}-message",
+                            {
+                              "$": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "slots": {
+                        "children": {
+                          "args": [],
+                          "do": [
+                            {
+                              "use": "Textarea",
+                              "props": {
+                                "Rows": 4,
+                                "Name": "message"
+                              },
+                              "attrs": {
+                                "id": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-message",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                },
+                                "data-testid": "field"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "terms"
+                          },
+                          "show"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "use": "Group",
+                          "props": {
+                            "Gap": "2",
+                            "Align": "center",
+                            "Class": {
+                              "op": "cn",
+                              "args": [
+                                "w-fit",
+                                ""
+                              ]
+                            }
+                          },
+                          "children": [
+                            {
+                              "use": "Checkbox",
+                              "props": {
+                                "Name": "consent"
+                              },
+                              "attrs": {
+                                "id": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-consent",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "use": "Label",
+                              "props": {
+                                "HTMLFor": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-consent",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                },
+                                "Class": "text-sm"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "labels.consent"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Button",
+                      "props": {
+                        "Variant": "default",
+                        "Size": "default",
+                        "Type": "submit",
+                        "Class": "w-fit"
+                      },
+                      "attrs": {
+                        "data-testid": "submit"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "labels.submit"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "layout"
+                          },
+                          "split"
+                        ]
+                      },
+                      {
+                        "op": "gt",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "details"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "4"
+                      },
+                      "attrs": {
+                        "data-testid": "details"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "details"
+                          },
+                          "as": "d",
+                          "key": {
+                            "$": "d.id"
+                          },
+                          "do": [
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "4",
+                                "Align": "start"
+                              },
+                              "attrs": {
+                                "data-testid": "detail"
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": {
+                                      "$": "d.icon"
+                                    },
+                                    "Size": 20
+                                  }
+                                },
+                                {
+                                  "use": "Stack",
+                                  "props": {
+                                    "Gap": "0"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "base",
+                                        "Weight": "semibold"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "d.title"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Class": "text-muted-foreground"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "d.text"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    }
+  ]
+}

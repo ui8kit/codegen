@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.bottomnav",
+  "name": "Bottom tab bar",
+  "docs": "An app-style tab bar for a phone: an icon over a name, the current tab marked.",
+  "theme": "dashboard",
+  "group": "navigation",
+  "organism": "BottomNav",
+  "axes": {
+    "labels": [
+      "show",
+      "hide"
+    ],
+    "position": [
+      "static",
+      "sticky"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "labels": "show",
+    "position": "static",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "labels",
+      "set": {}
+    },
+    {
+      "id": "icons",
+      "set": {
+        "labels": "hide"
+      }
+    },
+    {
+      "id": "sticky",
+      "set": {
+        "position": "sticky"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "MenuEntry"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@tabs"
+    },
+    {
+      "sel": "[aria-current=\"page\"]",
+      "n": 1
+    }
+  ],
+  "data": [
+    {
+      "as": "tabs",
+      "collection": "tabs",
+      "kind": "tab",
+      "record": "NavLink",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "label": {
+        "$": "ui.vibe.bottom.label"
+      },
+      "tabs": {
+        "$": "tabs"
+      },
+      "current": "tab-explore"
+    }
+  }
+}

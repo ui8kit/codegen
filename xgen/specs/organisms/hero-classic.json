@@ -1,0 +1,734 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.hero-classic",
+  "name": "HeroClassic",
+  "docs": "The top of a page: heading, lead and actions, with optional media (image, backdrop, code window, cluster). Axes: layout, media kind and side, scale, tone, density, actions mode.",
+  "records": {
+    "HeroMedia": [
+      {
+        "name": "kind",
+        "type": "\"none\" | \"image\" | \"backdrop\" | \"code\" | \"cluster\"",
+        "optional": true,
+        "docs": "what the hero shows besides the text",
+        "default": "none"
+      },
+      {
+        "name": "side",
+        "type": "\"end\" | \"start\"",
+        "optional": true,
+        "docs": "side of the media in the split layout",
+        "default": "end"
+      },
+      {
+        "name": "codeTitle",
+        "type": "string",
+        "optional": true,
+        "docs": "title of the code window"
+      },
+      {
+        "name": "prompt",
+        "type": "string",
+        "optional": true,
+        "docs": "prompt line of the code window"
+      },
+      {
+        "name": "lines",
+        "type": "CodeLine[]",
+        "optional": true,
+        "docs": "lines of the code window"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 1
+    },
+    {
+      "name": "badge",
+      "type": "string"
+    },
+    {
+      "name": "topics",
+      "type": {
+        "ts": "Topic[]"
+      }
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "ActionSet"
+      }
+    },
+    {
+      "name": "media",
+      "type": {
+        "record": "HeroMedia"
+      }
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"centered\" | \"split\""
+      },
+      "default": "centered"
+    },
+    {
+      "name": "scale",
+      "type": {
+        "ts": "\"default\" | \"display\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\" | \"inverse\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"roomy\" | \"default\" | \"compact\""
+      },
+      "default": "roomy"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "derived": [
+    {
+      "name": "mediaKind",
+      "value": {
+        "op": "coalesce",
+        "args": [
+          {
+            "$": "media.kind"
+          },
+          "none"
+        ]
+      }
+    },
+    {
+      "name": "mediaSide",
+      "value": {
+        "op": "coalesce",
+        "args": [
+          {
+            "$": "media.side"
+          },
+          "end"
+        ]
+      }
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "lead": {
+          "$": "text"
+        },
+        "heading": {
+          "level": {
+            "$": "level"
+          },
+          "scale": {
+            "$": "scale"
+          },
+          "badge": {
+            "$": "badge"
+          }
+        },
+        "layout": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "split"
+              ]
+            },
+            "split",
+            "stack"
+          ]
+        },
+        "align": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "split"
+              ]
+            },
+            "start",
+            "center"
+          ]
+        },
+        "media": {
+          "show": {
+            "op": "or",
+            "args": [
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "mediaKind"
+                  },
+                  "image"
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "mediaKind"
+                  },
+                  "code"
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "mediaKind"
+                  },
+                  "cluster"
+                ]
+              }
+            ]
+          },
+          "side": {
+            "$": "mediaSide"
+          }
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "className": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "mediaKind"
+                        },
+                        "backdrop"
+                      ]
+                    },
+                    "image",
+                    "none"
+                  ]
+                },
+                "image"
+              ]
+            },
+            "relative isolate overflow-hidden",
+            ""
+          ]
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "organism": "Backdrop",
+              "props": {
+                "kind": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "mediaKind"
+                        },
+                        "backdrop"
+                      ]
+                    },
+                    "image",
+                    "none"
+                  ]
+                },
+                "alt": {
+                  "$": "title"
+                }
+              }
+            },
+            {
+              "when": {
+                "$": "actions.cta"
+              },
+              "then": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "actions.mode"
+                      },
+                      "form"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "w-full max-w-xl",
+                            {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "layout"
+                                    },
+                                    "centered"
+                                  ]
+                                },
+                                "mx-auto",
+                                ""
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "attrs": {
+                        "data-testid": "email-form"
+                      },
+                      "children": [
+                        {
+                          "use": "Label",
+                          "props": {
+                            "HTMLFor": {
+                              "op": "tpl",
+                              "args": [
+                                "{0}-email",
+                                {
+                                  "$": "id"
+                                }
+                              ]
+                            },
+                            "Class": "sr-only"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "actions.emailLabel"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Group",
+                          "props": {
+                            "Gap": "2",
+                            "Align": "start",
+                            "Class": "w-full flex-wrap"
+                          },
+                          "children": [
+                            {
+                              "use": "Input",
+                              "props": {
+                                "Type": "text",
+                                "Name": "prompt",
+                                "Class": "min-w-0 flex-1",
+                                "Placeholder": {
+                                  "$": "actions.emailLabel"
+                                }
+                              },
+                              "attrs": {
+                                "id": {
+                                  "op": "tpl",
+                                  "args": [
+                                    "{0}-email",
+                                    {
+                                      "$": "id"
+                                    }
+                                  ]
+                                },
+                                "data-testid": "field"
+                              }
+                            },
+                            {
+                              "use": "Button",
+                              "props": {
+                                "Variant": "default",
+                                "Size": "default",
+                                "Href": {
+                                  "$": "actions.href"
+                                }
+                              },
+                              "attrs": {
+                                "data-testid": "submit"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "actions.cta"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "else": [
+                    {
+                      "organism": "ActionGroup",
+                      "props": {
+                        "primary": {
+                          "$": "actions.cta"
+                        },
+                        "primaryHref": {
+                          "$": "actions.href"
+                        },
+                        "secondary": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "actions.mode"
+                                },
+                                "two"
+                              ]
+                            },
+                            {
+                              "$": "actions.secondary"
+                            },
+                            {
+                              "op": "undef",
+                              "args": []
+                            }
+                          ]
+                        },
+                        "secondaryHref": {
+                          "$": "actions.secondaryHref"
+                        },
+                        "align": {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "layout"
+                                },
+                                "centered"
+                              ]
+                            },
+                            "center",
+                            "start"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "and",
+                "args": [
+                  {
+                    "$": "topics"
+                  },
+                  {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "topics"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  }
+                ]
+              },
+              "then": [
+                {
+                  "organism": "TopicChips",
+                  "props": {
+                    "topics": {
+                      "$": "topics"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "aside": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "mediaKind"
+                      },
+                      "code"
+                    ]
+                  },
+                  {
+                    "$": "media.lines"
+                  },
+                  {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "media.lines"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "$": "media.codeTitle"
+                  },
+                  {
+                    "$": "media.prompt"
+                  }
+                ]
+              },
+              "then": [
+                {
+                  "organism": "CodeWindow",
+                  "props": {
+                    "title": {
+                      "$": "media.codeTitle"
+                    },
+                    "prompt": {
+                      "$": "media.prompt"
+                    },
+                    "lines": {
+                      "$": "media.lines"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "mediaKind"
+                  },
+                  "cluster"
+                ]
+              },
+              "then": [
+                {
+                  "use": "Grid",
+                  "props": {
+                    "Cols": "3",
+                    "Class": "items-end gap-4"
+                  },
+                  "attrs": {
+                    "data-testid": "cluster"
+                  },
+                  "children": [
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "w-full",
+                            ""
+                          ]
+                        }
+                      },
+                      "children": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "title"
+                            },
+                            "ratio": "3/4"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "w-full",
+                            "-translate-y-4"
+                          ]
+                        }
+                      },
+                      "children": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "title"
+                            },
+                            "ratio": "4/3"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "w-full",
+                            ""
+                          ]
+                        }
+                      },
+                      "children": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "title"
+                            },
+                            "ratio": "3/4"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "when": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "mediaKind"
+                      },
+                      "image"
+                    ]
+                  }
+                ]
+              },
+              "then": [
+                {
+                  "organism": "MediaFrame",
+                  "props": {
+                    "alt": {
+                      "$": "title"
+                    },
+                    "ratio": "4/3"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "CtaActions",
+      "names": [
+        "ActionSet"
+      ]
+    },
+    {
+      "from": "CodeWindow",
+      "names": [
+        "CodeLine"
+      ]
+    },
+    {
+      "from": "TopicChips",
+      "names": [
+        "Topic"
+      ]
+    }
+  ]
+}

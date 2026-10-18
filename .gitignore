@@ -1,6 +1,23 @@
-node_modules/
-examples/node_modules/
+logs
 *.log
+node_modules
+dist
+dist-ssr
+*.local
 .DS_Store
-.dist/
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# never published from this repository
+private/
+shots/
+**/public/p/
+*.fig
+.env
+.env.*
 .manual/
+
+# ui8px: generated reports and learn-mode data
+.ui8px/telemetry/
+.ui8px/reports/

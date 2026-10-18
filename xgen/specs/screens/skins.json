@@ -1,0 +1,101 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.skins",
+  "name": "SkinsScreen",
+  "kind": "composed",
+  "docs": "The Skins screen: tiles that switch the look of the whole preview. A row of skins (the default theme and 14 tweakcn presets, each tile drawn in its skin), a row of Google fonts with Latin and Cyrillic over the font of the skin, and a row of corner radii over the radius of the skin. The tiles are static; the preview runtime (runtime/skins.ts) applies and stores the choice.",
+  "routes": [],
+  "frame": {
+    "before": [],
+    "after": []
+  },
+  "areas": {},
+  "skins": {
+    "skins": [
+      "default",
+      "modern-minimal",
+      "violet-bloom",
+      "t3-chat",
+      "bubblegum",
+      "doom-64",
+      "amber-minimal",
+      "supabase",
+      "kodama-grove",
+      "perpetuity",
+      "cosmic-night",
+      "claude",
+      "mocha-mousse",
+      "neo-brutalism",
+      "notebook"
+    ],
+    "fonts": [
+      {
+        "id": "inter",
+        "family": "Inter"
+      },
+      {
+        "id": "roboto",
+        "family": "Roboto"
+      },
+      {
+        "id": "manrope",
+        "family": "Manrope"
+      },
+      {
+        "id": "montserrat",
+        "family": "Montserrat"
+      },
+      {
+        "id": "rubik",
+        "family": "Rubik"
+      },
+      {
+        "id": "nunito",
+        "family": "Nunito"
+      },
+      {
+        "id": "ibm-plex-sans",
+        "family": "IBM Plex Sans"
+      },
+      {
+        "id": "golos-text",
+        "family": "Golos Text"
+      },
+      {
+        "id": "onest",
+        "family": "Onest"
+      },
+      {
+        "id": "open-sans",
+        "family": "Open Sans"
+      }
+    ],
+    "radii": [
+      {
+        "id": "r0",
+        "value": "0px"
+      },
+      {
+        "id": "r4",
+        "value": "4px"
+      },
+      {
+        "id": "r8",
+        "value": "8px"
+      },
+      {
+        "id": "r12",
+        "value": "12px"
+      },
+      {
+        "id": "r16",
+        "value": "16px"
+      }
+    ]
+  },
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

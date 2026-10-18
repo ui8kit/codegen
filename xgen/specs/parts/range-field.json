@@ -1,0 +1,350 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.range-field",
+  "name": "RangeField",
+  "docs": "A from–to pair for numbers or dates (price range, period). Empty means an open end. With numeric bounds two sliders sit above the inputs. Each control has its own accessible name; every change reports both ends.",
+  "records": {},
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "ts": "\"number\" | \"date\""
+      },
+      "required": true
+    },
+    {
+      "name": "from",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "to",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "fromLabel",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "toLabel",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "min",
+      "type": "number"
+    },
+    {
+      "name": "max",
+      "type": "number"
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [
+    {
+      "name": "change",
+      "args": [
+        {
+          "name": "from",
+          "type": "string"
+        },
+        {
+          "name": "to",
+          "type": "string"
+        }
+      ],
+      "docs": "either end changed; both ends are passed"
+    }
+  ],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            "flex flex-col gap-2",
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-slot": "range-field"
+      },
+      "children": [
+        {
+          "when": {
+            "op": "and",
+            "args": [
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "type"
+                  },
+                  "number"
+                ]
+              },
+              {
+                "op": "has",
+                "args": [
+                  {
+                    "$": "min"
+                  }
+                ]
+              },
+              {
+                "op": "has",
+                "args": [
+                  {
+                    "$": "max"
+                  }
+                ]
+              },
+              {
+                "op": "lt",
+                "args": [
+                  {
+                    "$": "min"
+                  },
+                  {
+                    "$": "max"
+                  }
+                ]
+              }
+            ]
+          },
+          "then": [
+            {
+              "use": "Range",
+              "props": {
+                "Min": {
+                  "$": "min"
+                },
+                "Max": {
+                  "$": "max"
+                },
+                "AriaLabel": {
+                  "$": "fromLabel"
+                },
+                "Value": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "from"
+                        },
+                        ""
+                      ]
+                    },
+                    {
+                      "op": "str",
+                      "args": [
+                        {
+                          "$": "min"
+                        }
+                      ]
+                    },
+                    {
+                      "$": "from"
+                    }
+                  ]
+                }
+              },
+              "attrs": {
+                "data-testid": "range-from"
+              },
+              "on": {
+                "input": {
+                  "call": "emit.change",
+                  "args": [
+                    {
+                      "$": "event.value"
+                    },
+                    {
+                      "$": "to"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "use": "Range",
+              "props": {
+                "Min": {
+                  "$": "min"
+                },
+                "Max": {
+                  "$": "max"
+                },
+                "AriaLabel": {
+                  "$": "toLabel"
+                },
+                "Value": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "args": [
+                        {
+                          "$": "to"
+                        },
+                        ""
+                      ]
+                    },
+                    {
+                      "op": "str",
+                      "args": [
+                        {
+                          "$": "max"
+                        }
+                      ]
+                    },
+                    {
+                      "$": "to"
+                    }
+                  ]
+                }
+              },
+              "attrs": {
+                "data-testid": "range-to"
+              },
+              "on": {
+                "input": {
+                  "call": "emit.change",
+                  "args": [
+                    {
+                      "$": "from"
+                    },
+                    {
+                      "$": "event.value"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "use": "Inline",
+          "props": {
+            "Class": "flex items-center gap-2"
+          },
+          "children": [
+            {
+              "use": "Input",
+              "props": {
+                "Type": {
+                  "$": "type"
+                },
+                "Size": "sm",
+                "AriaLabel": {
+                  "$": "fromLabel"
+                },
+                "Value": {
+                  "$": "from"
+                },
+                "Min": {
+                  "op": "str",
+                  "args": [
+                    {
+                      "$": "min"
+                    }
+                  ]
+                },
+                "Max": {
+                  "op": "str",
+                  "args": [
+                    {
+                      "$": "max"
+                    }
+                  ]
+                }
+              },
+              "on": {
+                "input": {
+                  "call": "emit.change",
+                  "args": [
+                    {
+                      "$": "event.value"
+                    },
+                    {
+                      "$": "to"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "use": "Inline",
+              "props": {
+                "Class": "text-muted-foreground"
+              },
+              "children": [
+                {
+                  "text": "–"
+                }
+              ]
+            },
+            {
+              "use": "Input",
+              "props": {
+                "Type": {
+                  "$": "type"
+                },
+                "Size": "sm",
+                "AriaLabel": {
+                  "$": "toLabel"
+                },
+                "Value": {
+                  "$": "to"
+                },
+                "Min": {
+                  "op": "str",
+                  "args": [
+                    {
+                      "$": "min"
+                    }
+                  ]
+                },
+                "Max": {
+                  "op": "str",
+                  "args": [
+                    {
+                      "$": "max"
+                    }
+                  ]
+                }
+              },
+              "on": {
+                "input": {
+                  "call": "emit.change",
+                  "args": [
+                    {
+                      "$": "from"
+                    },
+                    {
+                      "$": "event.value"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "collection": "deckplans",
+  "kind": "deck_plan",
+  "entries": [
+    {
+      "id": "deck-51-plan-1",
+      "locale": "en",
+      "kind": "deck_plan",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-plan-1",
+      "title": "Free plan",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 1
+        },
+        "cost": {
+          "value": "Free"
+        },
+        "note": {
+          "value": "For getting started"
+        },
+        "perks": {
+          "value": [
+            "Personal digital wallet",
+            "Virtual debit card",
+            "Basic spending insights",
+            "Email support"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-plan-2",
+      "locale": "en",
+      "kind": "deck_plan",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-plan-2",
+      "title": "Professional plan",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 2
+        },
+        "cost": {
+          "value": "$299"
+        },
+        "note": {
+          "value": "For growing teams"
+        },
+        "perks": {
+          "value": [
+            "Everything in Free",
+            "Unlimited transfers",
+            "Priority support",
+            "Team accounts"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-plan-3",
+      "locale": "en",
+      "kind": "deck_plan",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-plan-3",
+      "title": "Enterprise plan",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 3
+        },
+        "cost": {
+          "value": "$149"
+        },
+        "note": {
+          "value": "For large companies"
+        },
+        "perks": {
+          "value": [
+            "Everything in Professional",
+            "Advanced security controls",
+            "Dedicated manager",
+            "Custom limits"
+          ]
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "collection": "projects",
+  "kind": "project",
+  "entries": [
+    {
+      "id": "project-atlas",
+      "locale": "en",
+      "kind": "project",
+      "status": "published",
+      "visibility": "public",
+      "slug": "atlas",
+      "title": "Atlas dashboard",
+      "metadata": {
+        "year": {
+          "value": 2026
+        },
+        "summary": {
+          "value": "An analytics dashboard for a logistics team: one screen for the whole fleet."
+        },
+        "tags": {
+          "value": [
+            "Svelte",
+            "Charts",
+            "Design system"
+          ]
+        },
+        "featured": {
+          "value": true
+        },
+        "client": {
+          "value": "Northwind Freight"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-02T09:00:00Z",
+      "updated_at": "2026-03-03T09:00:00Z",
+      "published_at": "2026-03-03T10:00:00Z",
+      "terms": [
+        {
+          "taxonomy": "project_category",
+          "term_id": "project-category-product-design"
+        }
+      ]
+    },
+    {
+      "id": "project-harbor",
+      "locale": "en",
+      "kind": "project",
+      "status": "published",
+      "visibility": "public",
+      "slug": "harbor",
+      "title": "Harbor booking",
+      "metadata": {
+        "year": {
+          "value": 2025
+        },
+        "summary": {
+          "value": "Booking flow for a chain of marinas, from the map to the receipt."
+        },
+        "tags": {
+          "value": [
+            "React",
+            "Payments"
+          ]
+        },
+        "featured": {
+          "value": false
+        },
+        "client": {
+          "value": "Bluewater"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-05T09:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z",
+      "terms": [
+        {
+          "taxonomy": "project_category",
+          "term_id": "project-category-web-app"
+        }
+      ]
+    },
+    {
+      "id": "project-lumen",
+      "locale": "en",
+      "kind": "project",
+      "status": "published",
+      "visibility": "public",
+      "slug": "lumen",
+      "title": "Lumen brand",
+      "metadata": {
+        "year": {
+          "value": 2025
+        },
+        "summary": {
+          "value": "Identity, type and a site for a lighting studio."
+        },
+        "tags": {
+          "value": [
+            "Brand",
+            "Website"
+          ]
+        },
+        "featured": {
+          "value": false
+        },
+        "client": {
+          "value": "Lumen Studio"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T10:00:00Z",
+      "terms": [
+        {
+          "taxonomy": "project_category",
+          "term_id": "project-category-branding"
+        }
+      ]
+    },
+    {
+      "id": "project-orbit",
+      "locale": "en",
+      "kind": "project",
+      "status": "published",
+      "visibility": "public",
+      "slug": "orbit",
+      "title": "Orbit mobile",
+      "metadata": {
+        "year": {
+          "value": 2024
+        },
+        "summary": {
+          "value": "A habit tracker that fits on the lock screen."
+        },
+        "tags": {
+          "value": [
+            "iOS",
+            "Android"
+          ]
+        },
+        "featured": {
+          "value": true
+        },
+        "client": {
+          "value": "Orbit Labs"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-08T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T10:00:00Z",
+      "terms": [
+        {
+          "taxonomy": "project_category",
+          "term_id": "project-category-mobile"
+        }
+      ]
+    },
+    {
+      "id": "project-field",
+      "locale": "en",
+      "kind": "project",
+      "status": "published",
+      "visibility": "public",
+      "slug": "field",
+      "title": "Field notes",
+      "metadata": {
+        "year": {
+          "value": 2024
+        },
+        "summary": {
+          "value": "A long-read magazine with a reading mode and offline issues."
+        },
+        "tags": {
+          "value": [
+            "Vue",
+            "Content"
+          ]
+        },
+        "featured": {
+          "value": false
+        },
+        "client": {
+          "value": "Field Press"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-10T09:00:00Z",
+      "updated_at": "2026-03-11T09:00:00Z",
+      "published_at": "2026-03-11T10:00:00Z",
+      "terms": [
+        {
+          "taxonomy": "project_category",
+          "term_id": "project-category-editorial"
+        }
+      ]
+    },
+    {
+      "id": "project-cedar",
+      "locale": "en",
+      "kind": "project",
+      "status": "published",
+      "visibility": "public",
+      "slug": "cedar",
+      "title": "Cedar store",
+      "metadata": {
+        "year": {
+          "value": 2023
+        },
+        "summary": {
+          "value": "A small furniture store with a configurator and same-day delivery."
+        },
+        "tags": {
+          "value": [
+            "Commerce",
+            "3D"
+          ]
+        },
+        "featured": {
+          "value": false
+        },
+        "client": {
+          "value": "Cedar and Co"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-12T09:00:00Z",
+      "updated_at": "2026-03-13T09:00:00Z",
+      "published_at": "2026-03-13T10:00:00Z",
+      "terms": [
+        {
+          "taxonomy": "project_category",
+          "term_id": "project-category-commerce"
+        }
+      ]
+    }
+  ]
+}

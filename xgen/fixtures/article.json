@@ -1,0 +1,90 @@
+{
+  "collection": "article",
+  "kind": "section",
+  "entries": [
+    {
+      "id": "section-why",
+      "locale": "en",
+      "kind": "section",
+      "status": "published",
+      "visibility": "public",
+      "slug": "why",
+      "title": "Why start with the data",
+      "metadata": {
+        "text": {
+          "value": "A page that reads one source stays correct when the source changes. Everything else is layout, and layout is cheap to change."
+        },
+        "quote": {
+          "value": ""
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "section-blocks",
+      "locale": "en",
+      "kind": "section",
+      "status": "published",
+      "visibility": "public",
+      "slug": "blocks",
+      "title": "Compose from blocks",
+      "metadata": {
+        "text": {
+          "value": "Each block names its axes and its variants. A page is a list of blocks, so a new page is a few lines of data."
+        },
+        "quote": {
+          "value": "Pages are lists, not copies."
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "section-check",
+      "locale": "en",
+      "kind": "section",
+      "status": "published",
+      "visibility": "public",
+      "slug": "check",
+      "title": "Check what you ship",
+      "metadata": {
+        "text": {
+          "value": "Checks read the same specs as the generator, so a page cannot drift from its source without failing the build."
+        },
+        "quote": {
+          "value": ""
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "section-next",
+      "locale": "en",
+      "kind": "section",
+      "status": "published",
+      "visibility": "public",
+      "slug": "next",
+      "title": "Where to go next",
+      "metadata": {
+        "text": {
+          "value": "Open the gallery, pick a variant and put it on a page. The guides cover themes, data and deployment."
+        },
+        "quote": {
+          "value": ""
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    }
+  ]
+}

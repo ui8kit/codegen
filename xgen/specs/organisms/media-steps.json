@@ -1,0 +1,173 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.media-steps",
+  "name": "MediaSteps",
+  "docs": "The steps of MediaList as numbered rows: the number, a glyph, the title and the text.",
+  "records": {},
+  "props": [
+    {
+      "name": "extras",
+      "type": {
+        "ts": "MediaExtras"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "MediaListLabels"
+      },
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "4",
+        "Align": "stretch"
+      },
+      "children": [
+        {
+          "use": "Text",
+          "props": {
+            "Size": "sm",
+            "Weight": "semibold"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "labels.list"
+              }
+            }
+          ]
+        },
+        {
+          "each": {
+            "$": "extras.steps"
+          },
+          "as": "s",
+          "key": {
+            "$": "s.id"
+          },
+          "do": [
+            {
+              "use": "Group",
+              "props": {
+                "Gap": "4",
+                "Align": "start"
+              },
+              "attrs": {
+                "data-testid": "media-step"
+              },
+              "children": [
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm",
+                    "Weight": "semibold",
+                    "Class": "w-6 shrink-0 text-primary"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "op": "tpl",
+                        "args": [
+                          "0{0}",
+                          {
+                            "op": "str",
+                            "args": [
+                              {
+                                "op": "add",
+                                "args": [
+                                  {
+                                    "$": "i"
+                                  },
+                                  1
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Inline",
+                  "props": {
+                    "Class": "flex size-6 shrink-0 items-center justify-center text-primary"
+                  },
+                  "children": [
+                    {
+                      "use": "LucideIcon",
+                      "props": {
+                        "Name": {
+                          "$": "s.icon"
+                        },
+                        "Size": 16
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "0"
+                  },
+                  "children": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Weight": "semibold"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "s.title"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Class": "text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "s.text"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "index": "i"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "MediaList",
+      "names": [
+        "MediaExtras",
+        "MediaListLabels"
+      ]
+    }
+  ]
+}

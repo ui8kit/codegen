@@ -1,0 +1,90 @@
+{
+  "collection": "steps",
+  "kind": "step",
+  "entries": [
+    {
+      "id": "step-plan",
+      "locale": "en",
+      "kind": "step",
+      "status": "published",
+      "visibility": "public",
+      "slug": "plan",
+      "title": "Pick a plan",
+      "metadata": {
+        "text": {
+          "value": "Start free and upgrade when the team grows."
+        },
+        "icon": {
+          "value": "clipboard-list"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "step-connect",
+      "locale": "en",
+      "kind": "step",
+      "status": "published",
+      "visibility": "public",
+      "slug": "connect",
+      "title": "Connect your data",
+      "metadata": {
+        "text": {
+          "value": "Point the site at your collections and content."
+        },
+        "icon": {
+          "value": "database"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "step-design",
+      "locale": "en",
+      "kind": "step",
+      "status": "published",
+      "visibility": "public",
+      "slug": "design",
+      "title": "Choose the blocks",
+      "metadata": {
+        "text": {
+          "value": "Compose pages from ready blocks and variants."
+        },
+        "icon": {
+          "value": "layout-grid"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "step-launch",
+      "locale": "en",
+      "kind": "step",
+      "status": "published",
+      "visibility": "public",
+      "slug": "launch",
+      "title": "Publish",
+      "metadata": {
+        "text": {
+          "value": "Ship to every runtime with one command."
+        },
+        "icon": {
+          "value": "rocket"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    }
+  ]
+}

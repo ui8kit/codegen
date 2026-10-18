@@ -1,0 +1,851 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.table",
+  "tier": "brick",
+  "dir": "table",
+  "docs": "Table composes semantic table, caption, sections, rows, and cells.\nSupports scope, colspan, and headers attrs on head cells.",
+  "variants": {
+    "table": "table.variants.json",
+    "tableCell": "table-cell.variants.json",
+    "tableHeadCell": "table-head-cell.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Table",
+      "docs": "Table renders the root table element.",
+      "recipeId": "table",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "table"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "table"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "TableCaption",
+      "docs": "TableCaption renders the table caption.",
+      "classes": {},
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "caption"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "caption"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "TableHead",
+      "docs": "TableHead renders the thead section.",
+      "classes": {},
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "thead"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "thead"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "TableBody",
+      "docs": "TableBody renders the tbody section.",
+      "classes": {},
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "tbody"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "tbody"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "TableFoot",
+      "docs": "TableFoot renders the tfoot section.",
+      "classes": {},
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "tfoot"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "tfoot"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "TableRow",
+      "docs": "TableRow renders one tr row.",
+      "classes": {},
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "tr"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "tr"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "TableHeadCell",
+      "docs": "TableHeadCell renders th with optional scope and abbr.",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Scope",
+          "type": "string",
+          "cva": false,
+          "docs": "th scope: col, row, colgroup, rowgroup"
+        },
+        {
+          "name": "ColSpan",
+          "type": "int",
+          "cva": false
+        },
+        {
+          "name": "RowSpan",
+          "type": "int",
+          "cva": false
+        },
+        {
+          "name": "Headers",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "ids of related header cells"
+        },
+        {
+          "name": "Abbr",
+          "type": "string",
+          "cva": false,
+          "docs": "abbreviated header text for th"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "th"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "scope",
+            "expr": {
+              "kind": "mapOr",
+              "expr": {
+                "kind": "prop",
+                "name": "Scope"
+              },
+              "mapping": {
+                "col": "col",
+                "colgroup": "colgroup",
+                "row": "row",
+                "rowgroup": "rowgroup"
+              },
+              "fallback": "",
+              "lower": true
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "abbr",
+            "expr": {
+              "kind": "prop",
+              "name": "Abbr"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "colspan",
+            "expr": {
+              "kind": "intToString",
+              "expr": {
+                "kind": "prop",
+                "name": "ColSpan"
+              }
+            },
+            "when": {
+              "kind": "isSet",
+              "expr": {
+                "kind": "prop",
+                "name": "ColSpan"
+              }
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "rowspan",
+            "expr": {
+              "kind": "intToString",
+              "expr": {
+                "kind": "prop",
+                "name": "RowSpan"
+              }
+            },
+            "when": {
+              "kind": "isSet",
+              "expr": {
+                "kind": "prop",
+                "name": "RowSpan"
+              }
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "headers",
+            "expr": {
+              "kind": "prop",
+              "name": "Headers"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "th"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [],
+      "recipeId": "tableHeadCell"
+    },
+    {
+      "name": "TableCell",
+      "docs": "TableCell renders td with colspan and rowspan.",
+      "classes": {
+        "recipe": {}
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Scope",
+          "type": "string",
+          "cva": false,
+          "docs": "th scope: col, row, colgroup, rowgroup"
+        },
+        {
+          "name": "ColSpan",
+          "type": "int",
+          "cva": false
+        },
+        {
+          "name": "RowSpan",
+          "type": "int",
+          "cva": false
+        },
+        {
+          "name": "Headers",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "ids of related header cells"
+        },
+        {
+          "name": "Abbr",
+          "type": "string",
+          "cva": false,
+          "docs": "abbreviated header text for th"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "td"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "colspan",
+            "expr": {
+              "kind": "intToString",
+              "expr": {
+                "kind": "prop",
+                "name": "ColSpan"
+              }
+            },
+            "when": {
+              "kind": "isSet",
+              "expr": {
+                "kind": "prop",
+                "name": "ColSpan"
+              }
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "rowspan",
+            "expr": {
+              "kind": "intToString",
+              "expr": {
+                "kind": "prop",
+                "name": "RowSpan"
+              }
+            },
+            "when": {
+              "kind": "isSet",
+              "expr": {
+                "kind": "prop",
+                "name": "RowSpan"
+              }
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "headers",
+            "expr": {
+              "kind": "prop",
+              "name": "Headers"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "td"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [],
+      "recipeId": "tableCell"
+    },
+    {
+      "name": "TableColGroup",
+      "docs": "TableColGroup renders colgroup with optional span.",
+      "classes": {},
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Span",
+          "type": "int",
+          "cva": false
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "colgroup"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "span",
+            "expr": {
+              "kind": "intToString",
+              "expr": {
+                "kind": "prop",
+                "name": "Span"
+              }
+            },
+            "when": {
+              "kind": "isSet",
+              "expr": {
+                "kind": "prop",
+                "name": "Span"
+              }
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "colgroup"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "TableCol",
+      "docs": "TableCol renders a single col definition.",
+      "classes": {},
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Span",
+          "type": "int",
+          "cva": false
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "col"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "span",
+            "expr": {
+              "kind": "intToString",
+              "expr": {
+                "kind": "prop",
+                "name": "Span"
+              }
+            },
+            "when": {
+              "kind": "isSet",
+              "expr": {
+                "kind": "prop",
+                "name": "Span"
+              }
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [],
+        "void": true
+      },
+      "slots": [],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "col"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    }
+  ],
+  "examples": [
+    {
+      "id": "layout.basic",
+      "props": {
+        "Class": "w-full text-sm"
+      },
+      "children": {
+        "TableHeadCell": {
+          "props": {
+            "Scope": "col"
+          }
+        }
+      }
+    },
+    {
+      "id": "cell.colspan",
+      "props": {},
+      "children": {
+        "TableCell": {
+          "props": {
+            "ColSpan": 2
+          }
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

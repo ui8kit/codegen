@@ -1,0 +1,324 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.usp-strip",
+  "name": "UspStrip",
+  "docs": "The promises of a store in one band: free delivery, returns, warranty, help. Axes: layout (strip: one muted panel, cards: a card each, bar: a thin line of icons and titles), tone, density.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": "",
+      "docs": "section heading; empty: no heading (the section is named by id)"
+    },
+    {
+      "name": "perks",
+      "type": {
+        "ts": "Feature[]"
+      },
+      "required": true
+    },
+    {
+      "name": "empty",
+      "type": "string",
+      "default": "",
+      "docs": "the text of the empty state (no records), from the dictionary"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"strip\" | \"cards\" | \"bar\""
+      },
+      "default": "strip"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "perks"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "truck",
+                    "title": {
+                      "$": "empty"
+                    }
+                  }
+                }
+              ],
+              "else": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "layout"
+                      },
+                      "bar"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "List",
+                      "props": {
+                        "Tag": "ul",
+                        "Class": "flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
+                      },
+                      "attrs": {
+                        "data-testid": "items"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "perks"
+                          },
+                          "as": "p",
+                          "key": {
+                            "$": "p.id"
+                          },
+                          "do": [
+                            {
+                              "use": "ListItem",
+                              "props": {
+                                "Class": "flex items-center gap-2 text-sm font-medium"
+                              },
+                              "attrs": {
+                                "data-testid": "item"
+                              },
+                              "children": [
+                                {
+                                  "use": "LucideIcon",
+                                  "props": {
+                                    "Name": {
+                                      "$": "p.icon"
+                                    },
+                                    "Size": 16
+                                  }
+                                },
+                                {
+                                  "use": "Inline",
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "$": "p.title"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "else": [
+                    {
+                      "use": "Grid",
+                      "props": {
+                        "Cols": "1-4",
+                        "Class": {
+                          "op": "cn",
+                          "args": [
+                            "gap-4",
+                            {
+                              "op": "cond",
+                              "args": [
+                                {
+                                  "op": "eq",
+                                  "args": [
+                                    {
+                                      "$": "layout"
+                                    },
+                                    "strip"
+                                  ]
+                                },
+                                "rounded bg-muted p-6",
+                                ""
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "attrs": {
+                        "data-testid": "items"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "perks"
+                          },
+                          "as": "p",
+                          "key": {
+                            "$": "p.id"
+                          },
+                          "do": [
+                            {
+                              "use": "Stack",
+                              "props": {
+                                "Gap": "4",
+                                "Class": {
+                                  "op": "cond",
+                                  "args": [
+                                    {
+                                      "op": "eq",
+                                      "args": [
+                                        {
+                                          "$": "layout"
+                                        },
+                                        "cards"
+                                      ]
+                                    },
+                                    "rounded bg-card inset-ring inset-ring-border p-6",
+                                    ""
+                                  ]
+                                }
+                              },
+                              "attrs": {
+                                "data-testid": "item"
+                              },
+                              "children": [
+                                {
+                                  "use": "Box",
+                                  "props": {
+                                    "Class": "flex size-10 shrink-0 items-center justify-center rounded bg-muted"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "LucideIcon",
+                                      "props": {
+                                        "Name": {
+                                          "$": "p.icon"
+                                        },
+                                        "Size": 20
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Stack",
+                                  "props": {
+                                    "Gap": "2"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Weight": "semibold"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "p.title"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Class": "text-muted-foreground"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "p.text"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    }
+  ]
+}

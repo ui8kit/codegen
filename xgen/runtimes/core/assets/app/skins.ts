@@ -1,0 +1,153 @@
+// Preview tooling, not kit output: the look picked on the Skins screen (/skins/), kept for every screen and every reload.
+// Three choices, each in localStorage:
+//   xgen-skin    the skin: data-skin on <html> (the skin CSS switches on it)
+//   xgen-font    a Google font over the skin's own: --font-sans on <html>
+//   xgen-radius  a corner radius over the skin's own: --radius on <html>
+// Order: the `?skin=` query parameter beats the stored skin, which beats the build skin (VITE_SKIN, else the screen's own).
+// The font and the radius sit on top of whatever skin is on: they are inline on <html>, so they beat every skin rule.
+// Nothing stored means nothing changes.
+// The tiles of /skins/ are static markup; this file wires them by their data attributes:
+//   data-skin-pick="<skin>"                          a skin tile
+//   data-font-pick="<id>" data-font-family="<name>"  a font tile (shown in its font; clicking the chosen one again drops it)
+//   data-radius-pick="<id>" data-radius="<length>"   a radius tile (its [data-radius-sample] box shows the radius)
+//   data-look-reset="skin|font|radius"               back to the build skin, the skin's font, the skin's radius
+// The tile of the current choice gets aria-pressed="true".
+import { SKIN_FONTS } from "./skin-fonts";
+
+const KEYS = { skin: "xgen-skin", font: "xgen-font", radius: "xgen-radius" } as const;
+type Choice = keyof typeof KEYS;
+
+function read(choice: Choice): string | null {
+  try { return localStorage.getItem(KEYS[choice]); } catch { return null; }
+}
+
+function write(choice: Choice, value: string | null): void {
+  try {
+    if (value === null) localStorage.removeItem(KEYS[choice]);
+    else localStorage.setItem(KEYS[choice], value);
+  } catch { /* storage is blocked: the choice lasts until the next reload */ }
+}
+
+const html = (): HTMLElement => document.documentElement;
+
+// ---- fonts ----
+
+const linked = new Set<string>();
+
+/** add a Google Fonts stylesheet once. `spec` is "Inter:wght@400;500;600;700". The css2 API splits every face by script
+ *  (latin, cyrillic, ...) with unicode-range, so the browser downloads the cyrillic part as soon as the page shows Cyrillic. */
+function loadFont(spec: string): void {
+  const href = `https://fonts.googleapis.com/css2?family=${spec}&display=swap`;
+  if (linked.has(href)) return;
+  linked.add(href);
+  document.head.append(Object.assign(document.createElement("link"), { rel: "stylesheet", href, crossOrigin: "anonymous" }));
+}
+
+/** every font of the Fonts row has the 400 to 700 faces */
+const fontSpec = (family: string): string => `${family.replace(/ /g, "+")}:wght@400;500;600;700`;
+const fontStack = (family: string): string => `"${family}", ui-sans-serif, system-ui, sans-serif`;
+
+// ---- applying a choice ----
+
+/** the skin picked on /skins/, or null */
+export const storedSkin = (): string | null => read("skin");
+
+/** put a skin on the page and load the fonts it needs */
+export function applySkin(skin: string): void {
+  html().dataset.skin = skin;
+  for (const spec of SKIN_FONTS[skin] ?? []) loadFont(spec);
+}
+
+/** put the stored font and radius on top of the skin, or take them off */
+export function applyOverrides(): void {
+  const style = html().style;
+  const family = read("font");
+  if (family) {
+    loadFont(fontSpec(family));
+    style.setProperty("--font-sans", fontStack(family));
+    // a skin may map medium and semibold onto other faces (sky, notebook); the chosen font has them all
+    style.setProperty("--font-weight-medium", "500");
+    style.setProperty("--font-weight-semibold", "600");
+  } else {
+    style.removeProperty("--font-sans");
+    style.removeProperty("--font-weight-medium");
+    style.removeProperty("--font-weight-semibold");
+  }
+  const radius = read("radius");
+  if (radius) style.setProperty("--radius", radius);
+  else style.removeProperty("--radius");
+}
+
+/** a picked skin replaces a `?skin=` of the address, or the next reload would bring that one back */
+function dropSkinQuery(): void {
+  const url = new URL(location.href);
+  if (!url.searchParams.has("skin")) return;
+  url.searchParams.delete("skin");
+  history.replaceState(history.state, "", url);
+}
+
+// ---- the tiles ----
+
+function press(el: HTMLElement, on: boolean): void {
+  if (el.getAttribute("aria-pressed") !== String(on)) el.setAttribute("aria-pressed", String(on));
+}
+
+/** mark the current choices, show every font tile in its font and every radius sample with its radius */
+function paint(): void {
+  const skin = html().dataset.skin ?? "";
+  const font = read("font") ?? "";
+  const radius = read("radius") ?? "";
+  for (const tile of document.querySelectorAll<HTMLElement>("[data-skin-pick]")) {
+    press(tile, tile.dataset.skinPick === skin);
+    for (const spec of SKIN_FONTS[tile.dataset.skinPick ?? ""] ?? []) loadFont(spec);
+  }
+  for (const tile of document.querySelectorAll<HTMLElement>("[data-font-pick]")) {
+    const family = tile.dataset.fontFamily ?? "";
+    press(tile, family === font);
+    if (family && !tile.style.fontFamily) {
+      loadFont(fontSpec(family));
+      tile.style.fontFamily = fontStack(family);
+    }
+  }
+  for (const tile of document.querySelectorAll<HTMLElement>("[data-radius-pick]")) {
+    press(tile, tile.dataset.radius === radius);
+    tile.querySelector<HTMLElement>("[data-radius-sample]")?.style.setProperty("--radius", tile.dataset.radius ?? "");
+  }
+}
+
+/** after the first paint of the app: wire the tiles (one click listener for the page) and keep them marked as the app renders */
+export function mountLook(buildSkin: string): void {
+  document.addEventListener("click", (event) => {
+    const el = (event.target as Element | null)?.closest<HTMLElement>("[data-skin-pick], [data-font-pick], [data-radius-pick], [data-look-reset]");
+    if (!el) return;
+    const d = el.dataset;
+    if (d.skinPick) {
+      write("skin", d.skinPick);
+      dropSkinQuery();
+      applySkin(d.skinPick);
+    } else if (d.fontPick) {
+      const family = d.fontFamily ?? "";
+      write("font", read("font") === family ? null : family);
+      applyOverrides();
+    } else if (d.radiusPick) {
+      const radius = d.radius ?? "";
+      write("radius", read("radius") === radius ? null : radius);
+      applyOverrides();
+    } else if (d.lookReset === "skin") {
+      write("skin", null);
+      dropSkinQuery();
+      applySkin(buildSkin);
+    } else if (d.lookReset === "font" || d.lookReset === "radius") {
+      write(d.lookReset, null);
+      applyOverrides();
+    }
+    paint();
+  });
+  paint();
+  let queued = false;
+  new MutationObserver(() => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; paint(); });
+  }).observe(document.body, { childList: true, subtree: true });
+}

@@ -1,0 +1,177 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.menu-entry",
+  "name": "MenuEntry",
+  "docs": "One entry of a menu: a link to its address, or, without one, its content as text in the same box (the magazine routes nothing, so it shows text). current marks the page the entry stands for (aria-current) either way.",
+  "records": {},
+  "props": [
+    {
+      "name": "href",
+      "type": "string",
+      "docs": "the address; none: text, not a link"
+    },
+    {
+      "name": "current",
+      "type": "boolean",
+      "default": false,
+      "docs": "the entry of the current page"
+    },
+    {
+      "name": "variant",
+      "type": {
+        "ts": "\"default\" | \"muted\" | \"block\""
+      },
+      "default": "default",
+      "docs": "the look of the link"
+    },
+    {
+      "name": "size",
+      "type": {
+        "ts": "\"default\" | \"sm\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "testid",
+      "type": "string",
+      "docs": "the test id of the entry"
+    },
+    {
+      "name": "block",
+      "type": "boolean",
+      "default": false,
+      "docs": "the content holds block elements: without an address it sits in a div, not a span"
+    }
+  ],
+  "className": true,
+  "children": true,
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "$": "href"
+      },
+      "then": [
+        {
+          "use": "Link",
+          "props": {
+            "Href": {
+              "$": "href"
+            },
+            "Variant": {
+              "$": "variant"
+            },
+            "Size": {
+              "$": "size"
+            },
+            "AriaCurrent": {
+              "op": "cond",
+              "args": [
+                {
+                  "$": "current"
+                },
+                "page",
+                {
+                  "op": "undef",
+                  "args": []
+                }
+              ]
+            },
+            "Class": {
+              "$": "className"
+            }
+          },
+          "attrs": {
+            "data-testid": {
+              "$": "testid"
+            }
+          },
+          "children": [
+            {
+              "slot": "children"
+            }
+          ]
+        }
+      ],
+      "else": [
+        {
+          "when": {
+            "$": "block"
+          },
+          "then": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": {
+                  "$": "className"
+                }
+              },
+              "attrs": {
+                "aria-current": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "current"
+                    },
+                    "page",
+                    {
+                      "op": "undef",
+                      "args": []
+                    }
+                  ]
+                },
+                "data-testid": {
+                  "$": "testid"
+                }
+              },
+              "children": [
+                {
+                  "slot": "children"
+                }
+              ]
+            }
+          ],
+          "else": [
+            {
+              "use": "Inline",
+              "props": {
+                "Class": {
+                  "$": "className"
+                }
+              },
+              "attrs": {
+                "aria-current": {
+                  "op": "cond",
+                  "args": [
+                    {
+                      "$": "current"
+                    },
+                    "page",
+                    {
+                      "op": "undef",
+                      "args": []
+                    }
+                  ]
+                },
+                "data-testid": {
+                  "$": "testid"
+                }
+              },
+              "children": [
+                {
+                  "slot": "children"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

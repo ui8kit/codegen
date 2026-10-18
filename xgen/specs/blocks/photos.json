@@ -1,0 +1,154 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.photos",
+  "name": "Photo gallery",
+  "docs": "Photos in a grid, a masonry, a mosaic, a featured picture with thumbnails, or cards.",
+  "theme": "marketing",
+  "group": "company",
+  "organism": "PhotoGallery",
+  "axes": {
+    "layout": [
+      "grid",
+      "masonry",
+      "mosaic",
+      "featured",
+      "cards"
+    ],
+    "captions": [
+      "show",
+      "hide"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "grid",
+    "captions": "show",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "grid",
+      "set": {}
+    },
+    {
+      "id": "gridPlain",
+      "set": {
+        "captions": "hide",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "masonry",
+      "set": {
+        "layout": "masonry"
+      }
+    },
+    {
+      "id": "mosaic",
+      "set": {
+        "layout": "mosaic"
+      }
+    },
+    {
+      "id": "featured",
+      "set": {
+        "layout": "featured"
+      }
+    },
+    {
+      "id": "cards",
+      "set": {
+        "layout": "cards",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "FigureBlock",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@photos",
+      "when": {
+        "layout": [
+          "grid",
+          "masonry",
+          "mosaic",
+          "cards"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"thumbs\"] [data-slot=\"media-frame\"]",
+      "n": "@photos",
+      "when": {
+        "layout": "featured"
+      }
+    },
+    {
+      "sel": "[data-testid=\"caption\"]",
+      "n": "@photos",
+      "when": {
+        "layout": [
+          "grid",
+          "masonry"
+        ],
+        "captions": "show"
+      }
+    },
+    {
+      "sel": "[data-testid=\"caption\"]",
+      "n": 0,
+      "when": {
+        "captions": "hide"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "photos",
+      "collection": "photos",
+      "kind": "photo",
+      "record": "Photo",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "tag": "metadata.tag.value",
+        "size": "metadata.size.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "photos",
+      "title": {
+        "$": "ui.company.photos.title"
+      },
+      "lead": {
+        "$": "ui.company.photos.lead"
+      },
+      "photos": {
+        "$": "photos"
+      },
+      "empty": {
+        "$": "ui.empty.photos"
+      },
+      "labels": {
+        "$": "ui.company.photos"
+      }
+    }
+  }
+}

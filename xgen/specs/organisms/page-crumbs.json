@@ -1,0 +1,195 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.page-crumbs",
+  "name": "PageCrumbs",
+  "docs": "The breadcrumbs of an inner page: the parent pages (links where they have an href) separated by chevrons; the last entry is the current page and is not a link.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the breadcrumbs"
+    },
+    {
+      "name": "crumbs",
+      "type": {
+        "ts": "NavLink[]"
+      },
+      "required": true
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "derived": [
+    {
+      "name": "last",
+      "value": {
+        "op": "sub",
+        "args": [
+          {
+            "op": "len",
+            "args": [
+              {
+                "$": "crumbs"
+              }
+            ]
+          },
+          1
+        ]
+      }
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "nav"
+      },
+      "attrs": {
+        "aria-label": {
+          "op": "coalesce",
+          "args": [
+            {
+              "$": "landmarkLabel"
+            },
+            {
+              "$": "label"
+            }
+          ]
+        },
+        "data-testid": "crumbs"
+      },
+      "children": [
+        {
+          "use": "List",
+          "props": {
+            "Class": "m-0 flex list-none flex-wrap items-center gap-2 p-0 text-sm text-muted-foreground"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "crumbs"
+              },
+              "as": "c",
+              "key": {
+                "$": "c.id"
+              },
+              "do": [
+                {
+                  "use": "ListItem",
+                  "props": {
+                    "Class": "flex items-center gap-2"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "lt",
+                        "args": [
+                          {
+                            "$": "i"
+                          },
+                          {
+                            "$": "last"
+                          }
+                        ]
+                      },
+                      "then": [
+                        {
+                          "when": {
+                            "$": "c.href"
+                          },
+                          "then": [
+                            {
+                              "use": "Link",
+                              "props": {
+                                "Href": {
+                                  "$": "c.href"
+                                },
+                                "Variant": "muted",
+                                "Size": "sm"
+                              },
+                              "attrs": {
+                                "data-testid": "crumb"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "c.name"
+                                  }
+                                }
+                              ]
+                            }
+                          ],
+                          "else": [
+                            {
+                              "use": "Inline",
+                              "attrs": {
+                                "data-testid": "crumb"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "c.name"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "use": "LucideIcon",
+                          "props": {
+                            "Name": "chevron-right",
+                            "Size": 16
+                          }
+                        }
+                      ],
+                      "else": [
+                        {
+                          "use": "Inline",
+                          "props": {
+                            "Class": "font-medium text-foreground"
+                          },
+                          "attrs": {
+                            "aria-current": "page"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "c.name"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "NavBar",
+      "names": [
+        "NavLink"
+      ]
+    }
+  ]
+}

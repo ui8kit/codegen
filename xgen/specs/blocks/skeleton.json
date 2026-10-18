@@ -1,0 +1,100 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.skeleton",
+  "name": "Loading state",
+  "docs": "Grey blocks in the shape of what is coming: cards, a list or an article.",
+  "theme": "dashboard",
+  "group": "states",
+  "organism": "SkeletonLayout",
+  "axes": {
+    "shape": [
+      "cards",
+      "list",
+      "article"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "shape": "cards",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "cards",
+      "set": {}
+    },
+    {
+      "id": "list",
+      "set": {
+        "shape": "list"
+      }
+    },
+    {
+      "id": "article",
+      "set": {
+        "shape": "article"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[role=\"status\"]",
+      "n": 1
+    },
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@placeholders",
+      "when": {
+        "shape": [
+          "cards",
+          "list"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"item\"]",
+      "n": "@placeholders",
+      "when": {
+        "shape": "article"
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "placeholders",
+      "collection": "placeholders",
+      "kind": "placeholder",
+      "record": "Line",
+      "fields": {
+        "id": "id"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "skeleton",
+      "title": {
+        "$": "ui.vibe.skeleton.title"
+      },
+      "label": {
+        "$": "ui.vibe.skeleton.label"
+      },
+      "lines": {
+        "$": "placeholders"
+      }
+    }
+  }
+}

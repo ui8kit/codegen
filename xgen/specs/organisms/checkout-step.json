@@ -1,0 +1,152 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.checkout-step",
+  "name": "CheckoutStep",
+  "docs": "One step of a long form: an optional number, a heading (h2) and a line of text over the fields (`children`). Axes: layout (cards: the step in a card, numbered: a number beside the heading and a line between steps).",
+  "records": {},
+  "props": [
+    {
+      "name": "number",
+      "type": "string",
+      "required": true,
+      "docs": "the number of the step (shown in the numbered layout)"
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"cards\" | \"numbered\""
+      },
+      "default": "cards"
+    }
+  ],
+  "children": true,
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "6",
+        "Align": "stretch",
+        "Class": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "cards"
+              ]
+            },
+            "rounded bg-card inset-ring inset-ring-border p-6",
+            "border-t border-border pt-6"
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "step"
+      },
+      "children": [
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "4",
+            "Align": "start"
+          },
+          "children": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "layout"
+                  },
+                  "numbered"
+                ]
+              },
+              "then": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "flex size-8 shrink-0 items-center justify-center rounded bg-primary text-sm font-medium text-primary-foreground"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "number"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "use": "Stack",
+              "props": {
+                "Gap": "0"
+              },
+              "children": [
+                {
+                  "use": "Title",
+                  "props": {
+                    "As": 2,
+                    "Size": "lg",
+                    "Weight": "semibold"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "title"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "when": {
+                    "$": "text"
+                  },
+                  "then": [
+                    {
+                      "use": "Text",
+                      "props": {
+                        "Size": "sm",
+                        "Class": "text-muted-foreground"
+                      },
+                      "children": [
+                        {
+                          "text": {
+                            "$": "text"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slot": "children"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

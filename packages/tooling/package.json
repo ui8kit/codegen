@@ -1,0 +1,17 @@
+{
+  "name": "@ui8kit/xgen-tooling",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Gates of the workspace as bins: rules 01, 02, 03 and 06 (xgen-rules, a delegate of the rules group of xgen check), the zones catalog (xgen-zones), pre-push audit (xgen-audit).",
+  "bin": {
+    "xgen-rules": "./bin/rules.mjs",
+    "xgen-audit": "./bin/audit.sh",
+    "xgen-zones": "./bin/zones.mjs"
+  },
+  "exports": {
+    "./app": "./src/app.mjs",
+    "./zones": "./src/zones.mjs",
+    "./package.json": "./package.json"
+  }
+}

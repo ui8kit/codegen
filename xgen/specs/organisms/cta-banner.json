@@ -1,0 +1,211 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.cta-banner",
+  "name": "CtaBanner",
+  "docs": "A centered closing card: heading, one sentence and a pill button. Sizes from the default preset.",
+  "records": {},
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "cta",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "docs": "the address; none: a button, not a link"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "muted"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "section",
+        "Class": "w-full py-0"
+      },
+      "attrs": {
+        "aria-labelledby": {
+          "op": "cond",
+          "args": [
+            {
+              "$": "landmarkLabel"
+            },
+            {
+              "op": "undef",
+              "args": []
+            },
+            {
+              "op": "tpl",
+              "args": [
+                "{0}-title",
+                {
+                  "$": "id"
+                }
+              ]
+            }
+          ]
+        },
+        "data-testid": "section",
+        "data-tone": {
+          "$": "tone"
+        },
+        "data-density": "compact",
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "use": "Box",
+          "props": {
+            "Class": {
+              "op": "cn",
+              "args": [
+                "flex w-full flex-col items-center gap-10 bg-muted px-6 text-center",
+                {
+                  "op": "preset",
+                  "args": [
+                    "defaults",
+                    "cta.panel"
+                  ]
+                }
+              ]
+            }
+          },
+          "attrs": {
+            "data-testid": "cta-banner"
+          },
+          "children": [
+            {
+              "use": "Title",
+              "props": {
+                "As": 2,
+                "Size": "3xl",
+                "Weight": "semibold",
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    {
+                      "op": "preset",
+                      "args": [
+                        "defaults",
+                        "cta.title"
+                      ]
+                    },
+                    "leading-9"
+                  ]
+                }
+              },
+              "attrs": {
+                "id": {
+                  "op": "tpl",
+                  "args": [
+                    "{0}-title",
+                    {
+                      "$": "id"
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "title"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Text",
+              "props": {
+                "Size": "xs",
+                "Weight": "semibold",
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    "leading-5 text-muted-foreground",
+                    {
+                      "op": "preset",
+                      "args": [
+                        "defaults",
+                        "cta.text"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "text"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Button",
+              "props": {
+                "Variant": "default",
+                "Size": "lg",
+                "Href": {
+                  "$": "href"
+                },
+                "Class": {
+                  "op": "preset",
+                  "args": [
+                    "defaults",
+                    "cta.button"
+                  ]
+                }
+              },
+              "attrs": {
+                "data-testid": "action-primary"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "cta"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

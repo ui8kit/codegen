@@ -1,0 +1,103 @@
+{
+  "sky": {
+    "label": "Sky",
+    "source": "ui8kit",
+    "fonts": [
+      "Istok+Web:ital,wght@0,400;0,700;1,400;1,700"
+    ]
+  },
+  "modern-minimal": {
+    "label": "Modern Minimal",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Inter:wght@400;500;600;700"
+    ]
+  },
+  "violet-bloom": {
+    "label": "Violet Bloom",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Plus+Jakarta+Sans:wght@400;500;600;700"
+    ]
+  },
+  "t3-chat": {
+    "label": "T3 Chat",
+    "source": "tweakcn a3b47b3",
+    "fonts": []
+  },
+  "bubblegum": {
+    "label": "Bubblegum",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Poppins:wght@400;500;600;700"
+    ]
+  },
+  "doom-64": {
+    "label": "Doom 64",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Oxanium:wght@400;500;600;700"
+    ]
+  },
+  "amber-minimal": {
+    "label": "Amber Minimal",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Inter:wght@400;500;600;700"
+    ]
+  },
+  "supabase": {
+    "label": "Supabase",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Outfit:wght@400;500;600;700"
+    ]
+  },
+  "kodama-grove": {
+    "label": "Kodama Grove",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Merriweather:wght@400;500;600;700"
+    ]
+  },
+  "perpetuity": {
+    "label": "Perpetuity",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Source+Code+Pro:wght@400;500;600;700"
+    ]
+  },
+  "cosmic-night": {
+    "label": "Cosmic Night",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Inter:wght@400;500;600;700"
+    ]
+  },
+  "claude": {
+    "label": "Claude",
+    "source": "tweakcn a3b47b3",
+    "fonts": []
+  },
+  "mocha-mousse": {
+    "label": "Mocha Mousse",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "DM+Sans:wght@400;500;600;700"
+    ]
+  },
+  "neo-brutalism": {
+    "label": "Neo Brutalism",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "DM+Sans:wght@400;500;600;700"
+    ]
+  },
+  "notebook": {
+    "label": "Notebook",
+    "source": "tweakcn a3b47b3",
+    "fonts": [
+      "Architects+Daughter:wght@400"
+    ]
+  }
+}

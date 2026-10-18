@@ -1,0 +1,541 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.post-split",
+  "name": "PostSplit",
+  "docs": "A post header with the author, the reading figures, the tags and the actions. Axes: layout (center: tags, figures and an author card with share and save over a wide cover; split: beside the cover; outline: facts and related reading beside the cover), mediaSide, author (line, card, bio), cover (wide, square), actions (pair, wide, icons), tone.",
+  "records": {
+    "PostExtras": [
+      {
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "name": "bio",
+        "type": "string"
+      },
+      {
+        "name": "views",
+        "type": "string"
+      },
+      {
+        "name": "likes",
+        "type": "string"
+      },
+      {
+        "name": "tags",
+        "type": "NavLink[]"
+      },
+      {
+        "name": "outline",
+        "type": "NavLink[]"
+      }
+    ],
+    "PostSplitLabels": [
+      {
+        "name": "minutes",
+        "type": "string"
+      },
+      {
+        "name": "views",
+        "type": "string"
+      },
+      {
+        "name": "likes",
+        "type": "string"
+      },
+      {
+        "name": "share",
+        "type": "string"
+      },
+      {
+        "name": "save",
+        "type": "string"
+      },
+      {
+        "name": "read",
+        "type": "string"
+      },
+      {
+        "name": "related",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "post",
+      "type": {
+        "ts": "Post"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "PostSplitLabels"
+      },
+      "required": true,
+      "docs": "templates: minutes `{0} min read`, views `{0} views`, likes `{0} likes`; the words of the buttons and of the related heading"
+    },
+    {
+      "name": "extras",
+      "type": {
+        "record": "PostExtras"
+      },
+      "required": true
+    },
+    {
+      "name": "level",
+      "type": {
+        "ts": "1 | 2"
+      },
+      "default": 1
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"center\" | \"split\" | \"outline\""
+      },
+      "default": "split"
+    },
+    {
+      "name": "mediaSide",
+      "type": {
+        "ts": "\"end\" | \"start\""
+      },
+      "default": "end"
+    },
+    {
+      "name": "author",
+      "type": {
+        "ts": "\"line\" | \"card\" | \"bio\""
+      },
+      "default": "line"
+    },
+    {
+      "name": "cover",
+      "type": {
+        "ts": "\"wide\" | \"square\""
+      },
+      "default": "wide"
+    },
+    {
+      "name": "actions",
+      "type": {
+        "ts": "\"pair\" | \"wide\" | \"icons\""
+      },
+      "default": "pair"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "eq",
+        "args": [
+          {
+            "$": "layout"
+          },
+          "center"
+        ]
+      },
+      "then": [
+        {
+          "organism": "SectionFrame",
+          "props": {
+            "id": {
+              "$": "id"
+            },
+            "title": {
+              "$": "post.title"
+            },
+            "lead": {
+              "$": "post.excerpt"
+            },
+            "heading": {
+              "badge": {
+                "$": "post.category"
+              },
+              "level": {
+                "$": "level"
+              }
+            },
+            "tone": {
+              "$": "tone"
+            },
+            "media": {
+              "show": true
+            },
+            "align": "center",
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          },
+          "slots": {
+            "children": {
+              "args": [],
+              "do": [
+                {
+                  "when": {
+                    "op": "gt",
+                    "args": [
+                      {
+                        "op": "len",
+                        "args": [
+                          {
+                            "$": "extras.tags"
+                          }
+                        ]
+                      },
+                      0
+                    ]
+                  },
+                  "then": [
+                    {
+                      "organism": "PostTags",
+                      "props": {
+                        "tags": {
+                          "$": "extras.tags"
+                        },
+                        "align": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "organism": "PostStats",
+                  "props": {
+                    "post": {
+                      "$": "post"
+                    },
+                    "extras": {
+                      "$": "extras"
+                    },
+                    "labels": {
+                      "$": "labels"
+                    },
+                    "align": "center"
+                  }
+                },
+                {
+                  "organism": "PostAuthor",
+                  "props": {
+                    "post": {
+                      "$": "post"
+                    },
+                    "extras": {
+                      "$": "extras"
+                    },
+                    "labels": {
+                      "$": "labels"
+                    },
+                    "mode": "card",
+                    "share": true,
+                    "className": "mx-auto w-full max-w-md"
+                  }
+                }
+              ]
+            },
+            "aside": {
+              "args": [],
+              "do": [
+                {
+                  "organism": "MediaFrame",
+                  "props": {
+                    "alt": {
+                      "$": "post.title"
+                    },
+                    "ratio": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "center"
+                          ]
+                        },
+                        "21/9",
+                        {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "cover"
+                                },
+                                "square"
+                              ]
+                            },
+                            "1/1",
+                            "4/3"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "else": [
+        {
+          "organism": "SectionFrame",
+          "props": {
+            "id": {
+              "$": "id"
+            },
+            "title": {
+              "$": "post.title"
+            },
+            "lead": {
+              "$": "post.excerpt"
+            },
+            "heading": {
+              "badge": {
+                "$": "post.category"
+              },
+              "level": {
+                "$": "level"
+              }
+            },
+            "tone": {
+              "$": "tone"
+            },
+            "media": {
+              "show": true,
+              "side": {
+                "$": "mediaSide"
+              }
+            },
+            "layout": "split",
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          },
+          "slots": {
+            "children": {
+              "args": [],
+              "do": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "layout"
+                      },
+                      "outline"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "when": {
+                        "op": "gt",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "extras.outline"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "PostOutline",
+                          "props": {
+                            "post": {
+                              "$": "post"
+                            },
+                            "extras": {
+                              "$": "extras"
+                            },
+                            "labels": {
+                              "$": "labels"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "else": [
+                    {
+                      "organism": "PostAuthor",
+                      "props": {
+                        "post": {
+                          "$": "post"
+                        },
+                        "extras": {
+                          "$": "extras"
+                        },
+                        "labels": {
+                          "$": "labels"
+                        },
+                        "mode": {
+                          "$": "author"
+                        }
+                      }
+                    },
+                    {
+                      "when": {
+                        "op": "ne",
+                        "args": [
+                          {
+                            "$": "author"
+                          },
+                          "line"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "PostStats",
+                          "props": {
+                            "post": {
+                              "$": "post"
+                            },
+                            "extras": {
+                              "$": "extras"
+                            },
+                            "labels": {
+                              "$": "labels"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "when": {
+                        "op": "gt",
+                        "args": [
+                          {
+                            "op": "len",
+                            "args": [
+                              {
+                                "$": "extras.tags"
+                              }
+                            ]
+                          },
+                          0
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "PostTags",
+                          "props": {
+                            "tags": {
+                              "$": "extras.tags"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "organism": "PostActions",
+                  "props": {
+                    "labels": {
+                      "$": "labels"
+                    },
+                    "mode": {
+                      "$": "actions"
+                    }
+                  }
+                }
+              ]
+            },
+            "aside": {
+              "args": [],
+              "do": [
+                {
+                  "organism": "MediaFrame",
+                  "props": {
+                    "alt": {
+                      "$": "post.title"
+                    },
+                    "ratio": {
+                      "op": "cond",
+                      "args": [
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "$": "layout"
+                            },
+                            "center"
+                          ]
+                        },
+                        "21/9",
+                        {
+                          "op": "cond",
+                          "args": [
+                            {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "$": "cover"
+                                },
+                                "square"
+                              ]
+                            },
+                            "1/1",
+                            "4/3"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PostCard",
+      "names": [
+        "Post"
+      ]
+    },
+    {
+      "from": "NavBar",
+      "names": [
+        "NavLink"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.templates",
+  "name": "Template gallery",
+  "docs": "Template gallery: filters, a browse-all button and an 8-card MediaFrame grid.",
+  "theme": "marketing",
+  "group": "gallery",
+  "organism": "TemplateGrid",
+  "axes": {
+    "cols": [
+      "1-3",
+      "1-4"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "roomy",
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "cols": "1-4",
+    "tone": "default",
+    "density": "compact"
+  },
+  "variants": [
+    {
+      "id": "grid4",
+      "set": {
+        "cols": "1-4",
+        "density": "default"
+      }
+    },
+    {
+      "id": "grid3",
+      "set": {
+        "cols": "1-3"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    },
+    {
+      "id": "roomy",
+      "set": {
+        "density": "roomy"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"template-card\"]",
+      "n": "@templates"
+    },
+    {
+      "sel": "[data-testid=\"template-filter\"]",
+      "n": "@templateFilters"
+    },
+    {
+      "sel": "[data-testid=\"template-browse\"]",
+      "n": 1
+    }
+  ],
+  "data": [
+    {
+      "as": "templates",
+      "collection": "templates",
+      "kind": "template",
+      "record": "Template",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "views": "metadata.views.value|compact",
+        "likes": "metadata.likes.value|compact",
+        "topic": "metadata.topic.value"
+      }
+    },
+    {
+      "as": "templateFilters",
+      "collection": "prompts",
+      "kind": "prompt",
+      "record": "Filter",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "value": "metadata.value.value",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "templates",
+      "title": {
+        "$": "ui.vibe.templates.title"
+      },
+      "templates": {
+        "$": "templates"
+      },
+      "filters": {
+        "$": "templateFilters"
+      },
+      "labels": {
+        "$": "ui.vibe.templates"
+      },
+      "browseHref": "#/",
+      "empty": {
+        "$": "ui.empty.templates"
+      }
+    }
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "part.timeline",
+  "name": "Timeline",
+  "docs": "A vertical list of events (an order's history): a dot on a line, the title, an optional text and the time. Newest first or oldest first is the caller's order.",
+  "records": {
+    "TimelineItem": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "optional": true
+      },
+      {
+        "name": "time",
+        "type": "string"
+      },
+      {
+        "name": "tone",
+        "type": "string",
+        "optional": true
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "items",
+      "type": {
+        "ts": "TimelineItem[]"
+      },
+      "docs": "tone is gray, green, blue, amber or red",
+      "required": true
+    }
+  ],
+  "className": true,
+  "consts": {
+    "TONE_DOT": {
+      "gray": "bg-muted-foreground",
+      "green": "bg-emerald-500",
+      "blue": "bg-blue-500",
+      "amber": "bg-amber-500",
+      "red": "bg-red-500"
+    }
+  },
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": {
+          "op": "cn",
+          "args": [
+            "min-w-0",
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-slot": "timeline"
+      },
+      "children": [
+        {
+          "use": "List",
+          "props": {
+            "Class": "m-0 flex list-none flex-col p-0"
+          },
+          "children": [
+            {
+              "each": {
+                "$": "items"
+              },
+              "as": "item",
+              "key": {
+                "$": "item.id"
+              },
+              "do": [
+                {
+                  "use": "ListItem",
+                  "props": {
+                    "Class": "relative flex min-w-0 gap-4 pb-4 last:pb-0"
+                  },
+                  "attrs": {
+                    "data-event": {
+                      "$": "item.id"
+                    }
+                  },
+                  "children": [
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": "relative flex w-2 shrink-0 justify-center"
+                      },
+                      "children": [
+                        {
+                          "when": {
+                            "op": "lt",
+                            "args": [
+                              {
+                                "$": "i"
+                              },
+                              {
+                                "op": "sub",
+                                "args": [
+                                  {
+                                    "op": "len",
+                                    "args": [
+                                      {
+                                        "$": "items"
+                                      }
+                                    ]
+                                  },
+                                  1
+                                ]
+                              }
+                            ]
+                          },
+                          "then": [
+                            {
+                              "use": "Inline",
+                              "props": {
+                                "Class": "absolute top-4 -bottom-0 w-px bg-border"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Inline",
+                          "props": {
+                            "Class": {
+                              "op": "cn",
+                              "args": [
+                                "mt-2 size-2 rounded-full",
+                                {
+                                  "op": "at",
+                                  "args": [
+                                    {
+                                      "$": "TONE_DOT"
+                                    },
+                                    {
+                                      "op": "coalesce",
+                                      "args": [
+                                        {
+                                          "$": "item.tone"
+                                        },
+                                        "gray"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": "flex min-w-0 flex-1 flex-col gap-0"
+                      },
+                      "children": [
+                        {
+                          "use": "Box",
+                          "props": {
+                            "Class": "flex flex-wrap items-baseline justify-between gap-x-4"
+                          },
+                          "children": [
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Class": "m-0 text-sm font-bold text-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "item.title"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Class": "m-0 shrink-0 text-xs font-medium text-muted-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "item.time"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "$": "item.text"
+                          },
+                          "then": [
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Class": "m-0 text-xs font-medium text-muted-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "item.text"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "index": "i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

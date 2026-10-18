@@ -1,0 +1,8 @@
+{#- Self-test fixture of the rules group, detector block-root (violating). -#}
+{%- set c_2 -%}
+  {%- set c_1 -%}
+    {{ ui_text(v_title) }}
+  {%- endset -%}
+  {{ include('ui/block/block.html.twig', {'p': {'Tag': 'aside'}, 'children': c_1}, with_context = false) }}
+{%- endset -%}
+{{ include('ui/block/block.html.twig', {'p': {'Tag': 'section'}, 'children': c_2}, with_context = false) }}

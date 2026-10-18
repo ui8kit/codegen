@@ -1,0 +1,125 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.offer-media",
+  "name": "OfferMedia",
+  "docs": "The picture of the StoreHero overlay layout with an offer card floating on its lower corner (the card floats over the picture).",
+  "records": {},
+  "props": [
+    {
+      "name": "alt",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the picture"
+    },
+    {
+      "name": "card",
+      "type": {
+        "ts": "OfferCard"
+      },
+      "required": true
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Box",
+      "props": {
+        "Class": "relative"
+      },
+      "attrs": {
+        "data-testid": "hero-media"
+      },
+      "children": [
+        {
+          "organism": "MediaFrame",
+          "props": {
+            "alt": {
+              "$": "alt"
+            },
+            "ratio": "4/3"
+          }
+        },
+        {
+          "use": "Group",
+          "props": {
+            "Gap": "4",
+            "Align": "start",
+            "Class": "absolute bottom-4 left-4 mr-4 max-w-xs rounded bg-card p-4 shadow-lg"
+          },
+          "attrs": {
+            "data-testid": "offer-card"
+          },
+          "children": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": "flex size-10 shrink-0 items-center justify-center rounded bg-muted"
+              },
+              "children": [
+                {
+                  "use": "LucideIcon",
+                  "props": {
+                    "Name": {
+                      "$": "card.icon"
+                    },
+                    "Size": 20
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Stack",
+              "props": {
+                "Gap": "0"
+              },
+              "children": [
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "sm",
+                    "Weight": "semibold"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "card.title"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "use": "Text",
+                  "props": {
+                    "Size": "xs",
+                    "Class": "text-muted-foreground"
+                  },
+                  "children": [
+                    {
+                      "text": {
+                        "$": "card.text"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "StoreHero",
+      "names": [
+        "OfferCard"
+      ]
+    }
+  ]
+}

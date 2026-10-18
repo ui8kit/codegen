@@ -1,0 +1,133 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.post-mini-card",
+  "name": "PostMiniCard",
+  "docs": "A small post card of PostShowcase: the picture, the category, the title and the author with the reading time.",
+  "records": {},
+  "props": [
+    {
+      "name": "p",
+      "type": {
+        "ts": "Post"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "ts": "PostLabels"
+      },
+      "required": true,
+      "docs": "templates: minutes `{0} min read`, by `By {0}`; and the word of the read link"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Stack",
+      "props": {
+        "Gap": "2",
+        "Align": "stretch",
+        "Class": "rounded bg-card inset-ring inset-ring-border p-2"
+      },
+      "attrs": {
+        "data-testid": "post-mini"
+      },
+      "children": [
+        {
+          "organism": "MediaFrame",
+          "props": {
+            "alt": {
+              "$": "p.title"
+            }
+          }
+        },
+        {
+          "use": "Stack",
+          "props": {
+            "Gap": "2",
+            "Align": "start",
+            "Class": "p-2"
+          },
+          "children": [
+            {
+              "use": "Badge",
+              "props": {
+                "Variant": "secondary",
+                "Size": "sm"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "p.category"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Title",
+              "props": {
+                "As": 3,
+                "Size": "sm",
+                "Weight": "semibold"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "p.title"
+                  }
+                }
+              ]
+            },
+            {
+              "use": "Text",
+              "props": {
+                "Size": "xs",
+                "Class": "text-muted-foreground"
+              },
+              "children": [
+                {
+                  "text": {
+                    "op": "tpl",
+                    "args": [
+                      "{0} · {1}",
+                      {
+                        "$": "p.author"
+                      },
+                      {
+                        "op": "tpl",
+                        "args": [
+                          {
+                            "$": "labels.minutes"
+                          },
+                          {
+                            "$": "p.minutes"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "PostCard",
+      "names": [
+        "Post",
+        "PostLabels"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,327 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.grid",
+  "tier": "brick",
+  "dir": "grid",
+  "docs": "Grid lays out children in a CSS grid with optional column wrappers.",
+  "variants": {
+    "grid": "grid.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Grid",
+      "docs": "Grid renders a display:grid container.",
+      "recipeId": "grid",
+      "asChild": true,
+      "classes": {
+        "recipe": {},
+        "extra": [
+          {
+            "kind": "cond",
+            "test": {
+              "kind": "contains",
+              "expr": {
+                "kind": "prop",
+                "name": "Class"
+              },
+              "substring": "grid-cols-"
+            },
+            "then": {
+              "kind": "lit",
+              "value": ""
+            },
+            "else": {
+              "kind": "mapOr",
+              "expr": {
+                "kind": "defaultIfEmpty",
+                "expr": {
+                  "kind": "prop",
+                  "name": "Cols"
+                },
+                "fallback": "1"
+              },
+              "mapping": {
+                "1": "grid-cols-1",
+                "2": "grid-cols-2",
+                "3": "grid-cols-3",
+                "4": "grid-cols-4",
+                "5": "grid-cols-5",
+                "6": "grid-cols-6",
+                "7": "grid-cols-7",
+                "8": "grid-cols-8",
+                "9": "grid-cols-9",
+                "10": "grid-cols-10",
+                "11": "grid-cols-11",
+                "12": "grid-cols-12",
+                "1-2": "grid-cols-1 md:grid-cols-2",
+                "1-3": "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+                "1-4": "grid-cols-1 sm:grid-cols-2 md:grid-cols-4",
+                "2-3": "grid-cols-2 md:grid-cols-3",
+                "2-4": "grid-cols-2 md:grid-cols-4",
+                "2-6": "grid-cols-2 md:grid-cols-6",
+                "3-6": "grid-cols-3 md:grid-cols-6"
+              },
+              "fallback": ""
+            }
+          }
+        ]
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Cols",
+          "type": "string",
+          "cva": false,
+          "docs": "column preset: 1–12 or responsive 1-2, 1-3, 1-4"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "div"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    },
+    {
+      "name": "GridCol",
+      "docs": "GridCol renders one grid column child.",
+      "asChild": true,
+      "classes": {
+        "extra": [
+          {
+            "kind": "intMapOr",
+            "expr": {
+              "kind": "prop",
+              "name": "Span"
+            },
+            "mapping": {
+              "1": "col-span-1",
+              "2": "col-span-2",
+              "3": "col-span-3",
+              "4": "col-span-4",
+              "5": "col-span-5",
+              "6": "col-span-6",
+              "7": "col-span-7",
+              "8": "col-span-8",
+              "9": "col-span-9",
+              "10": "col-span-10",
+              "11": "col-span-11",
+              "12": "col-span-12"
+            },
+            "fallback": ""
+          },
+          {
+            "kind": "intMapOr",
+            "expr": {
+              "kind": "prop",
+              "name": "Start"
+            },
+            "mapping": {
+              "1": "col-start-1",
+              "2": "col-start-2",
+              "3": "col-start-3",
+              "4": "col-start-4",
+              "5": "col-start-5",
+              "6": "col-start-6",
+              "7": "col-start-7",
+              "8": "col-start-8",
+              "9": "col-start-9",
+              "10": "col-start-10",
+              "11": "col-start-11",
+              "12": "col-start-12"
+            },
+            "fallback": ""
+          },
+          {
+            "kind": "intMapOr",
+            "expr": {
+              "kind": "prop",
+              "name": "End"
+            },
+            "mapping": {
+              "1": "col-end-1",
+              "2": "col-end-2",
+              "3": "col-end-3",
+              "4": "col-end-4",
+              "5": "col-end-5",
+              "6": "col-end-6",
+              "7": "col-end-7",
+              "8": "col-end-8",
+              "9": "col-end-9",
+              "10": "col-end-10",
+              "11": "col-end-11",
+              "12": "col-end-12"
+            },
+            "fallback": ""
+          },
+          {
+            "kind": "intMapOr",
+            "expr": {
+              "kind": "prop",
+              "name": "Order"
+            },
+            "mapping": {
+              "1": "order-1",
+              "2": "order-2",
+              "3": "order-3",
+              "4": "order-4",
+              "5": "order-5",
+              "6": "order-6",
+              "7": "order-7",
+              "8": "order-8",
+              "9": "order-9",
+              "10": "order-10",
+              "11": "order-11",
+              "12": "order-12"
+            },
+            "fallback": ""
+          }
+        ]
+      },
+      "props": [
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Span",
+          "type": "int",
+          "cva": false,
+          "docs": "col-span-1..12"
+        },
+        {
+          "name": "Start",
+          "type": "int",
+          "cva": false,
+          "docs": "col-start-1..12"
+        },
+        {
+          "name": "End",
+          "type": "int",
+          "cva": false,
+          "docs": "col-end-1..12"
+        },
+        {
+          "name": "Order",
+          "type": "int",
+          "cva": false,
+          "docs": "order-1..12"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "div"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    }
+  ],
+  "examples": [
+    {
+      "id": "layout.three-col",
+      "props": {
+        "Class": "gap-4",
+        "Cols": "3"
+      }
+    },
+    {
+      "id": "layout.two-col",
+      "props": {
+        "Class": "gap-4",
+        "Cols": "2"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

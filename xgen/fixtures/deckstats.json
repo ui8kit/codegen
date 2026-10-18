@@ -1,0 +1,3846 @@
+{
+  "collection": "deckstats",
+  "kind": "deck_stat",
+  "entries": [
+    {
+      "id": "deck-01-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-01-stat-1",
+      "title": "makers",
+      "metadata": {
+        "deck": {
+          "value": "deck-01"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "48k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-01-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-01-stat-2",
+      "title": "countries",
+      "metadata": {
+        "deck": {
+          "value": "deck-01"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "120"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-01-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-01-stat-3",
+      "title": "rating",
+      "metadata": {
+        "deck": {
+          "value": "deck-01"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "4.9"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-02-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-02-stat-1",
+      "title": "faster reviews",
+      "metadata": {
+        "deck": {
+          "value": "deck-02"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "3x"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-02-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-02-stat-2",
+      "title": "fewer handoffs",
+      "metadata": {
+        "deck": {
+          "value": "deck-02"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "92%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-02-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-02-stat-3",
+      "title": "support",
+      "metadata": {
+        "deck": {
+          "value": "deck-02"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "24/7"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-03-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-03-stat-1",
+      "title": "notes",
+      "metadata": {
+        "deck": {
+          "value": "deck-03"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "1.2M"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-03-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-03-stat-2",
+      "title": "teams",
+      "metadata": {
+        "deck": {
+          "value": "deck-03"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "8k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-03-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-03-stat-3",
+      "title": "uptime",
+      "metadata": {
+        "deck": {
+          "value": "deck-03"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "99.9%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-04-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-04-stat-1",
+      "title": "templates",
+      "metadata": {
+        "deck": {
+          "value": "deck-04"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "15"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-04-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-04-stat-2",
+      "title": "parts",
+      "metadata": {
+        "deck": {
+          "value": "deck-04"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "200+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-04-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-04-stat-3",
+      "title": "command",
+      "metadata": {
+        "deck": {
+          "value": "deck-04"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-05-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-05-stat-1",
+      "title": "makers",
+      "metadata": {
+        "deck": {
+          "value": "deck-05"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "12"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-05-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-05-stat-2",
+      "title": "objects",
+      "metadata": {
+        "deck": {
+          "value": "deck-05"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "36"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-05-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-05-stat-3",
+      "title": "promise",
+      "metadata": {
+        "deck": {
+          "value": "deck-05"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-06-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-06-stat-1",
+      "title": "events",
+      "metadata": {
+        "deck": {
+          "value": "deck-06"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "2.4B"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-06-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-06-stat-2",
+      "title": "median",
+      "metadata": {
+        "deck": {
+          "value": "deck-06"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "40ms"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-06-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-06-stat-3",
+      "title": "regions",
+      "metadata": {
+        "deck": {
+          "value": "deck-06"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "150"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-07-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-07-stat-1",
+      "title": "plants",
+      "metadata": {
+        "deck": {
+          "value": "deck-07"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "900"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-07-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-07-stat-2",
+      "title": "guides",
+      "metadata": {
+        "deck": {
+          "value": "deck-07"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "52"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-07-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-07-stat-3",
+      "title": "climates",
+      "metadata": {
+        "deck": {
+          "value": "deck-07"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "6"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-08-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-08-stat-1",
+      "title": "clearer reports",
+      "metadata": {
+        "deck": {
+          "value": "deck-08"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "10x"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-08-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-08-stat-2",
+      "title": "to first chart",
+      "metadata": {
+        "deck": {
+          "value": "deck-08"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "30s"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-08-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-08-stat-3",
+      "title": "spreadsheets",
+      "metadata": {
+        "deck": {
+          "value": "deck-08"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-09-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-09-stat-1",
+      "title": "data sold",
+      "metadata": {
+        "deck": {
+          "value": "deck-09"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-09-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-09-stat-2",
+      "title": "bit keys",
+      "metadata": {
+        "deck": {
+          "value": "deck-09"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "256"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-09-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-09-stat-3",
+      "title": "archive",
+      "metadata": {
+        "deck": {
+          "value": "deck-09"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "30y"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-10-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-10-stat-1",
+      "title": "circles",
+      "metadata": {
+        "deck": {
+          "value": "deck-10"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "3k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-10-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-10-stat-2",
+      "title": "members",
+      "metadata": {
+        "deck": {
+          "value": "deck-10"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "40k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-10-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-10-stat-3",
+      "title": "events a week",
+      "metadata": {
+        "deck": {
+          "value": "deck-10"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "600"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-11-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-11-stat-1",
+      "title": "shortcut",
+      "metadata": {
+        "deck": {
+          "value": "deck-11"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-11-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-11-stat-2",
+      "title": "everywhere",
+      "metadata": {
+        "deck": {
+          "value": "deck-11"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "60fps"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-11-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-11-stat-3",
+      "title": "manuals",
+      "metadata": {
+        "deck": {
+          "value": "deck-11"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-12-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-12-stat-1",
+      "title": "people",
+      "metadata": {
+        "deck": {
+          "value": "deck-12"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "2"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-12-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-12-stat-2",
+      "title": "board",
+      "metadata": {
+        "deck": {
+          "value": "deck-12"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-12-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-12-stat-3",
+      "title": "a day",
+      "metadata": {
+        "deck": {
+          "value": "deck-12"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "15m"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-13-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-13-stat-1",
+      "title": "uptime",
+      "metadata": {
+        "deck": {
+          "value": "deck-13"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "99.99%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-13-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-13-stat-2",
+      "title": "regions",
+      "metadata": {
+        "deck": {
+          "value": "deck-13"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "12"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-13-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-13-stat-3",
+      "title": "to deploy",
+      "metadata": {
+        "deck": {
+          "value": "deck-13"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "5m"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-14-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-14-stat-1",
+      "title": "palettes",
+      "metadata": {
+        "deck": {
+          "value": "deck-14"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "4k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-14-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-14-stat-2",
+      "title": "patterns",
+      "metadata": {
+        "deck": {
+          "value": "deck-14"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "800"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-14-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-14-stat-3",
+      "title": "click export",
+      "metadata": {
+        "deck": {
+          "value": "deck-14"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-15-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-15-stat-1",
+      "title": "precision",
+      "metadata": {
+        "deck": {
+          "value": "deck-15"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "0.01px"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-15-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-15-stat-2",
+      "title": "tools",
+      "metadata": {
+        "deck": {
+          "value": "deck-15"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "64"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-15-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-15-stat-3",
+      "title": "grid",
+      "metadata": {
+        "deck": {
+          "value": "deck-15"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-16-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-16-stat-1",
+      "title": "years",
+      "metadata": {
+        "deck": {
+          "value": "deck-16"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "14"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-16-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-16-stat-2",
+      "title": "projects",
+      "metadata": {
+        "deck": {
+          "value": "deck-16"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "90"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-16-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-16-stat-3",
+      "title": "people",
+      "metadata": {
+        "deck": {
+          "value": "deck-16"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "6"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-17-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-17-stat-1",
+      "title": "devices",
+      "metadata": {
+        "deck": {
+          "value": "deck-17"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "5"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-17-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-17-stat-2",
+      "title": "space",
+      "metadata": {
+        "deck": {
+          "value": "deck-17"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1TB"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-17-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-17-stat-3",
+      "title": "lost files",
+      "metadata": {
+        "deck": {
+          "value": "deck-17"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-18-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-18-stat-1",
+      "title": "fewer rounds",
+      "metadata": {
+        "deck": {
+          "value": "deck-18"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "40%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-18-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-18-stat-2",
+      "title": "source of truth",
+      "metadata": {
+        "deck": {
+          "value": "deck-18"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-18-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-18-stat-3",
+      "title": "file types",
+      "metadata": {
+        "deck": {
+          "value": "deck-18"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "8"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-19-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-19-stat-1",
+      "title": "pings",
+      "metadata": {
+        "deck": {
+          "value": "deck-19"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-19-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-19-stat-2",
+      "title": "digests a day",
+      "metadata": {
+        "deck": {
+          "value": "deck-19"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "2"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-19-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-19-stat-3",
+      "title": "saved weekly",
+      "metadata": {
+        "deck": {
+          "value": "deck-19"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "3h"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-20-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-20-stat-1",
+      "title": "angles",
+      "metadata": {
+        "deck": {
+          "value": "deck-20"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "12"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-20-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-20-stat-2",
+      "title": "board",
+      "metadata": {
+        "deck": {
+          "value": "deck-20"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-20-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-20-stat-3",
+      "title": "variations",
+      "metadata": {
+        "deck": {
+          "value": "deck-20"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "∞"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-21-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-21-stat-1",
+      "title": "words per doc",
+      "metadata": {
+        "deck": {
+          "value": "deck-21"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "200k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-21-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-21-stat-2",
+      "title": "focus mode",
+      "metadata": {
+        "deck": {
+          "value": "deck-21"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-21-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-21-stat-3",
+      "title": "export formats",
+      "metadata": {
+        "deck": {
+          "value": "deck-21"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "12"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-22-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-22-stat-1",
+      "title": "recipes",
+      "metadata": {
+        "deck": {
+          "value": "deck-22"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "1.8k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-22-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-22-stat-2",
+      "title": "average cook",
+      "metadata": {
+        "deck": {
+          "value": "deck-22"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "30m"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-22-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-22-stat-3",
+      "title": "ingredients or fewer",
+      "metadata": {
+        "deck": {
+          "value": "deck-22"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "5"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-23-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-23-stat-1",
+      "title": "feature",
+      "metadata": {
+        "deck": {
+          "value": "deck-23"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-23-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-23-stat-2",
+      "title": "settings",
+      "metadata": {
+        "deck": {
+          "value": "deck-23"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-23-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-23-stat-3",
+      "title": "focus",
+      "metadata": {
+        "deck": {
+          "value": "deck-23"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "100%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-24-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-24-stat-1",
+      "title": "trips",
+      "metadata": {
+        "deck": {
+          "value": "deck-24"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "2M"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-24-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-24-stat-2",
+      "title": "less driving",
+      "metadata": {
+        "deck": {
+          "value": "deck-24"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "18%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-24-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-24-stat-3",
+      "title": "stars",
+      "metadata": {
+        "deck": {
+          "value": "deck-24"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "4.8"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-25-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-25-stat-1",
+      "title": "editor",
+      "metadata": {
+        "deck": {
+          "value": "deck-25"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-25-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-25-stat-2",
+      "title": "channels",
+      "metadata": {
+        "deck": {
+          "value": "deck-25"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "6"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-25-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-25-stat-3",
+      "title": "writers",
+      "metadata": {
+        "deck": {
+          "value": "deck-25"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "12k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-26-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-26-stat-1",
+      "title": "floors",
+      "metadata": {
+        "deck": {
+          "value": "deck-26"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "3"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-26-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-26-stat-2",
+      "title": "desks",
+      "metadata": {
+        "deck": {
+          "value": "deck-26"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "120"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-26-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-26-stat-3",
+      "title": "studios",
+      "metadata": {
+        "deck": {
+          "value": "deck-26"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "40"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-27-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-27-stat-1",
+      "title": "load time",
+      "metadata": {
+        "deck": {
+          "value": "deck-27"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "0.4s"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-27-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-27-stat-2",
+      "title": "score",
+      "metadata": {
+        "deck": {
+          "value": "deck-27"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "100"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-27-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-27-stat-3",
+      "title": "cities",
+      "metadata": {
+        "deck": {
+          "value": "deck-27"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "300"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-28-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-28-stat-1",
+      "title": "courses",
+      "metadata": {
+        "deck": {
+          "value": "deck-28"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "80"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-28-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-28-stat-2",
+      "title": "mentors",
+      "metadata": {
+        "deck": {
+          "value": "deck-28"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "400"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-28-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-28-stat-3",
+      "title": "average path",
+      "metadata": {
+        "deck": {
+          "value": "deck-28"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "6w"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-29-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-29-stat-1",
+      "title": "integrations",
+      "metadata": {
+        "deck": {
+          "value": "deck-29"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "30"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-29-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-29-stat-2",
+      "title": "view",
+      "metadata": {
+        "deck": {
+          "value": "deck-29"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-29-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-29-stat-3",
+      "title": "saved daily",
+      "metadata": {
+        "deck": {
+          "value": "deck-29"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "2h"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-30-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-30-stat-1",
+      "title": "colours",
+      "metadata": {
+        "deck": {
+          "value": "deck-30"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "16M"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-30-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-30-stat-2",
+      "title": "scenes",
+      "metadata": {
+        "deck": {
+          "value": "deck-30"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "24"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-30-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-30-stat-3",
+      "title": "tap",
+      "metadata": {
+        "deck": {
+          "value": "deck-30"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-31-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-31-stat-1",
+      "title": "components",
+      "metadata": {
+        "deck": {
+          "value": "deck-31"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "90"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-31-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-31-stat-2",
+      "title": "themes",
+      "metadata": {
+        "deck": {
+          "value": "deck-31"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "12"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-31-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-31-stat-3",
+      "title": "source",
+      "metadata": {
+        "deck": {
+          "value": "deck-31"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-32-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-32-stat-1",
+      "title": "stays",
+      "metadata": {
+        "deck": {
+          "value": "deck-32"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "300"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-32-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-32-stat-2",
+      "title": "nights minimum",
+      "metadata": {
+        "deck": {
+          "value": "deck-32"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "7"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-32-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-32-stat-3",
+      "title": "regions",
+      "metadata": {
+        "deck": {
+          "value": "deck-32"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "40"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-33-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-33-stat-1",
+      "title": "games",
+      "metadata": {
+        "deck": {
+          "value": "deck-33"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "22"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-33-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-33-stat-2",
+      "title": "plays",
+      "metadata": {
+        "deck": {
+          "value": "deck-33"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "5M"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-33-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-33-stat-3",
+      "title": "awards",
+      "metadata": {
+        "deck": {
+          "value": "deck-33"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "8"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-34-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-34-stat-1",
+      "title": "a day",
+      "metadata": {
+        "deck": {
+          "value": "deck-34"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "10m"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-34-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-34-stat-2",
+      "title": "pauses",
+      "metadata": {
+        "deck": {
+          "value": "deck-34"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "300"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-34-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-34-stat-3",
+      "title": "listeners",
+      "metadata": {
+        "deck": {
+          "value": "deck-34"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "1M"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-35-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-35-stat-1",
+      "title": "to invoice",
+      "metadata": {
+        "deck": {
+          "value": "deck-35"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "2m"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-35-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-35-stat-2",
+      "title": "hidden fees",
+      "metadata": {
+        "deck": {
+          "value": "deck-35"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-35-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-35-stat-3",
+      "title": "dashboard",
+      "metadata": {
+        "deck": {
+          "value": "deck-35"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-36-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-36-stat-1",
+      "title": "seats free",
+      "metadata": {
+        "deck": {
+          "value": "deck-36"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "5"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-36-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-36-stat-2",
+      "title": "home",
+      "metadata": {
+        "deck": {
+          "value": "deck-36"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-36-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-36-stat-3",
+      "title": "setup",
+      "metadata": {
+        "deck": {
+          "value": "deck-36"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-37-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-37-stat-1",
+      "title": "spots",
+      "metadata": {
+        "deck": {
+          "value": "deck-37"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "1.2k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-37-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-37-stat-2",
+      "title": "forecast",
+      "metadata": {
+        "deck": {
+          "value": "deck-37"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "7d"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-37-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-37-stat-3",
+      "title": "updates",
+      "metadata": {
+        "deck": {
+          "value": "deck-37"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "15m"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-38-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-38-stat-1",
+      "title": "folios",
+      "metadata": {
+        "deck": {
+          "value": "deck-38"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "60k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-38-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-38-stat-2",
+      "title": "layout engine",
+      "metadata": {
+        "deck": {
+          "value": "deck-38"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-38-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-38-stat-3",
+      "title": "to publish",
+      "metadata": {
+        "deck": {
+          "value": "deck-38"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "3m"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-39-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-39-stat-1",
+      "title": "reads",
+      "metadata": {
+        "deck": {
+          "value": "deck-39"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "1ms"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-39-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-39-stat-2",
+      "title": "per cluster",
+      "metadata": {
+        "deck": {
+          "value": "deck-39"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "10TB"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-39-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-39-stat-3",
+      "title": "downtime",
+      "metadata": {
+        "deck": {
+          "value": "deck-39"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-40-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-40-stat-1",
+      "title": "issues",
+      "metadata": {
+        "deck": {
+          "value": "deck-40"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "120"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-40-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-40-stat-2",
+      "title": "readers",
+      "metadata": {
+        "deck": {
+          "value": "deck-40"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "30k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-40-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-40-stat-3",
+      "title": "read",
+      "metadata": {
+        "deck": {
+          "value": "deck-40"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "5m"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-41-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-41-stat-1",
+      "title": "happy customers",
+      "metadata": {
+        "deck": {
+          "value": "deck-41"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "25K+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-41-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-41-stat-2",
+      "title": "average rating",
+      "metadata": {
+        "deck": {
+          "value": "deck-41"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "4.8"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-41-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-41-stat-3",
+      "title": "new this week",
+      "metadata": {
+        "deck": {
+          "value": "deck-41"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "120"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-41-stat-4",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-41-stat-4",
+      "title": "support",
+      "metadata": {
+        "deck": {
+          "value": "deck-41"
+        },
+        "position": {
+          "value": 4
+        },
+        "value": {
+          "value": "24/7"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-42-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-42-stat-1",
+      "title": "happy drivers",
+      "metadata": {
+        "deck": {
+          "value": "deck-42"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "25K+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-42-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-42-stat-2",
+      "title": "trips booked",
+      "metadata": {
+        "deck": {
+          "value": "deck-42"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "12K+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-42-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-42-stat-3",
+      "title": "pick-up points",
+      "metadata": {
+        "deck": {
+          "value": "deck-42"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "90+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-42-stat-4",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-42-stat-4",
+      "title": "average rating",
+      "metadata": {
+        "deck": {
+          "value": "deck-42"
+        },
+        "position": {
+          "value": 4
+        },
+        "value": {
+          "value": "4.9"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-43-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-43-stat-1",
+      "title": "meals served",
+      "metadata": {
+        "deck": {
+          "value": "deck-43"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "500K+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-43-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-43-stat-2",
+      "title": "average rating",
+      "metadata": {
+        "deck": {
+          "value": "deck-43"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "4.9/5"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-43-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-43-stat-3",
+      "title": "recipes",
+      "metadata": {
+        "deck": {
+          "value": "deck-43"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "200+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-43-stat-4",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-43-stat-4",
+      "title": "happy guests",
+      "metadata": {
+        "deck": {
+          "value": "deck-43"
+        },
+        "position": {
+          "value": 4
+        },
+        "value": {
+          "value": "98%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-44-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-44-stat-1",
+      "title": "average saving",
+      "metadata": {
+        "deck": {
+          "value": "deck-44"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "18%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-44-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-44-stat-2",
+      "title": "reports run",
+      "metadata": {
+        "deck": {
+          "value": "deck-44"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "40K"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-44-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-44-stat-3",
+      "title": "simple steps",
+      "metadata": {
+        "deck": {
+          "value": "deck-44"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "3"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-44-stat-4",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-44-stat-4",
+      "title": "match rate",
+      "metadata": {
+        "deck": {
+          "value": "deck-44"
+        },
+        "position": {
+          "value": 4
+        },
+        "value": {
+          "value": "99%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-45-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-45-stat-1",
+      "title": "projects finished",
+      "metadata": {
+        "deck": {
+          "value": "deck-45"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "1500+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-45-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-45-stat-2",
+      "title": "global clients",
+      "metadata": {
+        "deck": {
+          "value": "deck-45"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "950+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-45-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-45-stat-3",
+      "title": "ready units",
+      "metadata": {
+        "deck": {
+          "value": "deck-45"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "235+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-45-stat-4",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-45-stat-4",
+      "title": "in value",
+      "metadata": {
+        "deck": {
+          "value": "deck-45"
+        },
+        "position": {
+          "value": 4
+        },
+        "value": {
+          "value": "$50M+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-46-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-46-stat-1",
+      "title": "destinations",
+      "metadata": {
+        "deck": {
+          "value": "deck-46"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "50+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-46-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-46-stat-2",
+      "title": "happy travellers",
+      "metadata": {
+        "deck": {
+          "value": "deck-46"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "2M"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-46-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-46-stat-3",
+      "title": "satisfaction",
+      "metadata": {
+        "deck": {
+          "value": "deck-46"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "85%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-46-stat-4",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-46-stat-4",
+      "title": "repeat trips",
+      "metadata": {
+        "deck": {
+          "value": "deck-46"
+        },
+        "position": {
+          "value": 4
+        },
+        "value": {
+          "value": "90%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-47-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-47-stat-1",
+      "title": "happy customers",
+      "metadata": {
+        "deck": {
+          "value": "deck-47"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "200K+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-47-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-47-stat-2",
+      "title": "premium styles",
+      "metadata": {
+        "deck": {
+          "value": "deck-47"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "500+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-47-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-47-stat-3",
+      "title": "average rating",
+      "metadata": {
+        "deck": {
+          "value": "deck-47"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "4.8"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-48-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-48-stat-1",
+      "title": "premium vehicles",
+      "metadata": {
+        "deck": {
+          "value": "deck-48"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "120+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-48-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-48-stat-2",
+      "title": "city locations",
+      "metadata": {
+        "deck": {
+          "value": "deck-48"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "18"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-48-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-48-stat-3",
+      "title": "personal support",
+      "metadata": {
+        "deck": {
+          "value": "deck-48"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "24/7"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-49-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-49-stat-1",
+      "title": "happy customers",
+      "metadata": {
+        "deck": {
+          "value": "deck-49"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "10K+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-49-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-49-stat-2",
+      "title": "average rating",
+      "metadata": {
+        "deck": {
+          "value": "deck-49"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "4.9"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-49-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-49-stat-3",
+      "title": "delivery",
+      "metadata": {
+        "deck": {
+          "value": "deck-49"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "48h"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-50-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-50-stat-1",
+      "title": "people reached",
+      "metadata": {
+        "deck": {
+          "value": "deck-50"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "256k"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-50-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-50-stat-2",
+      "title": "engagement",
+      "metadata": {
+        "deck": {
+          "value": "deck-50"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "1.2x"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-50-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-50-stat-3",
+      "title": "units sold",
+      "metadata": {
+        "deck": {
+          "value": "deck-50"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "10k+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-stat-1",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-stat-1",
+      "title": "users worldwide",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 1
+        },
+        "value": {
+          "value": "30M+"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-stat-2",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-stat-2",
+      "title": "uptime",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 2
+        },
+        "value": {
+          "value": "99%"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-stat-3",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-stat-3",
+      "title": "countries",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 3
+        },
+        "value": {
+          "value": "150"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "deck-51-stat-4",
+      "locale": "en",
+      "kind": "deck_stat",
+      "status": "published",
+      "visibility": "public",
+      "slug": "deck-51-stat-4",
+      "title": "average rating",
+      "metadata": {
+        "deck": {
+          "value": "deck-51"
+        },
+        "position": {
+          "value": 4
+        },
+        "value": {
+          "value": "5.0"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    }
+  ]
+}

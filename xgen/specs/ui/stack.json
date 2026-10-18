@@ -1,0 +1,127 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.stack",
+  "tier": "brick",
+  "dir": "stack",
+  "docs": "Stack arranges children vertically in a flex column.\nDefault layout primitive for spacing sections and form fields.",
+  "variants": {
+    "stack": "stack.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Stack",
+      "docs": "Stack renders a vertical flex container.",
+      "recipeId": "stack",
+      "asChild": true,
+      "classes": {
+        "recipe": {
+          "gap": "Gap",
+          "align": "Align",
+          "justify": "Justify"
+        }
+      },
+      "props": [
+        {
+          "name": "Gap",
+          "type": "string",
+          "cva": true,
+          "docs": "sets gap: a Tailwind spacing step (0, 2, 4, 6, 8, 10, 12 = gap-N) or auto"
+        },
+        {
+          "name": "Align",
+          "type": "string",
+          "cva": true,
+          "docs": "sets align"
+        },
+        {
+          "name": "Justify",
+          "type": "string",
+          "cva": true,
+          "docs": "sets justify"
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Tag",
+          "type": "string",
+          "cva": false,
+          "docs": "div, ul, or ol. Use Block for landmarks (aside, section, header, nav)."
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        },
+        {
+          "name": "Children",
+          "type": "children",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "resolved",
+          "fromProp": "Tag",
+          "fallback": "div",
+          "group": "Stack"
+        },
+        "attrs": [
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "slot"
+          }
+        ]
+      },
+      "slots": [
+        {
+          "name": "children"
+        }
+      ],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "div",
+          "(Stack)"
+        ],
+        "roles": [],
+        "aria": [],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": []
+    }
+  ],
+  "examples": [
+    {
+      "id": "tag.default",
+      "props": {
+        "Class": "gap-4",
+        "Tag": "div"
+      }
+    },
+    {
+      "id": "tag.ul",
+      "props": {
+        "Class": "gap-2",
+        "Tag": "ul"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

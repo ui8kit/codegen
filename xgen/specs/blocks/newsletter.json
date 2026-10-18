@@ -1,0 +1,93 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.newsletter",
+  "name": "Newsletter sign-up",
+  "docs": "An email field and a button, inline, stacked or beside a picture.",
+  "theme": "promo",
+  "group": "forms",
+  "organism": "NewsletterForm",
+  "axes": {
+    "layout": [
+      "inline",
+      "stacked",
+      "split"
+    ],
+    "terms": [
+      "show",
+      "hide"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "align": [
+      "start",
+      "center"
+    ]
+  },
+  "defaults": {
+    "layout": "inline",
+    "terms": "hide",
+    "tone": "default",
+    "align": "center"
+  },
+  "variants": [
+    {
+      "id": "inline",
+      "set": {}
+    },
+    {
+      "id": "stacked",
+      "set": {
+        "layout": "stacked"
+      }
+    },
+    {
+      "id": "split",
+      "set": {
+        "layout": "split",
+        "align": "start"
+      }
+    },
+    {
+      "id": "consent",
+      "set": {
+        "terms": "show"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "terms": "show",
+        "align": "start"
+      }
+    }
+  ],
+  "slots": [
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "data": [],
+  "sample": {
+    "props": {
+      "id": "newsletter",
+      "title": {
+        "$": "ui.promo.newsletter.title"
+      },
+      "text": {
+        "$": "ui.promo.newsletter.text"
+      },
+      "label": {
+        "$": "ui.promo.newsletter.label"
+      },
+      "submit": {
+        "$": "ui.promo.newsletter.submit"
+      },
+      "consent": {
+        "$": "ui.promo.newsletter.consent"
+      }
+    }
+  }
+}

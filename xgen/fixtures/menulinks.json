@@ -1,0 +1,566 @@
+{
+  "collection": "menulinks",
+  "kind": "menu_item",
+  "entries": [
+    {
+      "id": "menulink-footer-product-blocks",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "blocks",
+      "title": "Blocks",
+      "parent_id": "group-product",
+      "order": 1,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-product-templates",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "templates",
+      "title": "Templates",
+      "parent_id": "group-product",
+      "order": 2,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-product-themes",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "themes",
+      "title": "Themes",
+      "parent_id": "group-product",
+      "order": 3,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-product-pricing",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "pricing",
+      "title": "Pricing",
+      "parent_id": "group-product",
+      "order": 4,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-company-about",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "about",
+      "title": "About",
+      "parent_id": "group-company",
+      "order": 1,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-company-careers",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "careers",
+      "title": "Careers",
+      "parent_id": "group-company",
+      "order": 2,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-company-contact",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "contact",
+      "title": "Contact",
+      "parent_id": "group-company",
+      "order": 3,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-company-press",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "press",
+      "title": "Press",
+      "parent_id": "group-company",
+      "order": 4,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-resources-guides",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "guides",
+      "title": "Guides",
+      "parent_id": "group-resources",
+      "order": 1,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-resources-changelog",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "changelog",
+      "title": "Changelog",
+      "parent_id": "group-resources",
+      "order": 2,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-resources-community",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "community",
+      "title": "Community",
+      "parent_id": "group-resources",
+      "order": 3,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-resources-support",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "support",
+      "title": "Support",
+      "parent_id": "group-resources",
+      "order": 4,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-legal-terms",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "terms",
+      "title": "Terms",
+      "parent_id": "group-legal",
+      "order": 1,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-legal-privacy",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "privacy",
+      "title": "Privacy",
+      "parent_id": "group-legal",
+      "order": 2,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-legal-cookies",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "cookies",
+      "title": "Cookies",
+      "parent_id": "group-legal",
+      "order": 3,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    },
+    {
+      "id": "menulink-footer-legal-security",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "security",
+      "title": "Security",
+      "parent_id": "group-legal",
+      "order": 4,
+      "metadata": {
+        "location": {
+          "value": "footer"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-product-blocks",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "blocks",
+      "title": "Blocks",
+      "parent_id": "megagroup-product",
+      "order": 1,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-product-templates",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "templates",
+      "title": "Templates",
+      "parent_id": "megagroup-product",
+      "order": 2,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-product-themes",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "themes",
+      "title": "Themes",
+      "parent_id": "megagroup-product",
+      "order": 3,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-product-integrations",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "integrations",
+      "title": "Integrations",
+      "parent_id": "megagroup-product",
+      "order": 4,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-resources-guides",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "guides",
+      "title": "Guides",
+      "parent_id": "megagroup-resources",
+      "order": 1,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-resources-changelog",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "changelog",
+      "title": "Changelog",
+      "parent_id": "megagroup-resources",
+      "order": 2,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-resources-community",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "community",
+      "title": "Community",
+      "parent_id": "megagroup-resources",
+      "order": 3,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-resources-support",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "support",
+      "title": "Support",
+      "parent_id": "megagroup-resources",
+      "order": 4,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-company-about",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "about",
+      "title": "About",
+      "parent_id": "megagroup-company",
+      "order": 1,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-company-careers",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "careers",
+      "title": "Careers",
+      "parent_id": "megagroup-company",
+      "order": 2,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-company-contact",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "contact",
+      "title": "Contact",
+      "parent_id": "megagroup-company",
+      "order": 3,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "menulink-mega-company-press",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "press",
+      "title": "Press",
+      "parent_id": "megagroup-company",
+      "order": 4,
+      "metadata": {
+        "location": {
+          "value": "mega"
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,289 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.quotesplit",
+  "name": "Testimonials, split",
+  "docs": "One quote beside a picture, a rating panel or over logo tiles; stacked quotes beside a picture; four compact quotes; figures over a featured quote and a stack.",
+  "theme": "marketing",
+  "group": "proof",
+  "organism": "QuoteSplit",
+  "axes": {
+    "layout": [
+      "media",
+      "logos",
+      "rating",
+      "stack",
+      "compact",
+      "bento"
+    ],
+    "mediaSide": [
+      "end",
+      "start"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "media",
+    "mediaSide": "end",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "quoteCard",
+      "set": {}
+    },
+    {
+      "id": "logoTiles",
+      "set": {
+        "layout": "logos",
+        "mediaSide": "start"
+      }
+    },
+    {
+      "id": "ratingPanel",
+      "set": {
+        "layout": "rating",
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "stackedCards",
+      "set": {
+        "layout": "stack",
+        "mediaSide": "start"
+      }
+    },
+    {
+      "id": "compact4",
+      "set": {
+        "layout": "compact"
+      }
+    },
+    {
+      "id": "bentoFigures",
+      "set": {
+        "layout": "bento"
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "EmptyState",
+    "MediaFrame",
+    "QuoteFigures",
+    "QuoteLogoTiles",
+    "QuoteRatingPanel",
+    "QuoteSlot",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"quote\"]",
+      "n": 1,
+      "when": {
+        "layout": [
+          "media",
+          "logos",
+          "rating"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"quote\"]",
+      "n": 3,
+      "when": {
+        "layout": "stack"
+      }
+    },
+    {
+      "sel": "[data-testid=\"quote\"]",
+      "n": "@testimonials",
+      "when": {
+        "layout": [
+          "compact",
+          "bento"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"quote-logo\"]",
+      "n": 4,
+      "when": {
+        "layout": [
+          "logos"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"quote-logo\"]",
+      "n": 0,
+      "when": {
+        "layout": [
+          "media",
+          "rating",
+          "stack",
+          "compact",
+          "bento"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"quote-rating\"]",
+      "n": 1,
+      "when": {
+        "layout": [
+          "rating"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"quote-rating\"]",
+      "n": 0,
+      "when": {
+        "layout": [
+          "media",
+          "logos",
+          "stack",
+          "compact",
+          "bento"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"quote-figures\"]",
+      "n": 1,
+      "when": {
+        "layout": [
+          "bento"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"quote-figures\"]",
+      "n": 0,
+      "when": {
+        "layout": [
+          "media",
+          "logos",
+          "rating",
+          "stack",
+          "compact"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"action-primary\"]",
+      "n": 1,
+      "when": {
+        "layout": [
+          "media",
+          "logos",
+          "rating"
+        ]
+      }
+    }
+  ],
+  "data": [
+    {
+      "as": "testimonials",
+      "collection": "testimonials",
+      "kind": "testimonial",
+      "record": "Quote",
+      "fields": {
+        "id": "id",
+        "author": "title",
+        "role": "metadata.role.value",
+        "company": "metadata.company.value",
+        "quote": "metadata.quote.value",
+        "rating": "metadata.rating.value",
+        "handle": "metadata.handle.value",
+        "time": "metadata.time.value|ago-short",
+        "mark": "metadata.mark.value"
+      }
+    },
+    {
+      "as": "stats",
+      "collection": "stats",
+      "kind": "stat",
+      "record": "Stat",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value|number",
+        "icon": "metadata.icon.value",
+        "hint": "metadata.hint.value"
+      }
+    },
+    {
+      "as": "logos",
+      "collection": "logos",
+      "kind": "logo",
+      "record": "Logo",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "quotesplit",
+      "title": {
+        "$": "ui.marketing.quoteSplit.title"
+      },
+      "lead": {
+        "$": "ui.marketing.quoteSplit.lead"
+      },
+      "badge": {
+        "$": "ui.marketing.quoteSplit.badge"
+      },
+      "quotes": {
+        "$": "testimonials"
+      },
+      "empty": {
+        "$": "ui.empty.quotes"
+      },
+      "labels": {
+        "rating": {
+          "$": "ui.testimonials.rating"
+        },
+        "byLine": {
+          "$": "ui.testimonials.byLine"
+        },
+        "handleLine": {
+          "$": "ui.testimonials.handleLine"
+        }
+      },
+      "extras": {
+        "stats": {
+          "$": "stats"
+        },
+        "logos": {
+          "$": "logos"
+        },
+        "rating": 5,
+        "score": {
+          "$": "ui.marketing.quoteSplit.score"
+        },
+        "reviews": {
+          "$": "ui.marketing.quoteSplit.reviews"
+        }
+      },
+      "actions": {
+        "mode": "two",
+        "cta": {
+          "$": "ui.marketing.quoteSplit.cta"
+        },
+        "href": "#/customers",
+        "secondary": {
+          "$": "ui.marketing.quoteSplit.secondary"
+        },
+        "secondaryHref": "#/contact"
+      }
+    }
+  }
+}

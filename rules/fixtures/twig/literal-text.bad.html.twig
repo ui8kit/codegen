@@ -1,0 +1,13 @@
+{#- Self-test fixture of the rules group, detector literal-text (violating). -#}
+{%- set c_2 -%}
+  {%- set c_1 -%}
+    Save changes
+  {%- endset -%}
+  {{ include('ui/text/text.html.twig', {'p': {}, 'children': c_1}, with_context = false) }}
+  {{ include('ui/input/input.html.twig', {'p': {'Placeholder': 'Your name'}}, with_context = false) }}
+  {%- set c_3 -%}
+    {{ ui_t(v_ok) ? 'Yes' : 'No' }}
+  {%- endset -%}
+  {{ include('ui/text/text.html.twig', {'p': {}, 'children': c_3}, with_context = false) }}
+{%- endset -%}
+{{ include('ui/block/block.html.twig', {'p': {'Tag': 'section'}, 'children': c_2}, with_context = false) }}

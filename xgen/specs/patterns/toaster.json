@@ -1,0 +1,68 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.toaster",
+  "name": "Toaster",
+  "docs": "The stack of toasts. Any code pushes a toast (tone, title, text); the list shows the last four and each closes itself.",
+  "records": {
+    "ToastItem": [
+      {
+        "name": "id",
+        "type": "number"
+      },
+      {
+        "name": "tone",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "optional": true
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "closeLabel",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "toasts",
+      "type": {
+        "ts": "ToastItem[]"
+      },
+      "docs": "the queue; tone is success, error or info",
+      "required": true
+    }
+  ],
+  "className": true,
+  "slots": [],
+  "events": [
+    {
+      "name": "dismiss",
+      "args": [
+        {
+          "name": "id",
+          "type": "number"
+        }
+      ],
+      "docs": "a toast was closed"
+    }
+  ],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "a queue with timers (auto-close after 5 or 8 seconds) is shared state: a store in the app, here only the shape of a toast and the close label are fixed"
+    },
+    "react": {
+      "portable": false,
+      "reason": "a queue with timers (auto-close after 5 or 8 seconds) is shared state: a store in the app, here only the shape of a toast and the close label are fixed"
+    }
+  }
+}

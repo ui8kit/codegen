@@ -1,0 +1,121 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.action-group",
+  "name": "ActionGroup",
+  "docs": "One or two calls to action side by side: a filled primary button and an outline secondary one. Links, not handlers: the page decides what they open.",
+  "records": {},
+  "props": [
+    {
+      "name": "primary",
+      "type": "string",
+      "docs": "text of the primary action",
+      "required": true
+    },
+    {
+      "name": "primaryHref",
+      "type": "string"
+    },
+    {
+      "name": "secondary",
+      "type": "string",
+      "docs": "text of the secondary action; none: one action"
+    },
+    {
+      "name": "secondaryHref",
+      "type": "string"
+    },
+    {
+      "name": "align",
+      "type": {
+        "ts": "\"start\" | \"center\""
+      },
+      "docs": "where the group sits",
+      "default": "start"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Group",
+      "props": {
+        "Gap": "4",
+        "Align": "center",
+        "Justify": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "align"
+                },
+                "center"
+              ]
+            },
+            "center",
+            "start"
+          ]
+        },
+        "Class": "flex-wrap"
+      },
+      "attrs": {
+        "data-slot": "action-group"
+      },
+      "children": [
+        {
+          "use": "Button",
+          "props": {
+            "Variant": "default",
+            "Size": "default",
+            "Href": {
+              "$": "primaryHref"
+            }
+          },
+          "attrs": {
+            "data-testid": "action-primary"
+          },
+          "children": [
+            {
+              "text": {
+                "$": "primary"
+              }
+            }
+          ]
+        },
+        {
+          "when": {
+            "$": "secondary"
+          },
+          "then": [
+            {
+              "use": "Button",
+              "props": {
+                "Variant": "outline",
+                "Size": "default",
+                "Href": {
+                  "$": "secondaryHref"
+                }
+              },
+              "attrs": {
+                "data-testid": "action-secondary"
+              },
+              "children": [
+                {
+                  "text": {
+                    "$": "secondary"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

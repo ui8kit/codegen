@@ -1,0 +1,8 @@
+{* Self-test fixture of the rules group, detector raw-html (clean). *}
+{capture $c_2}
+  {capture $c_1}
+    {=ui_text($v_title)}
+  {/capture}
+  {=ui_include('ui/text/text.latte', ['p' => [], 'children' => $c_1])|noescape}
+{/capture}
+{=ui_include('ui/block/block.latte', ['p' => ['Tag' => 'section'], 'children' => $c_2])|noescape}

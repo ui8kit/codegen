@@ -1,0 +1,754 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.footer-split",
+  "name": "FooterSplit",
+  "docs": "A footer with more than links. Axes: layout (stats: the brand with three figures and a sitemap link over the link groups as cards; points, links, newsletter, contacts, channels: a split beside a picture with the brand and four points, the brand and small link columns, a newsletter card and link columns, the contacts and two actions, or the community channels and figures), mediaSide, tone.",
+  "records": {
+    "FooterExtras": [
+      {
+        "name": "stats",
+        "type": "Stat[]"
+      },
+      {
+        "name": "points",
+        "type": "Feature[]"
+      },
+      {
+        "name": "contacts",
+        "type": "Feature[]"
+      },
+      {
+        "name": "channels",
+        "type": "Feature[]"
+      },
+      {
+        "name": "sitemapHref",
+        "type": "string",
+        "optional": true
+      },
+      {
+        "name": "ctaHref",
+        "type": "string",
+        "optional": true
+      },
+      {
+        "name": "secondaryHref",
+        "type": "string",
+        "optional": true
+      }
+    ],
+    "FooterSplitLabels": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "name": "loopTitle",
+        "type": "string"
+      },
+      {
+        "name": "loopText",
+        "type": "string"
+      },
+      {
+        "name": "joinTitle",
+        "type": "string"
+      },
+      {
+        "name": "joinText",
+        "type": "string"
+      },
+      {
+        "name": "sitemap",
+        "type": "string"
+      },
+      {
+        "name": "points",
+        "type": "string"
+      },
+      {
+        "name": "signup",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "subscribe",
+        "type": "string"
+      },
+      {
+        "name": "note",
+        "type": "string"
+      },
+      {
+        "name": "cta",
+        "type": "string"
+      },
+      {
+        "name": "secondary",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "default": "footer"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the link groups"
+    },
+    {
+      "name": "brand",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "tagline",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "copyright",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "groups",
+      "type": {
+        "ts": "MegaGroup[]"
+      },
+      "required": true
+    },
+    {
+      "name": "extras",
+      "type": {
+        "record": "FooterExtras"
+      },
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "FooterSplitLabels"
+      },
+      "required": true,
+      "docs": "the heading and text of the contacts, newsletter (loop) and channels (join) layouts, the sitemap link, the points title, the sign-up words and the two actions"
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"stats\" | \"points\" | \"links\" | \"newsletter\" | \"contacts\" | \"channels\""
+      },
+      "default": "stats"
+    },
+    {
+      "name": "mediaSide",
+      "type": {
+        "ts": "\"end\" | \"start\""
+      },
+      "default": "end"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "use": "Block",
+      "props": {
+        "Tag": "footer",
+        "Class": {
+          "op": "cn",
+          "args": [
+            "border-t border-border",
+            {
+              "op": "cond",
+              "args": [
+                {
+                  "op": "eq",
+                  "args": [
+                    {
+                      "$": "tone"
+                    },
+                    "muted"
+                  ]
+                },
+                "bg-muted",
+                ""
+              ]
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "data-testid": "footer-split",
+        "data-layout": {
+          "$": "layout"
+        },
+        "aria-label": {
+          "$": "landmarkLabel"
+        }
+      },
+      "children": [
+        {
+          "use": "Container",
+          "props": {
+            "Class": {
+              "op": "cn",
+              "args": [
+                "mx-auto w-full max-w-6xl px-4",
+                "py-12"
+              ]
+            }
+          },
+          "attrs": {
+            "data-slot": "container"
+          },
+          "children": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "$": "layout"
+                  },
+                  "stats"
+                ]
+              },
+              "then": [
+                {
+                  "use": "Stack",
+                  "props": {
+                    "Gap": "8",
+                    "Align": "stretch"
+                  },
+                  "children": [
+                    {
+                      "use": "Group",
+                      "props": {
+                        "Gap": "6",
+                        "Align": "start",
+                        "Justify": "between",
+                        "Class": "flex-wrap"
+                      },
+                      "children": [
+                        {
+                          "use": "Stack",
+                          "props": {
+                            "Gap": "6",
+                            "Align": "start"
+                          },
+                          "children": [
+                            {
+                              "organism": "FooterBrand",
+                              "props": {
+                                "brand": {
+                                  "$": "brand"
+                                },
+                                "tagline": {
+                                  "$": "tagline"
+                                }
+                              }
+                            },
+                            {
+                              "organism": "FooterFigures",
+                              "props": {
+                                "extras": {
+                                  "$": "extras"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "organism": "FooterSitemap",
+                          "props": {
+                            "href": {
+                              "$": "extras.sitemapHref"
+                            },
+                            "label": {
+                              "$": "labels.sitemap"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "organism": "FooterGroupCards",
+                      "props": {
+                        "label": {
+                          "$": "label"
+                        },
+                        "groups": {
+                          "$": "groups"
+                        },
+                        "landmarkLabel": {
+                          "$": "landmarkLabel"
+                        }
+                      }
+                    },
+                    {
+                      "use": "Box",
+                      "props": {
+                        "Class": "border-t border-border pt-6"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Class": "text-muted-foreground"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "copyright"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "else": [
+                {
+                  "use": "Box",
+                  "props": {
+                    "Class": "grid grid-cols-1 items-center gap-8 lg:grid-cols-2"
+                  },
+                  "children": [
+                    {
+                      "when": {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "$": "mediaSide"
+                          },
+                          "start"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "brand"
+                            },
+                            "ratio": "4/3"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "8",
+                        "Align": "stretch"
+                      },
+                      "children": [
+                        {
+                          "when": {
+                            "op": "or",
+                            "args": [
+                              {
+                                "op": "eq",
+                                "args": [
+                                  {
+                                    "$": "layout"
+                                  },
+                                  "points"
+                                ]
+                              },
+                              {
+                                "op": "eq",
+                                "args": [
+                                  {
+                                    "$": "layout"
+                                  },
+                                  "links"
+                                ]
+                              }
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "FooterBrand",
+                              "props": {
+                                "brand": {
+                                  "$": "brand"
+                                },
+                                "tagline": {
+                                  "$": "tagline"
+                                }
+                              }
+                            }
+                          ],
+                          "else": [
+                            {
+                              "use": "Stack",
+                              "props": {
+                                "Gap": "2",
+                                "Align": "start"
+                              },
+                              "children": [
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "xl",
+                                    "Weight": "bold"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "op": "cond",
+                                        "args": [
+                                          {
+                                            "op": "eq",
+                                            "args": [
+                                              {
+                                                "$": "layout"
+                                              },
+                                              "newsletter"
+                                            ]
+                                          },
+                                          {
+                                            "$": "labels.loopTitle"
+                                          },
+                                          {
+                                            "op": "cond",
+                                            "args": [
+                                              {
+                                                "op": "eq",
+                                                "args": [
+                                                  {
+                                                    "$": "layout"
+                                                  },
+                                                  "channels"
+                                                ]
+                                              },
+                                              {
+                                                "$": "labels.joinTitle"
+                                              },
+                                              {
+                                                "$": "labels.title"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "use": "Text",
+                                  "props": {
+                                    "Size": "sm",
+                                    "Class": "text-muted-foreground"
+                                  },
+                                  "children": [
+                                    {
+                                      "text": {
+                                        "op": "cond",
+                                        "args": [
+                                          {
+                                            "op": "eq",
+                                            "args": [
+                                              {
+                                                "$": "layout"
+                                              },
+                                              "newsletter"
+                                            ]
+                                          },
+                                          {
+                                            "$": "labels.loopText"
+                                          },
+                                          {
+                                            "op": "cond",
+                                            "args": [
+                                              {
+                                                "op": "eq",
+                                                "args": [
+                                                  {
+                                                    "$": "layout"
+                                                  },
+                                                  "channels"
+                                                ]
+                                              },
+                                              {
+                                                "$": "labels.joinText"
+                                              },
+                                              {
+                                                "$": "labels.text"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "layout"
+                              },
+                              "points"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "FooterPoints",
+                              "props": {
+                                "extras": {
+                                  "$": "extras"
+                                },
+                                "title": {
+                                  "$": "labels.points"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "layout"
+                              },
+                              "newsletter"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "FooterSignupCard",
+                              "props": {
+                                "id": {
+                                  "$": "id"
+                                },
+                                "labels": {
+                                  "$": "labels"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "or",
+                            "args": [
+                              {
+                                "op": "eq",
+                                "args": [
+                                  {
+                                    "$": "layout"
+                                  },
+                                  "links"
+                                ]
+                              },
+                              {
+                                "op": "eq",
+                                "args": [
+                                  {
+                                    "$": "layout"
+                                  },
+                                  "newsletter"
+                                ]
+                              }
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "FooterLinkColumns",
+                              "props": {
+                                "label": {
+                                  "$": "label"
+                                },
+                                "groups": {
+                                  "$": "groups"
+                                },
+                                "landmarkLabel": {
+                                  "$": "landmarkLabel"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "layout"
+                              },
+                              "contacts"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "FooterContacts",
+                              "props": {
+                                "extras": {
+                                  "$": "extras"
+                                }
+                              }
+                            },
+                            {
+                              "organism": "ActionGroup",
+                              "props": {
+                                "primary": {
+                                  "$": "labels.cta"
+                                },
+                                "primaryHref": {
+                                  "$": "extras.ctaHref"
+                                },
+                                "secondary": {
+                                  "$": "labels.secondary"
+                                },
+                                "secondaryHref": {
+                                  "$": "extras.secondaryHref"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "when": {
+                            "op": "eq",
+                            "args": [
+                              {
+                                "$": "layout"
+                              },
+                              "channels"
+                            ]
+                          },
+                          "then": [
+                            {
+                              "organism": "FooterChannels",
+                              "props": {
+                                "extras": {
+                                  "$": "extras"
+                                }
+                              }
+                            },
+                            {
+                              "organism": "FooterFigures",
+                              "props": {
+                                "extras": {
+                                  "$": "extras"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "Box",
+                          "props": {
+                            "Class": "border-t border-border pt-6"
+                          },
+                          "children": [
+                            {
+                              "use": "Text",
+                              "props": {
+                                "Size": "sm",
+                                "Class": "text-muted-foreground"
+                              },
+                              "children": [
+                                {
+                                  "text": {
+                                    "$": "copyright"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "when": {
+                        "op": "ne",
+                        "args": [
+                          {
+                            "$": "mediaSide"
+                          },
+                          "start"
+                        ]
+                      },
+                      "then": [
+                        {
+                          "organism": "MediaFrame",
+                          "props": {
+                            "alt": {
+                              "$": "brand"
+                            },
+                            "ratio": "4/3"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "MegaMenu",
+      "names": [
+        "MegaGroup"
+      ]
+    },
+    {
+      "from": "StatsBand",
+      "names": [
+        "Stat"
+      ]
+    },
+    {
+      "from": "FeatureGrid",
+      "names": [
+        "Feature"
+      ]
+    }
+  ]
+}

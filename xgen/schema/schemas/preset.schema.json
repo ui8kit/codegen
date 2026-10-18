@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "preset.schema.json",
+  "title": "A layout preset of a kit: named class strings with the frame geometry of the kit (the only place with arbitrary Tailwind values)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "specVersion",
+    "id",
+    "name",
+    "docs",
+    "values"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "specVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^preset\\.[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][A-Za-z0-9]*$",
+      "description": "the exported constant: defaults"
+    },
+    "docs": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "description": "where the numbers come from (frame, package digest)"
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "a comment for a key path (hero.band), printed above it"
+    },
+    "values": {
+      "$ref": "#/$defs/group"
+    }
+  },
+  "$defs": {
+    "group": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/$defs/group"
+          }
+        ]
+      }
+    }
+  }
+}

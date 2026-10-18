@@ -1,0 +1,192 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.featuresplit",
+  "name": "Features, split",
+  "docs": "Features beside a picture: plain in two columns, as cards with actions, two figures over checked rows, or four metric cards with actions.",
+  "theme": "marketing",
+  "group": "features",
+  "organism": "FeatureSplit",
+  "axes": {
+    "layout": [
+      "grid",
+      "cards",
+      "stats",
+      "metrics"
+    ],
+    "mediaSide": [
+      "end",
+      "start"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "grid",
+    "mediaSide": "end",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "gridStart",
+      "set": {
+        "mediaSide": "start"
+      }
+    },
+    {
+      "id": "statsStart",
+      "set": {
+        "layout": "stats",
+        "mediaSide": "start"
+      }
+    },
+    {
+      "id": "gridMuted",
+      "set": {
+        "tone": "muted"
+      }
+    },
+    {
+      "id": "metricCards",
+      "set": {
+        "layout": "metrics"
+      }
+    },
+    {
+      "id": "featureCards",
+      "set": {
+        "layout": "cards"
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "FeatureCards",
+    "FeatureMetricCards",
+    "FeaturePairs",
+    "FeatureStatRows",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"feature-item\"]",
+      "n": 4,
+      "when": {
+        "layout": "grid"
+      }
+    },
+    {
+      "sel": "[data-testid=\"feature-item\"]",
+      "n": 3,
+      "when": {
+        "layout": "stats"
+      }
+    },
+    {
+      "sel": "[data-testid=\"feature-card\"]",
+      "n": "@features",
+      "when": {
+        "layout": "cards"
+      }
+    },
+    {
+      "sel": "[data-testid=\"feature-stat\"]",
+      "n": 2,
+      "when": {
+        "layout": "stats"
+      }
+    },
+    {
+      "sel": "[data-testid=\"feature-stat\"]",
+      "n": 4,
+      "when": {
+        "layout": "metrics"
+      }
+    },
+    {
+      "sel": "[data-testid=\"action-primary\"]",
+      "n": 1,
+      "when": {
+        "layout": [
+          "cards",
+          "metrics"
+        ]
+      }
+    },
+    {
+      "sel": "[data-testid=\"action-primary\"]",
+      "n": 0,
+      "when": {
+        "layout": [
+          "grid",
+          "stats"
+        ]
+      }
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 1
+    }
+  ],
+  "data": [
+    {
+      "as": "features",
+      "collection": "features",
+      "kind": "feature",
+      "record": "Feature",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "text": "metadata.text.value",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "stats",
+      "collection": "stats",
+      "kind": "stat",
+      "record": "Stat",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value|number",
+        "icon": "metadata.icon.value",
+        "hint": "metadata.hint.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "featuresplit",
+      "title": {
+        "$": "ui.marketing.featureSplit.title"
+      },
+      "lead": {
+        "$": "ui.marketing.featureSplit.lead"
+      },
+      "badge": {
+        "$": "ui.marketing.featureSplit.badge"
+      },
+      "features": {
+        "$": "features"
+      },
+      "stats": {
+        "$": "stats"
+      },
+      "actions": {
+        "mode": "two",
+        "cta": {
+          "$": "ui.marketing.featureSplit.cta"
+        },
+        "href": "#/start",
+        "secondary": {
+          "$": "ui.marketing.featureSplit.secondary"
+        },
+        "secondaryHref": "#/work"
+      }
+    }
+  }
+}

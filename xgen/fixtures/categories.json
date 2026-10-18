@@ -1,0 +1,150 @@
+{
+  "collection": "categories",
+  "kind": "menu_item",
+  "entries": [
+    {
+      "id": "category-all",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "all",
+      "title": "All products",
+      "metadata": {
+        "location": {
+          "value": "categories"
+        },
+        "icon": {
+          "value": "layout-grid"
+        },
+        "count": {
+          "value": 48
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-02T09:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "category-desk",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "desk",
+      "title": "Desk",
+      "metadata": {
+        "location": {
+          "value": "categories"
+        },
+        "icon": {
+          "value": "lamp-desk"
+        },
+        "count": {
+          "value": 12
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-03T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "category-bags",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "bags",
+      "title": "Bags",
+      "metadata": {
+        "location": {
+          "value": "categories"
+        },
+        "icon": {
+          "value": "briefcase"
+        },
+        "count": {
+          "value": 9
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-05T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T10:00:00Z"
+    },
+    {
+      "id": "category-audio",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "audio",
+      "title": "Audio",
+      "metadata": {
+        "location": {
+          "value": "categories"
+        },
+        "icon": {
+          "value": "headphones"
+        },
+        "count": {
+          "value": 11
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-08T09:00:00Z",
+      "published_at": "2026-03-08T10:00:00Z"
+    },
+    {
+      "id": "category-light",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "light",
+      "title": "Lighting",
+      "metadata": {
+        "location": {
+          "value": "categories"
+        },
+        "icon": {
+          "value": "lightbulb"
+        },
+        "count": {
+          "value": 7
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-09T09:00:00Z",
+      "updated_at": "2026-03-10T09:00:00Z",
+      "published_at": "2026-03-10T10:00:00Z"
+    },
+    {
+      "id": "category-gifts",
+      "locale": "en",
+      "kind": "menu_item",
+      "status": "published",
+      "visibility": "public",
+      "slug": "gifts",
+      "title": "Gifts",
+      "metadata": {
+        "location": {
+          "value": "categories"
+        },
+        "icon": {
+          "value": "gift"
+        },
+        "count": {
+          "value": 9
+        }
+      },
+      "version": 1,
+      "created_at": "2026-03-11T09:00:00Z",
+      "updated_at": "2026-03-12T09:00:00Z",
+      "published_at": "2026-03-12T10:00:00Z"
+    }
+  ]
+}

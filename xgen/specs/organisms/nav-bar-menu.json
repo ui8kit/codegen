@@ -1,0 +1,99 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.nav-bar-menu",
+  "name": "NavBarMenu",
+  "docs": "The links of NavBar in a nav landmark; left out when there are no links.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the navigation"
+    },
+    {
+      "name": "links",
+      "type": {
+        "ts": "NavLink[]"
+      },
+      "required": true
+    },
+    {
+      "name": "current",
+      "type": "string",
+      "default": "",
+      "docs": "id of the current link"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "gt",
+        "args": [
+          {
+            "op": "len",
+            "args": [
+              {
+                "$": "links"
+              }
+            ]
+          },
+          0
+        ]
+      },
+      "then": [
+        {
+          "organism": "NavBlock",
+          "props": {
+            "label": {
+              "$": "label"
+            },
+            "className": "order-last w-full overflow-x-auto md:order-none md:w-auto [&>div]:flex-nowrap md:[&>div]:flex-wrap [&_a]:shrink-0",
+            "testid": "site-nav",
+            "landmarkLabel": {
+              "$": "landmarkLabel"
+            }
+          },
+          "slots": {
+            "children": {
+              "args": [],
+              "do": [
+                {
+                  "organism": "NavLinks",
+                  "props": {
+                    "links": {
+                      "$": "links"
+                    },
+                    "current": {
+                      "$": "current"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "NavBar",
+      "names": [
+        "NavLink"
+      ]
+    }
+  ]
+}

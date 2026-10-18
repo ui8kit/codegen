@@ -1,0 +1,391 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "organism.project-grid",
+  "name": "ProjectGrid",
+  "docs": "Projects of a studio or a person: cards with tags and links, a compact grid, tiles with the caption over the picture, a bento with one big project, or a list beside a collage. Axes: layout (cards, compact, overlay, bento, list), tone, density.",
+  "records": {
+    "Project": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "name": "year",
+        "type": "number"
+      },
+      {
+        "name": "summary",
+        "type": "string"
+      },
+      {
+        "name": "tags",
+        "type": "string[]"
+      },
+      {
+        "name": "featured",
+        "type": "boolean"
+      },
+      {
+        "name": "client",
+        "type": "string"
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "optional": true
+      }
+    ],
+    "ProjectLabels": [
+      {
+        "name": "featured",
+        "type": "string"
+      },
+      {
+        "name": "view",
+        "type": "string"
+      },
+      {
+        "name": "case",
+        "type": "string"
+      }
+    ]
+  },
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "lead",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "projects",
+      "type": {
+        "ts": "Project[]"
+      },
+      "required": true
+    },
+    {
+      "name": "empty",
+      "type": "string",
+      "default": "",
+      "docs": "the text of the empty state (no records), from the dictionary"
+    },
+    {
+      "name": "labels",
+      "type": {
+        "record": "ProjectLabels"
+      },
+      "required": true
+    },
+    {
+      "name": "layout",
+      "type": {
+        "ts": "\"cards\" | \"compact\" | \"overlay\" | \"bento\" | \"list\""
+      },
+      "default": "cards"
+    },
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "density",
+      "type": {
+        "ts": "\"default\" | \"compact\""
+      },
+      "default": "default"
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "organism": "SectionFrame",
+      "props": {
+        "id": {
+          "$": "id"
+        },
+        "title": {
+          "$": "title"
+        },
+        "lead": {
+          "$": "lead"
+        },
+        "tone": {
+          "$": "tone"
+        },
+        "density": {
+          "$": "density"
+        },
+        "layout": {
+          "op": "cond",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "$": "layout"
+                },
+                "list"
+              ]
+            },
+            "split",
+            "stack"
+          ]
+        },
+        "media": {
+          "show": {
+            "op": "eq",
+            "args": [
+              {
+                "$": "layout"
+              },
+              "list"
+            ]
+          },
+          "align": "start"
+        },
+        "landmarkLabel": {
+          "$": "landmarkLabel"
+        }
+      },
+      "slots": {
+        "children": {
+          "args": [],
+          "do": [
+            {
+              "when": {
+                "op": "eq",
+                "args": [
+                  {
+                    "op": "len",
+                    "args": [
+                      {
+                        "$": "projects"
+                      }
+                    ]
+                  },
+                  0
+                ]
+              },
+              "then": [
+                {
+                  "organism": "EmptyState",
+                  "props": {
+                    "icon": "folder-open",
+                    "title": {
+                      "$": "empty"
+                    }
+                  }
+                }
+              ],
+              "else": [
+                {
+                  "when": {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "$": "layout"
+                      },
+                      "list"
+                    ]
+                  },
+                  "then": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "4",
+                        "Align": "stretch"
+                      },
+                      "attrs": {
+                        "data-testid": "items"
+                      },
+                      "children": [
+                        {
+                          "each": {
+                            "$": "projects"
+                          },
+                          "as": "p",
+                          "key": {
+                            "$": "p.id"
+                          },
+                          "do": [
+                            {
+                              "use": "Group",
+                              "props": {
+                                "Gap": "4",
+                                "Align": "start",
+                                "Class": "border-b border-border pb-4"
+                              },
+                              "attrs": {
+                                "data-testid": "item"
+                              },
+                              "children": [
+                                {
+                                  "organism": "MediaFrame",
+                                  "props": {
+                                    "alt": {
+                                      "$": "p.title"
+                                    },
+                                    "ratio": "1/1",
+                                    "className": "size-16 shrink-0"
+                                  }
+                                },
+                                {
+                                  "use": "Stack",
+                                  "props": {
+                                    "Gap": "2",
+                                    "Align": "stretch",
+                                    "Class": "flex-1"
+                                  },
+                                  "children": [
+                                    {
+                                      "use": "Group",
+                                      "props": {
+                                        "Gap": "4",
+                                        "Justify": "between"
+                                      },
+                                      "children": [
+                                        {
+                                          "use": "Text",
+                                          "props": {
+                                            "Size": "sm",
+                                            "Weight": "semibold"
+                                          },
+                                          "children": [
+                                            {
+                                              "text": {
+                                                "$": "p.title"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "use": "Text",
+                                          "props": {
+                                            "Size": "xs",
+                                            "Class": "text-muted-foreground"
+                                          },
+                                          "children": [
+                                            {
+                                              "text": {
+                                                "$": "p.year"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "use": "Text",
+                                      "props": {
+                                        "Size": "sm",
+                                        "Class": "text-muted-foreground"
+                                      },
+                                      "children": [
+                                        {
+                                          "text": {
+                                            "$": "p.summary"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "else": [
+                    {
+                      "organism": "ProjectTiles",
+                      "props": {
+                        "projects": {
+                          "$": "projects"
+                        },
+                        "labels": {
+                          "$": "labels"
+                        },
+                        "layout": {
+                          "$": "layout"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "aside": {
+          "args": [],
+          "do": [
+            {
+              "use": "Box",
+              "props": {
+                "Class": "grid grid-cols-2 gap-4"
+              },
+              "attrs": {
+                "data-testid": "collage"
+              },
+              "children": [
+                {
+                  "organism": "MediaFrame",
+                  "props": {
+                    "alt": {
+                      "$": "title"
+                    },
+                    "ratio": "3/4"
+                  }
+                },
+                {
+                  "organism": "MediaFrame",
+                  "props": {
+                    "alt": {
+                      "$": "title"
+                    },
+                    "ratio": "3/4",
+                    "className": "mt-8"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

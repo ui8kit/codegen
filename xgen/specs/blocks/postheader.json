@@ -1,0 +1,104 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.postheader",
+  "name": "Post header",
+  "docs": "Category, title, excerpt, author line and a wide cover.",
+  "theme": "content",
+  "group": "blog",
+  "organism": "PostHeader",
+  "axes": {
+    "layout": [
+      "start",
+      "center"
+    ],
+    "cover": [
+      "show",
+      "hide"
+    ],
+    "meta": [
+      "full",
+      "short"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "start",
+    "cover": "show",
+    "meta": "full",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "start",
+      "set": {}
+    },
+    {
+      "id": "center",
+      "set": {
+        "layout": "center"
+      }
+    },
+    {
+      "id": "noCover",
+      "set": {
+        "cover": "hide"
+      }
+    },
+    {
+      "id": "minimal",
+      "set": {
+        "cover": "hide",
+        "meta": "short",
+        "tone": "muted",
+        "layout": "center"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "MediaFrame",
+    "Pill",
+    "SectionFrame"
+  ],
+  "data": [
+    {
+      "as": "posts",
+      "collection": "posts",
+      "kind": "post",
+      "record": "Post",
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "excerpt": "excerpt",
+        "category": "terms|term:category",
+        "author": "author_id|author",
+        "date": "metadata.date.value|date",
+        "minutes": "metadata.minutes.value",
+        "icon": "metadata.icon.value",
+        "href": "slug|route",
+        "image": "featured_media_id|media"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "postheader",
+      "post": {
+        "op": "pick",
+        "args": [
+          {
+            "$": "posts"
+          },
+          "post-static-first"
+        ]
+      },
+      "labels": {
+        "$": "ui.content.labels"
+      }
+    }
+  }
+}

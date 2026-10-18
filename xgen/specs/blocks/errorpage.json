@@ -1,0 +1,142 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.errorpage",
+  "name": "Error page",
+  "docs": "A page for something that went wrong, such as a missing page: a code, a heading, a sentence and the way back.",
+  "theme": "support",
+  "group": "states",
+  "organism": "ErrorPage",
+  "axes": {
+    "layout": [
+      "centered",
+      "split"
+    ],
+    "code": [
+      "show",
+      "hide"
+    ],
+    "actions.mode": [
+      "one",
+      "two"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ]
+  },
+  "defaults": {
+    "layout": "centered",
+    "code": "show",
+    "actions.mode": "one",
+    "tone": "default"
+  },
+  "variants": [
+    {
+      "id": "centered",
+      "set": {}
+    },
+    {
+      "id": "split",
+      "set": {
+        "layout": "split"
+      }
+    },
+    {
+      "id": "noCode",
+      "set": {
+        "code": "hide"
+      }
+    },
+    {
+      "id": "two",
+      "set": {
+        "actions.mode": "two"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted"
+      }
+    }
+  ],
+  "slots": [
+    "ActionGroup",
+    "MediaFrame",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"error-code\"]",
+      "n": 1,
+      "when": {
+        "code": "show"
+      }
+    },
+    {
+      "sel": "[data-testid=\"error-code\"]",
+      "n": 0,
+      "when": {
+        "code": "hide"
+      }
+    },
+    {
+      "sel": "[data-testid=\"action-primary\"]",
+      "n": 1
+    },
+    {
+      "sel": "[data-testid=\"action-secondary\"]",
+      "n": 1,
+      "when": {
+        "actions.mode": "two"
+      }
+    },
+    {
+      "sel": "[data-testid=\"action-secondary\"]",
+      "n": 0,
+      "when": {
+        "actions.mode": "one"
+      }
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 1,
+      "when": {
+        "layout": "split"
+      }
+    },
+    {
+      "sel": "[data-slot=\"media-frame\"]",
+      "n": 0,
+      "when": {
+        "layout": "centered"
+      }
+    }
+  ],
+  "data": [],
+  "sample": {
+    "props": {
+      "id": "errorpage",
+      "title": {
+        "$": "ui.vibe.error.title"
+      },
+      "text": {
+        "$": "ui.vibe.error.text"
+      },
+      "status": {
+        "$": "ui.vibe.error.status"
+      },
+      "actions": {
+        "cta": {
+          "$": "ui.vibe.error.cta"
+        },
+        "href": "#/",
+        "secondary": {
+          "$": "ui.vibe.error.secondary"
+        },
+        "secondaryHref": "#/"
+      }
+    }
+  }
+}

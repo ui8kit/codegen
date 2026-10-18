@@ -1,0 +1,100 @@
+/* Skin "cosmic-night" (Cosmic Night): the tweakcn preset "cosmic-night" (Apache-2.0, see NOTICE.md), written by xgen/runtimes/core/tools/tweakcn-skins.ts.
+   On when data-skin="cosmic-night" is on <html> (the page) or on any element (a tile of /skins/). Values as tweakcn exports them;
+   the spacing scale stays the kit's 0.25rem. Fonts: Inter (Google Fonts, loaded when the skin is on). */
+[data-skin="cosmic-night"] {
+  --background: hsl(240 100% 98%);
+  --foreground: hsl(240 27.6% 22.7%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(240 27.6% 22.7%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(240 27.6% 22.7%);
+  --primary: hsl(251.9 55.8% 57.5%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(249.4 100% 93.7%);
+  --secondary-foreground: hsl(249 33% 38%);
+  --muted: hsl(240 50% 96%);
+  --muted-foreground: hsl(240 12.4% 47.5%);
+  --accent: hsl(218.5 100% 92.4%);
+  --accent-foreground: hsl(240 27.6% 22.7%);
+  --destructive: hsl(347.1 70.5% 52.2%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(240 35% 91%);
+  --input: hsl(240 35% 91%);
+  --ring: hsl(251.9 55.8% 57.5%);
+  --chart-1: hsl(251.9 55.8% 57.5%);
+  --chart-2: hsl(250 95% 77%);
+  --chart-3: hsl(239 82% 65%);
+  --chart-4: hsl(243 93% 72%);
+  --chart-5: hsl(244 47% 48%);
+  --sidebar: hsl(240 50% 96%);
+  --sidebar-foreground: hsl(240 27.6% 22.7%);
+  --sidebar-primary: hsl(251.9 55.8% 57.5%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(218.5 100% 92.4%);
+  --sidebar-accent-foreground: hsl(240 27.6% 22.7%);
+  --sidebar-border: hsl(240 35% 91%);
+  --sidebar-ring: hsl(251.9 55.8% 57.5%);
+  --font-sans: Inter, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: JetBrains Mono, monospace;
+  --radius: 0.5rem;
+  --shadow-2xs: 0px 4px 10px 0px hsl(240 30% 25% / 0.06);
+  --shadow-xs: 0px 4px 10px 0px hsl(240 30% 25% / 0.06);
+  --shadow-sm: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 1px 2px -1px hsl(240 30% 25% / 0.12);
+  --shadow: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 1px 2px -1px hsl(240 30% 25% / 0.12);
+  --shadow-md: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 2px 4px -1px hsl(240 30% 25% / 0.12);
+  --shadow-lg: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 4px 6px -1px hsl(240 30% 25% / 0.12);
+  --shadow-xl: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 8px 10px -1px hsl(240 30% 25% / 0.12);
+  --shadow-2xl: 0px 4px 10px 0px hsl(240 30% 25% / 0.30);
+}
+
+:is(.dark, [data-theme="dark"]) [data-skin="cosmic-night"],
+[data-skin="cosmic-night"]:is(.dark, [data-theme="dark"]) {
+  --background: hsl(240 27% 8%);
+  --foreground: hsl(240 48.7% 92.4%);
+  --card: hsl(240 28% 14%);
+  --card-foreground: hsl(240 48.7% 92.4%);
+  --popover: hsl(240 28% 14%);
+  --popover-foreground: hsl(240 48.7% 92.4%);
+  --primary: hsl(251 100% 78%);
+  --primary-foreground: hsl(240 27% 8%);
+  --secondary: hsl(243 33% 25%);
+  --secondary-foreground: hsl(242 100% 88%);
+  --muted: hsl(240 33% 20%);
+  --muted-foreground: hsl(240 20% 69%);
+  --accent: hsl(240 33.3% 28.2%);
+  --accent-foreground: hsl(240 48.7% 92.4%);
+  --destructive: hsl(347.1 70.5% 52.2%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(240 26.2% 25.5%);
+  --input: hsl(240 26.2% 25.5%);
+  --ring: hsl(251 100% 78%);
+  --chart-1: hsl(251 100% 78%);
+  --chart-2: hsl(230.5 44.1% 63.5%);
+  --chart-3: hsl(207 89% 68%);
+  --chart-4: hsl(174 42% 51%);
+  --chart-5: hsl(325.5 100% 73.7%);
+  --sidebar: hsl(240 28% 14%);
+  --sidebar-foreground: hsl(240 48.7% 92.4%);
+  --sidebar-primary: hsl(251 100% 78%);
+  --sidebar-primary-foreground: hsl(240 27% 8%);
+  --sidebar-accent: hsl(240 33.3% 28.2%);
+  --sidebar-accent-foreground: hsl(240 48.7% 92.4%);
+  --sidebar-border: hsl(240 26.2% 25.5%);
+  --sidebar-ring: hsl(251 100% 78%);
+  --shadow-2xs: 0px 4px 10px 0px hsl(240 30% 25% / 0.06);
+  --shadow-xs: 0px 4px 10px 0px hsl(240 30% 25% / 0.06);
+  --shadow-sm: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 1px 2px -1px hsl(240 30% 25% / 0.12);
+  --shadow: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 1px 2px -1px hsl(240 30% 25% / 0.12);
+  --shadow-md: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 2px 4px -1px hsl(240 30% 25% / 0.12);
+  --shadow-lg: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 4px 6px -1px hsl(240 30% 25% / 0.12);
+  --shadow-xl: 0px 4px 10px 0px hsl(240 30% 25% / 0.12), 0px 8px 10px -1px hsl(240 30% 25% / 0.12);
+  --shadow-2xl: 0px 4px 10px 0px hsl(240 30% 25% / 0.30);
+}
+
+[data-skin="cosmic-night"] .shadow-xs { --tw-shadow: var(--shadow-xs); }
+[data-skin="cosmic-night"] .shadow-sm { --tw-shadow: var(--shadow-sm); }
+[data-skin="cosmic-night"] .shadow { --tw-shadow: var(--shadow); }
+[data-skin="cosmic-night"] .shadow-md { --tw-shadow: var(--shadow-md); }
+[data-skin="cosmic-night"] .shadow-lg { --tw-shadow: var(--shadow-lg); }
+[data-skin="cosmic-night"] .shadow-xl { --tw-shadow: var(--shadow-xl); }

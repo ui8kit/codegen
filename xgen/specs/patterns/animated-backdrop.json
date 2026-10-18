@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.animated-backdrop",
+  "name": "AnimatedBackdrop",
+  "docs": "A moving background behind a section (drifting shapes, a mesh of soft colour). The static fallback is a flat tone of the theme; nothing moves under a reduced-motion preference.",
+  "records": {},
+  "props": [
+    {
+      "name": "tone",
+      "type": {
+        "ts": "\"default\" | \"muted\" | \"accent\""
+      },
+      "docs": "the flat colour shown without motion",
+      "default": "default"
+    }
+  ],
+  "className": true,
+  "children": true,
+  "slots": [],
+  "events": [],
+  "view": [],
+  "portable": {
+    "svelte": {
+      "portable": false,
+      "reason": "motion needs timers, animation frames or media APIs and a reduced-motion rule; it is written by the programmer behind this contract"
+    },
+    "react": {
+      "portable": false,
+      "reason": "motion needs timers, animation frames or media APIs and a reduced-motion rule; it is written by the programmer behind this contract"
+    }
+  }
+}

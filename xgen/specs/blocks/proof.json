@@ -1,0 +1,116 @@
+{
+  "$schema": "../../schema/schemas/block.schema.json",
+  "specVersion": 1,
+  "id": "block.proof",
+  "name": "Logos and stats",
+  "docs": "A bar of customer logos and a row of key figures together.",
+  "theme": "marketing",
+  "group": "proof",
+  "organism": "ProofBand",
+  "axes": {
+    "layout": [
+      "above",
+      "beside"
+    ],
+    "logoStyle": [
+      "name",
+      "icon"
+    ],
+    "tone": [
+      "default",
+      "muted"
+    ],
+    "density": [
+      "default",
+      "compact"
+    ]
+  },
+  "defaults": {
+    "layout": "above",
+    "logoStyle": "name",
+    "tone": "default",
+    "density": "default"
+  },
+  "variants": [
+    {
+      "id": "above",
+      "set": {}
+    },
+    {
+      "id": "beside",
+      "set": {
+        "layout": "beside"
+      }
+    },
+    {
+      "id": "icons",
+      "set": {
+        "logoStyle": "icon"
+      }
+    },
+    {
+      "id": "muted",
+      "set": {
+        "tone": "muted",
+        "density": "compact"
+      }
+    }
+  ],
+  "slots": [
+    "EmptyState",
+    "SectionFrame"
+  ],
+  "facts": [
+    {
+      "sel": "[data-testid=\"logo\"]",
+      "n": "@logos"
+    },
+    {
+      "sel": "[data-testid=\"stat\"]",
+      "n": "@stats"
+    }
+  ],
+  "data": [
+    {
+      "as": "logos",
+      "collection": "logos",
+      "kind": "logo",
+      "record": "Logo",
+      "fields": {
+        "id": "id",
+        "name": "title",
+        "icon": "metadata.icon.value"
+      }
+    },
+    {
+      "as": "stats",
+      "collection": "stats",
+      "kind": "stat",
+      "record": "Stat",
+      "fields": {
+        "id": "id",
+        "label": "title",
+        "value": "metadata.value.value|number",
+        "icon": "metadata.icon.value",
+        "hint": "metadata.hint.value"
+      }
+    }
+  ],
+  "sample": {
+    "props": {
+      "id": "proof",
+      "title": {
+        "$": "ui.vibe.proof.title"
+      },
+      "logos": {
+        "$": "logos"
+      },
+      "empty": {
+        "$": "ui.empty.logos"
+      },
+      "stats": {
+        "$": "stats"
+      }
+    }
+  }
+}

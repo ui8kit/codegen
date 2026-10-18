@@ -1,0 +1,154 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.dropdown-item",
+  "name": "DropdownItem",
+  "docs": "A menu item: an optional icon, the label and an optional trailing mark (a check for selected items). tabindex -1: the menu moves focus with the arrow keys.",
+  "records": {},
+  "props": [
+    {
+      "name": "selected",
+      "type": "boolean",
+      "docs": "the chosen item",
+      "default": false
+    }
+  ],
+  "className": true,
+  "children": true,
+  "slots": [
+    {
+      "name": "icon",
+      "args": [],
+      "docs": "leading icon"
+    },
+    {
+      "name": "right",
+      "args": [],
+      "docs": "trailing mark"
+    }
+  ],
+  "events": [
+    {
+      "name": "click",
+      "args": [],
+      "docs": "the item was chosen"
+    }
+  ],
+  "view": [
+    {
+      "use": "ButtonPlain",
+      "props": {
+        "Type": "button",
+        "Role": "menuitem",
+        "Class": {
+          "op": "cn",
+          "args": [
+            "group flex h-9 w-full items-center px-2 text-left text-foreground",
+            {
+              "$": "className"
+            }
+          ]
+        }
+      },
+      "attrs": {
+        "tabindex": -1,
+        "data-slot": "dropdown-item",
+        "data-state": {
+          "op": "cond",
+          "args": [
+            {
+              "$": "selected"
+            },
+            "selected",
+            "default"
+          ]
+        }
+      },
+      "on": {
+        "click": {
+          "call": "emit.click",
+          "args": []
+        }
+      },
+      "children": [
+        {
+          "use": "Inline",
+          "props": {
+            "Class": "flex h-7 min-w-0 flex-1 items-center rounded p-1 group-hover:bg-muted group-focus-visible:bg-muted group-data-[state=selected]:bg-muted"
+          },
+          "attrs": {
+            "data-slot": "dropdown-item-content"
+          },
+          "children": [
+            {
+              "when": {
+                "$": "icon"
+              },
+              "then": [
+                {
+                  "use": "Inline",
+                  "props": {
+                    "Class": "flex w-7 shrink-0 items-center pr-2"
+                  },
+                  "attrs": {
+                    "data-slot": "dropdown-item-icon"
+                  },
+                  "children": [
+                    {
+                      "slot": "icon"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "use": "Inline",
+              "props": {
+                "Class": {
+                  "op": "cn",
+                  "args": [
+                    "text-xs",
+                    "min-w-0 flex-1 truncate px-1 font-bold"
+                  ]
+                }
+              },
+              "attrs": {
+                "data-slot": "dropdown-item-label"
+              },
+              "children": [
+                {
+                  "slot": "children"
+                }
+              ]
+            },
+            {
+              "when": {
+                "$": "right"
+              },
+              "then": [
+                {
+                  "use": "Inline",
+                  "props": {
+                    "Class": "flex shrink-0 items-center pr-1"
+                  },
+                  "attrs": {
+                    "data-slot": "dropdown-item-right"
+                  },
+                  "children": [
+                    {
+                      "slot": "right"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

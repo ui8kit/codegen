@@ -1,0 +1,176 @@
+{
+  "$schema": "../../schema/schemas/organism.schema.json",
+  "specVersion": 1,
+  "id": "pattern.footer-columns",
+  "name": "FooterColumns",
+  "docs": "The link groups of SitemapFooter as columns: a group title over its links, up to five columns.",
+  "records": {},
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "docs": "accessible name of the link groups"
+    },
+    {
+      "name": "groups",
+      "type": {
+        "ts": "MegaGroup[]"
+      },
+      "required": true
+    },
+    {
+      "name": "landmarkLabel",
+      "type": "string",
+      "docs": "accessible name of the landmark of this component when the page shows it more than once (a variant); replaces the heading name of the root landmark, follows the name of a nested one"
+    }
+  ],
+  "slots": [],
+  "events": [],
+  "view": [
+    {
+      "when": {
+        "op": "gt",
+        "args": [
+          {
+            "op": "len",
+            "args": [
+              {
+                "$": "groups"
+              }
+            ]
+          },
+          0
+        ]
+      },
+      "then": [
+        {
+          "use": "Block",
+          "props": {
+            "Tag": "nav"
+          },
+          "attrs": {
+            "aria-label": {
+              "op": "coalesce",
+              "args": [
+                {
+                  "$": "landmarkLabel"
+                },
+                {
+                  "$": "label"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "use": "Grid",
+              "props": {
+                "Cols": "1",
+                "Class": "grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5"
+              },
+              "attrs": {
+                "data-testid": "footer-groups"
+              },
+              "children": [
+                {
+                  "each": {
+                    "$": "groups"
+                  },
+                  "as": "g",
+                  "key": {
+                    "$": "g.id"
+                  },
+                  "do": [
+                    {
+                      "use": "Stack",
+                      "props": {
+                        "Gap": "2"
+                      },
+                      "attrs": {
+                        "data-testid": "group"
+                      },
+                      "children": [
+                        {
+                          "use": "Text",
+                          "props": {
+                            "Size": "sm",
+                            "Weight": "semibold"
+                          },
+                          "children": [
+                            {
+                              "text": {
+                                "$": "g.title"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "use": "List",
+                          "props": {
+                            "Class": "m-0 flex list-none flex-col gap-2 p-0"
+                          },
+                          "children": [
+                            {
+                              "each": {
+                                "$": "g.links"
+                              },
+                              "as": "item",
+                              "key": {
+                                "$": "item.id"
+                              },
+                              "do": [
+                                {
+                                  "use": "ListItem",
+                                  "children": [
+                                    {
+                                      "organism": "MenuEntry",
+                                      "props": {
+                                        "href": {
+                                          "$": "item.href"
+                                        },
+                                        "className": "text-sm text-muted-foreground"
+                                      },
+                                      "slots": {
+                                        "children": {
+                                          "args": [],
+                                          "do": [
+                                            {
+                                              "text": {
+                                                "$": "item.name"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  },
+  "typeImports": [
+    {
+      "from": "MegaMenu",
+      "names": [
+        "MegaGroup"
+      ]
+    }
+  ]
+}

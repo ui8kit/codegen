@@ -1,0 +1,285 @@
+{
+  "$schema": "../../schema/schemas/spec.schema.json",
+  "specVersion": 1,
+  "id": "ui.textarea",
+  "tier": "brick",
+  "dir": "textarea",
+  "docs": "Textarea is a multi-line native text field with row sizing.",
+  "variants": {
+    "textarea": "textarea.variants.json"
+  },
+  "parts": [
+    {
+      "name": "Textarea",
+      "docs": "Textarea renders a styled multi-line form control.",
+      "recipeId": "textarea",
+      "classes": {
+        "recipe": {
+          "size": "Size",
+          "variant": "Variant"
+        }
+      },
+      "props": [
+        {
+          "name": "Variant",
+          "type": "string",
+          "cva": true,
+          "docs": "sets appearance preset"
+        },
+        {
+          "name": "Size",
+          "type": "string",
+          "cva": true,
+          "docs": "sets density preset"
+        },
+        {
+          "name": "Class",
+          "type": "string",
+          "cva": false,
+          "docs": "adds Tailwind utilities"
+        },
+        {
+          "name": "Name",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Value",
+          "type": "string",
+          "cva": false,
+          "docs": "initial textarea content"
+        },
+        {
+          "name": "Placeholder",
+          "type": "string",
+          "cva": false,
+          "passthrough": true
+        },
+        {
+          "name": "Rows",
+          "type": "int",
+          "cva": false,
+          "docs": "visible line count; defaults to 4 when zero"
+        },
+        {
+          "name": "Disabled",
+          "type": "bool",
+          "cva": false
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "cva": false
+        },
+        {
+          "name": "ID",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "element id"
+        },
+        {
+          "name": "Role",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "ARIA role override"
+        },
+        {
+          "name": "TabIndex",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "tab order override"
+        },
+        {
+          "name": "AriaLabel",
+          "type": "string",
+          "cva": false,
+          "passthrough": true,
+          "docs": "accessible name for unlabeled controls"
+        },
+        {
+          "name": "Attrs",
+          "type": "attrs",
+          "cva": false
+        }
+      ],
+      "render": {
+        "kind": "element",
+        "tag": {
+          "kind": "static",
+          "tag": "textarea"
+        },
+        "attrs": [
+          {
+            "kind": "expr",
+            "name": "id",
+            "expr": {
+              "kind": "prop",
+              "name": "ID"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "name",
+            "expr": {
+              "kind": "prop",
+              "name": "Name"
+            }
+          },
+          {
+            "kind": "class"
+          },
+          {
+            "kind": "expr",
+            "name": "rows",
+            "expr": {
+              "kind": "cond",
+              "test": {
+                "kind": "isSet",
+                "expr": {
+                  "kind": "prop",
+                  "name": "Rows"
+                }
+              },
+              "then": {
+                "kind": "intToString",
+                "expr": {
+                  "kind": "prop",
+                  "name": "Rows"
+                }
+              },
+              "else": {
+                "kind": "lit",
+                "value": "4"
+              }
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "placeholder",
+            "expr": {
+              "kind": "prop",
+              "name": "Placeholder"
+            }
+          },
+          {
+            "kind": "bool",
+            "name": "disabled",
+            "expr": {
+              "kind": "prop",
+              "name": "Disabled"
+            }
+          },
+          {
+            "kind": "bool",
+            "name": "required",
+            "expr": {
+              "kind": "prop",
+              "name": "Required"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "role",
+            "expr": {
+              "kind": "prop",
+              "name": "Role"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "tabindex",
+            "expr": {
+              "kind": "prop",
+              "name": "TabIndex"
+            }
+          },
+          {
+            "kind": "expr",
+            "name": "aria-label",
+            "expr": {
+              "kind": "prop",
+              "name": "AriaLabel"
+            }
+          },
+          {
+            "kind": "rest"
+          }
+        ],
+        "children": [
+          {
+            "kind": "text",
+            "expr": {
+              "kind": "prop",
+              "name": "Value"
+            }
+          }
+        ]
+      },
+      "slots": [],
+      "events": [],
+      "a11y": {
+        "roots": [
+          "textarea"
+        ],
+        "roles": [],
+        "aria": [
+          {
+            "name": "aria-label",
+            "kind": "expr"
+          },
+          {
+            "name": "role",
+            "kind": "expr"
+          },
+          {
+            "name": "tabindex",
+            "kind": "expr"
+          }
+        ],
+        "keyboard": []
+      },
+      "data": [],
+      "tokens": [
+        "--background",
+        "--border",
+        "--foreground",
+        "--muted",
+        "--muted-foreground",
+        "--ring"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "rows.custom",
+      "props": {
+        "Name": "bio",
+        "Placeholder": "Bio",
+        "Rows": 6
+      }
+    },
+    {
+      "id": "state.disabled",
+      "props": {
+        "Disabled": true,
+        "Name": "locked",
+        "Value": "Fixed text"
+      }
+    },
+    {
+      "id": "variant.default",
+      "props": {
+        "Name": "message",
+        "Placeholder": "Your message"
+      }
+    }
+  ],
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}

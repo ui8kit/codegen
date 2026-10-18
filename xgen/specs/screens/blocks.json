@@ -1,0 +1,19 @@
+{
+  "$schema": "../../schema/schemas/composed.schema.json",
+  "specVersion": 1,
+  "id": "screen.blocks",
+  "name": "BlocksScreen",
+  "kind": "composed",
+  "docs": "The block gallery: an index of blocks grouped by topic and one page per block with every variant, on the fixtures. Built from the block catalog; nothing is written by hand.",
+  "routes": [],
+  "frame": {
+    "before": [],
+    "after": []
+  },
+  "areas": {},
+  "gallery": true,
+  "portable": {
+    "svelte": true,
+    "react": true
+  }
+}
