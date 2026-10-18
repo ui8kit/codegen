@@ -1,0 +1,11 @@
+{
+  "$schema": "../../xgen/schema/schemas/app.schema.json",
+  "specVersion": 1,
+  "name": "host-vue",
+  "runtime": "vue",
+  "screens": ["*"],
+  "title": "xgen screens (Vue)",
+  "port": 5182,
+  "locale": "en",
+  "theme": "light"
+}

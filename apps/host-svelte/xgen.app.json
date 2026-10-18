@@ -1,0 +1,11 @@
+{
+  "$schema": "../../xgen/schema/schemas/app.schema.json",
+  "specVersion": 1,
+  "name": "host-svelte",
+  "runtime": "svelte",
+  "screens": ["*"],
+  "title": "xgen screens (Svelte)",
+  "port": 5180,
+  "locale": "en",
+  "theme": "light"
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../xgen/schema/schemas/app.schema.json",
+  "specVersion": 1,
+  "name": "host-solid",
+  "runtime": "solid",
+  "screens": ["*"],
+  "title": "xgen screens (Solid)",
+  "port": 5183,
+  "locale": "en",
+  "theme": "light"
+}

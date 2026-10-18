@@ -1,0 +1,11 @@
+{
+  "$schema": "../../xgen/schema/schemas/app.schema.json",
+  "specVersion": 1,
+  "name": "host-react",
+  "runtime": "react",
+  "screens": ["*"],
+  "title": "xgen screens (React)",
+  "port": 5181,
+  "locale": "en",
+  "theme": "light"
+}
