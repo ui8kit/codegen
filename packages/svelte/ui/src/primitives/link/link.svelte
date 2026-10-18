@@ -65,6 +65,7 @@
   const relValue = $derived((isSetStr(rel) ? rel : ((external || eqStr(targetValue, "_blank")) ? "noopener noreferrer" : "")));
 </script>
 
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <a
   {...(cls ? { class: cls } : {})}
   target={orUndef(targetValue)}

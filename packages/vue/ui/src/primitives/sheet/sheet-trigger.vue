@@ -72,7 +72,6 @@ const cls = computed(() => cn(sheettriggerVariants({ variant, size }), className
       stroke-linecap="round"
       stroke-linejoin="round"
       aria-hidden="true"
-      focusable="false"
     >
       <line x1="4" x2="20" y1="12" y2="12"></line>
       <line x1="4" x2="20" y1="6" y2="6"></line>
@@ -88,7 +87,6 @@ const cls = computed(() => cn(sheettriggerVariants({ variant, size }), className
       stroke-linecap="round"
       stroke-linejoin="round"
       aria-hidden="true"
-      focusable="false"
     >
       <path d="M18 6 6 18"></path>
       <path d="m6 6 12 12"></path>

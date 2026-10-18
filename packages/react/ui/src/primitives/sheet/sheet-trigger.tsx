@@ -74,7 +74,6 @@ export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(fun
         stroke-linecap="round"
         stroke-linejoin="round"
         aria-hidden="true"
-        focusable="false"
       >
         <line x1="4" x2="20" y1="12" y2="12" />
         <line x1="4" x2="20" y1="6" y2="6" />
@@ -90,7 +89,6 @@ export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(fun
         stroke-linecap="round"
         stroke-linejoin="round"
         aria-hidden="true"
-        focusable="false"
       >
         <path d="M18 6 6 18" />
         <path d="m6 6 12 12" />

@@ -157,11 +157,6 @@
                 "kind": "static",
                 "name": "aria-hidden",
                 "value": "true"
-              },
-              {
-                "kind": "static",
-                "name": "focusable",
-                "value": "false"
               }
             ],
             "children": [
@@ -363,11 +358,6 @@
                 "kind": "static",
                 "name": "aria-hidden",
                 "value": "true"
-              },
-              {
-                "kind": "static",
-                "name": "focusable",
-                "value": "false"
               }
             ],
             "children": [

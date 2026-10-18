@@ -93,6 +93,7 @@
 </script>
 
 {#if isSetStr(href)}
+  <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
   <a
     href={orUndef(href)}
     {...(cls ? { class: cls } : {})}

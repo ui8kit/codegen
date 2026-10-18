@@ -68,7 +68,6 @@ const cls = computed(() => cn(themetoggleVariants({ variant, size }), className)
       stroke-linecap="round"
       stroke-linejoin="round"
       aria-hidden="true"
-      focusable="false"
     >
       <circle cx="12" cy="12" r="4"></circle>
       <path d="M12 2v2"></path>
@@ -90,7 +89,6 @@ const cls = computed(() => cn(themetoggleVariants({ variant, size }), className)
       stroke-linecap="round"
       stroke-linejoin="round"
       aria-hidden="true"
-      focusable="false"
     >
       <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
     </svg>

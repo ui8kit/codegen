@@ -49,7 +49,6 @@ export const SheetClose = forwardRef<HTMLButtonElement, SheetCloseProps>(functio
         stroke-linecap="round"
         stroke-linejoin="round"
         aria-hidden="true"
-        focusable="false"
       >
         <path d="M18 6 6 18" />
         <path d="m6 6 12 12" />

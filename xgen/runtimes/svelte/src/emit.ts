@@ -259,7 +259,10 @@ export class SvelteEmitter implements Emitter {
         if (node.void || node.children.length === 0) {
           return node.void ? tagHead(tagCode, head, "/>") : `${tagHead(tagCode, head, ">")}</${tagCode}>`;
         }
-        const open = tagHead(tagCode, head, ">");
+        // an anchor gets its href through {...rest}: the compiler cannot see it is a link and warns on its tabindex
+        // (a11y_no_noninteractive_tabindex); at run time it is a link, so that one warning is silenced here
+        const quiet = tagCode === "a" && attrs.some((a) => a.startsWith("tabindex=")) ? "<!-- svelte-ignore a11y_no_noninteractive_tabindex -->\n" : "";
+        const open = quiet + tagHead(tagCode, head, ">");
         const rendered = node.children.map((c) =>
           this.printNode(c, ctx, part, state, { inLoop: opts.inLoop })
         );
