@@ -18,7 +18,7 @@ kit zone is never scanned. An adapter per runtime (`svelte.ts`: svelte/compiler,
 `raw-html`, `dynamic-tag`, `raw-native-tag`, `reactive-aria` and `literal-text`.
 
 - Baselines: `rules/baselines/<package>.json`, counts per detector and file. More fails; fewer asks for a new baseline.
-- Style baselines: the `corners`, `shadows`, `hardcode` and `spacing` groups also scan the style text of `apps/magazine/src`
+- Style baselines: the `corners`, `shadows`, `hardcode` and `spacing` groups also scan the style text of hand-written apps when the workspace has them (`apps/magazine/src` in the codegen-x monorepo; none in ui8kit/codegen)
   (`src/style-zones.ts`; `packages/panorama`, Three.js and canvas code, is outside every rule zone) against `rules/style-baselines/<package>.json`, written by the same
   `bun run rules:baseline`.
 - Self-test: `rules/fixtures/<runtime>/<detector>.{bad,ok}.<ext>`, run inside the group and in `test/rules.test.ts`.

@@ -10,7 +10,7 @@ Part of xgen (see `../README.md`). Self-contained: depends only on other `@ui8ki
 
 ## Block data manifest
 
-`codex/blocks.json` (schema `codex/blocks.schema.json`) lists every kit block, screen spec, magazine template and taste screen with the
+`codex/blocks.json` (schema `codex/blocks.schema.json`) lists every kit block and screen spec (and, in the codegen-x monorepo, every magazine template and taste screen) with the
 entry kinds it reads; a block with status `done` also names its central field map (`CODEX_FIELDS` in
 `xgen/runtimes/core/assets/app/fields.ts`), the required and optional entry fields, settings props and dictionary labels.
 `test/blocks.test.ts` checks the fields against `codex/manifest.json`, the fixtures against the contract validator and the mapping.

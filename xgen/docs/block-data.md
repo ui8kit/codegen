@@ -1,5 +1,8 @@
 # Block data vs the Codex v0.4 contract (inventory; step 2: the pilot blocks fixed; step 3: lookups, terms, author_id; step 4: five more blocks; step 5: blocks.json generated; step 6: menus; steps 7-9: kit blocks in groups)
 
+> Working log ported from the codegen-x/ui8kit monorepo. The magazine templates, taste screens and panorama it mentions
+> are surfaces of that monorepo, not of ui8kit/codegen; the kit blocks and screens are the same here.
+
 Goal: every block, screen, template and data structure of the kit reads Codex v0.4 entries (`@ui8kit/contract` ^0.2.0;
 manifest `xgen/schema/codex/manifest.json`, 62 kinds) by the rules: money = integer minor units + `currency`; dates RFC 3339,
 formatted by the UI per locale; text = plain string + entry `locale`; links built from `slug` / `parent_id` (no `href` in data);

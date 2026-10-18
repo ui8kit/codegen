@@ -56,8 +56,11 @@ takes light and dark screenshots into `shots/` and compares the DOM of the svelt
 
 ## Moving out
 
-Copy `xgen/` to a new repository. The only things it reads from outside are the workspace root (where `packages/` and `apps/` are written)
-and `bun` workspaces. Nothing in xgen imports from `apps/` or `packages/`.
+This folder is self-contained: it reads only the workspace root (where `packages/` and `apps/` are written) and `bun`
+workspaces, and nothing in xgen imports from `apps/` or `packages/`. It lives in two places with the same layout:
+ui8kit/codegen (public, standalone) and the codegen-x/ui8kit monorepo, where hand-written apps (the magazine, the taste
+screens) also consume it. The monorepo-only targets and gates (the taste copy decks, the magazine style zone, the
+magazine and taste surfaces of `codex/blocks.json`) switch on only when those packages exist in the workspace.
 
 ## Host apps
 
