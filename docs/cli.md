@@ -10,7 +10,7 @@ The `xgen` command (`xgen/cli/src/cli.ts`, bin of `@ui8kit/xgen`); run it throug
 | `bun run e2e` | `xgen e2e` | every screen in every host: scenario, light/dark screenshots, DOM pair test, html-validate (run `bun run build:hosts` first) |
 | `bun run shot <screen>` | `xgen shot` | one full-page screenshot |
 | `bun run visual` | `xgen visual` | pixel gate over every state of every host |
-| `bun run verify` | | `check` + `codex:validate` + `typecheck:xgen` + `test` (CI) |
+| `bun run verify` | | `check` + `codex:validate` + `typecheck` + `test` (CI) |
 | `bun run typecheck` | | `tsc` on xgen and svelte-check / tsc / vue-tsc on the TS packages and hosts |
 | `bun run test` | | `bun test xgen` |
 | `bun run codex:manifest` / `codex:validate` / `codex:blocks` | | write the Codex manifest, validate every fixture with `@ui8kit/contract`, write `blocks.json` |

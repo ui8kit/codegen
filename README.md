@@ -49,7 +49,7 @@ bun install
 bun run build     # xgen build: specs + fixtures + content -> packages/*/ui (8 runtimes), packages/shared/app, apps/host-*
 bun run check     # xgen check: every gate, drift included, and the real-engine parity of templ, solid, twig, jinja2, latte
 bun run test      # bun test of xgen/*
-bun run verify    # check + codex:validate + typecheck:xgen + test (what CI runs)
+bun run verify    # check + codex:validate + typecheck + test (what CI runs)
 ```
 
 More: `bun run typecheck` (svelte-check, tsc, vue-tsc on the packages and hosts), `bun run build:hosts`,

@@ -17,7 +17,7 @@ working.
 | File names | `Button.svelte`, `button.tsx`, `button.solid.tsx`, `Button.latte`, `Button.html.twig` | kebab-case per package: `src/primitives/button/button.svelte`, `.tsx`, `.vue`; `ui/button/button.templ`, `.html.twig`, `.latte`, `.html.j2` |
 | Go module | `github.com/ui8kit/ui` (flag `--go-module`) | `github.com/ui8kit/codegen/packages/templ/ui`; templ `v0.3.1001` -> `v0.3.1070` |
 | CLI | `bun src/infrastructure/cli.ts generate --out generated --runtimes ...` | `bun run build` (`xgen build`), `bun run check` (`xgen check`), `xgen list / e2e / shot / visual` |
-| Verify | `bun run verify` = check + tsc + typecheck:generated + vitest/bun parity | `bun run verify` = `xgen check` (drift + 5 real-engine parity groups + style and rule gates) + `codex:validate` + `typecheck:xgen` + `bun test xgen` |
+| Verify | `bun run verify` = check + tsc + typecheck:generated + vitest/bun parity | `bun run verify` = `xgen check` (drift + 5 real-engine parity groups + style and rule gates) + `codex:validate` + `typecheck` (tsc, svelte-check, vue-tsc) + `bun test xgen` |
 | Data | none | Codex v0.4 fixtures validated with `@ui8kit/contract` |
 | Static HTML export, Latte bundle, `examples/` welcome screens | `build:html`, `generate:latte-bundle`, `examples/` | removed; the host apps serve every screen (`bun run build:hosts`), previews live in ui8kit/site |
 
@@ -57,7 +57,7 @@ saas-design pins `github:ui8kit/codegen#972b492` in `packages/ui/package.json` a
 
 1. **Local bricks.** Delete `packages/ui/bricks/{themetoggle,sheet,_lucide.ts,index.ts}`: `ThemeToggle`, `Sheet`,
    `SheetTrigger` and `SheetClose` are upstream (`xgen/specs/ui/themetoggle.json`, `sheet.json`) with the same DOM, ARIA
-   and `data-ui8kit` hooks (`theme-toggle`, `sheet`, `sheet-overlay`, `sheet-trigger`, `sheet-close`), so
+   and `data-ui8kit` hooks (`theme-toggle`, `sheet`, `sheet-overlay`, `sheet-trigger`, `sheet-close`; the inline SVGs drop the legacy `focusable="false"`), so
    `packages/ui/behaviors/ui8kit.js` keeps working. The classes that lived in `packages/adapter/src/base.css`
    (`ui-themetoggle-sun/moon`, `ui-sheet-overlay/panel/icon-*`) are now utilities in the spec (`dark:block`,
    `in-aria-expanded:hidden`, ...); the recipes use `rounded` (not `rounded-full`) and the panel `shadow-lg` (not `shadow-xl`).
@@ -78,10 +78,11 @@ saas-design pins `github:ui8kit/codegen#972b492` in `packages/ui/package.json` a
    if the package is consumed as a module, or stay under saas-design's own module path if emitted locally.
 5. **Parity tooling.** `@ui8kit/codegen/tests/support/*` is gone; the parity of every brick case across runtimes is part
    of `xgen check` upstream, so saas-design's `scripts/parity.ts` only has to cover its own class rewrite.
-6. **Still open upstream** (not changed by 2.0): Svelte `Link` still renders `tabindex={disabled ? -1 : undefined}` with
-   `href` in `rest` (backlog `codegen-svelte-link-a11y-tabindex.md`); not published to npm (backlog
-   `codegen-not-on-npm-no-recipe-override.md`: no `classMode: "semantic"` option yet); Icon still emits `icon-<name>`
-   classes.
+6. **Svelte Link warning.** Fixed upstream: the Svelte emitter marks the anchor of `Link` / `LinkPlain` with
+   `svelte-ignore a11y_no_noninteractive_tabindex` (backlog `codegen-svelte-link-a11y-tabindex.md` can be closed).
+7. **Still open upstream** (not changed by 2.0): not published to npm and no `classMode: "semantic"` option (backlog
+   `codegen-not-on-npm-no-recipe-override.md`); Icon still emits `icon-<name>` classes; no portal slot for the Sheet
+   (backlog `ui-behaviors-sheet-portal.md`).
 
 ## For other 0.1 consumers
 
