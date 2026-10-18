@@ -49,7 +49,7 @@
     "check:all": "bun run build && bun run check && bun run typecheck && bun run build:hosts && bun run test && bun run lint:px && bun run e2e",
     "typecheck:xgen": "tsc -p xgen/tsconfig.json",
     "lint:px": "node packages/tooling/bin/ui8px-gate.mjs",
-    "verify": "bun run check && bun run typecheck:xgen && bun run test"
+    "verify": "bun run check && bun run codex:validate && bun run typecheck:xgen && bun run test"
   },
   "devDependencies": {
     "@types/bun": "^1.4.2",

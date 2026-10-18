@@ -12,12 +12,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "ajv": "^8.17.1"
+    "ajv": "^8.17.1",
+    "@ui8kit/contract": "^0.2.0"
   },
   "scripts": {
     "test": "bun test"
-  },
-  "devDependencies": {
-    "@ui8kit/contract": "^0.2.0"
   }
 }
