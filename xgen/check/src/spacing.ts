@@ -1,7 +1,7 @@
 // The `spacing` group of `xgen check`: a layout spacing option (an axis named gap, padding, margin, space or inset in a
 // ui or recipe variant table) names its values by the Tailwind step they set (Gap "4" = gap-4), never by pixels (Gap "16").
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { xgenPaths } from "@ui8kit/xgen-schema";
 import type { Plan } from "@ui8kit/xgen-generator";
 import { styleProblems } from "./style-zones";
@@ -25,8 +25,26 @@ export function spacingKeyProblems(key: string, table: { byKey?: Record<string, 
   return problems;
 }
 
+/** a fractional step (gap-1.5, px-2.5, size-3.5, top-0.5): 2 or 6 px, off the 8 + 4 grid; never in a spec, a builder or a kit asset */
+export const HALF_STEP = /(?<![\w-])-?(?:[a-z0-9-]+:)*(?:gap(?:-[xy])?|p[xytrbl]?|m[xytrbl]?|space-[xy]|inset(?:-[xy])?|top|right|bottom|left|start|end|size|w|h|min-[wh]|max-[wh]|translate-[xy]|scroll-[mp][xytrbl]?)-\d+\.\d+(?![\w.-])/g;
+
+/** the half steps of one file's text */
+export const halfSteps = (text: string): string[] => [...text.matchAll(HALF_STEP)].map((m) => m[0]);
+
+const walkFiles = (dir: string, ext: RegExp): string[] => (existsSync(dir) ? readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walkFiles(join(dir, e.name), ext) : ext.test(e.name) ? [join(dir, e.name)] : [])) : []);
+
+/** every half step in the inputs people write: specs, the builder (screens/src/authoring) and the runtime assets copied into packages */
+export function halfStepProblems(xgenRoot: string): string[] {
+  const files = [
+    ...walkFiles(dirname(xgenPaths(xgenRoot).specs("ui")), /\.json$/),
+    ...walkFiles(join(xgenRoot, "screens", "src"), /\.ts$/),
+    ...walkFiles(join(xgenRoot, "runtimes"), /\.(ts|tsx|svelte|vue|css|templ|twig|latte|j2)$/).filter((f) => f.includes("/assets/")),
+  ].sort();
+  return files.flatMap((f) => halfSteps(readFileSync(f, "utf8")).map((c) => `xgen/${f.slice(xgenRoot.length + 1)}: ${c} is a half step (off the 8 + 4 grid); use the whole step above or below`));
+}
+
 export function checkSpacing(plan: Plan): CheckResult {
-  const problems: string[] = [];
+  const problems: string[] = [...halfStepProblems(plan.xgenRoot)];
   for (const dir of ["ui", "recipes"]) {
     const base = xgenPaths(plan.xgenRoot).specs(dir);
     if (!existsSync(base)) continue;
@@ -35,5 +53,5 @@ export function checkSpacing(plan: Plan): CheckResult {
     }
   }
   problems.push(...styleProblems(plan.workspace, "spacing"));
-  return result("spacing", "layout spacing options (gap, padding, margin, space, inset) are named by their Tailwind step, never by pixels", problems);
+  return result("spacing", "layout spacing options (gap, padding, margin, space, inset) are named by their Tailwind step, never by pixels; no half step (x.5) in any spec, builder or kit asset", problems);
 }
