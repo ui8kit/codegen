@@ -46,12 +46,14 @@ import (
 	rangefield "github.com/ui8kit/codegen/packages/templ/ui/ui/range"
 	selectfield "github.com/ui8kit/codegen/packages/templ/ui/ui/select"
 	"github.com/ui8kit/codegen/packages/templ/ui/ui/separator"
+	"github.com/ui8kit/codegen/packages/templ/ui/ui/sheet"
 	"github.com/ui8kit/codegen/packages/templ/ui/ui/skeleton"
 	"github.com/ui8kit/codegen/packages/templ/ui/ui/stack"
 	formswitch "github.com/ui8kit/codegen/packages/templ/ui/ui/switch"
 	"github.com/ui8kit/codegen/packages/templ/ui/ui/table"
 	"github.com/ui8kit/codegen/packages/templ/ui/ui/text"
 	"github.com/ui8kit/codegen/packages/templ/ui/ui/textarea"
+	"github.com/ui8kit/codegen/packages/templ/ui/ui/themetoggle"
 	"github.com/ui8kit/codegen/packages/templ/ui/ui/title"
 )
 
@@ -375,6 +377,24 @@ func renderCase(ctx context.Context, name string, propsJSON []byte, children tem
 			return err
 		}
 		return separator.Separator(p).Render(ctx, buf)
+	case "sheet/sheet/Sheet":
+		var p sheet.SheetProps
+		if err := json.Unmarshal(propsJSON, &p); err != nil {
+			return err
+		}
+		return sheet.Sheet(p).Render(templ.WithChildren(ctx, children), buf)
+	case "sheet/sheet/SheetTrigger":
+		var p sheet.SheetTriggerProps
+		if err := json.Unmarshal(propsJSON, &p); err != nil {
+			return err
+		}
+		return sheet.SheetTrigger(p).Render(ctx, buf)
+	case "sheet/sheet/SheetClose":
+		var p sheet.SheetCloseProps
+		if err := json.Unmarshal(propsJSON, &p); err != nil {
+			return err
+		}
+		return sheet.SheetClose(p).Render(ctx, buf)
 	case "skeleton/skeleton/Skeleton":
 		var p skeleton.SkeletonProps
 		if err := json.Unmarshal(propsJSON, &p); err != nil {
@@ -465,6 +485,12 @@ func renderCase(ctx context.Context, name string, propsJSON []byte, children tem
 			return err
 		}
 		return textarea.Textarea(p).Render(ctx, buf)
+	case "themetoggle/themetoggle/ThemeToggle":
+		var p themetoggle.ThemeToggleProps
+		if err := json.Unmarshal(propsJSON, &p); err != nil {
+			return err
+		}
+		return themetoggle.ThemeToggle(p).Render(ctx, buf)
 	case "title/title/Title":
 		var p title.TitleProps
 		if err := json.Unmarshal(propsJSON, &p); err != nil {

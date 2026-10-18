@@ -54,6 +54,9 @@ export * from "./primitives/select/select";
 export * from "./primitives/select/select-option";
 export * from "./primitives/select/opt-group";
 export * from "./primitives/separator/separator";
+export * from "./primitives/sheet/sheet";
+export * from "./primitives/sheet/sheet-trigger";
+export * from "./primitives/sheet/sheet-close";
 export * from "./primitives/skeleton/skeleton";
 export * from "./primitives/stack/stack";
 export * from "./primitives/switch/switch";
@@ -69,6 +72,7 @@ export * from "./primitives/table/table-col-group";
 export * from "./primitives/table/table-col";
 export * from "./primitives/text/text";
 export * from "./primitives/textarea/textarea";
+export * from "./primitives/themetoggle/themetoggle";
 export * from "./primitives/title/title";
 
 // components

@@ -52,6 +52,7 @@ export const SHADOWS = ["shadow-md", "shadow-lg"] as const;
 export const SHADOW_ALLOW: Record<string, { shadow: (typeof SHADOWS)[number]; n: number; why: string }> = {
   "specs/organisms/hero-split-media.json": { shadow: "shadow-lg", n: 1, why: "the plan cards float over the hero picture" },
   "specs/ui/dialog.variants.json": { shadow: "shadow-lg", n: 1, why: "a dialog or sheet floats over the page" },
+  "specs/ui/sheet.json": { shadow: "shadow-lg", n: 1, why: "the sheet panel is a side drawer over the page (fixed overlay)" },
   "specs/organisms/video-modal.json": { shadow: "shadow-lg", n: 1, why: "a modal dialog over the page" },
   "specs/parts/notice.json": { shadow: "shadow-lg", n: 1, why: "the toast is fixed to the corner of the screen, over the page" },
   "specs/recipes/dropdown-menu.variants.json": { shadow: "shadow-md", n: 1, why: "a menu panel floats at its trigger" },
