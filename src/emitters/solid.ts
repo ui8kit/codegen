@@ -448,14 +448,15 @@ export class SolidEmitter implements Emitter {
         ctx.helpers.add("syncValue");
         return `ref={(el) => createEffect(() => syncValue(el, ${printTsExpr(attr.expr, ctx)}))}`;
       case "class": {
-        if (!attr.spec) return `class={cls() || undefined}`;
+        // Solid SSR prints class="" for any present `class` key (even undefined): spread it only when non-empty (parity with React).
+        if (!attr.spec) return `{...(cls() ? { class: cls() } : {})}`;
         state.usesCn = true;
         const inline = printInlineClassSpec(attr.spec, ctx, () =>
           part.props.some((p) => p.name === "Class") && !opts.inLoop
             ? `(local.class ?? local.className)`
             : undefined
         );
-        return `class={${inline} || undefined}`;
+        return `{...((c: string) => (c ? { class: c } : {}))(${inline})}`;
       }
       case "rest":
         return opts.withRest ? `{...rest}` : "";

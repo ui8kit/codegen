@@ -49,8 +49,8 @@ function normalizeNode(node: P5Node): NormalizedNode | string | null {
     }
     if (attr.name === "class") {
       const cls = normalizeClass(attr.value);
-      // `class=""` is inert; runtimes differ on emitting vs omitting it.
-      if (cls !== "") attrs["class"] = cls;
+      // Strict: an empty class must be omitted (React omits it); `class=""` is a parity failure.
+      attrs["class"] = cls === "" ? "<empty>" : cls;
       continue;
     }
     // Solid SSR (`Dynamic` / hydratable markers) — not part of the DOM contract.
