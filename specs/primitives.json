@@ -1,7 +1,7 @@
 {
   "$schema": "ui8kit-codegen/specs",
   "version": 1,
-  "specVersion": "3.0.0",
+  "specVersion": "3.1.0",
   "tagGroups": {
     "Box": [
       "div",
@@ -21,7 +21,6 @@
       "dt",
       "dd",
       "fieldset",
-      "form",
       "table",
       "thead",
       "tbody",
@@ -58,7 +57,7 @@
       "id": "ui.box",
       "dir": "box",
       "file": "box",
-      "docs": "Box is the polymorphic structural primitive. `tag` accepts HTML5 structural\nelements only (sections, lists, tables, forms); anything else falls back to div.",
+      "docs": "Box is the polymorphic structural primitive. `tag` accepts HTML5 structural\nelements only (sections, lists, tables, fieldset); anything else falls back to div.\nForms use the Form primitive (Box no longer accepts `form`).",
       "recordTypes": [],
       "parts": [
         {
@@ -82,7 +81,6 @@
             "dt",
             "dd",
             "fieldset",
-            "form",
             "table",
             "thead",
             "tbody",
@@ -125,7 +123,6 @@
                 "dt",
                 "dd",
                 "fieldset",
-                "form",
                 "table",
                 "thead",
                 "tbody",
@@ -416,6 +413,128 @@
               "required": false,
               "passthrough": true,
               "docs": "id of the labeled control"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.form",
+      "dir": "form",
+      "file": "form",
+      "docs": "Form is the native <form>. Submission, validation and state are the consumer's;\nthe primitive only types the native form attributes.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Form",
+          "docs": "Form renders a native form element; method is whitelisted (get|post|dialog).",
+          "elements": [
+            "form"
+          ],
+          "customElement": "ui8-form",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "ID",
+              "html": "id",
+              "react": "id",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Name",
+              "html": "name",
+              "react": "name",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Action",
+              "html": "action",
+              "react": "action",
+              "type": "string",
+              "required": false,
+              "passthrough": true,
+              "docs": "submission URL"
+            },
+            {
+              "name": "Method",
+              "html": "method",
+              "react": "method",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "enum": [
+                "get",
+                "post",
+                "dialog"
+              ],
+              "docs": "HTTP method: get | post | dialog (omitted when empty)"
+            },
+            {
+              "name": "Enctype",
+              "html": "enctype",
+              "react": "encType",
+              "type": "string",
+              "required": false,
+              "passthrough": true,
+              "docs": "encoding for post (e.g. multipart/form-data)"
+            },
+            {
+              "name": "NoValidate",
+              "html": "novalidate",
+              "react": "noValidate",
+              "type": "bool",
+              "required": false,
+              "passthrough": false,
+              "docs": "skip native constraint validation"
+            },
+            {
+              "name": "Autocomplete",
+              "html": "autocomplete",
+              "react": "autoComplete",
+              "type": "string",
+              "required": false,
+              "passthrough": true,
+              "docs": "on | off"
+            },
+            {
+              "name": "Target",
+              "html": "target",
+              "react": "target",
+              "type": "string",
+              "required": false,
+              "passthrough": true,
+              "docs": "browsing context for the response"
+            },
+            {
+              "name": "AriaLabel",
+              "html": "aria-label",
+              "react": "aria-label",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaLabelledBy",
+              "html": "aria-labelledby",
+              "react": "aria-labelledby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaDescribedBy",
+              "html": "aria-describedby",
+              "react": "aria-describedby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
             }
           ]
         }
@@ -1551,6 +1670,51 @@
               "type": "string",
               "required": false,
               "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.separator",
+      "dir": "separator",
+      "file": "separator",
+      "docs": "Separator is the native <hr> (implicit role=separator). Vertical adds\naria-orientation; Decorative removes the semantics with role=none.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Separator",
+          "docs": "Separator renders a void hr; no children.",
+          "elements": [
+            "hr"
+          ],
+          "customElement": "ui8-separator",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": false,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Orientation",
+              "html": "orientation",
+              "react": "orientation",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "enum": [
+                "horizontal",
+                "vertical"
+              ],
+              "docs": "horizontal (default) | vertical"
+            },
+            {
+              "name": "Decorative",
+              "html": "decorative",
+              "react": "decorative",
+              "type": "bool",
+              "required": false,
+              "passthrough": false,
+              "docs": "purely visual: role=none, no separator semantics"
             }
           ]
         }

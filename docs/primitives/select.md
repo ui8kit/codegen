@@ -139,7 +139,9 @@ document.body.append(renderSelect({ value: "b", options: [{ value: "a", label: "
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/select" // package selectfield
 
-@selectfield.Select(selectfield.SelectProps{Name: "c", Value: "b", Options: []selectfield.SelectOptionItem{{Value: "a", Label: "A"}, {Value: "b", Label: "B"}, {Value: "c", Label: "C", Disabled: true}}}) { Content }
+@selectfield.Select(selectfield.SelectProps{Name: "c", Value: "b", Options: []selectfield.SelectOptionItem{{Value: "a", Label: "A"}, {Value: "b", Label: "B"}, {Value: "c", Label: "C", Disabled: true}}}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))
@@ -259,7 +261,9 @@ document.body.append(renderSelectOption({ value: "b" }, "Content"));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/select" // package selectfield
 
-@selectfield.SelectOption(selectfield.SelectOptionProps{Value: "b"}) { Content }
+@selectfield.SelectOption(selectfield.SelectOptionProps{Value: "b"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))
@@ -375,7 +379,9 @@ document.body.append(renderSelectOptGroup({ disabled: true }, "Content"));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/select" // package selectfield
 
-@selectfield.SelectOptGroup(selectfield.SelectOptGroupProps{Disabled: true}) { Content }
+@selectfield.SelectOptGroup(selectfield.SelectOptGroupProps{Disabled: true}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

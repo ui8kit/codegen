@@ -60,6 +60,9 @@ def _groups(core: str) -> list[str]:
         return ["position"]
     if core in ("isolate", "isolation-auto"):
         return ["isolation"]
+    # ring-offset-N (width) and ring-offset-<color> are their own groups
+    if core.startswith("ring-offset-"):
+        return ["ring-offset-width" if _is_number(core[12:]) else "ring-offset-color"]
     for kind in ("inset-ring", "ring"):
         if core == kind:
             return [kind + "-width"]

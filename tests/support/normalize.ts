@@ -30,8 +30,11 @@ function normalizeClass(value: string): string {
 
 function normalizeNode(node: P5Node): NormalizedNode | string | null {
   if (node.nodeName === "#text") {
-    const text = (node.value ?? "").trim();
-    return text === "" ? null : text;
+    // Strict: text content is compared verbatim (React SSR emits children flush
+    // against their tags). Only whitespace-only nodes — template formatting
+    // between sibling elements — are dropped.
+    const text = node.value ?? "";
+    return text.trim() === "" ? null : text;
   }
   if (node.nodeName === "#comment") return null; // framework SSR markers
   if (!node.tagName) return null;

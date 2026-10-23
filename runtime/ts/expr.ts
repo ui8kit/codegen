@@ -72,9 +72,9 @@ export const concatTrim = (...parts: (string | null | undefined)[]): string =>
   parts.map(trimStr).join("");
 
 /** Omit-if-empty attribute value: `""` → `undefined` so the attr is dropped. */
-export const orUndef = (v: string | null | undefined): string | undefined => {
+export const orUndef = <T extends string>(v: T | null | undefined): Exclude<T, ""> | undefined => {
   const t = trimStr(v);
-  return t === "" ? undefined : String(v);
+  return t === "" ? undefined : (String(v) as Exclude<T, "">);
 };
 
 /**

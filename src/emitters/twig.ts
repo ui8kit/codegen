@@ -68,12 +68,13 @@ function emitPart(brick: BrickDef, part: PartDef): string {
     tagVar: "uiTag",
     ifChain: (branches, elseBody) => {
       const out: string[] = [];
-      branches.forEach(([t, b], i) => out.push(`{% ${i === 0 ? "if" : "elseif"} ${t} %}`, ind(b)));
-      if (elseBody !== undefined) out.push(`{% else %}`, ind(elseBody));
+      // Inline (no newlines/indent): children sit flush against their tags (React SSR parity).
+      branches.forEach(([t, b], i) => out.push(`{% ${i === 0 ? "if" : "elseif"} ${t} %}`, b));
+      if (elseBody !== undefined) out.push(`{% else %}`, elseBody);
       out.push(`{% endif %}`);
-      return out.join("\n");
+      return out.join("");
     },
-    forEach: (items, body) => `{% for item in ${items} %}\n${ind(body)}\n{% endfor %}`,
+    forEach: (items, body) => `{% for item in ${items} %}${body}{% endfor %}`,
     text: (code) => `{{ ${code} }}`,
     // Trusted HTML by contract (like React children / templ.Raw): never pass user input here.
     slot: `{{ children|raw }}`,
@@ -82,7 +83,7 @@ function emitPart(brick: BrickDef, part: PartDef): string {
       const call = attrs.length === 0 && !rest ? "" : `{{ ui8kit_attrs(${map}${rest ? ", attrs" : ""}) }}`;
       const open = `<${tag}${call}>`;
       if (isVoid) return open;
-      return children ? `${open}\n${ind(children)}\n</${tag}>` : `${open}</${tag}>`;
+      return `${open}${children}</${tag}>`;
     },
     partClasses: () =>
       `ui8kit_classes(${phpString(part.name.charAt(0).toLowerCase() + part.name.slice(1) + "Classes")}, ${classesInput(part, TWIG_DIALECT, (p) => phpParamName(p))})`,

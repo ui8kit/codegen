@@ -116,7 +116,9 @@ document.body.append(renderLabel({ class: "text-sm", for: "email" }, "Content"))
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/label"
 
-@label.Label(label.LabelProps{For: "email", Class: "text-sm"}) { Content }
+@label.Label(label.LabelProps{For: "email", Class: "text-sm"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

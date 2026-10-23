@@ -188,7 +188,7 @@ function snippets(brick: BrickDef, part: PartDef, props: CanonicalProps): Array<
   const goFields = Object.entries(props)
     .map(([k, v]) => `${k}: ${goLit(v, brick, part.props.find((p) => p.name === k))}`)
     .join(", ");
-  const templ = `@${pkg}.${name}(${pkg}.${name}Props{${goFields}})${kids ? ` { ${CHILD} }` : ""}`;
+  const templ = `@${pkg}.${name}(${pkg}.${name}Props{${goFields}})${kids ? ` {\n\t${CHILD}\n}` : ""}`;
 
   const php = (latte: boolean) =>
     Object.entries(props).map(([k, v]) => {

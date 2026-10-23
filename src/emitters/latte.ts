@@ -62,12 +62,13 @@ function emitPart(brick: BrickDef, part: PartDef): string {
     tagVar: "$uiTag",
     ifChain: (branches, elseBody) => {
       const out: string[] = [];
-      branches.forEach(([t, b], i) => out.push(`{${i === 0 ? "if" : "elseif"} ${t}}`, ind(b)));
-      if (elseBody !== undefined) out.push(`{else}`, ind(elseBody));
+      // Inline (no newlines/indent): children sit flush against their tags (React SSR parity).
+      branches.forEach(([t, b], i) => out.push(`{${i === 0 ? "if" : "elseif"} ${t}}`, b));
+      if (elseBody !== undefined) out.push(`{else}`, elseBody);
       out.push(`{/if}`);
-      return out.join("\n");
+      return out.join("");
     },
-    forEach: (items, body) => `{foreach ${items} as $item}\n${ind(body)}\n{/foreach}`,
+    forEach: (items, body) => `{foreach ${items} as $item}${body}{/foreach}`,
     text: (code) => `{=${code}}`,
     // Trusted HTML by contract (like React children / templ.Raw): never pass user input here.
     slot: `{$children|noescape}`,
@@ -77,7 +78,7 @@ function emitPart(brick: BrickDef, part: PartDef): string {
       const nAttr = entries.length === 0 ? "" : ` n:attr="[\n${ind(entries.join("\n"))}\n]"`;
       const open = `<${tag}${nAttr}>`;
       if (isVoid) return open;
-      return children ? `${open}\n${ind(children)}\n</${tag}>` : `${open}</${tag}>`;
+      return `${open}${children}</${tag}>`;
     },
     partClasses: () =>
       `${NS}\\Classes::${part.name.charAt(0).toLowerCase() + part.name.slice(1)}Classes(${classesInput(part, LATTE_DIALECT, (p) => "$" + phpParamName(p))})`,
@@ -99,5 +100,6 @@ function emitPart(brick: BrickDef, part: PartDef): string {
     lines.push(`{var ${derivedVar(name)} = ${printExpr(expr, ctx)}}`);
   }
   lines.push(printNode(part.render, part, sx));
-  return lines.join("\n") + "\n";
+  // No trailing newline: Latte would print it after the root element (stray whitespace in inline contexts).
+  return lines.join("\n");
 }

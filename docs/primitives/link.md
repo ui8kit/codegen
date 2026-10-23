@@ -128,7 +128,9 @@ document.body.append(renderLink({ href: "/a" }, "Content"));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/link"
 
-@link.Link(link.LinkProps{Href: "/a"}) { Content }
+@link.Link(link.LinkProps{Href: "/a"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

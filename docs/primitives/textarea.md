@@ -67,6 +67,8 @@ Canonical renderer output (children = `Content`); all 9 runtimes are parity-test
 | defaults | — | `<textarea></textarea>` |
 | filled | `{"Name":"bio","Value":"Hello","Rows":"3","Placeholder":"About"}` | `<textarea name="bio" placeholder="About" rows="3">Hello</textarea>` |
 | states | `{"Required":true,"Disabled":true,"ReadOnly":true,"AriaInvalid":"true"}` | `<textarea required disabled readonly aria-invalid="true"></textarea>` |
+| address | `{"Name":"address","Value":"1 <Main> St\nApt 2"}` | `<textarea name="address">1 &lt;Main&gt; St
+Apt 2</textarea>` |
 | Required | `{"Required":true}` | `<textarea required></textarea>` |
 | Disabled | `{"Disabled":true}` | `<textarea disabled></textarea>` |
 | ReadOnly | `{"ReadOnly":true}` | `<textarea readonly></textarea>` |

@@ -1,0 +1,34 @@
+{
+  "showcase": {
+    "post": {
+      "props": {
+        "Action": "/login",
+        "Method": "post",
+        "Name": "login",
+        "Autocomplete": "on",
+        "AriaLabel": "Sign in",
+        "Class": "grid gap-4 p-4 bg-card text-card-foreground"
+      }
+    },
+    "upload": {
+      "props": {
+        "Action": "/upload",
+        "Method": "POST",
+        "Enctype": "multipart/form-data",
+        "NoValidate": true,
+        "Target": "_self",
+        "ID": "upload"
+      }
+    },
+    "dialog": {
+      "props": {
+        "Method": "dialog"
+      }
+    },
+    "rejected": {
+      "props": {
+        "Method": "put"
+      }
+    }
+  }
+}

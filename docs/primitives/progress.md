@@ -119,7 +119,9 @@ document.body.append(renderProgress({ value: "30", max: "100", "aria-label": "Up
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/progress"
 
-@progress.Progress(progress.ProgressProps{Value: "30", Max: "100", AriaLabel: "Upload"}) { Content }
+@progress.Progress(progress.ProgressProps{Value: "30", Max: "100", AriaLabel: "Upload"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

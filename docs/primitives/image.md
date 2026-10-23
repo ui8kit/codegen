@@ -251,7 +251,9 @@ document.body.append(renderPicture({}, "Content"));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/image"
 
-@image.Picture(image.PictureProps{}) { Content }
+@image.Picture(image.PictureProps{}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

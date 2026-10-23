@@ -40,3 +40,18 @@ func containsToken(s, token string) bool {
 	}
 	return false
 }
+
+func TestMergeRingOffsetKeepsRingColor(t *testing.T) {
+	cases := map[string]string{
+		"ring-offset-2 ring-ring":                 "ring-offset-2 ring-ring",
+		"ring-2 ring-offset-2 ring-ring":          "ring-2 ring-offset-2 ring-ring",
+		"ring-offset-2 ring-offset-4":             "ring-offset-4",
+		"ring-offset-background ring-offset-card": "ring-offset-card",
+		"ring-ring ring-offset-background ring-2": "ring-ring ring-offset-background ring-2",
+	}
+	for in, want := range cases {
+		if got := Cn(in); got != want {
+			t.Fatalf("Cn(%q) = %q want %q", in, got, want)
+		}
+	}
+}

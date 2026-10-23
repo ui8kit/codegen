@@ -448,7 +448,10 @@ export class ReactEmitter implements Emitter {
       case "bool":
         // React owns option selection through <select value|defaultValue>.
         if (attr.parentValue) return "";
-        return `${reactAttrName(attr.name)}={${printTsExpr(attr.expr, ctx)} || undefined}`;
+        // Passed through as-is: React omits `false` boolean attributes in SSR,
+        // and `checked={false}` must stay a *controlled* false (`|| undefined`
+        // turned it into uncontrolled). Absent props stay undefined.
+        return `${reactAttrName(attr.name)}={${printTsExpr(attr.expr, ctx)}}`;
       case "liveValue": {
         // Controlled when the caller wires onChange, otherwise an initial
         // defaultValue — React's own select semantics, no `selected` warning.

@@ -6,7 +6,7 @@
 
 export const BOX_TAGS = [
   "div", "section", "article", "aside", "header", "footer", "main", "nav", "figure", "search",
-  "ul", "ol", "li", "dl", "dt", "dd", "fieldset", "form",
+  "ul", "ol", "li", "dl", "dt", "dd", "fieldset",
   "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "colgroup", "col",
 ] as const;
 

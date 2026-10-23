@@ -34,6 +34,17 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 
 ## Runtime contract
 
+- Text is compared **strictly** by the parity suites (`tests/support/normalize.ts`): server
+  templates (Twig/Latte/Jinja2) print children flush against their tags (`<a>admin</a>`, exact
+  `<textarea>` value) — never wrap `{children}` / slots in newlines or indentation. Only
+  whitespace-only nodes between sibling elements are ignored.
+- React boolean attrs are forwarded as-is (`checked={checked}`), never `|| undefined`:
+  `checked={false}` must stay controlled (`tests/react-controlled.test.ts`).
+- `cn`/`CnMerge` ports (Go, PHP, Python) keep tailwind-merge groups: `ring-offset-N`,
+  `ring-offset-<color>`, `ring-N` and `ring-<color>` are four separate groups (`tests/cn-merge.test.ts`).
+- Forms: `Form` (`<form>`) is the only path — `Box` no longer accepts `tag="form"`.
+  `Separator` renders `<hr>`; `decorative` ⇒ `role="none"` (see docs/primitives/separator.md).
+
 - Every runtime renders the same DOM, classes (tokens) and ARIA as React / the canonical
   renderer (`src/domain/render.ts`). Parity tests prove it: `tests/parity*.test.ts`.
 - New runtime ⇒ add an emitter, a real-engine parity test (no mocks), CI setup, rules entry in

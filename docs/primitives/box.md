@@ -7,7 +7,8 @@
 ## Purpose
 
 Box is the polymorphic structural primitive. `tag` accepts HTML5 structural
-elements only (sections, lists, tables, forms); anything else falls back to div.
+elements only (sections, lists, tables, fieldset); anything else falls back to div.
+Forms use the Form primitive (Box no longer accepts `form`).
 
 ## Notes
 
@@ -21,7 +22,7 @@ Box renders the requested structural HTML element (default div).
 
 | Canonical (templ, Jinja2) | React / Solid | HTML (Svelte, Vue, WC) | Type | Default | Kind | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| `Tag` | `tag` | `tag` | `"div" \| "section" \| "article" \| "aside" \| "header" \| "footer" \| "main" \| "nav" \| "figure" \| "search" \| "ul" \| "ol" \| "li" \| "dl" \| "dt" \| "dd" \| "fieldset" \| "form" \| "table" \| "thead" \| "tbody" \| "tfoot" \| "tr" \| "th" \| "td" \| "caption" \| "colgroup" \| "col"` | — | prop | HTML5 structural tag (default div) |
+| `Tag` | `tag` | `tag` | `"div" \| "section" \| "article" \| "aside" \| "header" \| "footer" \| "main" \| "nav" \| "figure" \| "search" \| "ul" \| "ol" \| "li" \| "dl" \| "dt" \| "dd" \| "fieldset" \| "table" \| "thead" \| "tbody" \| "tfoot" \| "tr" \| "th" \| "td" \| "caption" \| "colgroup" \| "col"` | — | prop | HTML5 structural tag (default div) |
 
 Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
@@ -60,7 +61,7 @@ Canonical renderer output (children = `Content`); all 9 runtimes are parity-test
 | defaults | — | `<div>Content</div>` |
 | section | `{"Tag":"section","Class":"p-4 bg-card text-card-foreground"}` | `<section class="p-4 bg-card text-card-foreground">Content</section>` |
 | table | `{"Tag":"table"}` | `<table>Content</table>` |
-| form | `{"Tag":"form"}` | `<form>Content</form>` |
+| form | `{"Tag":"form"}` | `<div>Content</div>` |
 | li | `{"Tag":"li","Class":"text-muted-foreground"}` | `<li class="text-muted-foreground">Content</li>` |
 | rejected | `{"Tag":"stack"}` | `<div>Content</div>` |
 | Tag=div | `{"Tag":"div"}` | `<div>Content</div>` |
@@ -80,7 +81,6 @@ Canonical renderer output (children = `Content`); all 9 runtimes are parity-test
 | Tag=dt | `{"Tag":"dt"}` | `<dt>Content</dt>` |
 | Tag=dd | `{"Tag":"dd"}` | `<dd>Content</dd>` |
 | Tag=fieldset | `{"Tag":"fieldset"}` | `<fieldset>Content</fieldset>` |
-| Tag=form | `{"Tag":"form"}` | `<form>Content</form>` |
 | Tag=table | `{"Tag":"table"}` | `<table>Content</table>` |
 | Tag=thead | `{"Tag":"thead"}` | `<thead>Content</thead>` |
 | Tag=tbody | `{"Tag":"tbody"}` | `<tbody>Content</tbody>` |
@@ -151,7 +151,9 @@ document.body.append(renderBox({ tag: "section", class: "p-4 bg-card text-card-f
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/box"
 
-@box.Box(box.BoxProps{Tag: "section", Class: "p-4 bg-card text-card-foreground"}) { Content }
+@box.Box(box.BoxProps{Tag: "section", Class: "p-4 bg-card text-card-foreground"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

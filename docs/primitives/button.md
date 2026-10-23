@@ -139,7 +139,9 @@ document.body.append(renderButton({ type: "submit", class: "bg-primary text-prim
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/button"
 
-@button.Button(button.ButtonProps{Type: "submit", Class: "bg-primary text-primary-foreground"}) { Content }
+@button.Button(button.ButtonProps{Type: "submit", Class: "bg-primary text-primary-foreground"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

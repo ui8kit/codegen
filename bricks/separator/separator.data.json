@@ -1,0 +1,22 @@
+{
+  "showcase": {
+    "horizontal": {
+      "props": {
+        "Class": "my-4 border-border"
+      }
+    },
+    "vertical": {
+      "props": {
+        "Orientation": "vertical",
+        "Class": "mx-2 h-6 border-l border-border"
+      }
+    },
+    "decorative": {
+      "props": {
+        "Decorative": true,
+        "Orientation": "vertical",
+        "Class": "border-border"
+      }
+    }
+  }
+}

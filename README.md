@@ -28,9 +28,9 @@ and every snippet is executed in its runtime by `tests/docs.test.ts`.
 
 ## Primitives
 
-Box · Text · Button · Link · Label · Input · Textarea · Select (+ SelectOption, SelectOptGroup) ·
+19 primitives: Box · Text · Button · Link · Label · Form · Input · Textarea · Select (+ SelectOption, SelectOptGroup) ·
 Checkbox · Radio · Switch · Image (+ Picture, Source) · Icon · Dialog · Disclosure (+ Summary) ·
-Meter · Progress — see [docs/](docs/README.md).
+Meter · Progress · Separator — see [docs/](docs/README.md).
 
 No CSS ships with the primitives: style them with token class names via `class`.
 

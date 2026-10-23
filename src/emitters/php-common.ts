@@ -189,7 +189,7 @@ export interface Syntax {
 const fold = (e: Expr, tag: string | undefined) => (tag === undefined ? e : foldResolvedTag(e, tag));
 
 export function printNode(node: Node, part: PartDef, sx: Syntax, tag?: string): string {
-  const nodes = (ns: Node[]) => ns.map((n) => printNode(n, part, sx, tag)).join("\n");
+  const nodes = (ns: Node[]) => ns.map((n) => printNode(n, part, sx, tag)).join("");
   switch (node.kind) {
     case "element":
       return printElement(node, part, sx);
@@ -247,7 +247,7 @@ function printStatic(node: ElementNode, tag: string, part: PartDef, sx: Syntax):
   }
   const rest = node.attrs.some((a) => a.kind === "rest");
   const isVoid = node.void === true || VOID_TAGS.has(tag);
-  const children = isVoid ? "" : node.children.map((c) => printNode(c, part, sx, tag)).join("\n");
+  const children = isVoid ? "" : node.children.map((c) => printNode(c, part, sx, tag)).join("");
   return sx.element(tag, entries, rest, isVoid, children);
 }
 

@@ -120,7 +120,9 @@ document.body.append(renderDisclosure({ open: true, name: "faq" }, "Content"));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/disclosure"
 
-@disclosure.Disclosure(disclosure.DisclosureProps{Open: true, Name: "faq"}) { Content }
+@disclosure.Disclosure(disclosure.DisclosureProps{Open: true, Name: "faq"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))
@@ -242,7 +244,9 @@ document.body.append(renderSummary({}, "Content"));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/disclosure"
 
-@disclosure.Summary(disclosure.SummaryProps{}) { Content }
+@disclosure.Summary(disclosure.SummaryProps{}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

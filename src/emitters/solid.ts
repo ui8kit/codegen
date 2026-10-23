@@ -127,7 +127,7 @@ function solidAttrName(name: string): string {
     fetchpriority: "fetchPriority",
     autocomplete: "autoComplete",
     enctype: "encType",
-    novalidate: "noValidate",
+    // novalidate stays lowercase: Solid SSR serializes camel `noValidate` as novalidate="true".
     datetime: "dateTime",
   };
   return special[name] ?? name;

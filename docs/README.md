@@ -1,6 +1,6 @@
 # UI8Kit primitives — documentation
 
-The single, exhaustive home for the 17 UI8Kit primitives (plus the React-only `Slot`).
+The single, exhaustive home for the 19 UI8Kit primitives (plus the React-only `Slot`).
 Sites, the `ui8kit` CLI and the registry repos link here instead of copying it.
 Part of the UI8Kit 3 ecosystem — see the ecosystem block in the [repo README](../README.md).
 
@@ -27,6 +27,7 @@ Runtimes: [React](runtimes/react.md) · [Vue 3](runtimes/vue.md) · [Svelte 5](r
 | [Button](primitives/button.md) | `Button` | Button triggers an action. With `href` it renders an anchor (navigation that |
 | [Link](primitives/link.md) | `Link` | Link renders a semantic anchor for navigation. Use Button for actions |
 | [Label](primitives/label.md) | `Label` | Label names a form control |
+| [Form](primitives/form.md) | `Form` | Form is the native <form>. Submission, validation and state are the consumer's; |
 | [Input](primitives/input.md) | `Input` | Input is a single-line native form control (checkbox/radio have their own primitives) |
 | [Textarea](primitives/textarea.md) | `Textarea` | Textarea is a multi-line native text field |
 | [Select](primitives/select.md) | `Select`, `SelectOption`, `SelectOptGroup` | Select is a native dropdown. Flat options come from the Options list; |
@@ -39,6 +40,7 @@ Runtimes: [React](runtimes/react.md) · [Vue 3](runtimes/vue.md) · [Svelte 5](r
 | [Disclosure](primitives/disclosure.md) | `Disclosure`, `Summary` | Disclosure is native details/summary. `name` groups exclusive accordions |
 | [Meter](primitives/meter.md) | `Meter` | Meter is a native gauge for a known range (value/min/max) |
 | [Progress](primitives/progress.md) | `Progress` | Progress is native task progress (value/max); omit value for indeterminate |
+| [Separator](primitives/separator.md) | `Separator` | Separator is the native <hr> (implicit role=separator). Vertical adds |
 | [Slot](primitives/slot.md) | `Slot` | React-only composition helper behind `asChild` (hand-written page) |
 <!-- ui8kit-docs:index:end -->
 

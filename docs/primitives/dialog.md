@@ -123,7 +123,9 @@ document.body.append(renderDialog({ open: true, id: "d", "aria-labelledby": "t",
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/dialog"
 
-@dialog.Dialog(dialog.DialogProps{Open: true, ID: "d", AriaLabelledBy: "t", AriaDescribedBy: "desc"}) { Content }
+@dialog.Dialog(dialog.DialogProps{Open: true, ID: "d", AriaLabelledBy: "t", AriaDescribedBy: "desc"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

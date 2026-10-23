@@ -129,7 +129,9 @@ document.body.append(renderSwitch({ checked: true, "aria-label": "Wi-Fi" }, "Con
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/switch" // package formswitch
 
-@formswitch.Switch(formswitch.SwitchProps{Checked: true, AriaLabel: "Wi-Fi"}) { Content }
+@formswitch.Switch(formswitch.SwitchProps{Checked: true, AriaLabel: "Wi-Fi"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

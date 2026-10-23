@@ -194,7 +194,8 @@ export class Jinja2Emitter implements Emitter {
 }
 
 function printNodes(nodes: Node[], ctx: Ctx): string {
-  return nodes.map((n) => printNode(n, ctx)).join("\n");
+  // Inline: children sit flush against their tags (React SSR parity, exact textarea values).
+  return nodes.map((n) => printNode(n, ctx)).join("");
 }
 
 function printNode(node: Node, ctx: Ctx): string {
@@ -206,19 +207,19 @@ function printNode(node: Node, ctx: Ctx): string {
     case "text":
       return `{{ ${stringJ(node.expr, ctx)} }}`;
     case "when": {
-      const out = [`{%- if ${truthyJ(node.test, ctx)} %}`, ind(printNodes(node.then, ctx))];
+      const out = [`{%- if ${truthyJ(node.test, ctx)} %}`, printNodes(node.then, ctx)];
       let rest = node.else;
       while (rest && rest.length === 1 && rest[0]!.kind === "when") {
         const w = rest[0]!;
-        out.push(`{%- elif ${truthyJ(w.test, ctx)} %}`, ind(printNodes(w.then, ctx)));
+        out.push(`{%- elif ${truthyJ(w.test, ctx)} %}`, printNodes(w.then, ctx));
         rest = w.else;
       }
-      if (rest && rest.length > 0) out.push(`{%- else %}`, ind(printNodes(rest, ctx)));
+      if (rest && rest.length > 0) out.push(`{%- else %}`, printNodes(rest, ctx));
       out.push(`{%- endif %}`);
-      return out.join("\n");
+      return out.join("");
     }
     case "forEach":
-      return `{%- for item in ${propCode(ctx, node.itemsProp)} %}\n${ind(printNodes(node.body, ctx))}\n{%- endfor %}`;
+      return `{%- for item in ${propCode(ctx, node.itemsProp)} %}${printNodes(node.body, ctx)}{%- endfor %}`;
   }
 }
 
@@ -240,14 +241,14 @@ function printElement(node: ElementNode, ctx: Ctx): string {
   }
   const inner = { ...ctx, tagVar: v };
   const mode = node.void ? "void" : maybeVoid ? "maybe" : "normal";
-  return `{%- set ${v} = ${set} %}\n${printTag(node, `{{ ${v} }}`, mode, inner)}`;
+  return `{%- set ${v} = ${set} %}${printTag(node, `{{ ${v} }}`, mode, inner)}`;
 }
 
 function printTag(node: ElementNode, tag: string, mode: "void" | "normal" | "maybe", ctx: Ctx): string {
   const attrs = node.attrs.map((a) => printAttr(a, ctx)).filter(Boolean);
   const open = attrs.length === 0 ? `<${tag}>` : `<${tag}\n${ind(attrs.join("\n"))}\n>`;
   if (mode === "void") return open;
-  const body = node.children.length === 0 ? "" : `\n${ind(printNodes(node.children, ctx))}\n`;
+  const body = printNodes(node.children, ctx);
   const close = `${body}</${tag}>`;
   if (mode === "maybe") return `${open}{%- if not ui_is_void(${ctx.tagVar}) %}${close}{%- endif %}`;
   return `${open}${close}`;

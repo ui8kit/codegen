@@ -139,7 +139,9 @@ document.body.append(renderText({ tag: "h1", class: "text-2xl font-semibold" }, 
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/text"
 
-@text.Text(text.TextProps{Tag: "h1", Class: "text-2xl font-semibold"}) { Content }
+@text.Text(text.TextProps{Tag: "h1", Class: "text-2xl font-semibold"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

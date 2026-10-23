@@ -98,6 +98,13 @@ func utilityGroups(core string) []string {
 	}
 
 	// rings: the width (ring, ring-2) and the colour (ring-primary) are separate groups, as in tailwind-merge
+	// ring-offset-N (width) and ring-offset-<color> are their own groups; they never touch ring width/colour
+	if rest, ok := strings.CutPrefix(core, "ring-offset-"); ok {
+		if isNumber(rest) {
+			return []string{"ring-offset-width"}
+		}
+		return []string{"ring-offset-color"}
+	}
 	for _, kind := range []string{"inset-ring", "ring"} {
 		if core == kind {
 			return []string{kind + "-width"}

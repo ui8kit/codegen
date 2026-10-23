@@ -6,7 +6,8 @@ export default brick({
   dir: "box",
   docs:
     "Box is the polymorphic structural primitive. `tag` accepts HTML5 structural\n" +
-    "elements only (sections, lists, tables, forms); anything else falls back to div.",
+    "elements only (sections, lists, tables, fieldset); anything else falls back to div.\n" +
+    "Forms use the Form primitive (Box no longer accepts `form`).",
   parts: [
     {
       name: "Box",

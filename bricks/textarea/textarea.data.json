@@ -15,6 +15,12 @@
         "ReadOnly": true,
         "AriaInvalid": "true"
       }
+    },
+    "address": {
+      "props": {
+        "Name": "address",
+        "Value": "1 <Main> St\nApt 2"
+      }
     }
   }
 }

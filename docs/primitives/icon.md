@@ -130,7 +130,9 @@ document.body.append(renderIcon({ label: "Search", size: "lg" }, "Content"));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/icon"
 
-@icon.Icon(icon.IconProps{Label: "Search", Size: "lg"}) { Content }
+@icon.Icon(icon.IconProps{Label: "Search", Size: "lg"}) {
+	Content
+}
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))
