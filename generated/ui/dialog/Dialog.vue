@@ -4,13 +4,11 @@
 -->
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
-import { dialogClasses, type DialogSize, type DialogVariant } from "./dialog.shared";
+import { dialogClasses } from "./dialog.shared";
 
 defineOptions({ name: "Dialog", inheritAttrs: false });
 
 const props = defineProps<{
-  variant?: DialogVariant;
-  size?: DialogSize;
   open?: boolean;
 }>();
 
@@ -20,7 +18,7 @@ const restAttrs = computed(() => {
   const { class: _class, ...restEntries } = attrs;
   return restEntries;
 });
-const cls = computed(() => dialogClasses({ variant: props.variant, size: props.size, className: callerClass.value }));
+const cls = computed(() => dialogClasses({ className: callerClass.value }));
 </script>
 
 <template>

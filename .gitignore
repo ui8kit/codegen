@@ -1,6 +1,6 @@
 node_modules/
-examples/node_modules/
 *.log
 .DS_Store
 .dist/
-.manual/
+.manual/generated/
+.venv/

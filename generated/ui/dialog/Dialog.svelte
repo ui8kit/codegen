@@ -4,11 +4,8 @@
 -->
 <script lang="ts" module>
   import type { Snippet } from "svelte";
-  import type { DialogSize, DialogVariant } from "./dialog.shared";
 
   export type DialogProps = {
-    variant?: DialogVariant;
-    size?: DialogSize;
     open?: boolean;
     class?: string;
     children?: Snippet;
@@ -20,15 +17,13 @@
   import { dialogClasses } from "./dialog.shared";
 
   let {
-    variant,
-    size,
     open,
     class: className,
     children,
     ...rest
   }: DialogProps = $props();
 
-  const cls = $derived(dialogClasses({ variant, size, className }));
+  const cls = $derived(dialogClasses({ className }));
 </script>
 
 <dialog {...(cls ? { class: cls } : {})} open={open || undefined} {...rest}>

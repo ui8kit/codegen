@@ -5,19 +5,14 @@
 -->
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
-import { buttonClasses, type ButtonSize, type ButtonVariant } from "./button.shared";
-import { eqStr, isSetStr, oneOfOr, orUndef } from "../../utils/expr";
+import { buttonClasses } from "./button.shared";
+import { isSetStr, oneOfOr, orUndef } from "../../utils/expr";
 
 defineOptions({ name: "Button", inheritAttrs: false });
 
 const props = defineProps<{
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  type?: string;
+  type?: "button" | "submit" | "reset";
   href?: string;
-  target?: string;
-  rel?: string;
-  external?: boolean;
   disabled?: boolean;
 }>();
 
@@ -27,13 +22,11 @@ const restAttrs = computed(() => {
   const { class: _class, ...restEntries } = attrs;
   return restEntries;
 });
-const cls = computed(() => buttonClasses({ variant: props.variant, size: props.size, disabled: props.disabled, className: callerClass.value }));
-const targetValue = computed(() => (isSetStr(props.target) ? props.target : (props.external ? "_blank" : "")));
-const relValue = computed(() => (isSetStr(props.rel) ? props.rel : ((props.external || eqStr(targetValue.value, "_blank")) ? "noopener noreferrer" : "")));
+const cls = computed(() => buttonClasses({ className: callerClass.value }));
 </script>
 
 <template>
-  <a v-if="isSetStr(props.href)" :href="orUndef(props.href)" :class="cls || undefined" :target="orUndef(targetValue)" :rel="orUndef(relValue)" :aria-disabled="props.disabled ? 'true' : undefined" :tabindex="props.disabled ? -1 : undefined" v-bind="restAttrs">
+  <a v-if="isSetStr(props.href)" :href="orUndef(props.href)" :class="cls || undefined" :aria-disabled="props.disabled ? 'true' : undefined" :tabindex="props.disabled ? -1 : undefined" v-bind="restAttrs">
     <slot />
   </a>
   <button v-else :type="oneOfOr(props.type, 'button', 'submit', 'reset')" :class="cls || undefined" :disabled="props.disabled || undefined" v-bind="restAttrs">

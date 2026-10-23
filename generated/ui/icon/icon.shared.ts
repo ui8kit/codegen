@@ -2,36 +2,24 @@
 // ui.icon — shared TypeScript contract (types + classes helpers)
 
 import { cn, composeRecipe, type RecipeKey } from "../../utils";
-import { concatTrim, eqStr, isSetStr, oneOfOr } from "../../utils/expr";
 import iconRecipeJson from "./icon.variants.json";
 
 export const iconRecipe = iconRecipeJson;
 
 export type IconSize = RecipeKey<typeof iconRecipe, "size">;
 
-/** Icon renders a class-based span, svg use, or text fallback host. */
+/** Icon renders span[data-slot=icon]; Label switches to role=img + aria-label. */
 export type IconBaseProps = {
-  name?: string;
-  type?: string;
-  baseClass?: string;
-  prefix?: string;
   size?: IconSize;
-  href?: string;
-  title?: string;
-  ariaLabel?: string;
-  decorative?: boolean;
+  label?: string;
 };
 
 export type IconClassesInput = {
-  type?: string;
   size?: IconSize;
-  baseClass?: string;
-  name?: string;
-  prefix?: string;
   className?: string;
 };
 
 /** Compose Icon classes without rendering — the cross-runtime `asChild` substitute. */
 export function iconClasses(input: IconClassesInput = {}): string {
-  return cn(composeRecipe(iconRecipe, { type: oneOfOr(input.type, "class", "svg", "text") as RecipeKey<typeof iconRecipe, "type">, size: input.size }), (eqStr(oneOfOr(input.type, "class", "svg", "text"), "class") ? input.baseClass : ""), ((eqStr(oneOfOr(input.type, "class", "svg", "text"), "class") && isSetStr(input.name)) ? concatTrim(input.prefix, input.name) : ""), input.className);
+  return cn(composeRecipe(iconRecipe, { size: input.size }), input.className);
 }

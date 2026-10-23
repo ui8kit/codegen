@@ -5,16 +5,10 @@
 -->
 <script lang="ts" module>
   import type { Snippet } from "svelte";
-  import type { ButtonSize, ButtonVariant } from "./button.shared";
 
   export type ButtonProps = {
-    variant?: ButtonVariant;
-    size?: ButtonSize;
-    type?: string;
+    type?: "button" | "submit" | "reset";
     href?: string;
-    target?: string;
-    rel?: string;
-    external?: boolean;
     disabled?: boolean;
     class?: string;
     children?: Snippet;
@@ -24,29 +18,22 @@
 
 <script lang="ts">
   import { buttonClasses } from "./button.shared";
-  import { eqStr, isSetStr, oneOfOr, orUndef } from "../../utils/expr";
+  import { isSetStr, oneOfOr, orUndef } from "../../utils/expr";
 
   let {
-    variant,
-    size,
     type,
     href,
-    target,
-    rel,
-    external,
     disabled,
     class: className,
     children,
     ...rest
   }: ButtonProps = $props();
 
-  const cls = $derived(buttonClasses({ variant, size, disabled, className }));
-  const targetValue = $derived((isSetStr(target) ? target : (external ? "_blank" : "")));
-  const relValue = $derived((isSetStr(rel) ? rel : ((external || eqStr(targetValue, "_blank")) ? "noopener noreferrer" : "")));
+  const cls = $derived(buttonClasses({ className }));
 </script>
 
 {#if isSetStr(href)}
-  <a href={orUndef(href)} {...(cls ? { class: cls } : {})} target={orUndef(targetValue)} rel={orUndef(relValue)} aria-disabled={disabled ? "true" : undefined} tabindex={disabled ? -1 : undefined} {...rest}>
+  <a href={orUndef(href)} {...(cls ? { class: cls } : {})} aria-disabled={disabled ? "true" : undefined} tabindex={disabled ? -1 : undefined} {...rest}>
     {@render children?.()}
   </a>
 {:else}
