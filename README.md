@@ -41,6 +41,11 @@ document.body.append(renderButton({ class: "bg-primary text-primary-foreground" 
 Custom elements replace themselves with the rendered primitive (no shadow DOM), so the
 resulting DOM is identical to the other runtimes and consumer classes apply.
 
+The swap waits until children exist (DOMContentLoaded while the document is parsing, or the
+next microtask for a host connected before its subtree). Attributes are read **once**, at the
+swap: the host element is gone afterwards, so there is nothing to observe — update the rendered
+element directly, or call `render<Part>()` again.
+
 ## Layout
 
 ```

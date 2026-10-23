@@ -51,8 +51,15 @@ export type Renderer = (props: Record<string, unknown>, children?: Children) => 
 
 /**
  * Define a light-DOM custom element that replaces itself with the rendered
- * primitive on connect, moving its child nodes into the default slot. The
- * resulting DOM is identical to `render(props, children)`.
+ * primitive, moving its child nodes into the default slot. The resulting DOM
+ * is identical to `render(props, children)`.
+ *
+ * Upgrade timing: children must exist before the swap. While the document is
+ * still parsing, the swap waits for DOMContentLoaded; an element connected
+ * without children (parent connected before its subtree, e.g. incremental
+ * insertion) is retried on the next microtask. Attributes are read once, at
+ * the swap — afterwards the host element is gone, so later attribute changes
+ * have nothing to observe; update the rendered element directly instead.
  */
 export function defineLight(tagName: string, render: Renderer, meta: PropMeta): void {
   if (typeof customElements === "undefined" || customElements.get(tagName)) return;
@@ -60,9 +67,19 @@ export function defineLight(tagName: string, render: Renderer, meta: PropMeta): 
     tagName,
     class extends HTMLElement {
       connectedCallback(): void {
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", () => this.swap(), { once: true });
+        } else if (!this.hasChildNodes()) {
+          queueMicrotask(() => this.swap());
+        } else {
+          this.swap();
+        }
+      }
+
+      private swap(): void {
+        if (!this.isConnected) return; // moved/removed meanwhile; a later connect retries
         const children = Array.from(this.childNodes);
-        const el = render(readHost(this, meta), children);
-        this.replaceWith(el);
+        this.replaceWith(render(readHost(this, meta), children));
       }
     }
   );

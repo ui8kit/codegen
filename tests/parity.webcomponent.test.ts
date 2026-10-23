@@ -90,12 +90,13 @@ for (const brick of bricks) {
           expect(normalizeHtml(el.outerHTML)).toEqual(expected());
         });
 
-        it(`[webcomponent] ${part.name} · ${c.id} · <custom-element>`, () => {
+        it(`[webcomponent] ${part.name} · ${c.id} · <custom-element>`, async () => {
           const tag = `t${seq++}-${kebab(part.name)}`;
           (modules[brick.id]![`define${part.name}`] as (t: string) => void)(tag);
           const host = win.document.createElement("div");
           host.innerHTML = `<${tag}${hostAttrs(part, props)}>${withChildren ? CHILD_TEXT : ""}</${tag}>`;
           win.document.body.appendChild(host);
+          await Promise.resolve(); // childless hosts swap on the next microtask
           const html = host.innerHTML;
           host.remove();
           expect(normalizeHtml(html)).toEqual(expected());
@@ -104,3 +105,26 @@ for (const brick of bricks) {
     }
   });
 }
+
+describe("webcomponent upgrade timing", () => {
+  it("keeps children when elements are defined before their subtree is attached", async () => {
+    const wc = (n: string) => modules[`ui.${n}`]!;
+    const p = `late${seq++}`;
+    (wc("box")["defineBox"] as (t: string) => void)(`${p}-box`);
+    (wc("button")["defineButton"] as (t: string) => void)(`${p}-button`);
+    (wc("icon")["defineIcon"] as (t: string) => void)(`${p}-icon`);
+    const host = win.document.createElement("div");
+    win.document.body.appendChild(host);
+    // Defined first, inserted later: the outer host connects before its
+    // children in happy-dom (and in streaming parsers) — they must survive.
+    host.innerHTML = `<${p}-box tag="section"><${p}-button><${p}-icon size="sm">+</${p}-icon>Add</${p}-button></${p}-box>`;
+    await Promise.resolve();
+    await Promise.resolve();
+    const html = host.innerHTML;
+    host.remove();
+    expect(html).toContain("<section>");
+    expect(html).toContain('<button type="button">');
+    expect(html).toContain('data-slot="icon"');
+    expect(html).toContain("Add</button></section>");
+  });
+});
