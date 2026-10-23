@@ -27,7 +27,7 @@ export type { AttrSpec, BrickDef, ClassSpec, PartDef, PropDef, TagSpec } from ".
 // Prop factories
 // ---------------------------------------------------------------------------
 
-export const pClass = (docs = "adds Tailwind utilities"): PropDef => ({
+export const pClass = (docs = "token class names supplied by the consumer"): PropDef => ({
   name: "Class",
   type: "string",
   cva: false,
@@ -91,13 +91,26 @@ export const pPass = (name: string, docs?: string): PropDef => ({
   docs,
 });
 
-/** The recurring ID/Role/TabIndex/AriaLabel quartet on form controls. */
-export const controlPassthroughProps = (): PropDef[] => [
-  pPass("ID", "element id"),
-  pPass("Role", "ARIA role override"),
-  pPass("TabIndex", "tab order override"),
-  pPass("AriaLabel", "accessible name for unlabeled controls"),
-];
+/** Required string prop (non-optional in TS signatures). */
+export const pReq = (name: string, docs?: string): PropDef => ({
+  name,
+  type: "string",
+  cva: false,
+  required: true,
+  docs,
+});
+
+/** String prop restricted to a closed set (TS literal union). */
+export const pEnum = (name: string, values: readonly string[], docs?: string): PropDef => ({
+  name,
+  type: "string",
+  cva: false,
+  enumValues: [...values],
+  docs,
+});
+
+/** The plain primitive class contract: caller classes only, no recipe. */
+export const plainClasses = () => ({});
 
 // ---------------------------------------------------------------------------
 // Brick assembly
@@ -107,7 +120,6 @@ export interface BrickInput {
   id: string;
   dir: string;
   file?: string;
-  goPackage?: string;
   docs: string;
   parts: PartDef[];
   recordTypes?: BrickDef["recordTypes"];
@@ -126,7 +138,6 @@ export function brick(input: BrickInput): BrickDef {
     id: input.id,
     dir: input.dir,
     file: input.file,
-    goPackage: input.goPackage,
     docs: input.docs,
     parts: input.parts,
     recordTypes: input.recordTypes,

@@ -1,15 +1,30 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.box",
   "showcase": {
-    "tag.default": {
+    "section": {
       "props": {
-        "Tag": "div"
+        "Tag": "section",
+        "Class": "p-4 bg-card text-card-foreground"
       }
     },
-    "class.padded": {
+    "table": {
       "props": {
-        "Class": "p-4 rounded-md border border-border"
+        "Tag": "table"
+      }
+    },
+    "form": {
+      "props": {
+        "Tag": "form"
+      }
+    },
+    "li": {
+      "props": {
+        "Tag": "li",
+        "Class": "text-muted-foreground"
+      }
+    },
+    "rejected": {
+      "props": {
+        "Tag": "stack"
       }
     }
   }

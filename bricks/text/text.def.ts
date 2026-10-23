@@ -1,22 +1,29 @@
-import { attrClass, attrRest, brick, el, pAttrs, pChildren, pClass, slot } from "../_dsl";
-import textVariants from "./text.variants.json";
+import { attrClass, attrRest, brick, el, pAttrs, pChildren, pClass, pEnum, slot } from "../_dsl";
+import { TEXT_TAGS } from "../../src/domain/tags";
 
 export default brick({
   id: "ui.text",
   dir: "text",
   docs:
-    "Text renders a paragraph of body copy. Use Inline for inline span copy\n" +
-    "and Title (as 1–6) for headings.",
-  recipes: { text: { file: "text.variants.json", recipe: textVariants } },
+    "Text is the polymorphic text primitive. `tag` accepts HTML5 text elements\n" +
+    "only (p, span, h1–h6, blockquote, code, …); anything else falls back to p.",
   parts: [
     {
       name: "Text",
-      docs: "Text renders a p element with body copy classes.",
-      recipeId: "text",
+      docs: "Text renders the requested text element (default p).",
       asChild: true,
-      classes: { recipe: {} },
-      props: [pClass(), pAttrs(), pChildren()],
-      render: el("p", [attrClass(), attrRest()], [slot()]),
+      classes: {},
+      props: [
+        pClass(),
+        pEnum("Tag", TEXT_TAGS, "HTML5 text tag (default p)"),
+        pAttrs(),
+        pChildren(),
+      ],
+      render: el(
+        { kind: "resolved", fromProp: "Tag", fallback: "p", group: "Text" },
+        [attrClass(), attrRest()],
+        [slot()]
+      ),
     },
   ],
 });

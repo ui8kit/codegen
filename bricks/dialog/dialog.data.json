@@ -1,19 +1,16 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.dialog",
   "showcase": {
-    "variant.default": {
+    "open": {
       "props": {
-        "AriaLabel": "Dialog",
-        "Size": "default",
-        "Variant": "default"
+        "Open": true,
+        "ID": "d",
+        "AriaLabelledBy": "t",
+        "AriaDescribedBy": "desc"
       }
     },
-    "variant.sheet": {
+    "named": {
       "props": {
-        "AriaLabel": "Panel",
-        "Size": "full",
-        "Variant": "sheet"
+        "AriaLabel": "Settings"
       }
     }
   }

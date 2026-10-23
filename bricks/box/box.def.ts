@@ -1,28 +1,26 @@
-import { attrClass, attrRest, brick, el, pAttrs, pChildren, pClass, pStr, slot } from "../_dsl";
-import boxVariants from "./box.variants.json";
+import { attrClass, attrRest, brick, el, pAttrs, pChildren, pClass, pEnum, slot } from "../_dsl";
+import { BOX_TAGS } from "../../src/domain/tags";
 
 export default brick({
   id: "ui.box",
   dir: "box",
   docs:
-    "Box is a generic layout wrapper for internal sections.\n" +
-    "Not for top-level landmarks — use Block for page regions.",
-  recipes: { box: { file: "box.variants.json", recipe: boxVariants } },
+    "Box is the polymorphic structural primitive. `tag` accepts HTML5 structural\n" +
+    "elements only (sections, lists, tables, forms); anything else falls back to div.",
   parts: [
     {
       name: "Box",
-      docs: "Box renders a div layout wrapper.",
-      recipeId: "box",
+      docs: "Box renders the requested structural HTML element (default div).",
       asChild: true,
-      classes: { recipe: {} },
+      classes: {},
       props: [
         pClass(),
-        pStr("Tag", "div only. Use Block for landmarks (aside, section, header, nav)."),
+        pEnum("Tag", BOX_TAGS, "HTML5 structural tag (default div)"),
         pAttrs(),
         pChildren(),
       ],
       render: el(
-        { kind: "resolved", fromProp: "Tag", fallback: "div", group: "BoxAllowed" },
+        { kind: "resolved", fromProp: "Tag", fallback: "div", group: "Box" },
         [attrClass(), attrRest()],
         [slot()]
       ),

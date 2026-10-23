@@ -19,7 +19,7 @@ import type {
 import { propsByName } from "./model";
 import { cn } from "./cn";
 import { composeRecipe } from "./recipe";
-import { resolveTag, titleTag, VOID_TAGS } from "./tags";
+import { resolveTag, VOID_TAGS } from "./tags";
 
 export type PropValues = Record<string, unknown>;
 
@@ -184,8 +184,6 @@ function resolveTagSpec(tag: TagSpec, ctx: Ctx): string {
       return tag.tag;
     case "resolved":
       return resolveTag(String(propValue(ctx, tag.fromProp) ?? ""), tag.fallback, tag.group);
-    case "heading":
-      return titleTag(Number(propValue(ctx, tag.fromProp) ?? 0));
     case "mapped": {
       const t = String(evalExpr(tag.expr, ctx));
       if (!tag.tags.includes(t)) {

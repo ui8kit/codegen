@@ -1,18 +1,24 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.text",
   "showcase": {
-    "default": {
-      "props": {}
-    },
-    "muted": {
+    "h1": {
       "props": {
-        "Class": "text-muted-foreground"
+        "Tag": "h1",
+        "Class": "text-2xl font-semibold"
       }
     },
     "code": {
       "props": {
-        "Class": "text-sm font-mono"
+        "Tag": "code"
+      }
+    },
+    "legend": {
+      "props": {
+        "Tag": "legend"
+      }
+    },
+    "rejected": {
+      "props": {
+        "Tag": "title"
       }
     }
   }

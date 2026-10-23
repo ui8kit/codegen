@@ -38,12 +38,11 @@ export type ItemExpr = { kind: "item"; field: string };
 export type DerivedRefExpr = { kind: "derivedRef"; name: string };
 /** The tag the part's root resolved to (List/ListItem need it in attr logic). */
 export type ResolvedTagExpr = { kind: "resolvedTag" };
-/** `trim(e) === "" ? fallback : trim(e)` — mirrors Go DefaultInputType et al. */
+/** `trim(e) === "" ? fallback : trim(e)` */
 export type DefaultIfEmptyExpr = { kind: "defaultIfEmpty"; expr: Expr; fallback: string };
 /**
  * Whitelist decision table over a trimmed string:
  * `mapping[trim(e)] ?? fallback`. `lower: true` lowercases before lookup
- * (mirrors Go tableScope / AriaHasPopup style switches).
  */
 export type MapOrExpr = {
   kind: "mapOr";
@@ -65,7 +64,7 @@ export type AndExpr = { kind: "and"; exprs: Expr[] };
 export type OrExpr = { kind: "or"; exprs: Expr[] };
 export type NotExpr = { kind: "not"; expr: Expr };
 /**
- * Presence test with per-type semantics matching the Go originals:
+ * Presence test with per-type semantics (string: non-blank; int: > 0; bool: true):
  * string → `trim(v) !== ""`; bool → `v === true`; int → `v > 0`.
  */
 export type IsSetExpr = { kind: "isSet"; expr: Expr };

@@ -1,45 +1,21 @@
-import {
-  attrBool,
-  attrClass,
-  attrRest,
-  brick,
-  el,
-  fwd,
-  pAttrs,
-  pBool,
-  pChildren,
-  pClass,
-  pPass,
-  prop,
-  pSize,
-  pVariant,
-  slot,
-} from "../_dsl";
-import dialogVariants from "./dialog.variants.json";
+import { attrBool, attrClass, attrRest, brick, el, fwd, pAttrs, pBool, pChildren, pClass, pPass, prop, slot } from "../_dsl";
 
 export default brick({
   id: "ui.dialog",
   dir: "dialog",
-  docs:
-    "Dialog renders a native dialog root with an optional behavior hook.\n" +
-    "The data-ui8kit hook defaults off; the registry ships no client JS.",
-  recipes: { dialog: { file: "dialog.variants.json", recipe: dialogVariants } },
+  docs: "Dialog is the native <dialog>. Opening/closing (showModal) is the consumer's.",
   parts: [
     {
       name: "Dialog",
       docs: "Dialog renders a native dialog element.",
-      recipeId: "dialog",
-      classes: { recipe: { variant: "Variant", size: "Size" } },
+      classes: {},
       props: [
-        pVariant(),
-        pSize(),
         pClass(),
         pPass("ID"),
-        pBool("Open", "initial open state (static attribute only)"),
-        pPass("DataUI8Kit", "opt-in behavior hook; empty emits nothing"),
-        pPass("AriaLabel"),
+        pBool("Open", "initial open state"),
         pPass("AriaLabelledBy"),
         pPass("AriaDescribedBy"),
+        pPass("AriaLabel"),
         pAttrs(),
         pChildren(),
       ],
@@ -47,12 +23,11 @@ export default brick({
         "dialog",
         [
           attrClass(),
-          attrBool("open", prop("Open")),
           fwd("id", "ID"),
-          fwd("data-ui8kit", "DataUI8Kit"),
-          fwd("aria-label", "AriaLabel"),
+          attrBool("open", prop("Open")),
           fwd("aria-labelledby", "AriaLabelledBy"),
           fwd("aria-describedby", "AriaDescribedBy"),
+          fwd("aria-label", "AriaLabel"),
           attrRest(),
         ],
         [slot()]

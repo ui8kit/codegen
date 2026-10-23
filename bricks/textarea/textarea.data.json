@@ -1,25 +1,19 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.textarea",
   "showcase": {
-    "rows.custom": {
+    "filled": {
       "props": {
         "Name": "bio",
-        "Placeholder": "Bio",
-        "Rows": 6
+        "Value": "Hello",
+        "Rows": "3",
+        "Placeholder": "About"
       }
     },
-    "state.disabled": {
+    "states": {
       "props": {
+        "Required": true,
         "Disabled": true,
-        "Name": "locked",
-        "Value": "Fixed text"
-      }
-    },
-    "variant.default": {
-      "props": {
-        "Name": "message",
-        "Placeholder": "Your message"
+        "ReadOnly": true,
+        "AriaInvalid": "true"
       }
     }
   }

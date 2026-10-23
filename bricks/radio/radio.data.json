@@ -1,17 +1,16 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.radio",
   "showcase": {
-    "layout.group": {
+    "checked": {
       "props": {
-        "Name": "plan"
+        "Name": "r",
+        "Value": "a",
+        "Checked": true
       }
     },
-    "state.disabled": {
+    "disabled": {
       "props": {
         "Disabled": true,
-        "Name": "plan",
-        "Value": "pro"
+        "AriaDescribedBy": "h"
       }
     }
   }

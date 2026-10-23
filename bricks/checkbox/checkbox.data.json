@@ -1,25 +1,18 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.checkbox",
   "showcase": {
-    "state.checked": {
+    "checked": {
       "props": {
+        "Name": "t",
+        "Value": "1",
         "Checked": true,
-        "ID": "terms",
-        "Name": "terms"
+        "Required": true
       }
     },
-    "state.disabled": {
+    "disabled": {
       "props": {
-        "Checked": true,
         "Disabled": true,
-        "Name": "locked"
-      }
-    },
-    "state.unchecked": {
-      "props": {
-        "ID": "terms",
-        "Name": "terms"
+        "AriaInvalid": "true",
+        "ID": "c1"
       }
     }
   }

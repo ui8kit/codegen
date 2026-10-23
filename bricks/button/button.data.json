@@ -1,106 +1,39 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.button",
   "showcase": {
-    "size.icon": {
-      "props": {
-        "AriaLabel": "Settings",
-        "Size": "icon",
-        "Variant": "default"
-      }
-    },
-    "size.lg": {
-      "props": {
-        "Size": "lg",
-        "Variant": "default"
-      }
-    },
-    "size.sm": {
-      "props": {
-        "Size": "sm",
-        "Variant": "default"
-      }
-    },
-    "state.disabled": {
-      "props": {
-        "Disabled": true,
-        "Variant": "default"
-      }
-    },
-    "state.reset": {
-      "props": {
-        "Type": "reset",
-        "Variant": "outline"
-      }
-    },
-    "state.submit": {
+    "submit": {
       "props": {
         "Type": "submit",
-        "Variant": "default"
+        "Class": "bg-primary text-primary-foreground"
       }
     },
-    "variant.default": {
+    "disabled": {
       "props": {
-        "Size": "default",
-        "Variant": "default"
+        "Disabled": true
       }
     },
-    "variant.destructive": {
+    "form": {
       "props": {
-        "Size": "default",
-        "Variant": "destructive"
+        "Form": "f1",
+        "AriaLabel": "Save"
       }
     },
-    "variant.ghost": {
+    "pressed": {
       "props": {
-        "Size": "sm",
-        "Variant": "ghost"
+        "AriaPressed": "true",
+        "AriaExpanded": "false",
+        "AriaControls": "m1"
       }
     },
-    "variant.link": {
+    "href": {
       "props": {
-        "Variant": "link"
+        "Href": "/docs",
+        "Class": "underline"
       }
     },
-    "variant.outline": {
+    "hrefDisabled": {
       "props": {
-        "Size": "sm",
-        "Variant": "outline"
-      }
-    },
-    "variant.secondary": {
-      "props": {
-        "Size": "default",
-        "Variant": "secondary"
-      }
-    },
-    "composition.aschild-link": {
-      "props": {
-        "AsChild": true,
-        "Variant": "outline",
-        "Size": "sm"
-      }
-    },
-    "composition.href": {
-      "props": {
-        "Href": "/cart",
-        "Variant": "default",
-        "Size": "default"
-      }
-    },
-    "composition.href-external": {
-      "props": {
-        "Href": "https://example.com",
-        "External": true,
-        "Variant": "outline",
-        "Size": "sm"
-      }
-    },
-    "composition.href-disabled": {
-      "props": {
-        "Href": "/cart",
-        "Disabled": true,
-        "Variant": "secondary"
+        "Href": "/x",
+        "Disabled": true
       }
     }
   }

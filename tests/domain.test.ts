@@ -34,7 +34,7 @@ import {
 import { htmlPropName, reactPropName } from "../src/domain/naming";
 import { composeRecipe, RecipeError, validateRecipe, type VariantRecipe } from "../src/domain/recipe";
 import { renderPart } from "../src/domain/render";
-import { resolveTag, titleTag } from "../src/domain/tags";
+import { BOX_TAGS, resolveTag, TEXT_TAGS } from "../src/domain/tags";
 import { DefinitionError, validateBrick } from "../src/domain/validate";
 
 const recipe: VariantRecipe = {
@@ -77,17 +77,20 @@ describe("recipe", () => {
 
 describe("tags", () => {
   it("resolves allowed tags and falls back otherwise", () => {
-    expect(resolveTag("ul", "div", "Stack")).toBe("ul");
-    expect(resolveTag("nav", "div", "Stack")).toBe("div");
-    expect(resolveTag("", "div", "Stack")).toBe("div");
-    expect(resolveTag("SECTION", "div", "Layout")).toBe("section");
+    expect(resolveTag("ul", "div", "Box")).toBe("ul");
+    expect(resolveTag("table", "div", "Box")).toBe("table");
+    expect(resolveTag("SECTION", "div", "Box")).toBe("section");
+    expect(resolveTag("h1", "div", "Box")).toBe("div");
+    expect(resolveTag("", "p", "Text")).toBe("p");
+    expect(resolveTag("h3", "p", "Text")).toBe("h3");
   });
 
-  it("titleTag defaults to h2", () => {
-    expect(titleTag(1)).toBe("h1");
-    expect(titleTag(0)).toBe("h2");
-    expect(titleTag(undefined)).toBe("h2");
-    expect(titleTag(6)).toBe("h6");
+  it("layout vocabulary is never a tag", () => {
+    for (const name of ["block", "container", "stack", "group", "grid", "list", "inline", "title"]) {
+      expect((BOX_TAGS as readonly string[]).includes(name)).toBe(false);
+      expect((TEXT_TAGS as readonly string[]).includes(name)).toBe(false);
+      expect(resolveTag(name, "div", "Box")).toBe("div");
+    }
   });
 });
 

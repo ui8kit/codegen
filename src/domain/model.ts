@@ -2,7 +2,8 @@
  * Domain model — bricks, parts, props, and the render-tree IR.
  *
  * A `BrickDef` is the single source of truth for one `ui/<brick>/` primitive.
- * Emitters print the same definition into Templ, React, Svelte 5, and Vue 3;
+ * Emitters print the same definition into React, Svelte 5, Vue 3, SolidJS and
+ * vanilla custom elements;
  * the canonical renderer executes it to produce the reference DOM.
  */
 
@@ -17,7 +18,7 @@ import type { VariantRecipe } from "./recipe";
 export type PropType = "string" | "bool" | "int" | "attrs" | "children" | "items";
 
 export interface PropDef {
-  /** Canonical PascalCase name (Go casing); runtimes derive their own. */
+  /** Canonical PascalCase name ; runtimes derive their own. */
   name: string;
   type: PropType;
   /** CVA prop — resolved through the brick's variants.json recipe. */
@@ -28,8 +29,7 @@ export interface PropDef {
   default?: string | number | boolean;
   /**
    * Forwarded verbatim as a DOM attribute with the same name and semantics in
-   * every runtime. TS runtimes absorb it through rest props; Go declares an
-   * explicit struct field. Passthrough props must never be referenced by any
+   * every runtime. TS runtimes absorb it through rest props. Passthrough props must never be referenced by any
    * expression (validated).
    */
   passthrough?: boolean;
@@ -37,8 +37,8 @@ export interface PropDef {
   domName?: string;
   /** Record type for `items` props (e.g. BreadcrumbItem). */
   itemsOf?: string;
-  /** Go struct field type override (e.g. `uiutils.HeadingLevel`). */
-  goType?: string;
+  /** Required in TS signatures (e.g. Image alt). */
+  required?: boolean;
   docs?: string;
 }
 
@@ -56,8 +56,6 @@ export type TagSpec =
   | { kind: "static"; tag: string }
   /** Tag resolved from a prop against a TagGroup allow-list. */
   | { kind: "resolved"; fromProp: string; fallback: string; group: TagGroupName }
-  /** h1–h6 from an int prop (default h2). */
-  | { kind: "heading"; fromProp: string }
   /** Tag chosen by a string expression over a closed tag set (Break: br|wbr). */
   | { kind: "mapped"; expr: Expr; tags: string[] };
 
@@ -188,8 +186,6 @@ export interface BrickDef {
   dir: string;
   /** File stem (differs from dir for ui/form/controls.*). */
   file?: string;
-  /** Go package name override (switch → formswitch, select → selectfield). */
-  goPackage?: string;
   docs: string;
   parts: PartDef[];
   recordTypes?: RecordTypeDef[];

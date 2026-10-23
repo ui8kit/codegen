@@ -4,7 +4,6 @@ import {
   attrExpr,
   attrRest,
   brick,
-  controlPassthroughProps,
   el,
   eq,
   forEach,
@@ -16,59 +15,57 @@ import {
   pClass,
   pPass,
   prop,
-  pSize,
   pStr,
-  pVariant,
   slot,
   text,
 } from "../_dsl";
-import selectVariants from "./select.variants.json";
 
 export default brick({
   id: "ui.select",
   dir: "select",
-  goPackage: "selectfield",
-  docs: "Select is a native dropdown built from Option items.",
+  docs:
+    "Select is a native dropdown. Flat options come from the Options list;\n" +
+    "SelectOption / SelectOptGroup children cover grouped or custom markup.",
   recordTypes: [
     {
       name: "SelectOptionItem",
       fields: [
         { name: "Value", type: "string" },
         { name: "Label", type: "string" },
+        { name: "Disabled", type: "bool" },
       ],
     },
   ],
-  recipes: { select: { file: "select.variants.json", recipe: selectVariants } },
   parts: [
     {
       name: "Select",
-      docs: "Select renders option children from the Options list plus manual children.",
-      recipeId: "select",
-      classes: { recipe: { variant: "Variant", size: "Size" } },
+      docs: "Select renders option children from Options, then manual children.",
+      classes: {},
       props: [
-        pVariant(),
-        pSize(),
         pClass(),
+        pPass("ID"),
         pPass("Name"),
-        pStr("Value", "currently selected option value"),
-        pBool("Disabled"),
+        pStr("Value", "selected option value"),
+        pBool("Multiple"),
         pBool("Required"),
+        pBool("Disabled"),
         { name: "Options", type: "items", cva: false, itemsOf: "SelectOptionItem" },
-        ...controlPassthroughProps(),
+        pPass("AriaInvalid"),
+        pPass("AriaDescribedBy"),
         pAttrs(),
         pChildren(),
       ],
       render: el(
         "select",
         [
+          attrClass(),
           fwd("id", "ID"),
           fwd("name", "Name"),
-          attrClass(),
-          attrBool("disabled", prop("Disabled")),
+          attrBool("multiple", prop("Multiple")),
           attrBool("required", prop("Required")),
-          fwd("role", "Role"),
-          fwd("tabindex", "TabIndex"),
-          fwd("aria-label", "AriaLabel"),
+          attrBool("disabled", prop("Disabled")),
+          fwd("aria-invalid", "AriaInvalid"),
+          fwd("aria-describedby", "AriaDescribedBy"),
           attrRest(),
         ],
         [
@@ -78,6 +75,7 @@ export default brick({
               [
                 attrExpr("value", item("Value"), { keepEmpty: true }),
                 attrBool("selected", eq(item("Value"), prop("Value"))),
+                attrBool("disabled", item("Disabled")),
               ],
               [text(item("Label"))]
             ),
@@ -88,20 +86,12 @@ export default brick({
     },
     {
       name: "SelectOption",
-      docs: "SelectOption renders an option for custom Select children.",
-      props: [
-        pPass("Value"),
-        pPass("Label"),
-        pBool("Selected"),
-        pBool("Disabled"),
-        pAttrs(),
-        pChildren(),
-      ],
+      docs: "SelectOption renders a native option.",
+      props: [pPass("Value"), pBool("Selected"), pBool("Disabled"), pAttrs(), pChildren()],
       render: el(
         "option",
         [
           fwd("value", "Value"),
-          fwd("label", "Label"),
           attrBool("selected", prop("Selected")),
           attrBool("disabled", prop("Disabled")),
           attrRest(),
@@ -110,18 +100,12 @@ export default brick({
       ),
     },
     {
-      name: "OptGroup",
-      docs: "OptGroup renders a native optgroup around option children.",
-      classes: {},
-      props: [pClass(), pPass("Label"), pBool("Disabled"), pAttrs(), pChildren()],
+      name: "SelectOptGroup",
+      docs: "SelectOptGroup renders a native optgroup around option children.",
+      props: [pPass("Label"), pBool("Disabled"), pAttrs(), pChildren()],
       render: el(
         "optgroup",
-        [
-          attrClass(),
-          fwd("label", "Label"),
-          attrBool("disabled", prop("Disabled")),
-          attrRest(),
-        ],
+        [fwd("label", "Label"), attrBool("disabled", prop("Disabled")), attrRest()],
         [slot()]
       ),
     },

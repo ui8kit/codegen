@@ -1,16 +1,34 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.link",
   "showcase": {
-    "variant.default": {
+    "basic": {
       "props": {
-        "Href": "/docs"
+        "Href": "/a"
       }
     },
-    "variant.external": {
+    "external": {
       "props": {
-        "External": true,
-        "Href": "https://example.com"
+        "Href": "https://e.com",
+        "External": true
+      }
+    },
+    "explicit": {
+      "props": {
+        "Href": "/b",
+        "Target": "_self",
+        "Rel": "nofollow"
+      }
+    },
+    "blank": {
+      "props": {
+        "Href": "/c",
+        "Target": "_blank"
+      }
+    },
+    "current": {
+      "props": {
+        "Href": "/d",
+        "AriaCurrent": "page",
+        "Download": "f.txt"
       }
     }
   }

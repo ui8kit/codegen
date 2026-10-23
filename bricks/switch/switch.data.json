@@ -1,28 +1,18 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.switch",
   "showcase": {
-    "state.disabled": {
+    "on": {
       "props": {
-        "AriaLabel": "Locked setting",
         "Checked": true,
+        "AriaLabel": "Wi-Fi"
+      }
+    },
+    "disabled": {
+      "props": {
         "Disabled": true,
-        "Name": "locked"
-      }
-    },
-    "state.off": {
-      "props": {
-        "AriaLabel": "Notifications",
-        "ID": "notifications",
-        "Name": "notifications"
-      }
-    },
-    "state.on": {
-      "props": {
-        "AriaLabel": "Notifications",
-        "Checked": true,
-        "ID": "notifications",
-        "Name": "notifications"
+        "Name": "s",
+        "Value": "on",
+        "ID": "sw",
+        "AriaLabelledBy": "l"
       }
     }
   }

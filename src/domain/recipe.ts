@@ -35,7 +35,7 @@ export function validateRecipe(recipe: VariantRecipe): void {
 }
 
 /**
- * Compose recipe classes for a selection. Mirrors Go `uiutils.Compose` and TS
+ * Compose recipe classes for a selection. Mirrors the TS runtime
  * `composeRecipe`: base → per-key variant classes (selection or default) →
  * extra fragments, merged Tailwind-conflict-aware.
  */

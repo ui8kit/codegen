@@ -1,12 +1,11 @@
 /**
  * Naming conventions per runtime family — decided once, applied to every
- * brick (brainstorm §5.1). Canonical prop names are Go PascalCase.
+ * brick. Canonical prop names are PascalCase (`Class`, `AriaLabel`, `For`).
  *
- * - Templ:  PascalCase struct fields (`Variant`, `Class`, `AriaLabel`, `HTMLFor`).
  * - React:  camelCase DOM-ish (`variant`, `className`, `htmlFor`); literal
  *           `aria-*` keys stay hyphenated.
- * - Svelte/Vue: HTML-native attribute names (`class`, `for`, `aria-label`) —
- *           closer to Go than to React, per the documented 3rd convention.
+ * - Svelte/Vue/Web Components: HTML-native attribute names (`class`, `for`,
+ *           `aria-label`).
  */
 
 import type { PropDef } from "./model";
@@ -71,23 +70,6 @@ export function htmlPropName(p: PropDef): string {
   const aria = hyphenateAria(p.name);
   if (aria) return aria;
   return camelCase(p.name);
-}
-
-/**
- * Latte/Twig prop name — PHP-compatible identifiers (no hyphens), HTML-native
- * casing where unambiguous (`class`, `for`, `id`, `tabindex`), camelCase for
- * ARIA (`ariaLabel`) since `aria-label` is not a valid PHP/Twig variable.
- * Mirrored at runtime by `UI8Kit\Rt::params()` in `runtime/php/ui8kit.php`.
- */
-export function phpPropName(p: PropDef): string {
-  if (p.name.startsWith("Aria")) return camelCase(p.name); // ariaLabel
-  if (p.name === "DataUI8Kit") return "dataUi8kit";
-  return htmlPropName(p);
-}
-
-/** Latte/Twig loop-item field key (mirrors `Rt::params` item conversion). */
-export function phpItemKey(field: string): string {
-  return camelCase(field);
 }
 
 /**

@@ -1,10 +1,9 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.label",
   "showcase": {
-    "layout.with-control": {
+    "for": {
       "props": {
-        "HTMLFor": "demo-email"
+        "For": "email",
+        "Class": "text-sm"
       }
     }
   }

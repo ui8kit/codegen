@@ -1,108 +1,55 @@
 import {
-  and,
   attrClass,
   attrExpr,
   attrRest,
+  attrStatic,
   brick,
-  concat,
-  cond,
-  derived,
   el,
-  eq,
   isSet,
   lit,
-  mapOr,
   not,
-  or,
   pAttrs,
-  pBool,
   pChildren,
   pClass,
+  pCva,
   prop,
-  pSize,
   pStr,
   slot,
-  text,
-  when,
-  type PartDef,
 } from "../_dsl";
 import iconVariants from "./icon.variants.json";
-
-const typeExpr = mapOr(prop("Type"), { svg: "svg", text: "text" }, "class");
-
-const ariaAttrs = [
-  attrExpr("aria-hidden", lit("true"), { when: derived("isDecorative") }),
-  attrExpr("role", lit("img"), { when: not(derived("isDecorative")) }),
-  attrExpr("aria-label", prop("AriaLabel"), {
-    when: and(not(derived("isDecorative")), isSet(prop("AriaLabel"))),
-  }),
-];
-
-const iconPart: PartDef = {
-  name: "Icon",
-  docs: "Icon renders a class-based span, svg use, or text fallback host.",
-  recipeId: "icon",
-  classes: {
-    recipe: { type: typeExpr, size: "Size" },
-    extra: [
-      cond(eq(typeExpr, lit("class")), prop("BaseClass"), lit("")),
-      cond(
-        and(eq(typeExpr, lit("class")), isSet(prop("Name"))),
-        concat(prop("Prefix"), prop("Name")),
-        lit("")
-      ),
-    ],
-  },
-  derived: {
-    iconKind: typeExpr,
-    isDecorative: or(
-      prop("Decorative"),
-      and(not(isSet(prop("Title"))), not(isSet(prop("AriaLabel"))))
-    ),
-  },
-  props: [
-    pStr("Name", "icon name appended to Prefix in class mode"),
-    pStr("Type", "svg, text, or class (default)"),
-    pStr("BaseClass", "base icon font class in class mode"),
-    pStr("Prefix", "icon font prefix in class mode"),
-    pSize(),
-    pClass(),
-    pStr("Href", "svg use href in svg mode"),
-    pStr("Title", "svg title / accessible name"),
-    pStr("AriaLabel", "accessible name for non-decorative icons"),
-    pBool("Decorative", "hides the icon from assistive technology"),
-    pAttrs(),
-    pChildren(),
-  ],
-  render: when(
-    eq(derived("iconKind"), lit("svg")),
-    [
-      el(
-        "svg",
-        [attrClass(), ...ariaAttrs, attrRest()],
-        [
-          when(isSet(prop("Title")), [el("title", [], [text(prop("Title"))])]),
-          when(isSet(prop("Href")), [el("use", [attrExpr("href", prop("Href"))], [])]),
-          slot(),
-        ]
-      ),
-    ],
-    [
-      when(
-        eq(derived("iconKind"), lit("text")),
-        [el("span", [attrClass(), ...ariaAttrs, attrRest()], [slot()])],
-        [el("span", [attrClass(), ...ariaAttrs, attrRest()], [])]
-      ),
-    ]
-  ),
-};
 
 export default brick({
   id: "ui.icon",
   dir: "icon",
   docs:
-    "Icon renders a class-based span, svg use reference, or text fallback.\n" +
-    "Decorative icons are hidden from assistive technology by default.",
+    "Icon is a sized frame for a consumer-supplied glyph (svg, sprite, font).\n" +
+    "No registry: the glyph is the children/slot. Decorative unless Label is set.",
   recipes: { icon: { file: "icon.variants.json", recipe: iconVariants } },
-  parts: [iconPart],
+  parts: [
+    {
+      name: "Icon",
+      docs: "Icon renders span[data-slot=icon]; Label switches to role=img + aria-label.",
+      recipeId: "icon",
+      classes: { recipe: { size: "Size" } },
+      props: [
+        pCva("Size", "size", "size token: xs, sm, md, lg, xl (default sm)"),
+        pClass(),
+        pStr("Label", "accessible name; omitted = decorative (aria-hidden)"),
+        pAttrs(),
+        pChildren(),
+      ],
+      render: el(
+        "span",
+        [
+          attrStatic("data-slot", "icon"),
+          attrClass(),
+          attrExpr("aria-hidden", lit("true"), { when: not(isSet(prop("Label"))) }),
+          attrExpr("role", lit("img"), { when: isSet(prop("Label")) }),
+          attrExpr("aria-label", prop("Label"), { when: isSet(prop("Label")) }),
+          attrRest(),
+        ],
+        [slot()]
+      ),
+    },
+  ],
 });

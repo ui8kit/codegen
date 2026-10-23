@@ -139,7 +139,6 @@ export function validatePart(brick: BrickDef, part: PartDef): void {
         referencedProps.add(node.tag.fromProp);
         if (!TAG_GROUPS[node.tag.group]) fail(`unknown tag group ${node.tag.group}`);
       }
-      if (node.tag.kind === "heading") referencedProps.add(node.tag.fromProp);
       for (const attr of node.attrs) {
         if (attr.kind === "class" && attr.spec?.recipe) {
           for (const source of Object.values(attr.spec.recipe)) {

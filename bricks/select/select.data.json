@@ -1,33 +1,44 @@
 {
-  "$schema": "../../schemas/data.schema.json",
-  "id": "ui.select",
   "showcase": {
-    "state.disabled": {
+    "options": {
       "props": {
-        "Disabled": true,
-        "Name": "locked",
+        "Name": "c",
+        "Value": "b",
         "Options": [
           {
-            "Label": "Option A",
-            "Value": "a"
+            "Value": "a",
+            "Label": "A"
+          },
+          {
+            "Value": "b",
+            "Label": "B"
+          },
+          {
+            "Value": "c",
+            "Label": "C",
+            "Disabled": true
           }
         ]
       }
     },
-    "variant.default": {
+    "states": {
       "props": {
-        "Name": "country",
-        "Options": [
-          {
-            "Label": "United States",
-            "Value": "us"
-          },
-          {
-            "Label": "Canada",
-            "Value": "ca"
-          }
-        ],
-        "Value": "us"
+        "Multiple": true,
+        "Required": true,
+        "Disabled": true,
+        "AriaInvalid": "true"
+      }
+    },
+    "option": {
+      "props": {
+        "Value": "x",
+        "Selected": true
+      }
+    },
+    "group": {
+      "props": {
+        "Label": "Group",
+        "Disabled": true
       }
     }
   }
