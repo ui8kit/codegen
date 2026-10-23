@@ -98,8 +98,10 @@ describe("solid emitter", () => {
     expect(file("ui/box/box.solid.tsx")).toContain("<Dynamic component={resolvedTagValue()}");
   });
 
-  it("maps the textarea content contract to a controlled value prop", () => {
-    expect(file("ui/textarea/textarea.solid.tsx")).toContain("value={(");
+  it("maps the textarea content contract to text content + a client value effect (no value attribute)", () => {
+    const ta = file("ui/textarea/textarea.solid.tsx");
+    expect(ta).toContain("createEffect(() => { el.value = (");
+    expect(ta).not.toMatch(/\svalue=\{/);
   });
 
   it("keeps root branches reactive and types multi-root refs as callbacks", () => {

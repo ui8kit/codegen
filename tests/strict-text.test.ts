@@ -40,3 +40,14 @@ describe("strict text parity", () => {
     expect(normalizeHtml(`<textarea>  ${VALUE}\n</textarea>`)).not.toEqual(normalizeHtml(`<textarea>${VALUE}</textarea>`));
   });
 });
+
+import { renderToString as solidSSR } from "solid-js/web";
+import { createComponent } from "solid-js";
+import { loadGeneratedUiModules } from "./support/generated-ui";
+
+it("Solid SSR textarea prints its value as content, never a value attribute (invalid on <textarea>)", async () => {
+  const { solidModules } = await loadGeneratedUiModules();
+  const SolidTextarea = (solidModules["../generated/ui/textarea/textarea.solid.tsx"] as Record<string, unknown>).Textarea as Parameters<typeof createComponent>[0];
+  expect(solidSSR(() => createComponent(SolidTextarea, {}))).not.toContain("value=");
+  expect(solidSSR(() => createComponent(SolidTextarea, { value: "a b" }))).toMatch(/<textarea[^>]*>a b<\/textarea>/);
+});

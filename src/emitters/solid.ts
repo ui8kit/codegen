@@ -491,8 +491,8 @@ export class SolidEmitter implements Emitter {
         });
         let open = attrs.length > 0 ? `<${tagCode} ${attrs}` : `<${tagCode}`;
 
-        // Controlled `value` for client updates; empty string is stripped in
-        // parity normalizeHtml so SSR DOM matches runtimes that use children.
+        // Textarea: the text is the child (SSR prints it as content, never a value="" attribute, which is
+        // invalid on <textarea>); a ref effect keeps the DOM property in sync on the client (refs never run in SSR).
         if (
           !isDynamic &&
           tagCode === "textarea" &&
@@ -500,8 +500,8 @@ export class SolidEmitter implements Emitter {
           node.children[0]!.kind === "text"
         ) {
           const value = printTsExpr((node.children[0] as { expr: Expr }).expr, ctx);
-          open += ` value={(${value}) ?? ""}`;
-          return `${open} />`;
+          open += ` ref={(el) => createEffect(() => { el.value = (${value}) ?? ""; })}`;
+          return `${open}>{(${value}) ?? ""}</${tagCode}>`;
         }
         if (node.void || node.children.length === 0) return `${open} />`;
         const children = node.children
