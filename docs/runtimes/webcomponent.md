@@ -33,3 +33,9 @@ Files: `{dir}/ui/<brick>/<brick>.wc.ts`; barrel `index.wc.ts` (`defineAll()`).
 `<name>Classes()` from `<brick>.shared.ts`.
 
 See also: [contract](../contract.md) · [docs index](../README.md) · primitive pages in [primitives/](../primitives/).
+
+## Bundling
+
+The elements and their utils are bundle-agnostic: no `import.meta`, so they build as ESM, CJS or a classic IIFE script
+(`tests/bundle-agnostic.test.ts` bundles every `*.wc.ts` with `format: "iife"`). Dev-only warnings (unknown variant, disallowed tag)
+are on when `globalThis.__UI8KIT_DEV__ = true` or when the bundler defines `process.env.NODE_ENV` as `"development"`.
