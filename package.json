@@ -13,7 +13,7 @@
     "test:watch": "bun test --watch",
     "typecheck": "tsc --noEmit",
     "typecheck:generated": "bun run generate && bun x tsc -p tsconfig.generated.json && bun x tsc -p tsconfig.generated.solid.json && bun x vue-tsc --noEmit -p tsconfig.generated.vue.json && bun x svelte-check --tsconfig ./tsconfig.generated.svelte.json --fail-on-warnings",
-    "verify": "bun run check && bun x tsc --noEmit && bun run typecheck:generated && bun test"
+    "verify": "bun run check && bun run generate && bun x tsc --noEmit && bun run typecheck:generated && bun test"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@babel/core": "7",
     "@babel/preset-typescript": "7",
+    "@types/babel__core": "7",
     "@types/node": "^22.10.5",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
