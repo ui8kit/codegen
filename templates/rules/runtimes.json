@@ -33,5 +33,12 @@
     "importHint": "`import { renderBox, defineAll } from \"<relative path to {kit}>/index.wc\"` (`render<Part>()` or `<ui8-*>` elements after `defineAll()`).",
     "lucidePackage": "`lucide` (`createElement(Save)`)",
     "example": "```ts\nimport { createElement, Save } from \"lucide\";\nrenderBox({ tag: \"section\", class: \"flex flex-col gap-4 p-4 bg-card text-card-foreground\" }, [\n  renderText({ tag: \"h2\", class: \"text-foreground\" }, \"Title\"),\n  renderButton({ \"aria-label\": \"Save\", class: \"bg-primary text-primary-foreground px-4 py-2\" }, [\n    renderIcon({ size: \"sm\" }, [createElement(Save)]),\n  ]),\n]);\n```"
+  },
+  "templ": {
+    "title": "Go templ",
+    "ext": "templ",
+    "importHint": "`import \"github.com/ui8kit/codegen/generated/templ/ui/box\"` (one Go package per primitive; `select` → package `selectfield`, `switch` → `formswitch`). Props are typed structs (`box.BoxProps{Tag: \"section\"}`); children go between `@box.Box(...) { … }`. There is no asChild: for a custom root use the exported `<Name>Classes(props)` helper (`class={ button.ButtonClasses(button.ButtonProps{}) }`).",
+    "lucidePackage": "inline Lucide SVG markup (copy the `<svg>` from lucide.dev; there is no official Go package)",
+    "example": "```templ\n@box.Box(box.BoxProps{Tag: \"section\", Class: \"flex flex-col gap-4 p-4 bg-card text-card-foreground\"}) {\n  @text.Text(text.TextProps{Tag: \"h2\", Class: \"text-foreground\"}) { Title }\n  @button.Button(button.ButtonProps{AriaLabel: \"Save\", Class: \"bg-primary text-primary-foreground px-4 py-2\"}) {\n    @icon.Icon(icon.IconProps{Size: \"sm\"}) { <svg><!-- lucide save --></svg> }\n  }\n}\n```"
   }
 }

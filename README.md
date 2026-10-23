@@ -1,10 +1,11 @@
 # @ui8kit/codegen
 
 Spec-driven code generator for **style-agnostic HTML primitives**. Each primitive is defined once
-as a typed render contract (`bricks/<name>/<name>.def.ts`); emitters print it into five
+as a typed render contract (`bricks/<name>/<name>.def.ts`); emitters print it into six
 runtimes, and parity tests prove every runtime renders the same DOM/ARIA as the canonical renderer.
 
-Runtimes: **React 19 · Svelte 5 · Vue 3 · SolidJS · Web Components** (vanilla, light DOM).
+Runtimes: **React 19 · Svelte 5 · Vue 3 · SolidJS · Web Components** (vanilla, light DOM) ·
+**Go [templ](https://templ.guide)** (server-rendered, first of the template runtimes).
 
 ## Primitives
 
@@ -25,10 +26,10 @@ Composition (cards, badges, alerts, layouts, …) is out of scope for codegen.
 bun install
 bun run generate          # writes generated/ (all runtimes + specs.json)
 bun run build:specs       # writes specs/primitives.json (registry-facing JSON spec)
-bun run verify            # check + tsc + typecheck:generated + all tests (parity ×5 runtimes)
+bun run verify            # check + tsc + typecheck:generated + all tests (parity ×6 runtimes)
 ```
 
-`generate --runtimes react,svelte,vue,solid,webcomponent` limits the output.
+`generate --runtimes react,svelte,vue,solid,webcomponent,templ` limits the output.
 
 ### Web Components
 
@@ -46,14 +47,46 @@ next microtask for a host connected before its subtree). Attributes are read **o
 swap: the host element is gone afterwards, so there is nothing to observe — update the rendered
 element directly, or call `render<Part>()` again.
 
+### Go templ
+
+`generated/templ/` is a self-contained Go module (`github.com/ui8kit/codegen/generated/templ`,
+templ `v0.3.1070`, Go 1.26): one package per primitive under `ui/<name>/` (`select` → package
+`selectfield`, `switch` → `formswitch`), helpers in `utils/`, the parity harness in `cmd/parity`.
+
+```sh
+cd generated/templ && templ generate && go vet ./... && go build ./...
+```
+
+```templ
+@button.Button(button.ButtonProps{Href: "/docs", Class: "bg-primary text-primary-foreground"}) {
+	Read the docs
+}
+```
+
+- Props are typed structs (`<Name>Props`); a zero value means "unset", so empty strings omit the
+  attribute (to force `value=""`, pass it through `Attrs: templ.Attributes{"value": ""}`).
+- **No `asChild` / Slot in templ.** For a custom root element use the exported
+  `<Name>Classes(props)` helper: `<a class={ button.ButtonClasses(button.ButtonProps{}) }>`.
+- **Children are trusted HTML.** `{ children... }` renders whatever the caller passes; templ
+  escapes props and text, but `templ.Raw(...)` / unescaped children are your responsibility —
+  never pass user input as raw children (XSS).
+- templ sanitizes URL attributes: `href="javascript:…"` renders as
+  `about:invalid#TemplFailedSanitizationURL` (React would print it verbatim).
+- `Attrs` are spread last; unlike the JS runtimes they do not replace an attribute the
+  primitive already printed (avoid duplicating `class`, `id`, …; use `Class` / typed props).
+
+Parity: `tests/parity.templ.test.ts` runs the real `templ generate` + `go run ./cmd/parity`
+and compares the normalized DOM with React SSR and the canonical renderer. Without Go the
+suite is skipped locally with a message; with `UI8KIT_REQUIRE_ALL_RUNTIMES=1` (CI) it fails.
+
 ## Layout
 
 ```
 bricks/            primitive definitions (+ showcase fixtures *.data.json)
 src/domain/        IR, expressions, tags, canonical renderer, validation
-src/emitters/      react, svelte, vue, solid, webcomponent
+src/emitters/      react, svelte, vue, solid, webcomponent, templ (+ go-expr)
 src/application/   generate pipeline, JSON spec export
-runtime/           support code copied into generated/utils
+runtime/           support code copied into generated/utils (runtime/go → generated/templ/utils)
 tests/             domain, emitter conventions, parity, type tests
 ```
 

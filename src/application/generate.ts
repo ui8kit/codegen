@@ -16,15 +16,19 @@ import { SolidEmitter } from "../emitters/solid";
 import { SvelteEmitter } from "../emitters/svelte";
 import { VueEmitter } from "../emitters/vue";
 import { WebComponentEmitter } from "../emitters/webcomponent";
+import { emitGoMod, emitGoParityHarness, emitGoTags, TemplEmitter } from "../emitters/templ";
 
-export type RuntimeName = "react" | "svelte" | "vue" | "solid" | "webcomponent";
+export type RuntimeName = "react" | "svelte" | "vue" | "solid" | "webcomponent" | "templ";
+
+/** Runtimes that consume the shared TypeScript layer (`ui/*.shared.ts`, `utils/*.ts`). */
+export const TS_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent"];
 
 export interface GenerateOptions {
   runtimes?: RuntimeName[];
 }
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
-export const ALL_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent"];
+export const ALL_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent", "templ"];
 
 export async function generateFiles(
   bricks: BrickDef[],
@@ -39,9 +43,10 @@ export async function generateFiles(
   if (runtimes.includes("vue")) emitters.push(new VueEmitter());
   if (runtimes.includes("solid")) emitters.push(new SolidEmitter());
   if (runtimes.includes("webcomponent")) emitters.push(new WebComponentEmitter());
+  if (runtimes.includes("templ")) emitters.push(new TemplEmitter());
 
   const files: GeneratedFile[] = [];
-  const emitTs = runtimes.length > 0;
+  const emitTs = runtimes.some((r) => TS_RUNTIMES.includes(r));
 
   for (const brick of bricks) {
     // Colocate the shared recipes next to every runtime file.
@@ -64,6 +69,7 @@ export async function generateFiles(
   }
 
   files.push(...(await runtimeSupportFiles(runtimes)));
+  if (runtimes.includes("templ")) files.push(...(await templSupportFiles(bricks)));
   files.push(...barrels(bricks, runtimes));
 
   const { rulesFiles } = await import("./rules");
@@ -91,7 +97,7 @@ export async function writeFiles(files: GeneratedFile[], outDir: string): Promis
 
 async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFile[]> {
   const files: GeneratedFile[] = [];
-  const emitTs = runtimes.length > 0;
+  const emitTs = runtimes.some((r) => TS_RUNTIMES.includes(r));
   if (emitTs) {
     const tsDir = join(PACKAGE_ROOT, "runtime", "ts");
     for (const name of await readdir(tsDir)) {
@@ -109,10 +115,23 @@ async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFi
   return files;
 }
 
+/** The Go module under `templ/`: helpers, tag groups, go.mod/go.sum, parity harness. */
+async function templSupportFiles(bricks: BrickDef[]): Promise<GeneratedFile[]> {
+  const goDir = join(PACKAGE_ROOT, "runtime", "go");
+  const files: GeneratedFile[] = [];
+  for (const name of (await readdir(goDir)).sort()) {
+    const contents = await readFile(join(goDir, name), "utf8");
+    if (name === "go.sum") files.push({ path: "templ/go.sum", contents });
+    else if (name.endsWith(".go")) files.push({ path: `templ/utils/${name}`, contents: `// ${BANNER}\n\n${contents}` });
+  }
+  files.push(emitGoTags(), emitGoMod(), emitGoParityHarness(bricks));
+  return files;
+}
+
 function barrels(bricks: BrickDef[], runtimes: RuntimeName[]): GeneratedFile[] {
   const files: GeneratedFile[] = [];
 
-  if (runtimes.length > 0) {
+  if (runtimes.some((r) => TS_RUNTIMES.includes(r))) {
     const lines = [`// ${BANNER}`, `// Shared per-brick contracts (types + classes helpers).`, ``];
     for (const brick of bricks) {
       lines.push(`export * from "./${brick.dir}/${fileStem(brick)}.shared";`);

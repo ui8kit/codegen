@@ -2,7 +2,7 @@
 /**
  * ui8kit-codegen CLI.
  *
- *   generate [--out <dir>] [--runtimes react,svelte,vue,solid,webcomponent]
+ *   generate [--out <dir>] [--runtimes react,svelte,vue,solid,webcomponent,templ]
  *   specs [--out <file>]                   write the JSON spec export (specs.json)
  *   check                                  validate all brick definitions
  *   list                                   list bricks and parts

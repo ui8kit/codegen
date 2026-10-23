@@ -8,8 +8,17 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      # Every runtime toolchain must be present in CI: a skipped parity suite is a failure.
+      UI8KIT_REQUIRE_ALL_RUNTIMES: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.x"
+          cache-dependency-path: runtime/go/go.sum
+      - name: Install templ
+        run: go install github.com/a-h/templ/cmd/templ@v0.3.1070 && echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
       - run: bun install --frozen-lockfile
       - run: bun run verify

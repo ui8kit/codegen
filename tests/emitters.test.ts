@@ -215,3 +215,38 @@ describe("spec version + agent rules", () => {
     }
   });
 });
+
+describe("templ emitter", () => {
+  const button = file("templ/ui/button/button.templ");
+  const select = file("templ/ui/select/select.templ");
+  const text = file("templ/ui/text/text.templ");
+
+  it("exports <Name>Classes instead of asChild/Slot", () => {
+    expect(button).toContain("func ButtonClasses(p ButtonProps) string");
+    expect(button).not.toMatch(/AsChild|Slot\(|slot\./);
+    expect(files.some((f) => f.path.startsWith("templ/") && f.path.includes("slot"))).toBe(false);
+  });
+
+  it("repeats the children slot in every branch (Button href | button)", () => {
+    expect(button.match(/\{ children\.\.\. \}/g)?.length).toBe(2);
+    expect(button).toContain("if uiutils.IsSetStr(p.Href) {");
+  });
+
+  it("loops Select options and keeps manual children", () => {
+    expect(select).toContain("for _, item := range p.Options {");
+    expect(select).toContain("selected?={ (item.Value == p.Value) }");
+    expect(select).toContain("package selectfield");
+  });
+
+  it("switches over allowed tags for dynamic roots", () => {
+    expect(text).toContain("switch uiutils.ResolveTag(p.Tag, \"p\", uiutils.TagGroupText) {");
+    expect(text).toContain('case "h1":');
+  });
+
+  it("ships a self-contained Go module", () => {
+    expect(file("templ/go.mod")).toContain("require github.com/a-h/templ v0.3.1070");
+    expect(file("templ/utils/tags.go")).toContain("TagGroupBox TagGroup = iota");
+    expect(file("templ/cmd/parity/main.go")).toContain('case "select/Select":');
+    expect(file("rules/templ/rules.json")).toContain("**/*.templ");
+  });
+});
