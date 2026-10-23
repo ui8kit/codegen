@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 
 import { fileStem, type BrickDef } from "../domain/model";
 import { validateRegistry } from "../domain/validate";
-import { BANNER, type Emitter, type GeneratedFile } from "../emitters/common";
+import { BANNER, pruneUnusedImports, type Emitter, type GeneratedFile } from "../emitters/common";
 import { ReactEmitter } from "../emitters/react";
 import { SolidEmitter } from "../emitters/solid";
 import { SvelteEmitter } from "../emitters/svelte";
@@ -57,7 +57,9 @@ export async function generateFiles(
       files.push(emitSharedModule(brick, "../../utils"));
     }
     for (const emitter of emitters) {
-      files.push(...emitter.emit(brick));
+      files.push(
+        ...emitter.emit(brick).map((f) => ({ ...f, contents: pruneUnusedImports(f.contents) }))
+      );
     }
   }
 

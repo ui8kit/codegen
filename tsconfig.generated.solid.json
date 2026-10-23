@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.generated.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  },
+  "include": [
+    "generated/ui/**/*.solid.tsx",
+    "generated/ui/index.solid.ts",
+    "generated/ui/**/*.shared.ts",
+    "generated/utils/**/*.ts"
+  ],
+  "exclude": []
+}

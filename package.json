@@ -12,7 +12,7 @@
     "test": "bun test",
     "test:watch": "bun test --watch",
     "typecheck": "tsc --noEmit",
-    "typecheck:generated": "bun run generate && bun x tsc -p tsconfig.generated.json",
+    "typecheck:generated": "bun run generate && bun x tsc -p tsconfig.generated.json && bun x tsc -p tsconfig.generated.solid.json && bun x vue-tsc --noEmit -p tsconfig.generated.vue.json && bun x svelte-check --tsconfig ./tsconfig.generated.svelte.json --fail-on-warnings",
     "verify": "bun run check && bun x tsc --noEmit && bun run typecheck:generated && bun test"
   },
   "dependencies": {
@@ -34,8 +34,10 @@
     "react-dom": "^19.0.0",
     "solid-js": "^1.9.5",
     "svelte": "^5.19.0",
+    "svelte-check": "^4.7.7",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue-tsc": "^3.3.13"
   }
 }

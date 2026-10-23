@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.generated.json",
+  "include": [
+    "generated/ui/**/*.vue",
+    "generated/ui/index.vue.ts",
+    "generated/ui/**/*.shared.ts",
+    "generated/utils/**/*.ts"
+  ],
+  "exclude": []
+}

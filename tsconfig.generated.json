@@ -13,7 +13,9 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "include": [
     "generated/ui/**/*.ts",

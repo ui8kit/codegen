@@ -130,6 +130,10 @@ export class VueEmitter implements Emitter {
     }
 
     const markup = this.printNode(root, templateCtx, part, state, { isRoot: true });
+    // Parts without a classes contract (e.g. <source>, <option>) never read it.
+    if (!/\bcallerClass\b/.test(markup + body.slice(2).join("\n"))) {
+      body.splice(body.indexOf(`const callerClass = computed(() => attrs.class as string | undefined);`), 1);
+    }
 
     // Assemble imports.
     const imports: string[] = [`import { computed, useAttrs } from "vue";`];

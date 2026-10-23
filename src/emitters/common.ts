@@ -256,3 +256,24 @@ export function recipeVarName(recipeFile: string): string {
   const stem = recipeFile.replace(/\.variants\.json$/, "");
   return pascalCase(stem) + "Variants";
 }
+
+/**
+ * Drop named imports that the emitted file never references, so generated
+ * code compiles under `noUnusedLocals`. Emitters import helpers by family
+ * (e.g. every WC file pulls the same DOM helpers); pruning once here keeps
+ * each emitter simple. Only single-line `import { … } from "…";` statements
+ * are touched; an import whose specifiers all go away is removed entirely.
+ */
+export function pruneUnusedImports(code: string): string {
+  const importRe = /^import (type )?\{([^}]*)\} from ("[^"]+");\n/gm;
+  const body = code.replace(importRe, "");
+  const used = (name: string) => new RegExp(`(?<![\\w$.])${name.replace(/\$/g, "\\$")}(?![\\w$])`).test(body);
+  return code.replace(importRe, (_m, typeKw: string | undefined, specs: string, from: string) => {
+    const kept = specs
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .filter((s) => used(s.replace(/^type\s+/, "").split(/\s+as\s+/).pop()!.trim()));
+    return kept.length === 0 ? "" : `import ${typeKw ?? ""}{ ${kept.join(", ")} } from ${from};\n`;
+  });
+}
