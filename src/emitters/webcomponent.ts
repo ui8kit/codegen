@@ -165,6 +165,12 @@ export class WebComponentEmitter implements Emitter {
           lines.push(`const ${v} = document.createElement(${tagCode});`);
           for (const a of node.attrs) this.emitAttr(a, v, part, ctx, lines, isRoot, state);
           for (const c of node.children) emitNode(c, v, lines, false);
+          for (const a of node.attrs) {
+            if (a.kind !== "liveValue") continue;
+            // After the options exist; the DOM property, not an attribute.
+            helpers.add("syncValue");
+            lines.push(`syncValue(${v} as HTMLSelectElement, ${printTsExpr(a.expr, ctx)});`);
+          }
           add(v);
           return;
         }

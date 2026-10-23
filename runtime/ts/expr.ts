@@ -76,3 +76,17 @@ export const orUndef = (v: string | null | undefined): string | undefined => {
   const t = trimStr(v);
   return t === "" ? undefined : String(v);
 };
+
+/**
+ * Sync a form control's live `value` property (never an attribute, so SSR
+ * markup is untouched). `undefined` leaves the current selection alone, so
+ * the children's initial `selected` state stays in charge. Usable directly as
+ * a Svelte action (`use:syncValue={value}`) and from Solid refs / WC renderers.
+ */
+export function syncValue(node: { value: string }, value?: string | null): { update(v?: string | null): void } {
+  const apply = (v?: string | null): void => {
+    if (v !== undefined && v !== null && node.value !== v) node.value = v;
+  };
+  apply(value);
+  return { update: apply };
+}

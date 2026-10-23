@@ -11,6 +11,7 @@ export * from "../src/domain/expr";
 export {
   attrBool,
   attrClass,
+  attrLiveValue,
   attrExpr,
   attrRest,
   attrStatic,

@@ -183,7 +183,8 @@ export class SolidEmitter implements Emitter {
     lines.push(` */`);
     lines.push(``);
 
-    lines.push(`import { splitProps, type JSX, type Component } from "solid-js";`);
+    // Unused names (createEffect) are pruned by pruneUnusedImports.
+    lines.push(`import { createEffect, splitProps, type JSX, type Component } from "solid-js";`);
     if (usesDynamic) {
       lines.push(`import { Dynamic } from "solid-js/web";`);
     }
@@ -441,6 +442,11 @@ export class SolidEmitter implements Emitter {
       }
       case "bool":
         return `${solidAttrName(attr.name)}={${printTsExpr(attr.expr, ctx)} || undefined}`;
+      case "liveValue":
+        // Client-only (refs never run in SSR); the effect runs after the
+        // options are inserted and re-syncs when the value changes.
+        ctx.helpers.add("syncValue");
+        return `ref={(el) => createEffect(() => syncValue(el, ${printTsExpr(attr.expr, ctx)}))}`;
       case "class": {
         if (!attr.spec) return `class={cls() || undefined}`;
         state.usesCn = true;

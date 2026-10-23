@@ -446,7 +446,16 @@ export class ReactEmitter implements Emitter {
         return `${name}={orUndef(${value})}`;
       }
       case "bool":
+        // React owns option selection through <select value|defaultValue>.
+        if (attr.parentValue) return "";
         return `${reactAttrName(attr.name)}={${printTsExpr(attr.expr, ctx)} || undefined}`;
+      case "liveValue": {
+        // Controlled when the caller wires onChange, otherwise an initial
+        // defaultValue — React's own select semantics, no `selected` warning.
+        const v = printTsExpr(attr.expr, ctx);
+        const val = attr.multiple ? `${printTsExpr(attr.multiple, ctx)} ? [${v}] : ${v}` : v;
+        return `{...(${v} === undefined ? {} : { [rest.onChange ? "value" : "defaultValue"]: ${val} })}`;
+      }
       case "class": {
         if (!attr.spec) return `className={cls || undefined}`;
         state.usesCn = true;

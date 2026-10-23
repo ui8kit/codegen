@@ -103,8 +103,20 @@ export type AttrSpec =
    * `keepEmpty` is set.
    */
   | { kind: "expr"; name: string; expr: Expr; when?: Expr; keepEmpty?: boolean }
-  /** Native boolean attribute: present when true, absent when false. */
-  | { kind: "bool"; name: string; expr: Expr }
+  /**
+   * Native boolean attribute: present when true, absent when false.
+   * `parentValue` marks initial-state attrs (option `selected`) that runtimes
+   * with a controlled parent value (React `<select value>`) derive from the
+   * parent's `liveValue` instead of printing.
+   */
+  | { kind: "bool"; name: string; expr: Expr; parentValue?: boolean }
+  /**
+   * Live `value` DOM property of a form control (controlled select). Never
+   * serialized: the SSR/DOM contract is carried by the children's
+   * `parentValue` attrs, so parity is unaffected. `multiple` selects the
+   * array form where a runtime needs it (React).
+   */
+  | { kind: "liveValue"; expr: Expr; multiple?: Expr }
   /**
    * The merged class attribute. Without `spec`, uses the part's `classes`
    * contract and prints as a call to the shared classes helper; with an
@@ -261,7 +273,12 @@ export const attrExpr = (
   expr: Expr,
   opts?: { when?: Expr; keepEmpty?: boolean }
 ): AttrSpec => ({ kind: "expr", name, expr, when: opts?.when, keepEmpty: opts?.keepEmpty });
-export const attrBool = (name: string, expr: Expr): AttrSpec => ({ kind: "bool", name, expr });
+export const attrBool = (
+  name: string,
+  expr: Expr,
+  opts?: { parentValue?: boolean }
+): AttrSpec => ({ kind: "bool", name, expr, ...(opts?.parentValue ? { parentValue: true } : {}) });
+export const attrLiveValue = (expr: Expr, multiple?: Expr): AttrSpec => ({ kind: "liveValue", expr, multiple });
 export const attrClass = (spec?: ClassSpec): AttrSpec => ({ kind: "class", spec });
 export const attrRest = (): AttrSpec => ({ kind: "rest" });
 

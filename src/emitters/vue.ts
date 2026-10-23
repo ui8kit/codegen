@@ -189,7 +189,14 @@ export class VueEmitter implements Emitter {
     state: { usesCn: boolean },
     opts: { inLoop: boolean }
   ): string[] {
-    return node.attrs.map((attr) => this.printAttr(attr, ctx, part, state, opts)).filter(Boolean);
+    const printed = node.attrs.map((attr) => this.printAttr(attr, ctx, part, state, opts)).filter(Boolean);
+    const live = node.attrs.find((a) => a.kind === "liveValue");
+    if (!live || live.kind !== "liveValue") return printed;
+    // `.value` keys set the DOM property (after children mount) and are
+    // skipped by SSR; one merged v-bind keeps the caller's attrs last.
+    const v = printTsExpr(live.expr, ctx);
+    const bind = `v-bind="${escapeVue(`{ ...(${v} === undefined ? {} : { '.value': ${v} }), ...restAttrs }`)}"`;
+    return printed.map((p) => (p === `v-bind="restAttrs"` ? bind : p));
   }
 
   private printAttr(
@@ -220,6 +227,8 @@ export class VueEmitter implements Emitter {
       }
       case "bool":
         return `:${attr.name}="${escapeVue(`${printTsExpr(attr.expr, ctx)} || undefined`)}"`;
+      case "liveValue":
+        return ""; // merged into the rest v-bind in printAttrs
       case "class": {
         if (!attr.spec) return `:class="cls || undefined"`;
         state.usesCn = true;

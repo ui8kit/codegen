@@ -13,6 +13,10 @@ Checkbox · Radio · Switch · Image (+ Picture, Source) · Icon · Dialog · Di
 Meter · Progress — see [docs/primitives.md](docs/primitives.md).
 
 No CSS ships with the primitives: style them with token class names via `class`.
+
+**Select value.** `value` marks the matching option `selected` in the markup and also drives
+the live DOM `value` on the client (React: `value` when you pass `onChange`, otherwise
+`defaultValue`; Svelte/Solid/Vue/WC: the `value` property is synced, never an attribute).
 Composition (cards, badges, alerts, layouts, …) is out of scope for codegen.
 
 ## Usage

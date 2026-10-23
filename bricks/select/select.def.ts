@@ -2,6 +2,7 @@ import {
   attrBool,
   attrClass,
   attrExpr,
+  attrLiveValue,
   attrRest,
   brick,
   el,
@@ -66,6 +67,7 @@ export default brick({
           attrBool("disabled", prop("Disabled")),
           fwd("aria-invalid", "AriaInvalid"),
           fwd("aria-describedby", "AriaDescribedBy"),
+          attrLiveValue(prop("Value"), prop("Multiple")),
           attrRest(),
         ],
         [
@@ -74,7 +76,7 @@ export default brick({
               "option",
               [
                 attrExpr("value", item("Value"), { keepEmpty: true }),
-                attrBool("selected", eq(item("Value"), prop("Value"))),
+                attrBool("selected", eq(item("Value"), prop("Value")), { parentValue: true }),
                 attrBool("disabled", item("Disabled")),
               ],
               [text(item("Label"))]

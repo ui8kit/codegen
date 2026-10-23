@@ -38,6 +38,10 @@ function collectExprs(part: PartDef): Expr[] {
       case "bool":
         out.push(attr.expr);
         break;
+      case "liveValue":
+        out.push(attr.expr);
+        if (attr.multiple) out.push(attr.multiple);
+        break;
       case "class": {
         const spec = attr.spec;
         if (spec) {

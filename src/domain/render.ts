@@ -225,6 +225,8 @@ function renderAttrs(attrs: AttrSpec[], ctx: Ctx): string {
         if (cls !== "") put("class", cls);
         break;
       }
+      case "liveValue":
+        break; // DOM property, never serialized
       case "rest":
         for (const [k, v] of Object.entries(ctx.rest ?? {})) {
           if (v === false || v === undefined || v === null) continue;

@@ -222,6 +222,9 @@ export class SvelteEmitter implements Emitter {
       }
       case "bool":
         return `${attr.name}={${printTsExpr(attr.expr, ctx)} || undefined}`;
+      case "liveValue":
+        ctx.helpers.add("syncValue");
+        return `use:syncValue={${printTsExpr(attr.expr, ctx)}}`;
       case "class": {
         // With spread attributes Svelte SSR prints `class=""` even for
         // undefined; a conditional spread omits the attr entirely.
