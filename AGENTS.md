@@ -42,3 +42,16 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 - No asChild/Slot: each part with a class contract gets a `<name>_classes(p)` Jinja global.
 - **Children are trusted HTML** (`{{ children|safe }}`, repeated per branch); never route user
   input into children (XSS). Props/text are autoescaped.
+
+## Twig / Latte specifics
+
+- Output `generated/twig/` and `generated/latte/` (Composer packages, `twig/twig ^3`,
+  `latte/latte ^3`); emitters `src/emitters/{twig,latte,php-common}.ts`, PHP helpers copied from
+  `runtime/php/*.php` (`__NAMESPACE__` → `UI8Kit\Twig` / `UI8Kit\Latte`); `Tags.php` and
+  `Classes.php` are generated.
+- No asChild: `Classes::<part>Classes(array $props)` (Twig: `ui8kit_classes('<part>Classes', {…})`).
+- Dynamic tags: `if` chain, one static element per allowed tag; slot repeated per branch; Select
+  options loop over `options`.
+- **Children are trusted HTML** (`|raw` / `|noescape`); never route user input into them (XSS).
+- Parity: `tests/parity.{twig,latte}.test.ts` (shared `tests/support/php-parity.ts`); CI uses
+  `shivammathur/setup-php` (PHP 8.3 + Composer).

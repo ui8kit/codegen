@@ -18,8 +18,19 @@ import { VueEmitter } from "../emitters/vue";
 import { WebComponentEmitter } from "../emitters/webcomponent";
 import { emitGoMod, emitGoParityHarness, emitGoTags, TemplEmitter } from "../emitters/templ";
 import { emitJinjaClasses, Jinja2Emitter, JINJA2_REQUIREMENT } from "../emitters/jinja2";
+import { TwigEmitter } from "../emitters/twig";
+import { LatteEmitter } from "../emitters/latte";
+import {
+  emitClassesPhp,
+  emitComposerJson,
+  emitPhpParityHarness,
+  emitTagsPhp,
+  PHP_NAMESPACE,
+  runtimePhpFile,
+  type PhpRuntime,
+} from "../emitters/php-common";
 
-export type RuntimeName = "react" | "svelte" | "vue" | "solid" | "webcomponent" | "templ" | "jinja2";
+export type RuntimeName = "react" | "svelte" | "vue" | "solid" | "webcomponent" | "templ" | "jinja2" | "twig" | "latte";
 
 /** Runtimes that consume the shared TypeScript layer (`ui/*.shared.ts`, `utils/*.ts`). */
 export const TS_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent"];
@@ -29,7 +40,7 @@ export interface GenerateOptions {
 }
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
-export const ALL_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent", "templ", "jinja2"];
+export const ALL_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent", "templ", "jinja2", "twig", "latte"];
 
 export async function generateFiles(
   bricks: BrickDef[],
@@ -46,6 +57,8 @@ export async function generateFiles(
   if (runtimes.includes("webcomponent")) emitters.push(new WebComponentEmitter());
   if (runtimes.includes("templ")) emitters.push(new TemplEmitter());
   if (runtimes.includes("jinja2")) emitters.push(new Jinja2Emitter());
+  if (runtimes.includes("twig")) emitters.push(new TwigEmitter());
+  if (runtimes.includes("latte")) emitters.push(new LatteEmitter());
 
   const files: GeneratedFile[] = [];
   const emitTs = runtimes.some((r) => TS_RUNTIMES.includes(r));
@@ -73,6 +86,9 @@ export async function generateFiles(
   files.push(...(await runtimeSupportFiles(runtimes)));
   if (runtimes.includes("templ")) files.push(...(await templSupportFiles(bricks)));
   if (runtimes.includes("jinja2")) files.push(...(await jinja2SupportFiles(bricks)));
+  for (const php of ["twig", "latte"] as const) {
+    if (runtimes.includes(php)) files.push(...(await phpSupportFiles(bricks, php)));
+  }
   files.push(...barrels(bricks, runtimes));
 
   const { rulesFiles } = await import("./rules");
@@ -141,6 +157,24 @@ async function jinja2SupportFiles(bricks: BrickDef[]): Promise<GeneratedFile[]> 
   }
   files.push(emitJinjaClasses(bricks));
   files.push({ path: "jinja2/requirements.txt", contents: `# ${BANNER}\n${JINJA2_REQUIREMENT}\n` });
+  return files;
+}
+
+/** A Composer package under `<runtime>/`: runtime helpers, Tags, Classes, composer.json, parity harness. */
+async function phpSupportFiles(bricks: BrickDef[], runtime: PhpRuntime): Promise<GeneratedFile[]> {
+  const ns = PHP_NAMESPACE[runtime];
+  const phpDir = join(PACKAGE_ROOT, "runtime", "php");
+  const files: GeneratedFile[] = [];
+  for (const name of (await readdir(phpDir)).sort()) {
+    if (name === "TwigExtension.php" && runtime !== "twig") continue;
+    files.push({ path: `${runtime}/src/${name}`, contents: runtimePhpFile(await readFile(join(phpDir, name), "utf8"), ns) });
+  }
+  files.push(
+    { path: `${runtime}/src/Tags.php`, contents: emitTagsPhp(ns) },
+    { path: `${runtime}/src/Classes.php`, contents: emitClassesPhp(bricks, ns) },
+    { path: `${runtime}/composer.json`, contents: emitComposerJson(runtime) },
+    { path: `${runtime}/bin/parity.php`, contents: emitPhpParityHarness(runtime) }
+  );
   return files;
 }
 

@@ -6,6 +6,7 @@ runtimes, and parity tests prove every runtime renders the same DOM/ARIA as the 
 
 Runtimes: **React 19 · Svelte 5 · Vue 3 · SolidJS · Web Components** (vanilla, light DOM) ·
 **Go [templ](https://templ.guide)** (server-rendered, first of the template runtimes).
+PHP template runtimes: **[Twig](https://twig.symfony.com) · [Latte](https://latte.nette.org)**.
 
 ## Primitives
 
@@ -107,6 +108,39 @@ Parity: `tests/parity.jinja2.test.ts` renders every part with real Python Jinja2
 (`generated/jinja2/parity.py`) and compares the normalized DOM with React SSR and the canonical
 renderer. Without python3 + Jinja2 the suite is skipped locally; with
 `UI8KIT_REQUIRE_ALL_RUNTIMES=1` (CI) it fails.
+
+### Twig and Latte (PHP)
+
+`generated/twig/` and `generated/latte/` are Composer packages (`twig/twig ^3`, `latte/latte ^3`,
+PHP ≥ 8.1; namespaces `UI8Kit\Twig` / `UI8Kit\Latte`): one template per part under
+`ui/<brick>/<Part>.html.twig` / `<Part>.latte`, plus `src/` (`Rt` helpers, tailwind-merge port
+`CnMerge`, generated `Tags` and `Classes`; Twig also `TwigExtension`).
+
+```twig
+{# $twig->addExtension(new \UI8Kit\Twig\TwigExtension()); loader root: generated/twig/ui #}
+{% include 'button/Button.html.twig' with { ariaLabel: 'Save', class: 'px-4', children: icon } only %}
+```
+
+```latte
+{include 'button/Button.latte', ariaLabel: 'Save', class: 'px-4', children: $icon}
+```
+
+- Props are template parameters (`tag`, `class`, `ariaLabel`, `htmlFor`, `id`); Latte declares
+  them in a typed `{parameters}` block. Extra attributes go in `attrs` and are merged last (the
+  caller wins, like the JS rest props). Select options: `options: [{value, label, disabled}]`.
+- **Children are trusted HTML**: `children` is printed raw (`{{ children|raw }}` /
+  `{$children|noescape}`). Props and text are escaped by the engine; never route user input into
+  `children` (XSS) — render it through a template first (`{% set %}…{% endset %}` / `{capture}`).
+  URL attributes are not sanitized (`href="javascript:…"` prints verbatim, as in React).
+- **No `asChild`**: compose a part's classes for a custom root with
+  `ui8kit_classes('buttonClasses', {…})` (Twig) or `\UI8Kit\Latte\Classes::buttonClasses([...])`.
+- Dynamic tags (Box/Text `tag`) become an `if` chain with one static element per allowed tag;
+  `when` branches repeat the children slot. Empty strings mean "unset" (attribute omitted);
+  force `value=""` through `attrs`.
+
+Parity: `tests/parity.twig.test.ts` / `tests/parity.latte.test.ts` run `composer install` and the
+real engines (`php bin/parity.php`) and compare with React SSR and the canonical renderer;
+skipped locally without PHP/Composer, a failure with `UI8KIT_REQUIRE_ALL_RUNTIMES=1`.
 
 ## Layout
 
