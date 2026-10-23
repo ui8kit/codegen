@@ -106,6 +106,16 @@ def eq(a: Any, b: Any) -> bool:
     return False
 
 
+URL_ATTRS = frozenset(["href", "src", "action", "formaction", "poster", "cite", "background", "xlink:href"])
+
+
+def safe_url(v: Any) -> str:
+    """URL attribute value: "" for javascript:, vbscript: and data: (ASCII whitespace/control chars removed, case-insensitive)."""
+    t = s(v)
+    k = "".join(c for c in t if ord(c) > 0x20).lower()
+    return "" if k.startswith(("javascript:", "vbscript:", "data:")) else t
+
+
 def attr_html(a: Any) -> str:
     """the Attrs escape hatch as markup: ` name="value"`, a bare name for True, nothing for None and False"""
     if not isinstance(a, dict):
@@ -113,6 +123,8 @@ def attr_html(a: Any) -> str:
     out = ""
     for k, v in a.items():
         if v is None or v is False:
+            continue
+        if isinstance(v, str) and v != "" and str(k).lower() in URL_ATTRS and safe_url(v) == "":
             continue
         name = html.escape(str(k), quote=True)
         out += f" {name}" if v is True else f' {name}="{html.escape(s(v), quote=True)}"'

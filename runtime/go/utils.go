@@ -88,3 +88,35 @@ func MergeAttrs(parts ...templ.Attributes) templ.Attributes {
 	}
 	return out
 }
+
+// URLAttrs are the attributes whose value is a URL (SafeURL in every runtime).
+var URLAttrs = map[string]bool{"href": true, "src": true, "action": true, "formaction": true, "poster": true, "cite": true, "background": true, "xlink:href": true}
+
+// SafeURL returns "" for javascript:, vbscript: and data: URLs (ASCII whitespace/control chars removed, case-insensitive).
+func SafeURL(v string) string {
+	b := make([]byte, 0, len(v))
+	for i := 0; i < len(v); i++ {
+		if v[i] > 0x20 {
+			b = append(b, v[i])
+		}
+	}
+	s := strings.ToLower(string(b))
+	for _, p := range []string{"javascript:", "vbscript:", "data:"} {
+		if strings.HasPrefix(s, p) {
+			return ""
+		}
+	}
+	return v
+}
+
+// SafeAttrs drops URL attributes with an unsafe URL from an Attrs map.
+func SafeAttrs(a templ.Attributes) templ.Attributes {
+	out := templ.Attributes{}
+	for k, v := range a {
+		if s, ok := v.(string); ok && URLAttrs[strings.ToLower(k)] && SafeURL(s) == "" && s != "" {
+			continue
+		}
+		out[k] = v
+	}
+	return out
+}

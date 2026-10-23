@@ -90,3 +90,7 @@ export function syncValue(node: { value: string }, value?: string | null): { upd
   apply(value);
   return { update: apply };
 }
+
+/** URL attribute value: "" for javascript:, vbscript: and data: (ASCII whitespace/control chars removed, case-insensitive). */
+export const safeUrl = (v: string | null | undefined): string =>
+  /^(javascript|vbscript|data):/.test(String(v ?? "").replace(/[\u0000-\u0020]/g, "").toLowerCase()) ? "" : (v ?? "");

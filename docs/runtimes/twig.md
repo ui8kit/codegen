@@ -17,7 +17,8 @@ Register `$twig->addExtension(new \UI8Kit\Twig\TwigExtension())` and point the l
 ## Props and children
 
 - Props are variables (`tag`, `class`, `ariaLabel`, `htmlFor`, `id`); call with
-  `{% include 'button/Button.html.twig' with { … } only %}`. Select options:
+  `{% include 'button/Button.html.twig' with { … } only %}` — always `only`: without it the caller's variables
+  (`children`, `class`, `href`, ...) leak into the primitive (a test guards docs/ and the generated templates). Select options:
   `options: [{ value, label, disabled }]`.
 - Extra attributes: `attrs` (merged last, caller wins).
 - Children: `children` is trusted HTML printed with `{{ children|raw }}`. Render markup with

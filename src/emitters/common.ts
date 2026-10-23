@@ -79,6 +79,7 @@ export function exprType(expr: Expr, env: TypeEnv): ExprType {
     case "concat":
     case "boolToString":
     case "intToString":
+    case "safeUrl":
       return "string";
     case "cond":
       return exprType(expr.then, env);
@@ -139,6 +140,7 @@ function childListOf(expr: Expr): Expr[] {
     case "contains":
     case "boolToString":
     case "intToString":
+    case "safeUrl":
       return [expr.expr];
     case "cond":
       return [expr.test, expr.then, expr.else];
@@ -201,6 +203,8 @@ export function foldResolvedTag(expr: Expr, tag: string): Expr {
         return { ...e, test, then: fold(e.then), else: fold(e.else) };
       }
       case "defaultIfEmpty":
+        return { ...e, expr: fold(e.expr) };
+      case "safeUrl":
         return { ...e, expr: fold(e.expr) };
       case "mapOr":
         return { ...e, expr: fold(e.expr) };

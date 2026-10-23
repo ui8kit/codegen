@@ -3,6 +3,9 @@
  */
 
 import type { BrickDef } from "../src/domain/model";
+import { walkNodes } from "../src/domain/model";
+import { safeUrl, URL_ATTRS } from "../src/domain/expr";
+import { isPassthroughForward } from "../src/domain/passthrough";
 
 import box from "./box/box.def";
 import text from "./text/text.def";
@@ -24,7 +27,7 @@ import meter from "./meter/meter.def";
 import progress from "./progress/progress.def";
 import separator from "./separator/separator.def";
 
-export const bricks: BrickDef[] = [
+const raw: BrickDef[] = [
   box,
   text,
   button,
@@ -45,3 +48,16 @@ export const bricks: BrickDef[] = [
   progress,
   separator,
 ];
+
+/** Security: every URL attribute (href, src, action, ...) goes through safeUrl (javascript:, vbscript:, data: -> omitted).
+ * Passthrough forwards stay plain props (nullable contract); the server emitters and the canonical renderer apply the check by attribute name. */
+function withSafeUrls(b: BrickDef): BrickDef {
+  for (const part of b.parts)
+    walkNodes(part.render, (n) => {
+      if (n.kind !== "element") return;
+      for (const a of n.attrs) if (a.kind === "expr" && URL_ATTRS.includes(a.name) && a.expr.kind !== "safeUrl" && a.expr.kind !== "lit" && !isPassthroughForward(a, part)) a.expr = safeUrl(a.expr);
+    });
+  return b;
+}
+
+export const bricks: BrickDef[] = raw.map(withSafeUrls);

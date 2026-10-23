@@ -28,3 +28,15 @@ Point the Latte loader at `{dir}/ui`. One template per part: `<brick>/<Part>.lat
 `{\UI8Kit\Latte\Classes::buttonClasses(['class' => 'px-4'])}`; `Rt`, `CnMerge`, `Tags` in the runtime.
 
 See also: [contract](../contract.md) · [docs index](../README.md) · primitive pages in [primitives/](../primitives/).
+
+## Includes inherit variables
+
+Latte has no `only`: an included primitive receives the caller's variables for every `{parameters}` name it declares.
+Pass every such parameter explicitly when the caller has a variable of the same name
+(`{include 'ui/icon/Icon.latte', size: '', class: '...'}`), or render from a template that has no colliding variables.
+
+## Safe URLs
+
+URL attributes (`href`, `src`, `action`, `formaction`, `poster`, `cite`, `background`, `xlink:href`), named or in `attrs`,
+go through `Rt::safeUrl` / `Rt::urlOrNull` / `Rt::safeAttrs`: `javascript:`, `vbscript:` and `data:` (case and control
+characters ignored) omit the attribute, as in Twig, Jinja2 and templ.

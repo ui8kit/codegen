@@ -14,6 +14,7 @@
  */
 
 import { isPassthroughForward } from "../domain/passthrough";
+import { URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import {
   type AttrSpec,
@@ -97,6 +98,8 @@ export function printJinjaExpr(expr: Expr, ctx: Ctx): string {
     case "resolvedTag":
       if (!ctx.tagVar) throw new Error(`${ctx.part.name}: resolvedTag outside a dynamic element`);
       return ctx.tagVar;
+    case "safeUrl":
+      return `ui_safe_url(${p(expr.expr)})`;
     case "defaultIfEmpty":
       return `ui_default_if_empty(${p(expr.expr)}, ${str(expr.fallback)})`;
     case "mapOr": {
@@ -263,7 +266,8 @@ function printAttr(attr: AttrSpec, ctx: Ctx): string {
       if (isPassthroughForward(attr, ctx.part)) {
         // nullable passthrough: unset / None omits, an explicit "" renders attr=""
         const k = (attr.expr as { name: string }).name;
-        return `{%- if p['${k}'] is defined and p['${k}'] is not none %} ${attr.name}="{{ p['${k}'] }}"{%- endif %}`;
+        const safe = URL_ATTRS.includes(attr.name) ? ` and (p['${k}'] == '' or ui_safe_url(p['${k}']) != '')` : "";
+        return `{%- if p['${k}'] is defined and p['${k}'] is not none${safe} %} ${attr.name}="{{ p['${k}'] }}"{%- endif %}`;
       }
       const value = stringJ(attr.expr, ctx);
       if (attr.when) {

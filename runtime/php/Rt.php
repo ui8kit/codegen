@@ -151,10 +151,40 @@ final class Rt
      * attrs merged last so the caller wins. null/false omit, true prints a
      * bare boolean attribute, everything else stringifies and escapes.
      */
+    private const URL_ATTRS = ['href', 'src', 'action', 'formaction', 'poster', 'cite', 'background', 'xlink:href'];
+
+    /** URL attribute value: '' for javascript:, vbscript: and data: (ASCII whitespace/control chars removed, case-insensitive). */
+    public static function safeUrl(mixed $v): string
+    {
+        $s = self::s($v);
+        return preg_match('/^(javascript|vbscript|data):/', strtolower((string) preg_replace('/[\x00-\x20]/', '', $s))) ? '' : $s;
+    }
+
+    /** Passthrough URL attribute: null (omitted) for an unsafe scheme, else the value as given (null stays null). */
+    public static function urlOrNull(mixed $v): ?string
+    {
+        if ($v === null) {
+            return null;
+        }
+        $s = self::s($v);
+        return $s !== '' && self::safeUrl($s) === '' ? null : $s;
+    }
+
+    /** Drops URL attributes with an unsafe URL (Latte n:attr maps, Twig attrs). */
+    public static function safeAttrs(array $attrs): array
+    {
+        foreach ($attrs as $name => $value) {
+            if (is_string($value) && $value !== '' && in_array(strtolower((string) $name), self::URL_ATTRS, true) && self::safeUrl($value) === '') {
+                unset($attrs[$name]);
+            }
+        }
+        return $attrs;
+    }
+
     public static function attrs(array $attrs, array $rest = []): string
     {
         $out = '';
-        foreach (array_merge($attrs, $rest) as $name => $value) {
+        foreach (self::safeAttrs(array_merge($attrs, $rest)) as $name => $value) {
             if ($value === null || $value === false) {
                 continue;
             }

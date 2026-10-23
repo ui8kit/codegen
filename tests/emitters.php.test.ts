@@ -54,7 +54,7 @@ describe("latte emitter", () => {
   });
 
   it("spreads caller attrs last and uses the Classes helper", () => {
-    expect(button).toContain("...$attrs,");
+    expect(button).toContain("...\\UI8Kit\\Latte\\Rt::safeAttrs($attrs),");
     expect(button).toContain("\\UI8Kit\\Latte\\Classes::buttonClasses([");
     expect(select).toContain("{foreach $options as $item}");
   });

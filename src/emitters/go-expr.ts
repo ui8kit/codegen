@@ -31,6 +31,8 @@ export function printGoExpr(expr: Expr, ctx: GoPrintCtx): string {
       return ctx.derivedCode(expr.name);
     case "resolvedTag":
       throw new Error(`${ctx.env.part.name}: resolvedTag must be folded before Go printing`);
+    case "safeUrl":
+      return `uiutils.SafeURL(${p(expr.expr)})`;
     case "defaultIfEmpty":
       return `uiutils.DefaultIfEmpty(${p(expr.expr)}, ${goString(expr.fallback)})`;
     case "mapOr": {

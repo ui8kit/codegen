@@ -13,6 +13,7 @@
  */
 
 import { isPassthroughForward } from "../domain/passthrough";
+import { URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import {
   fileStem,
@@ -288,7 +289,8 @@ function printAttr(attr: AttrSpec, tag: string, part: PartDef, ctx: GoPrintCtx):
         return `if p.${k} != nil {\n\t${attr.name}={ *p.${k} }\n}`;
       }
       const expr = fold(attr.expr, tag);
-      const value = stringGo(expr, ctx);
+      // passthrough URL attrs are plain props here: SafeURL omits an unsafe scheme (templ would print about:invalid#...)
+      const value = isPassthroughForward(attr, part) && URL_ATTRS.includes(attr.name) ? `uiutils.SafeURL(${stringGo(expr, ctx)})` : stringGo(expr, ctx);
       if (attr.when) {
         const when = fold(attr.when, tag);
         if (when.kind === "lit") return when.value ? `${attr.name}={ ${value} }` : "";
@@ -311,7 +313,7 @@ function printAttr(attr: AttrSpec, tag: string, part: PartDef, ctx: GoPrintCtx):
       return `if ${call} != "" {\n\tclass={ ${call} }\n}`;
     }
     case "rest":
-      return `{ p.Attrs... }`;
+      return `{ uiutils.SafeAttrs(p.Attrs)... }`;
   }
 }
 

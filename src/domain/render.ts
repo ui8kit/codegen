@@ -7,6 +7,7 @@
 
 import { isPassthroughForward } from "./passthrough";
 import type { Expr } from "./expr";
+import { isUnsafeUrl, URL_ATTRS } from "./expr";
 import type {
   AttrSpec,
   BrickDef,
@@ -85,6 +86,10 @@ export function evalExpr(expr: Expr, ctx: Ctx): string | number | boolean {
     case "resolvedTag": {
       if (!ctx.resolvedTag) throw new RenderError(`resolvedTag used before resolution in ${ctx.part.name}`);
       return ctx.resolvedTag;
+    }
+    case "safeUrl": {
+      const v = evalExpr(expr.expr, ctx);
+      return isUnsafeUrl(v) ? "" : v;
     }
     case "defaultIfEmpty": {
       const v = String(evalExpr(expr.expr, ctx) ?? "").trim();
@@ -213,7 +218,7 @@ function renderAttrs(attrs: AttrSpec[], ctx: Ctx): string {
         // Passthrough attrs are nullable: unset (undefined/null) omits, an explicit "" renders attr="" (React forwards it).
         if (isPassthroughForward(attr, ctx.part)) {
           const raw = ctx.props[(attr.expr as { name: string }).name];
-          if (raw !== undefined && raw !== null) put(attr.name, String(raw));
+          if (raw !== undefined && raw !== null && !(URL_ATTRS.includes(attr.name) && isUnsafeUrl(raw))) put(attr.name, String(raw));
           break;
         }
         const v = evalExpr(attr.expr, ctx);
@@ -237,6 +242,7 @@ function renderAttrs(attrs: AttrSpec[], ctx: Ctx): string {
       case "rest":
         for (const [k, v] of Object.entries(ctx.rest ?? {})) {
           if (v === false || v === undefined || v === null) continue;
+          if (typeof v === "string" && v !== "" && URL_ATTRS.includes(k.toLowerCase()) && isUnsafeUrl(v)) continue; // unsafe URL key
           put(k, v === true ? true : String(v));
         }
         break;

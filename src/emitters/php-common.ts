@@ -13,6 +13,7 @@
  */
 
 import { isPassthroughForward } from "../domain/passthrough";
+import { URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import type { AttrSpec, BrickDef, ClassSpec, ElementNode, Node, PartDef, PropDef } from "../domain/model";
 import { camelCase, reactPropName } from "../domain/naming";
@@ -58,6 +59,8 @@ export function phpDefault(type: string): string {
 // ---------------------------------------------------------------------------
 
 type RtFn =
+  | "safeUrl"
+  | "urlOrNull"
   | "defaultIfEmpty"
   | "oneOfOr"
   | "oneOfOrLower"
@@ -107,6 +110,8 @@ export function printExpr(expr: Expr, ctx: PhpCtx): string {
       return ctx.derived(expr.name);
     case "resolvedTag":
       throw new Error(`${ctx.env.part.name}: resolvedTag must be folded before PHP printing`);
+    case "safeUrl":
+      return d.call("safeUrl", [p(expr.expr)]);
     case "defaultIfEmpty":
       return d.call("defaultIfEmpty", [p(expr.expr), phpString(expr.fallback)]);
     case "mapOr": {
@@ -264,7 +269,11 @@ function attrEntry(attr: AttrSpec, tag: string, part: PartDef, sx: Syntax): Attr
       return [attr.name, phpString(attr.value)];
     case "expr": {
       // nullable passthrough: the param defaults to null (omitted by attrs()), "" renders attr=""
-      if (isPassthroughForward(attr, part)) return [attr.name, printExpr(attr.expr, ctx)];
+      if (isPassthroughForward(attr, part)) {
+        const raw = printExpr(attr.expr, ctx);
+        // URL attrs: an unsafe scheme (javascript:, ...) becomes null = omitted
+        return [attr.name, URL_ATTRS.includes(attr.name) ? ctx.d.call("urlOrNull", [raw]) : raw];
+      }
       const expr = fold(attr.expr, tag);
       const value = stringOf(expr, ctx);
       if (attr.when) {

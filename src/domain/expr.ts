@@ -27,7 +27,8 @@ export type Expr =
   | ContainsExpr
   | ConcatExpr
   | BoolToStringExpr
-  | IntToStringExpr;
+  | IntToStringExpr
+  | SafeUrlExpr;
 
 export type LitExpr = { kind: "lit"; value: string | number | boolean };
 /** Value of a component prop, referenced by canonical (PascalCase) name. */
@@ -74,6 +75,8 @@ export type ConcatExpr = { kind: "concat"; parts: Expr[] };
 /** ARIA state stringification: always `"true"` / `"false"`, never omitted. */
 export type BoolToStringExpr = { kind: "boolToString"; expr: Expr };
 export type IntToStringExpr = { kind: "intToString"; expr: Expr };
+/** URL attribute value: "" when the scheme (ASCII whitespace/control chars removed, lowercased) is javascript:, vbscript: or data:. */
+export type SafeUrlExpr = { kind: "safeUrl"; expr: Expr };
 
 // ---------------------------------------------------------------------------
 // Constructors (ergonomic builder API for brick definitions)
@@ -119,6 +122,10 @@ export const contains = (expr: Expr, substring: string): ContainsExpr => ({
 export const concat = (...parts: Expr[]): ConcatExpr => ({ kind: "concat", parts });
 export const boolToString = (expr: Expr): BoolToStringExpr => ({ kind: "boolToString", expr });
 export const intToString = (expr: Expr): IntToStringExpr => ({ kind: "intToString", expr });
+export const safeUrl = (expr: Expr): SafeUrlExpr => ({ kind: "safeUrl", expr });
+/** Attributes whose value is a URL: forwarded through safeUrl in every runtime (and filtered in the Attrs / rest maps of the servers). */
+export const URL_ATTRS = ["href", "src", "action", "formaction", "poster", "cite", "background", "xlink:href"];
+export const isUnsafeUrl = (v: unknown): boolean => /^(javascript|vbscript|data):/.test(String(v ?? "").replace(/[\u0000-\u0020]/g, "").toLowerCase());
 
 /** Convenience: `oneOfOr(v, ["submit","reset"], "button")` whitelist. */
 export const oneOfOr = (
@@ -149,6 +156,7 @@ export function childExprs(expr: Expr): Expr[] {
     case "contains":
     case "boolToString":
     case "intToString":
+    case "safeUrl":
       return [expr.expr];
     case "cond":
       return [expr.test, expr.then, expr.else];

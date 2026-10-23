@@ -8,6 +8,7 @@
  * with UI8KIT_REQUIRE_ALL_RUNTIMES=1 (CI) a missing toolchain is a failure.
  */
 
+import { withUnsafeUrls } from "./support/unsafe-urls";
 import { describe, expect, it } from "bun:test";
 import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -72,7 +73,7 @@ function casesFor(brick: BrickDef, part: PartDef): Case[] {
 }
 
 /** Edge cases named in the templ contract: empty input value, attribute escaping. */
-const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> = {
+const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> = withUnsafeUrls({
   Input: {
     // passthrough attrs are nullable: an explicit "" renders value="" (as React), unset omits it
     "empty value": { props: { Value: "" } },
@@ -86,7 +87,7 @@ const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> 
     "href escaping": { props: { Href: '/a?b=1&c="2"' } },
   },
   Text: { "tag fallback": { props: { Tag: "script" } } },
-};
+});
 
 const allCases = bricks.flatMap((b) => b.parts.flatMap((p) => casesFor(b, p)));
 

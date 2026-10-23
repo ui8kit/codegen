@@ -9,6 +9,7 @@
  * with UI8KIT_REQUIRE_ALL_RUNTIMES=1 (CI) a missing toolchain is a failure.
  */
 
+import { withUnsafeUrls } from "./unsafe-urls";
 import { describe, expect, it } from "bun:test";
 import { execFileSync, spawnSync } from "node:child_process";
 import { join } from "node:path";
@@ -57,7 +58,7 @@ function casesFor(brick: BrickDef, part: PartDef): Case[] {
   return out;
 }
 
-const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> = {
+const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> = withUnsafeUrls({
   Input: {
     // Template params default to '': an explicit '' is "unset" (canonical contract);
     // React forwards an explicit "" verbatim.
@@ -83,7 +84,7 @@ const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> 
       },
     },
   },
-};
+});
 
 /** Canonical (PascalCase) props → template parameters. */
 function templateParams(part: PartDef, canonical: CanonicalProps): Record<string, unknown> {

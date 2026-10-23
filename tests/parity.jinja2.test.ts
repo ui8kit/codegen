@@ -8,6 +8,7 @@
  * with UI8KIT_REQUIRE_ALL_RUNTIMES=1 (CI) a missing toolchain is a failure.
  */
 
+import { withUnsafeUrls } from "./support/unsafe-urls";
 import { describe, expect, it } from "bun:test";
 import { execFileSync, spawnSync } from "node:child_process";
 import { join } from "node:path";
@@ -41,6 +42,8 @@ interface Case {
   noChildren?: boolean;
   /** canonical props for the React side when the Jinja call differs (Attrs escape hatch). */
   reactProps?: CanonicalProps;
+  /** compared with the canonical renderer only (reason) */
+  canonicalOnly?: string;
 }
 
 /** defaults, every showcase fixture, every enum value, every boolean set. */
@@ -60,7 +63,7 @@ function casesFor(brick: BrickDef, part: PartDef): Case[] {
 }
 
 /** Edge cases: empty input value, attribute escaping, tag fallback. */
-const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> = {
+const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> = withUnsafeUrls({
   Input: {
     // passthrough attrs are nullable: an explicit "" renders value="" (as React), unset omits it
     "empty value": { props: { Value: "" } },
@@ -73,7 +76,7 @@ const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> 
     "href escaping": { props: { Href: '/a?b=1&c="2"' } },
   },
   Text: { "tag fallback": { props: { Tag: "script" } } },
-};
+});
 
 const allCases = bricks.flatMap((b) => b.parts.flatMap((p) => casesFor(b, p)));
 
@@ -130,7 +133,7 @@ if (!jinjaAvailable) {
           const react = renderToStaticMarkup(
             createElement(reactComponent(brick, c.part), reactProps(c.part, c.reactProps ?? c.props), withChildren ? reactChild() : undefined)
           ).replace(/<link rel="preload"[^>]*\/?>/g, "");
-          expect(jinja, "jinja2 ≠ react").toEqual(normalizeHtml(react));
+          if (!c.canonicalOnly) expect(jinja, "jinja2 ≠ react").toEqual(normalizeHtml(react));
           const { Attrs: rest, ...canonicalProps } = c.props as CanonicalProps & { Attrs?: Record<string, string> };
           const canonical = renderPart(brick, c.part.name, canonicalProps, { children: withChildren ? CHILD_HTML : undefined, rest });
           expect(jinja, "jinja2 ≠ canonical").toEqual(normalizeHtml(canonical));

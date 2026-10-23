@@ -75,7 +75,7 @@ function emitPart(brick: BrickDef, part: PartDef): string {
     slot: `{$children|noescape}`,
     element: (tag, attrs, rest, isVoid, children) => {
       const entries = attrs.map(([k, v]) => `${phpString(k)} => ${v},`);
-      if (rest) entries.push("...$attrs,");
+      if (rest) entries.push("...\\UI8Kit\\Latte\\Rt::safeAttrs($attrs),"); // unsafe URL attrs dropped (javascript:, ...)
       const nAttr = entries.length === 0 ? "" : ` n:attr="[\n${ind(entries.join("\n"))}\n]"`;
       const open = `<${tag}${nAttr}>`;
       if (isVoid) return open;

@@ -37,6 +37,9 @@ export function printTsExpr(expr: Expr, ctx: TsPrintCtx): string {
       return ctx.derivedCode(expr.name);
     case "resolvedTag":
       return ctx.resolvedTagCode();
+    case "safeUrl":
+      ctx.helpers.add("safeUrl");
+      return `safeUrl(${p(expr.expr)})`;
     case "defaultIfEmpty":
       ctx.helpers.add("defaultIfEmpty");
       return `defaultIfEmpty(${p(expr.expr)}, ${JSON.stringify(expr.fallback)})`;
