@@ -194,3 +194,24 @@ describe("specs export", () => {
     expect(file("specs.json")).toContain('"ui.button"');
   });
 });
+
+describe("spec version + agent rules", () => {
+  it("specVersion tracks the package version", async () => {
+    const { readFileSync } = await import("node:fs");
+    const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+    const committed = JSON.parse(readFileSync(new URL("../specs/primitives.json", import.meta.url), "utf8"));
+    expect(committed.specVersion).toBe(pkg.version);
+  });
+
+  it("emits one primitives rule per runtime with installer placeholders only", () => {
+    for (const rt of ["react", "vue", "svelte", "solid", "webcomponent"]) {
+      const rule = file(`rules/${rt}/ui8kit-primitives.mdc`);
+      expect(rule).toContain("globs: {globs}");
+      expect(rule).toContain("{kit}");
+      expect(rule).not.toMatch(/\{\{\w+\}\}/);
+      expect(rule).not.toContain("bun run check");
+      expect(rule).not.toMatch(/\b(Stack|Card|Block)\b/);
+      expect(rule).toContain("`Dialog`");
+    }
+  });
+});

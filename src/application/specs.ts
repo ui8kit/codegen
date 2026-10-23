@@ -10,6 +10,8 @@ import { TAG_GROUPS } from "../domain/tags";
 import { kebab } from "../emitters/webcomponent";
 
 export const SPECS_VERSION = 1;
+/** Spec contract version; tracks the @ui8kit/codegen package major (3.x). */
+export const SPEC_VERSION = "3.0.0";
 
 function rootTags(part: PartDef): string[] {
   const out = new Set<string>();
@@ -39,6 +41,7 @@ export function buildSpecs(bricks: BrickDef[]) {
   return {
     $schema: "ui8kit-codegen/specs",
     version: SPECS_VERSION,
+    specVersion: SPEC_VERSION,
     tagGroups: TAG_GROUPS,
     primitives: bricks.map((brick) => ({
       id: brick.id,

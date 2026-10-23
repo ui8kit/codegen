@@ -1,6 +1,6 @@
 {
   "name": "@ui8kit/codegen",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "description": "Spec-driven codegen for UI8Kit primitives: 17 style-agnostic HTML primitives, one typed render contract, five JS runtimes (React, Svelte 5, Vue 3, SolidJS, vanilla Web Components).",
   "license": "MIT",
   "type": "module",

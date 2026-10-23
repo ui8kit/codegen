@@ -66,6 +66,9 @@ export async function generateFiles(
   files.push(...(await runtimeSupportFiles(runtimes)));
   files.push(...barrels(bricks, runtimes));
 
+  const { rulesFiles } = await import("./rules");
+  files.push(...(await rulesFiles(bricks, runtimes)));
+
   const { buildSpecs } = await import("./specs");
   files.push({ path: "specs.json", contents: JSON.stringify(buildSpecs(bricks), null, 2) + "\n" });
 

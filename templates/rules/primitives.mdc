@@ -1,0 +1,62 @@
+---
+description: UI8Kit primitives ({{runtimeTitle}}) — how to build markup with the kit in {kit}
+globs: {globs}
+alwaysApply: false
+---
+
+# UI8Kit primitives — {{runtimeTitle}}
+
+Primitives live in `{kit}` (one folder per primitive, generated code: do not edit by hand).
+Import them from there: {{importHint}}
+
+## 1. Use a primitive instead of raw HTML
+
+Where a primitive exists for an element, use the primitive, never the raw tag:
+
+| Primitive | Renders |
+| --- | --- |
+{{primitiveTable}}
+
+Raw HTML is fine only for elements no primitive covers.
+
+## 2. `tag` accepts only real HTML5 tags
+
+`Box` and `Text` choose their element with `tag`. Pass only a real HTML5 tag from the allowed list
+(never a component name, custom element or made-up tag):
+
+{{tagGroups}}
+
+## 3. Static ARIA via props
+
+Set ARIA through the primitive's typed props (e.g. {{ariaExamples}}), as static values.
+Do not hand-write `role`/`aria-*` that a primitive already renders (`Icon` sets `aria-hidden`
+or `role="img"` + `aria-label` from `label`; `Switch` sets `role="switch"`).
+
+## 4. Colors only via shadcn token classes
+
+Style with token utility classes only: `bg-background`, `text-foreground`, `bg-primary`,
+`text-primary-foreground`, `bg-secondary`, `bg-muted`, `text-muted-foreground`, `bg-accent`,
+`bg-destructive`, `border-border`, `border-input`, `ring-ring`, `bg-card`, `bg-popover`, …
+No palette colors (`bg-blue-500`), no hex/rgb/hsl values, no arbitrary color classes (`bg-[#fff]`),
+no inline `style` colors.
+
+## 5. Spacing: 8 + 4 rule
+
+- Spacing (padding, margin, gap, space-*) uses the 8px step: Tailwind `2, 4, 6, 8, 10, 12, 16, …`
+  (`p-2` = 8px, `gap-4` = 16px).
+- The 4px step (`1`, e.g. `px-1`, `gap-1`) is allowed only inside controls (button, input,
+  select, checkbox, badge-like inline control content).
+- No half-steps (`p-0.5`, `p-1.5`, `p-2.5`, …), no odd steps (`p-3`, `p-5`, `p-7`), no arbitrary
+  px values (`p-[13px]`, `mt-[7px]`).
+
+## 6. Icons: Lucide inside `Icon`
+
+Use Lucide icons ({{lucidePackage}}) as the child of the `Icon` primitive; size via `Icon` `size`
+(`xs`, `sm`, `md`, `lg`, `xl`). Give `label` when the icon carries meaning; omit it for
+decorative icons.
+
+{{example}}
+
+## Checks
+
+Review-only: verify the rules above when reviewing changes; there is no automated command for them.

@@ -1,0 +1,37 @@
+{
+  "react": {
+    "title": "React",
+    "ext": "tsx",
+    "importHint": "`import { Box, Text, Button, Icon } from \"<relative path to {kit}>\"` (barrel `{kit}/index.ts`) or one module per primitive (`{kit}/box/box`).",
+    "lucidePackage": "`lucide-react`",
+    "example": "```tsx\n<Box tag=\"section\" className=\"flex flex-col gap-4 p-4 bg-card text-card-foreground\">\n  <Text tag=\"h2\" className=\"text-foreground\">Title</Text>\n  <Button aria-label=\"Save\" className=\"bg-primary text-primary-foreground px-4 py-2\">\n    <Icon size=\"sm\"><Save /></Icon>\n  </Button>\n</Box>\n```"
+  },
+  "vue": {
+    "title": "Vue 3",
+    "ext": "vue",
+    "importHint": "`import Box from \"<relative path to {kit}>/box/Box.vue\"` or the barrel `{kit}/index.vue.ts`.",
+    "lucidePackage": "`lucide-vue-next`",
+    "example": "```vue\n<Box tag=\"section\" class=\"flex flex-col gap-4 p-4 bg-card text-card-foreground\">\n  <Text tag=\"h2\" class=\"text-foreground\">Title</Text>\n  <Button aria-label=\"Save\" class=\"bg-primary text-primary-foreground px-4 py-2\">\n    <Icon size=\"sm\"><Save /></Icon>\n  </Button>\n</Box>\n```"
+  },
+  "svelte": {
+    "title": "Svelte 5",
+    "ext": "svelte",
+    "importHint": "`import Box from \"<relative path to {kit}>/box/Box.svelte\"` or the barrel `{kit}/index.svelte.ts`.",
+    "lucidePackage": "`@lucide/svelte`",
+    "example": "```svelte\n<Box tag=\"section\" class=\"flex flex-col gap-4 p-4 bg-card text-card-foreground\">\n  <Text tag=\"h2\" class=\"text-foreground\">Title</Text>\n  <Button aria-label=\"Save\" class=\"bg-primary text-primary-foreground px-4 py-2\">\n    <Icon size=\"sm\"><Save /></Icon>\n  </Button>\n</Box>\n```"
+  },
+  "solid": {
+    "title": "SolidJS",
+    "ext": "tsx",
+    "importHint": "`import { Box, Text, Button, Icon } from \"<relative path to {kit}>/index.solid\"` or one module per primitive (`{kit}/box/box.solid`).",
+    "lucidePackage": "`lucide-solid`",
+    "example": "```tsx\n<Box tag=\"section\" class=\"flex flex-col gap-4 p-4 bg-card text-card-foreground\">\n  <Text tag=\"h2\" class=\"text-foreground\">Title</Text>\n  <Button aria-label=\"Save\" class=\"bg-primary text-primary-foreground px-4 py-2\">\n    <Icon size=\"sm\"><Save /></Icon>\n  </Button>\n</Box>\n```"
+  },
+  "webcomponent": {
+    "title": "Web Components",
+    "ext": "ts",
+    "importHint": "`import { renderBox, defineAll } from \"<relative path to {kit}>/index.wc\"` (`render<Part>()` or `<ui8-*>` elements after `defineAll()`).",
+    "lucidePackage": "`lucide` (`createElement(Save)`)",
+    "example": "```ts\nimport { createElement, Save } from \"lucide\";\nrenderBox({ tag: \"section\", class: \"flex flex-col gap-4 p-4 bg-card text-card-foreground\" }, [\n  renderText({ tag: \"h2\", class: \"text-foreground\" }, \"Title\"),\n  renderButton({ \"aria-label\": \"Save\", class: \"bg-primary text-primary-foreground px-4 py-2\" }, [\n    renderIcon({ size: \"sm\" }, [createElement(Save)]),\n  ]),\n]);\n```"
+  }
+}
