@@ -1,0 +1,19 @@
+{
+  "showcase": {
+    "checked": {
+      "props": {
+        "Name": "t",
+        "Value": "1",
+        "Checked": true,
+        "Required": true
+      }
+    },
+    "disabled": {
+      "props": {
+        "Disabled": true,
+        "AriaInvalid": "true",
+        "ID": "c1"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "showcase": {
+    "for": {
+      "props": {
+        "For": "email",
+        "Class": "text-sm"
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "showcase": {
+    "on": {
+      "props": {
+        "Checked": true,
+        "AriaLabel": "Wi-Fi"
+      }
+    },
+    "disabled": {
+      "props": {
+        "Disabled": true,
+        "Name": "s",
+        "Value": "on",
+        "ID": "sw",
+        "AriaLabelledBy": "l"
+      }
+    }
+  }
+}

@@ -1,7 +1,0 @@
-{
-  "id": "ui.form-description",
-  "base": "text-xs font-semibold text-muted-foreground",
-  "keys": [],
-  "defaults": {},
-  "byKey": {}
-}

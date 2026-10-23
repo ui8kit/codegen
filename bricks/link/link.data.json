@@ -1,0 +1,35 @@
+{
+  "showcase": {
+    "basic": {
+      "props": {
+        "Href": "/a"
+      }
+    },
+    "external": {
+      "props": {
+        "Href": "https://e.com",
+        "External": true
+      }
+    },
+    "explicit": {
+      "props": {
+        "Href": "/b",
+        "Target": "_self",
+        "Rel": "nofollow"
+      }
+    },
+    "blank": {
+      "props": {
+        "Href": "/c",
+        "Target": "_blank"
+      }
+    },
+    "current": {
+      "props": {
+        "Href": "/d",
+        "AriaCurrent": "page",
+        "Download": "f.txt"
+      }
+    }
+  }
+}

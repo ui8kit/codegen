@@ -1,0 +1,30 @@
+{
+  "showcase": {
+    "email": {
+      "props": {
+        "Type": "email",
+        "Name": "email",
+        "Placeholder": "you@example.com",
+        "Required": true
+      }
+    },
+    "range": {
+      "props": {
+        "Type": "range",
+        "Min": "0",
+        "Max": "10",
+        "Step": "2",
+        "Value": "4"
+      }
+    },
+    "invalid": {
+      "props": {
+        "AriaInvalid": "true",
+        "AriaDescribedBy": "err",
+        "Disabled": true,
+        "ReadOnly": true,
+        "ID": "i1"
+      }
+    }
+  }
+}

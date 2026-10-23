@@ -1,7 +1,0 @@
-{
-  "id": "ui.form",
-  "base": "grid gap-4",
-  "keys": [],
-  "defaults": {},
-  "byKey": {}
-}

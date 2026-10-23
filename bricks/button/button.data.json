@@ -1,0 +1,40 @@
+{
+  "showcase": {
+    "submit": {
+      "props": {
+        "Type": "submit",
+        "Class": "bg-primary text-primary-foreground"
+      }
+    },
+    "disabled": {
+      "props": {
+        "Disabled": true
+      }
+    },
+    "form": {
+      "props": {
+        "Form": "f1",
+        "AriaLabel": "Save"
+      }
+    },
+    "pressed": {
+      "props": {
+        "AriaPressed": "true",
+        "AriaExpanded": "false",
+        "AriaControls": "m1"
+      }
+    },
+    "href": {
+      "props": {
+        "Href": "/docs",
+        "Class": "underline"
+      }
+    },
+    "hrefDisabled": {
+      "props": {
+        "Href": "/x",
+        "Disabled": true
+      }
+    }
+  }
+}

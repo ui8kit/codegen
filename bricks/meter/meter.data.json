@@ -1,0 +1,15 @@
+{
+  "showcase": {
+    "full": {
+      "props": {
+        "Value": "0.6",
+        "Min": "0",
+        "Max": "1",
+        "Low": "0.2",
+        "High": "0.8",
+        "Optimum": "0.5",
+        "AriaLabel": "Disk"
+      }
+    }
+  }
+}

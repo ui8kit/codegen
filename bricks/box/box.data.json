@@ -1,0 +1,31 @@
+{
+  "showcase": {
+    "section": {
+      "props": {
+        "Tag": "section",
+        "Class": "p-4 bg-card text-card-foreground"
+      }
+    },
+    "table": {
+      "props": {
+        "Tag": "table"
+      }
+    },
+    "form": {
+      "props": {
+        "Tag": "form"
+      }
+    },
+    "li": {
+      "props": {
+        "Tag": "li",
+        "Class": "text-muted-foreground"
+      }
+    },
+    "rejected": {
+      "props": {
+        "Tag": "stack"
+      }
+    }
+  }
+}

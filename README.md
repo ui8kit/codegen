@@ -1,110 +1,158 @@
-# UI8Kit Codegen 2.0 (xgen)
+# @ui8kit/codegen
 
-**One spec, eight runtimes, the same DOM and ARIA.**
+Spec-driven code generator for **style-agnostic HTML primitives**. Each primitive is defined once
+as a typed render contract (`bricks/<name>/<name>.def.ts`); emitters print it into six
+runtimes, and parity tests prove every runtime renders the same DOM/ARIA as the canonical renderer.
 
-Spec-driven generation for UI8Kit: bricks (primitives), components and blocks are written once as JSON specs and a
-TypeScript builder, and `xgen` generates idiomatic source for **Svelte 5, React 19, Vue 3 and SolidJS** and server
-templates for **Go templ, Twig, Latte and Jinja2**. Every brick and block case of the template runtimes is rendered with
-the real engine and compared with React; identity across runtimes is a gate, not a convention.
+Runtimes: **React 19 · Svelte 5 · Vue 3 · SolidJS · Web Components** (vanilla, light DOM) ·
+**Go [templ](https://templ.guide)** (server-rendered, first of the template runtimes).
+PHP template runtimes: **[Twig](https://twig.symfony.com) · [Latte](https://latte.nette.org)**.
 
-This is the engine behind the public ui8kit 2.0 registry ([ui.buildy.tw](https://ui.buildy.tw), `npx ui8kit add <name>`,
-CLI [`ui8kit`](https://github.com/ui8kit/cli) 2.0.x, registry roots `https://registry.buildy.tw/<runtime>`).
+## Primitives
 
-| Fact | Value |
-|------|-------|
-| **Bricks / parts** | 40 / 72 (`xgen/specs/ui`) |
-| **Components and blocks** | 23 parts, 36 patterns, 184 organisms; 92 blocks with 474 variants (`xgen/specs/{parts,patterns,organisms,blocks}`) |
-| **Screens** | 15 screen specs (themes, gallery, catalog, site, plans, skins), served by 4 host apps |
-| **Runtimes** | svelte, react, vue, solid, templ, twig, latte, jinja2 |
-| **Data contract** | Codex v0.4 via [`@ui8kit/contract`](https://github.com/ui8kit/contract) (77 fixture collections, 733 entries) |
-| **Skins** | default + 15 (CSS variables only, shadcn tokens) |
-| **Version** | 2.0.0 (not published to npm) - upgrading from 0.1: [MIGRATION.md](MIGRATION.md) |
-| **License** | MIT, (c) UI8Kit |
+Box · Text · Button · Link · Label · Input · Textarea · Select (+ SelectOption, SelectOptGroup) ·
+Checkbox · Radio · Switch · Image (+ Picture, Source) · Icon · Dialog · Disclosure (+ Summary) ·
+Meter · Progress — see [docs/primitives.md](docs/primitives.md).
 
----
+No CSS ships with the primitives: style them with token class names via `class`.
 
-## Runtimes
+**Select value.** `value` marks the matching option `selected` in the markup and also drives
+the live DOM `value` on the client (React: `value` when you pass `onChange`, otherwise
+`defaultValue`; Svelte/Solid/Vue/WC: the `value` property is synced, never an attribute).
+Composition (cards, badges, alerts, layouts, …) is out of scope for codegen.
 
-| Runtime | Package (generated) | Files | Checked by |
-|---|---|---|---|
-| Svelte 5 | `packages/svelte/ui` (`@ui8kit/svelte-ui`) | `src/primitives/<brick>/<part>.svelte`, `src/components`, `src/blocks` | host app + e2e DOM pair |
-| React 19 | `packages/react/ui` (`@ui8kit/react-ui`) | `.tsx` per brick / organism | reference DOM of every parity gate |
-| Vue 3 | `packages/vue/ui` (`@ui8kit/vue-ui`) | `.vue` SFCs | host app + e2e DOM pair |
-| SolidJS 1.9 | `packages/solid/ui` (`@ui8kit/solid-ui`) | `.tsx` | server render vs React (`xgen check`, group `solid`) |
-| Go templ | `packages/templ/ui` (module `github.com/ui8kit/codegen/packages/templ/ui`) | `.templ` + `_gen.go` + Go helpers | `templ generate`, `go vet`, `go build`, DOM vs React |
-| Twig | `packages/twig/ui` | `.html.twig` + PHP extension | real twig/twig (PHP + composer), DOM vs React |
-| Latte | `packages/latte/ui` | `.latte` + PHP extension | real latte/latte, DOM vs React |
-| Jinja2 | `packages/jinja2/ui` | `.html.j2` + Python helpers (`py/ui8kit_jinja`) | real Jinja2 (Python venv), DOM vs React |
+## Usage
 
-The TypeScript packages are source only (no build step; the consumer's Vite compiles them). Peer dependencies: the
-framework, `tailwindcss` v4, `clsx`, `tailwind-merge`.
-
-## Quick start
-
-**Prerequisites:** [Bun](https://bun.sh) 1.4+. Go, PHP 8.1+ with Composer and Python 3 are optional: each template
-runtime group skips without its toolchain (`UI8KIT_REQUIRE_ALL_RUNTIMES=1` turns a skip into a failure, as in CI).
-
-```bash
+```sh
 bun install
-bun run build     # xgen build: specs + fixtures + content -> packages/*/ui (8 runtimes), packages/shared/app, apps/host-*
-bun run check     # xgen check: every gate, drift included, and the real-engine parity of templ, solid, twig, jinja2, latte
-bun run test      # bun test of xgen/*
-bun run verify    # check + codex:validate + typecheck + test (what CI runs)
+bun run generate          # writes generated/ (all runtimes + specs.json)
+bun run build:specs       # writes specs/primitives.json (registry-facing JSON spec)
+bun run verify            # check + tsc + typecheck:generated + all tests (parity ×6 runtimes)
 ```
 
-More: `bun run typecheck` (svelte-check, tsc, vue-tsc on the packages and hosts), `bun run build:hosts`,
-`bun run e2e` (every screen in every host, screenshots, DOM pair test; needs Playwright browsers), `bun run lint:px`
-(ui8px gate on the class sets), `bun run rules` / `rules:baseline`, `bun run codex:manifest` / `codex:validate` /
-`codex:blocks`. Full list: [docs/cli.md](docs/cli.md).
+`generate --runtimes react,svelte,vue,solid,webcomponent,templ` limits the output.
+
+### Web Components
+
+```ts
+import { defineAll, renderButton } from "./generated/ui/index.wc";
+defineAll(); // <ui8-button>, <ui8-box>, … (prefix configurable)
+document.body.append(renderButton({ class: "bg-primary text-primary-foreground" }, "Save"));
+```
+
+Custom elements replace themselves with the rendered primitive (no shadow DOM), so the
+resulting DOM is identical to the other runtimes and consumer classes apply.
+
+The swap waits until children exist (DOMContentLoaded while the document is parsing, or the
+next microtask for a host connected before its subtree). Attributes are read **once**, at the
+swap: the host element is gone afterwards, so there is nothing to observe — update the rendered
+element directly, or call `render<Part>()` again.
+
+### Go templ
+
+`generated/templ/` is a self-contained Go module (`github.com/ui8kit/codegen/generated/templ`,
+templ `v0.3.1070`, Go 1.26): one package per primitive under `ui/<name>/` (`select` → package
+`selectfield`, `switch` → `formswitch`), helpers in `utils/`, the parity harness in `cmd/parity`.
+
+```sh
+cd generated/templ && templ generate && go vet ./... && go build ./...
+```
+
+```templ
+@button.Button(button.ButtonProps{Href: "/docs", Class: "bg-primary text-primary-foreground"}) {
+	Read the docs
+}
+```
+
+- Props are typed structs (`<Name>Props`); a zero value means "unset", so empty strings omit the
+  attribute (to force `value=""`, pass it through `Attrs: templ.Attributes{"value": ""}`).
+- **No `asChild` / Slot in templ.** For a custom root element use the exported
+  `<Name>Classes(props)` helper: `<a class={ button.ButtonClasses(button.ButtonProps{}) }>`.
+- **Children are trusted HTML.** `{ children... }` renders whatever the caller passes; templ
+  escapes props and text, but `templ.Raw(...)` / unescaped children are your responsibility —
+  never pass user input as raw children (XSS).
+- templ sanitizes URL attributes: `href="javascript:…"` renders as
+  `about:invalid#TemplFailedSanitizationURL` (React would print it verbatim).
+- `Attrs` are spread last; unlike the JS runtimes they do not replace an attribute the
+  primitive already printed (avoid duplicating `class`, `id`, …; use `Class` / typed props).
+
+Parity: `tests/parity.templ.test.ts` runs the real `templ generate` + `go run ./cmd/parity`
+and compares the normalized DOM with React SSR and the canonical renderer. Without Go the
+suite is skipped locally with a message; with `UI8KIT_REQUIRE_ALL_RUNTIMES=1` (CI) it fails.
+
+### Jinja2
+
+`generated/jinja2/` holds one template per part (`ui/<brick>/<part>.html.j2`, e.g.
+`ui/card/card-header.html.j2`), the recipes, and the `ui8kit_jinja` Python package
+(`pip install -r generated/jinja2/requirements.txt`, Jinja2 `>=3.1,<4`). Templates read `p`
+(canonical PascalCase props, `Attrs` for extra attributes) and `children` (markup):
+
+```python
+import sys; sys.path.insert(0, "generated/jinja2")
+from ui8kit_jinja import environment
+env = environment()  # autoescape on; ui_* helpers + <name>_classes globals
+env.get_template("ui/button/button.html.j2").render(p={"AriaLabel": "Save"}, children=icon_html)
+```
+
+- **Children are trusted HTML.** `{{ children|safe }}` prints whatever you pass (repeated in
+  every branch, e.g. Button `<a>` | `<button>`). Props and text are autoescaped; never pass raw
+  user input as `children` — escape it (`markupsafe.escape`) or render it via a template (XSS).
+- **No `asChild` / Slot in Jinja2.** Each part with a class contract has a global
+  `<name>_classes(p)` (`button_classes`, `icon_classes`, …):
+  `<a class="{{ button_classes({'Class': 'px-4'}) }}" href="/x">`.
+- Blank strings mean "unset" (the canonical contract): `Value: ""` omits the attribute; force
+  `value=""` with `Attrs: {"value": ""}`. `Attrs` is printed last and is not de-duplicated
+  against attributes the primitive already printed.
+
+Parity: `tests/parity.jinja2.test.ts` renders every part with real Python Jinja2
+(`generated/jinja2/parity.py`) and compares the normalized DOM with React SSR and the canonical
+renderer. Without python3 + Jinja2 the suite is skipped locally; with
+`UI8KIT_REQUIRE_ALL_RUNTIMES=1` (CI) it fails.
+
+### Twig and Latte (PHP)
+
+`generated/twig/` and `generated/latte/` are Composer packages (`twig/twig ^3`, `latte/latte ^3`,
+PHP ≥ 8.1; namespaces `UI8Kit\Twig` / `UI8Kit\Latte`): one template per part under
+`ui/<brick>/<Part>.html.twig` / `<Part>.latte`, plus `src/` (`Rt` helpers, tailwind-merge port
+`CnMerge`, generated `Tags` and `Classes`; Twig also `TwigExtension`).
+
+```twig
+{# $twig->addExtension(new \UI8Kit\Twig\TwigExtension()); loader root: generated/twig/ui #}
+{% include 'button/Button.html.twig' with { ariaLabel: 'Save', class: 'px-4', children: icon } only %}
+```
+
+```latte
+{include 'button/Button.latte', ariaLabel: 'Save', class: 'px-4', children: $icon}
+```
+
+- Props are template parameters (`tag`, `class`, `ariaLabel`, `htmlFor`, `id`); Latte declares
+  them in a typed `{parameters}` block. Extra attributes go in `attrs` and are merged last (the
+  caller wins, like the JS rest props). Select options: `options: [{value, label, disabled}]`.
+- **Children are trusted HTML**: `children` is printed raw (`{{ children|raw }}` /
+  `{$children|noescape}`). Props and text are escaped by the engine; never route user input into
+  `children` (XSS) — render it through a template first (`{% set %}…{% endset %}` / `{capture}`).
+  URL attributes are not sanitized (`href="javascript:…"` prints verbatim, as in React).
+- **No `asChild`**: compose a part's classes for a custom root with
+  `ui8kit_classes('buttonClasses', {…})` (Twig) or `\UI8Kit\Latte\Classes::buttonClasses([...])`.
+- Dynamic tags (Box/Text `tag`) become an `if` chain with one static element per allowed tag;
+  `when` branches repeat the children slot. Empty strings mean "unset" (attribute omitted);
+  force `value=""` through `attrs`.
+
+Parity: `tests/parity.twig.test.ts` / `tests/parity.latte.test.ts` run `composer install` and the
+real engines (`php bin/parity.php`) and compare with React SSR and the canonical renderer;
+skipped locally without PHP/Composer, a failure with `UI8KIT_REQUIRE_ALL_RUNTIMES=1`.
 
 ## Layout
 
 ```
-xgen/        the generation layer: self-contained @ui8kit/xgen-* packages (schema, spec, screens, generator, check, cli, runtimes/*)
-  specs/       ui (bricks), parts, patterns, organisms, blocks, recipes, presets, screens, assets (Lucide)
-  fixtures/    Codex v0.4 collections (sample data), taxonomies
-  content/     the text dictionary (content/ui/en.json): views never hold literal text
-  schema/      JSON Schemas + codex/ (manifest.json, blocks.json: the data contract of every block)
-packages/    generated packages: {svelte,react,vue,solid}/ui, {templ,twig,jinja2,latte}/ui, shared/app; tooling (gates)
-apps/        generated host apps host-{svelte,react,vue,solid}; the only hand-written file in each is xgen.app.json
-rules/       composition rules (zones, baselines, self-test fixtures, html-validate config)
-docs/        guides
+bricks/            primitive definitions (+ showcase fixtures *.data.json)
+src/domain/        IR, expressions, tags, canonical renderer, validation
+src/emitters/      react, svelte, vue, solid, webcomponent, templ (+ go-expr)
+src/application/   generate pipeline, JSON spec export
+runtime/           support code copied into generated/utils (runtime/go → generated/templ/utils)
+tests/             domain, emitter conventions, parity, type tests
 ```
-
-> **Nobody edits `packages/*/ui`, `packages/shared/app` or `apps/host-*` by hand.** Every file starts with
-> `Code generated by xgen. DO NOT EDIT.` and names its source. `xgen check` (group `drift`) regenerates everything in
-> memory and fails on any difference.
-
-## Design rules enforced by `xgen check`
-
-- **8 + 4 grid.** Spacing uses whole Tailwind steps on the 8 px grid; 4 px steps only inside controls; no half steps
-  (`gap-1.5`, `px-2.5`) anywhere in specs, builder or kit assets (group `spacing`). Controls share one scale:
-  `sm / default / lg` = `h-8 / h-10 / h-12`.
-- **Tokens only.** Colours are shadcn CSS variables (`bg-primary`, `text-muted-foreground`); no palette colours, hex,
-  arbitrary values or gradients (`hardcode`). One corner token: plain `rounded` reads `--radius` (`corners`); shadows only
-  on floating layers (`shadows`).
-- **Lucide icons** (`LucideIcon`, registry `xgen/specs/assets/lucide-icons.json`, ISC).
-- **Identical DOM and ARIA** in every runtime (`a11y`, parity groups, e2e DOM pair); no literal text in views (`text`,
-  `dictionary`); portability contract (`nonportable`, `xgen/specs/_nonportable.json`).
-
-## Data: Codex and `@ui8kit/contract`
-
-Sample data are Codex v0.4 collections (`xgen/fixtures/*.json`), validated with `validateCollectionV04` from
-`@ui8kit/contract`. `xgen/schema/codex/manifest.json` describes every kind and field, `blocks.json` lists for every block
-and screen which collection, record type and fields it reads. See [docs/contract.md](docs/contract.md).
-
-## Documentation
-
-- [docs/README.md](docs/README.md) - index
-- [docs/specs-guide.md](docs/specs-guide.md) - authoring specs end to end (start here)
-- [docs/architecture.md](docs/architecture.md) - packages, flow, checks
-- [docs/runtimes.md](docs/runtimes.md) - the eight targets and how to consume them
-- [docs/contract.md](docs/contract.md) - Codex fixtures, manifest, block data
-- [docs/registry.md](docs/registry.md) - the public registry (ui8kit/site, ui8kit/cli) and how it maps to this repo
-- [MIGRATION.md](MIGRATION.md) - 0.1 -> 2.0
-- `xgen/README.md` and the README of every xgen package
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Lucide icon data: ISC (https://lucide.dev). Skins: see
-`xgen/runtimes/core/assets/styles/skins/NOTICE.md`.
+MIT © UI8Kit

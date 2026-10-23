@@ -1,2 +1,2 @@
-[install]
-linker = "hoisted"
+[test]
+preload = ["./tests/preload-bun.ts"]

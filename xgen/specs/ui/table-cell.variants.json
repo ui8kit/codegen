@@ -1,7 +1,0 @@
-{
-  "id": "ui.table-cell",
-  "base": "px-2 py-2 align-middle",
-  "keys": [],
-  "defaults": {},
-  "byKey": {}
-}

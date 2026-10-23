@@ -1,0 +1,25 @@
+{
+  "showcase": {
+    "h1": {
+      "props": {
+        "Tag": "h1",
+        "Class": "text-2xl font-semibold"
+      }
+    },
+    "code": {
+      "props": {
+        "Tag": "code"
+      }
+    },
+    "legend": {
+      "props": {
+        "Tag": "legend"
+      }
+    },
+    "rejected": {
+      "props": {
+        "Tag": "title"
+      }
+    }
+  }
+}

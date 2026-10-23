@@ -1,0 +1,16 @@
+{
+  "showcase": {
+    "labelled": {
+      "props": {
+        "Label": "Search",
+        "Size": "lg"
+      }
+    },
+    "xl": {
+      "props": {
+        "Size": "xl",
+        "Class": "text-primary"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "showcase": {
+    "img": {
+      "props": {
+        "Src": "/a.png",
+        "Alt": "A cat",
+        "Width": "64",
+        "Height": "64",
+        "Loading": "lazy",
+        "Decoding": "async"
+      }
+    },
+    "decorative": {
+      "props": {
+        "Src": "/b.png",
+        "Alt": ""
+      }
+    },
+    "source": {
+      "props": {
+        "SrcSet": "/a.webp",
+        "Type": "image/webp",
+        "Media": "(min-width: 40rem)",
+        "Sizes": "100vw"
+      }
+    }
+  }
+}

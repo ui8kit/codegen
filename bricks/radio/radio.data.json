@@ -1,0 +1,17 @@
+{
+  "showcase": {
+    "checked": {
+      "props": {
+        "Name": "r",
+        "Value": "a",
+        "Checked": true
+      }
+    },
+    "disabled": {
+      "props": {
+        "Disabled": true,
+        "AriaDescribedBy": "h"
+      }
+    }
+  }
+}

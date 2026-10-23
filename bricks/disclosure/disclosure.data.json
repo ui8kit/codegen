@@ -1,0 +1,10 @@
+{
+  "showcase": {
+    "open": {
+      "props": {
+        "Open": true,
+        "Name": "faq"
+      }
+    }
+  }
+}

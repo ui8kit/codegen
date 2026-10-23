@@ -1,0 +1,17 @@
+{
+  "showcase": {
+    "open": {
+      "props": {
+        "Open": true,
+        "ID": "d",
+        "AriaLabelledBy": "t",
+        "AriaDescribedBy": "desc"
+      }
+    },
+    "named": {
+      "props": {
+        "AriaLabel": "Settings"
+      }
+    }
+  }
+}

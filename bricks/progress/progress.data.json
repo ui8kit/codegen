@@ -1,0 +1,11 @@
+{
+  "showcase": {
+    "value": {
+      "props": {
+        "Value": "30",
+        "Max": "100",
+        "AriaLabel": "Upload"
+      }
+    }
+  }
+}

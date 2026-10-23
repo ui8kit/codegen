@@ -1,0 +1,45 @@
+{
+  "showcase": {
+    "options": {
+      "props": {
+        "Name": "c",
+        "Value": "b",
+        "Options": [
+          {
+            "Value": "a",
+            "Label": "A"
+          },
+          {
+            "Value": "b",
+            "Label": "B"
+          },
+          {
+            "Value": "c",
+            "Label": "C",
+            "Disabled": true
+          }
+        ]
+      }
+    },
+    "states": {
+      "props": {
+        "Multiple": true,
+        "Required": true,
+        "Disabled": true,
+        "AriaInvalid": "true"
+      }
+    },
+    "option": {
+      "props": {
+        "Value": "x",
+        "Selected": true
+      }
+    },
+    "group": {
+      "props": {
+        "Label": "Group",
+        "Disabled": true
+      }
+    }
+  }
+}

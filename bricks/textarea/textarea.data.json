@@ -1,0 +1,20 @@
+{
+  "showcase": {
+    "filled": {
+      "props": {
+        "Name": "bio",
+        "Value": "Hello",
+        "Rows": "3",
+        "Placeholder": "About"
+      }
+    },
+    "states": {
+      "props": {
+        "Required": true,
+        "Disabled": true,
+        "ReadOnly": true,
+        "AriaInvalid": "true"
+      }
+    }
+  }
+}
