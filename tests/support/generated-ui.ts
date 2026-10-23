@@ -1,6 +1,5 @@
 /**
- * Load generated React/Svelte/Vue/Solid modules without Vite's import.meta.glob so
- * parity tests run under `bun test` as well as Vitest.
+ * Load generated React/Svelte/Vue/Solid modules for parity tests under `bun test`.
  */
 
 import { existsSync, readdirSync, statSync } from "node:fs";
@@ -16,41 +15,8 @@ export interface GeneratedUiModules {
   solidModules: Record<string, Record<string, unknown>>;
 }
 
-function partitionTsx(
-  all: Record<string, unknown>
-): {
-  reactModules: Record<string, Record<string, unknown>>;
-  solidModules: Record<string, Record<string, unknown>>;
-} {
-  const reactModules: Record<string, Record<string, unknown>> = {};
-  const solidModules: Record<string, Record<string, unknown>> = {};
-  for (const [key, mod] of Object.entries(all)) {
-    if (key.endsWith(".solid.tsx")) solidModules[key] = mod as Record<string, unknown>;
-    else reactModules[key] = mod as Record<string, unknown>;
-  }
-  return { reactModules, solidModules };
-}
-
 /** Eager-load every generated ui component module (tsx, solid.tsx, svelte, vue). */
 export async function loadGeneratedUiModules(): Promise<GeneratedUiModules> {
-  const globFn = (
-    import.meta as ImportMeta & {
-      glob?: (pattern: string, options: { eager: true }) => Record<string, unknown>;
-    }
-  ).glob;
-
-  if (typeof globFn === "function") {
-    const { reactModules, solidModules } = partitionTsx(
-      globFn("../generated/ui/*/*.tsx", { eager: true })
-    );
-    return {
-      reactModules,
-      solidModules,
-      svelteModules: globFn("../generated/ui/*/*.svelte", { eager: true }) as GeneratedUiModules["svelteModules"],
-      vueModules: globFn("../generated/ui/*/*.vue", { eager: true }) as GeneratedUiModules["vueModules"],
-    };
-  }
-
   const reactModules: Record<string, Record<string, unknown>> = {};
   const svelteModules: Record<string, { default: unknown }> = {};
   const vueModules: Record<string, { default: unknown }> = {};

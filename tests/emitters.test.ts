@@ -3,7 +3,7 @@
  * that DOM parity alone cannot see (idioms, imports, escape hatches).
  */
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 
 import { bricks } from "../bricks/index";
 import { generateFiles } from "../src/application/generate";

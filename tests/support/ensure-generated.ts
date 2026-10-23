@@ -1,6 +1,6 @@
 /**
- * Write `generated/` before parity tests. Vitest runs this via global-setup;
- * `bun test` has no global hook, so importers call it at module load.
+ * Write `generated/` before parity tests. `bun test` has no global hook, so
+ * importers call it at module load.
  */
 
 import { bricks } from "../../bricks/index";

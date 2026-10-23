@@ -3,7 +3,7 @@
  * evaluation, naming conventions, and definition validation.
  */
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 
 import {
   and,

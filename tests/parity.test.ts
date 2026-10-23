@@ -7,7 +7,7 @@
  * specification). Web Components parity lives in parity.webcomponent.test.ts.
  */
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { createElement, type ComponentType } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { render as svelteRender } from "svelte/server";

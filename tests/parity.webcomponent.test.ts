@@ -4,7 +4,7 @@
  * primitive) must produce the canonical DOM. Rendered in happy-dom.
  */
 
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "bun:test";
 import { Window } from "happy-dom";
 import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
