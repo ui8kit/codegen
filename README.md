@@ -79,6 +79,35 @@ Parity: `tests/parity.templ.test.ts` runs the real `templ generate` + `go run ./
 and compares the normalized DOM with React SSR and the canonical renderer. Without Go the
 suite is skipped locally with a message; with `UI8KIT_REQUIRE_ALL_RUNTIMES=1` (CI) it fails.
 
+### Jinja2
+
+`generated/jinja2/` holds one template per part (`ui/<brick>/<part>.html.j2`, e.g.
+`ui/card/card-header.html.j2`), the recipes, and the `ui8kit_jinja` Python package
+(`pip install -r generated/jinja2/requirements.txt`, Jinja2 `>=3.1,<4`). Templates read `p`
+(canonical PascalCase props, `Attrs` for extra attributes) and `children` (markup):
+
+```python
+import sys; sys.path.insert(0, "generated/jinja2")
+from ui8kit_jinja import environment
+env = environment()  # autoescape on; ui_* helpers + <name>_classes globals
+env.get_template("ui/button/button.html.j2").render(p={"AriaLabel": "Save"}, children=icon_html)
+```
+
+- **Children are trusted HTML.** `{{ children|safe }}` prints whatever you pass (repeated in
+  every branch, e.g. Button `<a>` | `<button>`). Props and text are autoescaped; never pass raw
+  user input as `children` — escape it (`markupsafe.escape`) or render it via a template (XSS).
+- **No `asChild` / Slot in Jinja2.** Each part with a class contract has a global
+  `<name>_classes(p)` (`button_classes`, `icon_classes`, …):
+  `<a class="{{ button_classes({'Class': 'px-4'}) }}" href="/x">`.
+- Blank strings mean "unset" (the canonical contract): `Value: ""` omits the attribute; force
+  `value=""` with `Attrs: {"value": ""}`. `Attrs` is printed last and is not de-duplicated
+  against attributes the primitive already printed.
+
+Parity: `tests/parity.jinja2.test.ts` renders every part with real Python Jinja2
+(`generated/jinja2/parity.py`) and compares the normalized DOM with React SSR and the canonical
+renderer. Without python3 + Jinja2 the suite is skipped locally; with
+`UI8KIT_REQUIRE_ALL_RUNTIMES=1` (CI) it fails.
+
 ## Layout
 
 ```

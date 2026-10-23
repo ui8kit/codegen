@@ -40,5 +40,12 @@
     "importHint": "`import \"github.com/ui8kit/codegen/generated/templ/ui/box\"` (one Go package per primitive; `select` → package `selectfield`, `switch` → `formswitch`). Props are typed structs (`box.BoxProps{Tag: \"section\"}`); children go between `@box.Box(...) { … }`. There is no asChild: for a custom root use the exported `<Name>Classes(props)` helper (`class={ button.ButtonClasses(button.ButtonProps{}) }`).",
     "lucidePackage": "inline Lucide SVG markup (copy the `<svg>` from lucide.dev; there is no official Go package)",
     "example": "```templ\n@box.Box(box.BoxProps{Tag: \"section\", Class: \"flex flex-col gap-4 p-4 bg-card text-card-foreground\"}) {\n  @text.Text(text.TextProps{Tag: \"h2\", Class: \"text-foreground\"}) { Title }\n  @button.Button(button.ButtonProps{AriaLabel: \"Save\", Class: \"bg-primary text-primary-foreground px-4 py-2\"}) {\n    @icon.Icon(icon.IconProps{Size: \"sm\"}) { <svg><!-- lucide save --></svg> }\n  }\n}\n```"
+  },
+  "jinja2": {
+    "title": "Jinja2",
+    "ext": "html.j2",
+    "importHint": "`from ui8kit_jinja import environment` (put `<path to {kit}>/../jinja2` on `sys.path`), then `{% include 'ui/box/box.html.j2' %}` with `p` (canonical PascalCase props: `{'Tag': 'section', 'Class': '…'}`) and `children` (markup) in scope — one template per part (`ui/card/card-header.html.j2`). `children` is printed with `|safe`: trusted HTML only, never raw user input. There is no asChild: for a custom root use the `<name>_classes(p)` global (`class=\"{{ button_classes({'Variant': 'outline'}) }}\"`).",
+    "lucidePackage": "inline Lucide SVG markup (copy the `<svg>` from lucide.dev; there is no official Jinja2 package)",
+    "example": "```jinja\n{% set icon %}{% with p = {'Size': 'sm'}, children = '<svg><!-- lucide save --></svg>' %}{% include 'ui/icon/icon.html.j2' %}{% endwith %}{% endset %}\n{% with p = {'AriaLabel': 'Save', 'Class': 'bg-primary text-primary-foreground px-4 py-2'}, children = icon %}{% include 'ui/button/button.html.j2' %}{% endwith %}\n```"
   }
 }

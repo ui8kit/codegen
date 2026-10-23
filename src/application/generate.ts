@@ -17,8 +17,9 @@ import { SvelteEmitter } from "../emitters/svelte";
 import { VueEmitter } from "../emitters/vue";
 import { WebComponentEmitter } from "../emitters/webcomponent";
 import { emitGoMod, emitGoParityHarness, emitGoTags, TemplEmitter } from "../emitters/templ";
+import { emitJinjaClasses, Jinja2Emitter, JINJA2_REQUIREMENT } from "../emitters/jinja2";
 
-export type RuntimeName = "react" | "svelte" | "vue" | "solid" | "webcomponent" | "templ";
+export type RuntimeName = "react" | "svelte" | "vue" | "solid" | "webcomponent" | "templ" | "jinja2";
 
 /** Runtimes that consume the shared TypeScript layer (`ui/*.shared.ts`, `utils/*.ts`). */
 export const TS_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent"];
@@ -28,7 +29,7 @@ export interface GenerateOptions {
 }
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
-export const ALL_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent", "templ"];
+export const ALL_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent", "templ", "jinja2"];
 
 export async function generateFiles(
   bricks: BrickDef[],
@@ -44,6 +45,7 @@ export async function generateFiles(
   if (runtimes.includes("solid")) emitters.push(new SolidEmitter());
   if (runtimes.includes("webcomponent")) emitters.push(new WebComponentEmitter());
   if (runtimes.includes("templ")) emitters.push(new TemplEmitter());
+  if (runtimes.includes("jinja2")) emitters.push(new Jinja2Emitter());
 
   const files: GeneratedFile[] = [];
   const emitTs = runtimes.some((r) => TS_RUNTIMES.includes(r));
@@ -70,6 +72,7 @@ export async function generateFiles(
 
   files.push(...(await runtimeSupportFiles(runtimes)));
   if (runtimes.includes("templ")) files.push(...(await templSupportFiles(bricks)));
+  if (runtimes.includes("jinja2")) files.push(...(await jinja2SupportFiles(bricks)));
   files.push(...barrels(bricks, runtimes));
 
   const { rulesFiles } = await import("./rules");
@@ -125,6 +128,19 @@ async function templSupportFiles(bricks: BrickDef[]): Promise<GeneratedFile[]> {
     else if (name.endsWith(".go")) files.push({ path: `templ/utils/${name}`, contents: `// ${BANNER}\n\n${contents}` });
   }
   files.push(emitGoTags(), emitGoMod(), emitGoParityHarness(bricks));
+  return files;
+}
+
+/** The Python side under `jinja2/`: ui8kit_jinja helpers, classes globals, parity harness. */
+async function jinja2SupportFiles(bricks: BrickDef[]): Promise<GeneratedFile[]> {
+  const pyDir = join(PACKAGE_ROOT, "runtime", "python");
+  const files: GeneratedFile[] = [];
+  for (const rel of ["parity.py", ...(await readdir(join(pyDir, "ui8kit_jinja"))).sort().map((n) => `ui8kit_jinja/${n}`)]) {
+    if (!rel.endsWith(".py")) continue;
+    files.push({ path: `jinja2/${rel}`, contents: `# ${BANNER}\n${await readFile(join(pyDir, rel), "utf8")}` });
+  }
+  files.push(emitJinjaClasses(bricks));
+  files.push({ path: "jinja2/requirements.txt", contents: `# ${BANNER}\n${JINJA2_REQUIREMENT}\n` });
   return files;
 }
 

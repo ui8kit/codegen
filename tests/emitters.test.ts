@@ -250,3 +250,36 @@ describe("templ emitter", () => {
     expect(file("rules/templ/rules.json")).toContain("**/*.templ");
   });
 });
+
+describe("jinja2 emitter", () => {
+  const button = file("jinja2/ui/button/button.html.j2");
+  const select = file("jinja2/ui/select/select.html.j2");
+  const box = file("jinja2/ui/box/box.html.j2");
+
+  it("exposes <name>_classes globals instead of asChild/Slot", () => {
+    expect(button).toContain("button_classes(p)");
+    expect(button).not.toMatch(/p\['AsChild'\]|Slot\(/);
+    expect(file("jinja2/ui8kit_jinja/classes.py")).toContain('"button_classes": ');
+  });
+
+  it("prints children as trusted HTML in every branch (Button a | button)", () => {
+    expect(button.match(/\{\{ children\|default\('', true\)\|safe \}\}/g)?.length).toBe(2);
+    expect(button).toContain("TRUSTED HTML");
+  });
+
+  it("loops Select options and keeps manual children", () => {
+    expect(select).toContain("{%- for item in ui_def(p['Options'], []) %}");
+    expect(select).toContain("{%- if ui_eq(ui_field(item, 'Value', ''), ui_def(p['Value'], '')) %} selected{%- endif %}");
+  });
+
+  it("resolves dynamic tags against the allow-list, void-aware", () => {
+    expect(box).toContain("{%- set tag1 = ui_resolve_tag(ui_def(p['Tag'], ''), 'div', [");
+    expect(box).toContain("{%- if not ui_is_void(tag1) %}");
+  });
+
+  it("ships the Python helpers, requirements and rules", () => {
+    expect(file("jinja2/requirements.txt")).toContain("Jinja2>=3.1,<4");
+    expect(file("jinja2/ui8kit_jinja/__init__.py")).toContain("def environment(");
+    expect(file("rules/jinja2/rules.json")).toContain("**/*.html.j2");
+  });
+});

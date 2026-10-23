@@ -12,7 +12,7 @@ export interface GeneratedFile {
   contents: string;
 }
 
-export type EmitterRuntime = "react" | "svelte" | "vue" | "solid" | "webcomponent" | "templ";
+export type EmitterRuntime = "react" | "svelte" | "vue" | "solid" | "webcomponent" | "templ" | "jinja2";
 
 export interface Emitter {
   readonly runtime: EmitterRuntime;
