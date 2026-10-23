@@ -12,7 +12,7 @@ export const BOX_TAGS = [
 
 export const TEXT_TAGS = [
   "p", "span", "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "figcaption", "pre", "code",
-  "small", "strong", "em", "time", "legend",
+  "small", "strong", "em", "time", "legend", "del", "ins",
 ] as const;
 
 export const TAG_GROUPS = {

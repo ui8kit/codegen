@@ -249,3 +249,8 @@ describe("validation", () => {
     expect(() => validateBrick(brick)).toThrow(/children/);
   });
 });
+
+it("Text tags include del and ins (edits, e.g. a compare-at price)", () => {
+  expect(TEXT_TAGS).toContain("del");
+  expect(TEXT_TAGS).toContain("ins");
+});

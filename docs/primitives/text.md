@@ -21,7 +21,7 @@ Text renders the requested text element (default p).
 
 | Canonical (templ, Jinja2) | React / Solid | HTML (Svelte, Vue, WC) | Type | Default | Kind | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| `Tag` | `tag` | `tag` | `"p" \| "span" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "blockquote" \| "figcaption" \| "pre" \| "code" \| "small" \| "strong" \| "em" \| "time" \| "legend"` | — | prop | HTML5 text tag (default p) |
+| `Tag` | `tag` | `tag` | `"p" \| "span" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "blockquote" \| "figcaption" \| "pre" \| "code" \| "small" \| "strong" \| "em" \| "time" \| "legend" \| "del" \| "ins"` | — | prop | HTML5 text tag (default p) |
 
 Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
@@ -79,6 +79,8 @@ Canonical renderer output (children = `Content`); all 9 runtimes are parity-test
 | Tag=em | `{"Tag":"em"}` | `<em>Content</em>` |
 | Tag=time | `{"Tag":"time"}` | `<time>Content</time>` |
 | Tag=legend | `{"Tag":"legend"}` | `<legend>Content</legend>` |
+| Tag=del | `{"Tag":"del"}` | `<del>Content</del>` |
+| Tag=ins | `{"Tag":"ins"}` | `<ins>Content</ins>` |
 
 ## Usage
 
