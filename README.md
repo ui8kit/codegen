@@ -156,3 +156,7 @@ tests/             domain, emitter conventions, parity, type tests
 ## License
 
 MIT © UI8Kit
+
+## `generated/` is build output
+
+`generated/` is not committed (it is in `.gitignore`). Produce it locally with `bun run generate`; `bun run verify` and CI always regenerate it. The source of truth is the spec and emitters in `src/`. Consumers get primitives through `@ui8kit/registry` and the `ui8kit` CLI, not from `generated/` paths on GitHub.

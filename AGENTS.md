@@ -55,3 +55,9 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 - **Children are trusted HTML** (`|raw` / `|noescape`); never route user input into them (XSS).
 - Parity: `tests/parity.{twig,latte}.test.ts` (shared `tests/support/php-parity.ts`); CI uses
   `shivammathur/setup-php` (PHP 8.3 + Composer).
+
+## `generated/`
+
+- Never commit `generated/`; it is build output of `bun run generate` and is ignored.
+- Change specs/emitters in `src/`, then run `bun run verify` (regenerates and checks all runtimes).
+- `@ui8kit/registry` is packed from a fresh `bun run generate`, never from a stale tree.
