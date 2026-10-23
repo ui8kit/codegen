@@ -16,6 +16,6 @@
     "noEmit": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*.ts", "bricks/**/*.ts", "tests/**/*.ts"],
+  "include": ["src/**/*.ts", "bricks/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts"],
   "exclude": ["node_modules", "generated", "runtime", "tests/types"]
 }

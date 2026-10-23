@@ -9,11 +9,13 @@
     "build:specs": "bun src/infrastructure/cli.ts specs --out specs/primitives.json",
     "check": "bun src/infrastructure/cli.ts check",
     "list": "bun src/infrastructure/cli.ts list",
+    "docs": "bun scripts/docs.ts",
+    "docs:check": "bun scripts/docs.ts --check",
     "test": "bun test",
     "test:watch": "bun test --watch",
     "typecheck": "tsc --noEmit",
     "typecheck:generated": "bun run generate && bun x tsc -p tsconfig.generated.json && bun x tsc -p tsconfig.generated.solid.json && bun x vue-tsc --noEmit -p tsconfig.generated.vue.json && bun x svelte-check --tsconfig ./tsconfig.generated.svelte.json --fail-on-warnings",
-    "verify": "bun run check && bun run generate && bun x tsc --noEmit && bun run typecheck:generated && bun test"
+    "verify": "bun run check && bun run generate && bun run docs:check && bun x tsc --noEmit && bun run typecheck:generated && bun test"
   },
   "dependencies": {
     "clsx": "^2.1.1",

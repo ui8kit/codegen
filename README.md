@@ -18,11 +18,19 @@ Runtimes: **React 19 · Svelte 5 · Vue 3 · SolidJS · Web Components** (vanill
 **Go [templ](https://templ.guide)** (server-rendered, first of the template runtimes).
 PHP template runtimes: **[Twig](https://twig.symfony.com) · [Latte](https://latte.nette.org)**.
 
+## Documentation
+
+**[docs/](docs/README.md)** is the single home for primitives documentation: one page per primitive
+(`docs/primitives/<name>.md` — props, variants, rendered DOM per state, ARIA, classes escape hatch,
+a snippet per runtime), runtime notes (`docs/runtimes/<rt>.md`) and the [contract](docs/contract.md).
+Reference parts are generated from the spec (`bun run docs`; `bun run docs:check` runs in `verify`),
+and every snippet is executed in its runtime by `tests/docs.test.ts`.
+
 ## Primitives
 
 Box · Text · Button · Link · Label · Input · Textarea · Select (+ SelectOption, SelectOptGroup) ·
 Checkbox · Radio · Switch · Image (+ Picture, Source) · Icon · Dialog · Disclosure (+ Summary) ·
-Meter · Progress — see [docs/primitives.md](docs/primitives.md).
+Meter · Progress — see [docs/](docs/README.md).
 
 No CSS ships with the primitives: style them with token class names via `class`.
 
@@ -37,7 +45,8 @@ Composition (cards, badges, alerts, layouts, …) is out of scope for codegen.
 bun install
 bun run generate          # writes generated/ (all runtimes + specs.json)
 bun run build:specs       # writes specs/primitives.json (registry-facing JSON spec)
-bun run verify            # check + tsc + typecheck:generated + all tests (parity ×6 runtimes)
+bun run docs              # regenerate docs/primitives/*.md from the spec
+bun run verify            # check + docs:check + tsc + typecheck:generated + all tests (parity ×6 runtimes)
 ```
 
 `generate --runtimes react,svelte,vue,solid,webcomponent,templ` limits the output.
@@ -160,7 +169,9 @@ src/domain/        IR, expressions, tags, canonical renderer, validation
 src/emitters/      react, svelte, vue, solid, webcomponent, templ (+ go-expr)
 src/application/   generate pipeline, JSON spec export
 runtime/           support code copied into generated/utils (runtime/go → generated/templ/utils)
-tests/             domain, emitter conventions, parity, type tests
+tests/             domain, emitter conventions, parity, docs snippets, type tests
+scripts/docs.ts    docs generator (bun run docs / docs:check)
+docs/              primitives documentation (generated reference + hand-written prose)
 ```
 
 ## License
