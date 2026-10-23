@@ -255,6 +255,9 @@ export class SolidEmitter implements Emitter {
     // `className` accepted as alias for React migrants.
     const omitKeys = new Set<string>(["class", "className", "children"]);
     for (const d of decls) omitKeys.add(d.reactName);
+    // Polymorphic/multi-root parts (Button: <a> | <button>) cannot type `ref`
+    // as a concrete element; a callback typed on HTMLElement fits every root.
+    if (multiRoot) omitKeys.add("ref");
 
     const propsFields: string[] = decls.map((d) => {
       const key = /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(d.reactName)
@@ -265,6 +268,7 @@ export class SolidEmitter implements Emitter {
     propsFields.push(`  class?: string;`);
     propsFields.push(`  className?: string;`);
     if (hasChildren) propsFields.push(`  children?: JSX.Element;`);
+    if (multiRoot) propsFields.push(`  ref?: (el: HTMLElement) => void;`);
 
     const genericAttr =
       attrType === "HTMLAttributes"
@@ -361,7 +365,10 @@ export class SolidEmitter implements Emitter {
 
     const fn =
       `export const ${part.name}: Component<${propsTypeName}> = (props) => {\n` +
-      indent(`const [local, rest] = splitProps(props, [${splitKeys.join(", ")}]);`, 1) +
+      indent(
+        `const [${/\blocal\b/.test(body.join("\n") + jsx) ? "local" : ""}, rest] = splitProps(props, [${splitKeys.join(", ")}]);`,
+        1
+      ) +
       "\n" +
       indent([...body, ""].join("\n"), 1) +
       indent(`return (\n${indent(jsx, 1)}\n);`, 1) +
@@ -513,7 +520,9 @@ export class SolidEmitter implements Emitter {
         const ternary = `${test} ? (\n${indent(thenCode, 1)}\n) : ${
           elseCode === "null" ? "null" : `(\n${indent(elseCode, 1)}\n)`
         }`;
-        return opts.isRoot ? ternary : `{${ternary}}`;
+        // At the root a bare ternary would run once (Solid components do not
+        // re-execute); inside a fragment it compiles to a reactive memo.
+        return opts.isRoot ? `<>\n${indent(`{${ternary}}`, 1)}\n</>` : `{${ternary}}`;
       }
       case "forEach": {
         const itemsProp = part.props.find((p) => p.name === node.itemsProp)!;
@@ -523,7 +532,7 @@ export class SolidEmitter implements Emitter {
         );
         const bodyCode = this.wrapFragment(body);
         // Solid: .map is fine for SSR parity; keys help reconciliation on client.
-        return `{(${itemsCode} ?? []).map((item, index) => (\n${indent(bodyCode, 1)}\n))}`;
+        return `{(${itemsCode} ?? []).map((item) => (\n${indent(bodyCode, 1)}\n))}`;
       }
     }
   }

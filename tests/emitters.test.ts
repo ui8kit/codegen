@@ -101,6 +101,13 @@ describe("solid emitter", () => {
   it("maps the textarea content contract to a controlled value prop", () => {
     expect(file("ui/textarea/textarea.solid.tsx")).toContain("value={(");
   });
+
+  it("keeps root branches reactive and types multi-root refs as callbacks", () => {
+    // A bare root ternary runs once; inside a fragment Solid memoizes it.
+    expect(button).toMatch(/return \(\n\s*<>\n\s*\{isSetStr\(local\.href\) \?/);
+    expect(button).toContain('"ref">');
+    expect(button).toContain("ref?: (el: HTMLElement) => void;");
+  });
 });
 
 describe("webcomponent emitter", () => {
