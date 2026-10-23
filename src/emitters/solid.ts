@@ -260,7 +260,7 @@ export class SolidEmitter implements Emitter {
       const key = /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(d.reactName)
         ? d.reactName
         : JSON.stringify(d.reactName);
-      return `  ${key}?: ${d.tsType};`;
+      return `  ${key}${d.def.required ? "" : "?"}: ${d.tsType};`;
     });
     propsFields.push(`  class?: string;`);
     propsFields.push(`  className?: string;`);
@@ -337,9 +337,6 @@ export class SolidEmitter implements Emitter {
         body.push(
           `const resolvedTagValue = () => resolveTag(${ctx.propCode(t.fromProp)}, ${JSON.stringify(t.fallback)}, TagGroup.${t.group});`
         );
-      } else if (root.tag.kind === "heading") {
-        state.usesTitleTag = true;
-        body.push(`const resolvedTagValue = () => titleTag(${ctx.propCode(root.tag.fromProp)});`);
       } else {
         body.push(`const resolvedTagValue = () => ${printTsExpr(root.tag.expr, ctx)};`);
       }

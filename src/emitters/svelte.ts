@@ -62,7 +62,7 @@ export class SvelteEmitter implements Emitter {
     // Props type (module script).
     const typeFields: string[] = decls.map((d) => {
       const key = IDENT_RE.test(d.htmlName) ? d.htmlName : JSON.stringify(d.htmlName);
-      return `  ${key}?: ${d.tsType};`;
+      return `  ${key}${d.def.required ? "" : "?"}: ${d.tsType};`;
     });
     typeFields.push(`  class?: string;`);
     if (hasChildren) typeFields.push(`  children?: Snippet;`);
@@ -111,10 +111,6 @@ export class SvelteEmitter implements Emitter {
         body.push(
           `const resolvedTagValue = $derived(resolveTag(${ctx.propCode(root.tag.fromProp)}, ${JSON.stringify(root.tag.fallback)}, TagGroup.${root.tag.group}));`
         );
-      } else if (root.tag.kind === "heading") {
-        state.usesTitleTag = true;
-        helperImports.add("titleTag");
-        body.push(`const resolvedTagValue = $derived(titleTag(${ctx.propCode(root.tag.fromProp)}));`);
       } else {
         body.push(`const resolvedTagValue = $derived(${printTsExpr(root.tag.expr, ctx)});`);
       }

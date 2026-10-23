@@ -24,7 +24,7 @@ export function recipeToVariants<R extends VariantRecipe>(recipe: R): Variants {
 
 /**
  * Merge base, variant selections, and optional tail classes.
- * Mirrors Go `uiutils.Compose`.
+ * Mirrors the canonical `composeRecipe`.
  */
 export function compose(
   v: Variants,

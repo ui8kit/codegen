@@ -76,23 +76,3 @@ export const orUndef = (v: string | null | undefined): string | undefined => {
   const t = trimStr(v);
   return t === "" ? undefined : String(v);
 };
-
-export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
-
-/** h1–h6 from a heading level; 0/undefined/out-of-range default to h2. */
-export const titleTag = (order: HeadingLevel | number | null | undefined): string => {
-  switch (order) {
-    case 1:
-      return "h1";
-    case 3:
-      return "h3";
-    case 4:
-      return "h4";
-    case 5:
-      return "h5";
-    case 6:
-      return "h6";
-    default:
-      return "h2";
-  }
-};

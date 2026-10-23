@@ -201,7 +201,7 @@ export function emitSharedModule(brick: BrickDef, utilsPath: string): GeneratedF
     }
 
     // Base props type (framework-neutral; class/children/rest added per runtime).
-    const fields = decls.map((d) => `  ${quoteIfNeeded(d.local)}?: ${d.tsType};`);
+    const fields = decls.map((d) => `  ${quoteIfNeeded(d.local)}${d.def.required ? "" : "?"}: ${d.tsType};`);
     bodies.push(``);
     bodies.push(`/** ${part.docs.split("\n")[0]} */`);
     bodies.push(`export type ${basePropsTypeName(part)} = {\n${fields.join("\n")}\n};`);

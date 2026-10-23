@@ -4,7 +4,7 @@
  * For every brick, every part, and every showcase fixture, the generated
  * React, Svelte 5, Vue 3, and SolidJS components are server-rendered and their
  * normalized DOM must equal the canonical renderer's output (the executable
- * specification derived from the same IR the Templ emitter prints).
+ * specification). Web Components parity lives in parity.webcomponent.test.ts.
  */
 
 import { describe, expect, it } from "vitest";
@@ -118,7 +118,9 @@ async function renderAllRuntimes(
 
   return {
     canonical: canonicalHtml,
-    react: reactHtml,
+    // React 19 hoists image preload hints (<link rel="preload" as="image">)
+    // into static markup; they are document resources, not component DOM.
+    react: reactHtml.replace(/<link rel="preload"[^>]*\/?>/g, ""),
     svelte: svelteHtml,
     vue: vueHtml,
     solid: solidHtml,
@@ -140,14 +142,14 @@ for (const brick of bricks) {
       ];
 
       for (const testCase of partCases) {
-        it(`${part.name} · ${testCase.id}`, async () => {
-          const out = await renderAllRuntimes(brick, part, testCase.props);
-          const expected = normalizeHtml(out.canonical);
-          expect(normalizeHtml(out.react), "react ≠ canonical").toEqual(expected);
-          expect(normalizeHtml(out.svelte), "svelte ≠ canonical").toEqual(expected);
-          expect(normalizeHtml(out.vue), "vue ≠ canonical").toEqual(expected);
-          expect(normalizeHtml(out.solid), "solid ≠ canonical").toEqual(expected);
-        });
+        for (const runtime of ["react", "svelte", "vue", "solid"] as const) {
+          it(`[${runtime}] ${part.name} · ${testCase.id}`, async () => {
+            const out = await renderAllRuntimes(brick, part, testCase.props);
+            expect(normalizeHtml(out[runtime]), `${runtime} ≠ canonical`).toEqual(
+              normalizeHtml(out.canonical)
+            );
+          });
+        }
       }
     }
   });

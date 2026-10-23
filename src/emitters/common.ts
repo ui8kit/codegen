@@ -12,7 +12,7 @@ export interface GeneratedFile {
   contents: string;
 }
 
-export type EmitterRuntime = "templ" | "react" | "svelte" | "vue" | "solid" | "latte" | "twig";
+export type EmitterRuntime = "react" | "svelte" | "vue" | "solid" | "webcomponent";
 
 export interface Emitter {
   readonly runtime: EmitterRuntime;
@@ -154,7 +154,7 @@ function childListOf(expr: Expr): Expr[] {
 
 /**
  * Replace `resolvedTag` with a literal and fold trivially-constant boolean
- * algebra. Used by the Templ emitter inside tag-switch cases, where the
+ * algebra. Used inside tag-switch cases, where the
  * resolved tag is a known literal per case.
  */
 export function foldResolvedTag(expr: Expr, tag: string): Expr {

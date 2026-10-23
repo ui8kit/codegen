@@ -127,6 +127,7 @@ function reactAttrName(name: string): string {
     enctype: "encType",
     novalidate: "noValidate",
     datetime: "dateTime",
+    readonly: "readOnly",
   };
   return special[name] ?? name;
 }
@@ -245,10 +246,15 @@ export class ReactEmitter implements Emitter {
     const singleStaticTag =
       !multiRoot && rootTags.length === 1 && rootTags[0] !== undefined ? rootTags[0] : undefined;
     const isSvgRoot = singleStaticTag === "svg";
+    const allStatic = rootTags.length > 0 && rootTags.every((t) => t !== undefined && t !== "svg");
+    const rootTypes = allStatic
+      ? [...new Set(rootTags as string[])].map((t): [string, string] => REACT_ATTR_TYPES[t] ?? ["HTMLAttributes", "HTMLElement"])
+      : [];
     const [attrType, elemType] =
       singleStaticTag && !isSvgRoot
         ? REACT_ATTR_TYPES[singleStaticTag] ?? ["HTMLAttributes", "HTMLElement"]
         : ["HTMLAttributes", "HTMLElement"];
+    for (const [a] of rootTypes) reactTypeImports.add(a);
     reactTypeImports.add(attrType);
     const refType = isSvgRoot
       ? "SVGSVGElement"
@@ -256,7 +262,9 @@ export class ReactEmitter implements Emitter {
         ? "HTMLElement | SVGSVGElement"
         : singleStaticTag
           ? elemType
-          : "HTMLElement";
+          : multiRoot && allStatic
+            ? [...new Set(rootTypes.map(([, e]) => e))].join(" | ")
+            : "HTMLElement";
     // Casts are needed when the forwardRef generic is wider than one element.
     const needsRefCast = multiRoot || singleStaticTag === undefined || isSvgRoot;
     if (needsRefCast) state.usesRefCast = true;
@@ -270,13 +278,16 @@ export class ReactEmitter implements Emitter {
     for (const d of decls) omitKeys.add(d.reactName);
     const propsFields: string[] = decls.map((d) => {
       const key = /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(d.reactName) ? d.reactName : JSON.stringify(d.reactName);
-      return `  ${key}?: ${d.tsType};`;
+      return `  ${key}${d.def.required ? "" : "?"}: ${d.tsType};`;
     });
     propsFields.push(`  className?: string;`);
     if (hasChildren) propsFields.push(`  children?: ReactNode;`);
     if (part.asChild) propsFields.push(`  asChild?: boolean;`);
 
-    const genericAttr = attrType === "HTMLAttributes" ? `HTMLAttributes<${elemType}>` : `${attrType}<${elemType}>`;
+    const genericAttr =
+      multiRoot && allStatic
+        ? [...new Set(rootTypes.map(([a, e]) => `${a}<${e}>`))].join(" & ")
+        : `${attrType}<${elemType}>`;
     const omit = [...omitKeys].map((k) => JSON.stringify(k)).join(" | ");
     const propsTypeName = `${part.name}Props`;
     const propsType =
@@ -335,9 +346,6 @@ export class ReactEmitter implements Emitter {
         body.push(
           `const resolvedTagValue = resolveTag(${ctx.propCode(t.fromProp)}, ${JSON.stringify(t.fallback)}, TagGroup.${t.group});`
         );
-      } else if (root.tag.kind === "heading") {
-        state.usesTitleTag = true;
-        body.push(`const resolvedTagValue = titleTag(${ctx.propCode(root.tag.fromProp)});`);
       } else {
         body.push(`const resolvedTagValue = ${printTsExpr(root.tag.expr, ctx)};`);
       }
@@ -485,7 +493,9 @@ export class ReactEmitter implements Emitter {
         const refCast = opts.needsRefCast
           ? isSvg
             ? "SVGSVGElement"
-            : "HTMLElement"
+            : node.tag.kind === "static"
+              ? (REACT_ATTR_TYPES[node.tag.tag]?.[1] ?? "HTMLElement")
+              : "HTMLElement"
           : undefined;
         const attrs = this.printAttrs(node, ctx, part, state, {
           withRef: opts.isRoot === true,

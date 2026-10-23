@@ -17,48 +17,33 @@ function file(path: string): string {
   return f.contents;
 }
 
-describe("templ emitter", () => {
-  const button = file("ui/button/button.templ");
-
-  it("uses boolean attribute syntax and the Attrs spread", () => {
-    expect(button).toContain("disabled?={ p.Disabled }");
-    expect(button).toContain("{ p.Attrs... }");
-    expect(button).toContain("{ children... }");
-  });
-
-  it("exports the Classes escape hatch", () => {
-    expect(button).toContain("func ButtonClasses(p ButtonProps) string");
-  });
-
-  it("embeds the shared recipe verbatim", () => {
-    const gen = file("ui/button/button_gen.go");
-    expect(gen).toContain("//go:embed button.variants.json");
-    expect(gen).toContain("uiutils.MustParseVariantRecipe");
-  });
-
-  it("resolves Tier-B tags through a local switch over the allow-list", () => {
-    const stack = file("ui/stack/stack.templ");
-    expect(stack).toContain('switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupStack)');
-    expect(stack).toContain('case "ul":');
-    expect(stack).toContain("default:");
-  });
-});
-
 describe("react emitter", () => {
   const button = file("ui/button/button.tsx");
 
   it("forwards refs and supports asChild via Slot", () => {
-    // Multi-root (button | a when href is set) widens the ref to HTMLElement.
-    expect(button).toContain("forwardRef<HTMLElement, ButtonProps>");
+    // Multi-root (a when href is set | button): ref is the exact element union.
+    expect(button).toContain("forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonProps>");
+    expect(button).toContain("ref as Ref<HTMLAnchorElement>");
+    expect(button).toContain("ref as Ref<HTMLButtonElement>");
+    expect(button).not.toContain("Ref<HTMLElement>");
     expect(button).toContain("if (asChild) {");
     expect(button).toContain('import { Slot } from "../slot/slot"');
   });
 
-  it("derives variant types from the shared contract module", () => {
-    expect(button).toContain('from "./button.shared"');
-    expect(file("ui/button/button.shared.ts")).toContain(
-      'export type ButtonVariant = RecipeKey<typeof buttonRecipe, "variant">'
+  it("derives variant key types from the shared contract module", () => {
+    expect(file("ui/icon/icon.tsx")).toContain('from "./icon.shared"');
+    expect(file("ui/icon/icon.shared.ts")).toContain(
+      'export type IconSize = RecipeKey<typeof iconRecipe, "size">'
     );
+  });
+
+  it("types polymorphic tags as HTML5 unions", () => {
+    expect(file("ui/box/box.shared.ts")).toContain('tag?: "div" | "section"');
+    expect(file("ui/text/text.shared.ts")).toContain('tag?: "p" | "span" | "h1"');
+  });
+
+  it("requires Image alt", () => {
+    expect(file("ui/image/image.shared.ts")).toContain("alt: string;");
   });
 
   it("maps the textarea content contract to defaultValue", () => {
@@ -81,7 +66,7 @@ describe("svelte emitter", () => {
   });
 
   it("uses svelte:element for resolved tags", () => {
-    expect(file("ui/stack/Stack.svelte")).toContain("<svelte:element this={resolvedTagValue}");
+    expect(file("ui/box/Box.svelte")).toContain("<svelte:element this={resolvedTagValue}");
   });
 });
 
@@ -95,7 +80,7 @@ describe("vue emitter", () => {
   });
 
   it("uses component :is for resolved tags", () => {
-    expect(file("ui/stack/Stack.vue")).toContain('<component :is="resolvedTagValue"');
+    expect(file("ui/box/Box.vue")).toContain('<component :is="resolvedTagValue"');
   });
 });
 
@@ -110,7 +95,7 @@ describe("solid emitter", () => {
   });
 
   it("uses Dynamic for resolved tags", () => {
-    expect(file("ui/stack/stack.solid.tsx")).toContain("<Dynamic component={resolvedTagValue()}");
+    expect(file("ui/box/box.solid.tsx")).toContain("<Dynamic component={resolvedTagValue()}");
   });
 
   it("maps the textarea content contract to a controlled value prop", () => {
@@ -118,16 +103,57 @@ describe("solid emitter", () => {
   });
 });
 
-describe("behavior hooks", () => {
-  it("data-ui8kit defaults off in every runtime", () => {
-    for (const path of [
-      "ui/dialog/dialog.templ",
-      "ui/dialog/dialog.tsx",
-      "ui/dialog/Dialog.svelte",
-      "ui/dialog/Dialog.vue",
-      "ui/dialog/dialog.solid.tsx",
-    ]) {
-      expect(file(path), path).not.toContain('data-ui8kit="');
+describe("webcomponent emitter", () => {
+  const button = file("ui/button/button.wc.ts");
+
+  it("renders light DOM via createElement, no shadow root, no framework", () => {
+    expect(button).toContain("export function renderButton(");
+    expect(button).toContain("document.createElement(");
+    expect(button).toContain('export function defineButton(tagName = "ui8-button")');
+    expect(button).not.toContain("attachShadow");
+    expect(button).not.toMatch(/from "(react|vue|svelte|solid-js)/);
+  });
+
+  it("barrel registers every part", () => {
+    const barrel = file("ui/index.wc.ts");
+    expect(barrel).toContain("export function defineAll(");
+    for (const brick of bricks) for (const part of brick.parts) expect(barrel).toContain(`define${part.name}(`);
+  });
+});
+
+describe("style agnosticism", () => {
+  const shipped = files.filter((f) => !f.path.endsWith(".md"));
+
+  it("ships no CSS", () => {
+    expect(shipped.filter((f) => /\.(css|scss|less)$/.test(f.path))).toEqual([]);
+  });
+
+  it("ships no half-step spacing, px values, or color literals in classes", () => {
+    const classes: string[] = [];
+    for (const brick of bricks) {
+      for (const r of Object.values(brick.recipes)) {
+        classes.push(r.base, ...Object.values(r.byKey).flatMap((m) => Object.values(m)));
+      }
+      for (const part of brick.parts) {
+        if (part.classes?.staticBase) classes.push(part.classes.staticBase);
+        for (const st of part.classes?.state ?? []) classes.push(st.classes);
+      }
+    }
+    const tokens = classes.join(" ").split(/\s+/).filter(Boolean);
+    const bad = tokens.filter(
+      (t) =>
+        /-\d+\.5\b/.test(t) ||
+        /\d+px\b|-px\b/.test(t) ||
+        /#[0-9a-f]{3,8}\b|rgb\(|hsl\(|oklch\(/i.test(t) ||
+        /-(red|blue|green|gray|slate|zinc|neutral|stone|black|white|yellow|orange|purple|pink|indigo)(-\d+)?\b/.test(t)
+    );
+    expect(bad).toEqual([]);
+  });
+
+  it("never emits layout vocabulary as tags or components", () => {
+    const parts = bricks.flatMap((b) => b.parts.map((p) => p.name.toLowerCase()));
+    for (const n of ["block", "container", "stack", "group", "grid", "list", "inline", "title", "card", "badge"]) {
+      expect(parts).not.toContain(n);
     }
   });
 });
@@ -138,6 +164,7 @@ describe("barrels", () => {
     const svelte = file("ui/index.svelte.ts");
     const vue = file("ui/index.vue.ts");
     const solid = file("ui/index.solid.ts");
+    expect(file("ui/index.wc.ts")).toContain('export * from "./shared"');
     for (const brick of bricks) {
       for (const part of brick.parts) {
         expect(svelte).toContain(`export { default as ${part.name} }`);
@@ -148,5 +175,15 @@ describe("barrels", () => {
     expect(react).toContain('export * from "./slot/slot"');
     expect(solid).toContain('export * from "./shared"');
     expect(solid).toContain(".solid");
+  });
+});
+
+describe("specs export", () => {
+  it("specs/primitives.json is up to date with the definitions (run `bun run build:specs`)", async () => {
+    const { readFileSync } = await import("node:fs");
+    const { buildSpecs } = await import("../src/application/specs");
+    const committed = JSON.parse(readFileSync(new URL("../specs/primitives.json", import.meta.url), "utf8"));
+    expect(committed).toEqual(JSON.parse(JSON.stringify(buildSpecs(bricks))));
+    expect(file("specs.json")).toContain('"ui.button"');
   });
 });

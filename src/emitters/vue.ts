@@ -91,7 +91,7 @@ export class VueEmitter implements Emitter {
     };
 
     // Props declaration.
-    const propsFields = decls.map((d) => `  ${d.local}?: ${d.tsType};`);
+    const propsFields = decls.map((d) => `  ${d.local}${d.def.required ? "" : "?"}: ${d.tsType};`);
 
     const body: string[] = [];
     body.push(`const attrs = useAttrs();`);
@@ -123,11 +123,6 @@ export class VueEmitter implements Emitter {
         const t = root.tag;
         body.push(
           `const resolvedTagValue = computed(() => resolveTag(props.${localIdent(t.fromProp)}, ${JSON.stringify(t.fallback)}, TagGroup.${t.group}));`
-        );
-      } else if (root.tag.kind === "heading") {
-        helperImports.add("titleTag");
-        body.push(
-          `const resolvedTagValue = computed(() => titleTag(props.${localIdent(root.tag.fromProp)}));`
         );
       } else {
         body.push(`const resolvedTagValue = computed(() => ${printTsExpr(root.tag.expr, scriptCtx)});`);
