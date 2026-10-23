@@ -70,7 +70,7 @@ export function reactProps(part: PartDef, canonical: CanonicalProps): Record<str
   }
   // Passthrough props arrive as React DOM props through rest.
   for (const [def, value] of passthrough) out[reactPropName(def)] = value;
-  return out;
+  return { ...out, ...rawAttrs(part, canonical) };
 }
 
 /**
@@ -86,7 +86,7 @@ export function solidProps(part: PartDef, canonical: CanonicalProps): Record<str
     else out[reactPropName(def)] = value;
   }
   for (const [def, value] of passthrough) out[htmlPropName(def)] = value;
-  return out;
+  return { ...out, ...rawAttrs(part, canonical) };
 }
 
 /** Svelte and Vue share HTML-native prop naming. */
@@ -99,7 +99,7 @@ export function htmlRuntimeProps(part: PartDef, canonical: CanonicalProps): Reco
     else out[htmlPropName(def)] = value;
   }
   for (const [def, value] of passthrough) out[htmlPropName(def)] = value;
-  return out;
+  return { ...out, ...rawAttrs(part, canonical) };
 }
 
 /** Vue converts kebab-case attrs to camelCase declared props automatically,
@@ -113,7 +113,7 @@ export function vueProps(part: PartDef, canonical: CanonicalProps): Record<strin
     else out[localIdent(def.name)] = value;
   }
   for (const [def, value] of passthrough) out[htmlPropName(def)] = value;
-  return out;
+  return { ...out, ...rawAttrs(part, canonical) };
 }
 
 export function hasChildren(part: PartDef): boolean {
@@ -122,4 +122,11 @@ export function hasChildren(part: PartDef): boolean {
 
 export function mainPart(brick: BrickDef): PartDef {
   return brick.parts[0]!;
+}
+
+/** Raw DOM attributes (undeclared lowercase or dashed keys, e.g. a flattened Attrs map); JS runtimes take them as rest
+ * props, the canonical renderer as `rest`. */
+export function rawAttrs(part: PartDef, canonical: CanonicalProps): Record<string, unknown> {
+  const named = new Set(part.props.map((p) => p.name));
+  return Object.fromEntries(Object.entries(canonical).filter(([k]) => !named.has(k) && /^[a-z]/.test(k)));
 }

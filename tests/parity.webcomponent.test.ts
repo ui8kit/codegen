@@ -17,6 +17,8 @@ import { ensureGenerated } from "./support/ensure-generated";
 import { showcaseCases } from "./support/fixtures";
 import { normalizeHtml } from "./support/normalize";
 import { hasChildren, htmlRuntimeProps, knownCanonicalProps, type CanonicalProps } from "./support/props";
+import { rawAttrs } from "./support/props";
+import { UNSAFE_URL_EDGES } from "./support/unsafe-urls";
 
 await ensureGenerated();
 
@@ -72,12 +74,13 @@ for (const brick of bricks) {
           .filter((c): c is { id: string; props: CanonicalProps } =>
             c.props !== undefined && Object.keys(c.props).length > 0
           ),
+        ...Object.entries(UNSAFE_URL_EDGES[part.name] ?? {}).map(([id, c]) => ({ id, props: jsAttrs(c.props) })),
       ];
       for (const c of cases) {
         const withChildren = hasChildren(part);
         const expected = () =>
           normalizeHtml(
-            renderPart(brick, part.name, c.props, { children: withChildren ? CHILD_TEXT : undefined })
+            renderPart(brick, part.name, c.props, { children: withChildren ? CHILD_TEXT : undefined, rest: rawAttrs(part, c.props) as Record<string, string> })
           );
         const props = htmlRuntimeProps(part, c.props);
 
@@ -128,3 +131,9 @@ describe("webcomponent upgrade timing", () => {
     expect(html).toContain("Add</button></section>");
   });
 });
+
+/** JS runtimes take extra attributes as rest props, not as a server-style Attrs map */
+function jsAttrs(props: Record<string, unknown>): CanonicalProps {
+  const { Attrs, ...rest } = props as { Attrs?: Record<string, unknown> };
+  return { ...rest, ...(Attrs ?? {}) } as CanonicalProps;
+}

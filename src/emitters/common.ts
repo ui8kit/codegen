@@ -271,7 +271,7 @@ export function recipeVarName(recipeFile: string): string {
 export function pruneUnusedImports(code: string): string {
   const importRe = /^import (type )?\{([^}]*)\} from ("[^"]+");\n/gm;
   const body = code.replace(importRe, "");
-  const used = (name: string) => new RegExp(`(?<![\\w$.])${name.replace(/\$/g, "\\$")}(?![\\w$])`).test(body);
+  const used = (name: string) => new RegExp(`(?<![\\w$])(?<!(?<!\\.\\.)\\.)${name.replace(/\$/g, "\\$")}(?![\\w$])`).test(body);
   return code.replace(importRe, (_m, typeKw: string | undefined, specs: string, from: string) => {
     const kept = specs
       .split(",")

@@ -1,11 +1,14 @@
 /**
  * Unsafe URL edge cases (javascript:, vbscript:, data:; obfuscated with case and control chars), shared by the server
- * parity suites. Canonical contract: the attribute is omitted (named URL props and URL keys of Attrs). React blocks
- * javascript: with its own placeholder URL, so these cases compare the servers with the canonical renderer only.
+ * and JS parity suites. Contract: the attribute is omitted (named URL props and URL keys of Attrs) in every runtime,
+ * React included (no React placeholder URL), so all runtimes are compared with React.
  */
-const REACT = "React replaces a javascript: URL with its own placeholder; servers omit the attribute (canonical)";
-type C = { props: Record<string, unknown>; canonicalOnly: string };
-const c = (props: Record<string, unknown>): C => ({ props, canonicalOnly: REACT });
+type C = { props: Record<string, unknown>; reactProps?: Record<string, unknown> };
+/** React (and the other JS runtimes) take Attrs entries as rest props */
+const c = (props: Record<string, unknown>): C => {
+  const { Attrs, ...rest } = props as { Attrs?: Record<string, unknown> };
+  return Attrs ? { props, reactProps: { ...rest, ...Attrs } } : { props };
+};
 
 export const UNSAFE_URL_EDGES: Record<string, Record<string, C>> = {
   Link: {

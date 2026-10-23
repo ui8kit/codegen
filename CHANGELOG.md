@@ -11,7 +11,10 @@
   named props and URL keys of `Attrs`/`attrs`, omit `javascript:`, `vbscript:` and `data:` values (case / control chars ignored)
   in Latte, Twig, Jinja2 and templ (templ: no more `about:invalid#TemplFailedSanitizationURL`) and in the canonical renderer;
   non-passthrough URL expressions go through `safeUrl` in the TS runtimes too. Parity edge cases in every server suite.
-  Not covered: passthrough URL props / rest spread in Svelte, Vue, Solid, web components (React blocks `javascript:` itself).
+  **JS runtimes:** passthrough URL props and rest spread in React, Svelte, Vue, Solid and web components go through
+  `safeRest` / `applyRest` and omit the same values, so the DOM is identical everywhere (no React placeholder URL).
+  Unsafe-URL edge cases compared against React in all 8 runtimes.
+- Emitters: import pruning treats a spread (`...name`) as a use (a member access `x.name` still is not).
 - Twig: docs and a test require `only` on every include (no context leak). Latte: include variable inheritance documented.
 - Server cn merge (Go, PHP, Python): `object-fit`, `object-position` and `aspect-*` are conflict groups, as in tailwind-merge
   (`object-cover … object-contain` kept both on the server).

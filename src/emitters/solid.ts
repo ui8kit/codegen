@@ -219,7 +219,7 @@ export class SolidEmitter implements Emitter {
   private emitPart(brick: BrickDef, part: PartDef): PartEmit {
     const env: TypeEnv = makeEnv(brick, part);
     const decls = declaredProps(brick, part);
-    const helperImports = new Set<string>();
+    const helperImports = new Set<string>(["safeRest"]);
     const sharedImports = new Set<string>();
     const jsxAttrImports = new Set<string>();
     const state = {
@@ -459,7 +459,8 @@ export class SolidEmitter implements Emitter {
         return `{...((c: string) => (c ? { class: c } : {}))(${inline})}`;
       }
       case "rest":
-        return opts.withRest ? `{...rest}` : "";
+        if (opts.withRest) ctx.helpers.add("safeRest");
+        return opts.withRest ? `{...safeRest(rest)}` : "";
     }
   }
 

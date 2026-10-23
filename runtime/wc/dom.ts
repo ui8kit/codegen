@@ -1,3 +1,5 @@
+import { safeUrl } from "./expr";
+const URL_KEYS = new Set(["href", "src", "action", "formaction", "poster", "cite", "background", "xlink:href"]);
 // Vanilla light-DOM runtime for the generated custom elements.
 // No shadow DOM: rendered nodes live in the document so consumer token
 // classes apply. Mirrors the canonical attribute semantics.
@@ -30,6 +32,7 @@ export function applyRest(el: Element, rest: Record<string, unknown>): void {
       continue;
     }
     if (v === false || v === null || v === undefined) continue;
+    if (typeof v === "string" && v !== "" && URL_KEYS.has(k.toLowerCase()) && safeUrl(v) === "") continue; // javascript:, ...
     el.setAttribute(k, v === true ? "" : String(v));
   }
 }

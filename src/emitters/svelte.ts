@@ -75,7 +75,7 @@ export class SvelteEmitter implements Emitter {
     });
     destructure.push(`class: className`);
     if (hasChildren) destructure.push("children");
-    destructure.push("...rest");
+    destructure.push("...rawRest");
 
     const ctx: TsPrintCtx = {
       env,
@@ -92,6 +92,8 @@ export class SvelteEmitter implements Emitter {
     };
 
     const body: string[] = [];
+    helperImports.add("safeRest");
+    body.push(`const rest = $derived(safeRest(rawRest));`);
     if (part.classes) {
       sharedValueImports.add(classesHelperName(part));
       const inputs = classSpecProps(part.classes).map((n) => ctx.propCode(n));

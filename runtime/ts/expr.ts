@@ -94,3 +94,16 @@ export function syncValue(node: { value: string }, value?: string | null): { upd
 /** URL attribute value: "" for javascript:, vbscript: and data: (ASCII whitespace/control chars removed, case-insensitive). */
 export const safeUrl = (v: string | null | undefined): string =>
   /^(javascript|vbscript|data):/.test(String(v ?? "").replace(/[\u0000-\u0020]/g, "").toLowerCase()) ? "" : (v ?? "");
+
+const URL_KEYS = new Set(["href", "src", "action", "formaction", "poster", "cite", "background", "xlink:href", "xlinkhref"]);
+/** Rest props / caller attrs without URL attributes whose value is unsafe (same omission as safeUrl); identity when clean. */
+export function safeRest<T extends object>(rest: T): T {
+  const bad = Object.keys(rest).filter((k) => {
+    const v = (rest as Record<string, unknown>)[k];
+    return typeof v === "string" && v !== "" && URL_KEYS.has(k.toLowerCase()) && safeUrl(v) === "";
+  });
+  if (bad.length === 0) return rest;
+  const out = { ...rest } as Record<string, unknown>;
+  for (const k of bad) delete out[k];
+  return out as T;
+}

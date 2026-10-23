@@ -306,7 +306,7 @@ export class ReactEmitter implements Emitter {
     destructure.push("className");
     if (hasChildren) destructure.push("children");
     if (part.asChild) destructure.push("asChild");
-    destructure.push("...rest");
+    destructure.push("...rawRest");
 
     // Print context.
     const ctx: TsPrintCtx = {
@@ -323,8 +323,10 @@ export class ReactEmitter implements Emitter {
       helpers: helperImports,
     };
 
-    // Body statements.
+    // Body statements. Caller attrs lose unsafe URLs (javascript:, ...) like every runtime.
     const body: string[] = [];
+    helperImports.add("safeRest");
+    body.push(`const rest = safeRest(rawRest);`);
     if (part.classes) {
       sharedImports.add(classesHelperName(part));
       const inputs = classSpecProps(part.classes).map((n) => ctx.propCode(n));

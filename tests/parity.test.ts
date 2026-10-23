@@ -33,6 +33,8 @@ import {
   vueProps,
   type CanonicalProps,
 } from "./support/props";
+import { rawAttrs } from "./support/props";
+import { UNSAFE_URL_EDGES } from "./support/unsafe-urls";
 
 await ensureGenerated();
 const { reactModules, svelteModules, vueModules, solidModules } = await loadGeneratedUiModules();
@@ -81,6 +83,7 @@ async function renderAllRuntimes(
 
   const canonicalHtml = renderPart(brick, part.name, canonical, {
     children: withChildren ? CHILD_TEXT : undefined,
+    rest: rawAttrs(part, canonical) as Record<string, string>,
   });
 
   const reactHtml = renderToStaticMarkup(
@@ -139,6 +142,7 @@ for (const brick of bricks) {
           .filter((c): c is { id: string; props: CanonicalProps } =>
             c.props !== undefined && Object.keys(c.props).length > 0
           ),
+        ...Object.entries(UNSAFE_URL_EDGES[part.name] ?? {}).map(([id, c]) => ({ id, props: jsAttrs(c.props) })),
       ];
 
       for (const testCase of partCases) {
@@ -148,9 +152,18 @@ for (const brick of bricks) {
             expect(normalizeHtml(out[runtime]), `${runtime} ≠ canonical`).toEqual(
               normalizeHtml(out.canonical)
             );
+            if (UNSAFE_URL_EDGES[part.name]?.[testCase.id]) {
+              expect(out[runtime]).not.toMatch(/(href|src|action|formaction)="[^"]*(javascript|vbscript|data):|react-has-blocked/i);
+            }
           });
         }
       }
     }
   });
+}
+
+/** JS runtimes take extra attributes as rest props, not as a server-style Attrs map */
+function jsAttrs(props: Record<string, unknown>): CanonicalProps {
+  const { Attrs, ...rest } = props as { Attrs?: Record<string, unknown> };
+  return { ...rest, ...(Attrs ?? {}) } as CanonicalProps;
 }

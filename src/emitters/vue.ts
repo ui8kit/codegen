@@ -98,7 +98,8 @@ export class VueEmitter implements Emitter {
     body.push(`const callerClass = computed(() => attrs.class as string | undefined);`);
     body.push(`const restAttrs = computed(() => {`);
     body.push(`  const { class: _class, ...restEntries } = attrs;`);
-    body.push(`  return restEntries;`);
+    body.push(`  return safeRest(restEntries);`);
+    helperImports.add("safeRest");
     body.push(`});`);
 
     if (part.classes) {
