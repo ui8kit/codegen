@@ -1,0 +1,1559 @@
+{
+  "$schema": "ui8kit-codegen/specs",
+  "version": 1,
+  "tagGroups": {
+    "Box": [
+      "div",
+      "section",
+      "article",
+      "aside",
+      "header",
+      "footer",
+      "main",
+      "nav",
+      "figure",
+      "search",
+      "ul",
+      "ol",
+      "li",
+      "dl",
+      "dt",
+      "dd",
+      "fieldset",
+      "form",
+      "table",
+      "thead",
+      "tbody",
+      "tfoot",
+      "tr",
+      "th",
+      "td",
+      "caption",
+      "colgroup",
+      "col"
+    ],
+    "Text": [
+      "p",
+      "span",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "blockquote",
+      "figcaption",
+      "pre",
+      "code",
+      "small",
+      "strong",
+      "em",
+      "time",
+      "legend"
+    ]
+  },
+  "primitives": [
+    {
+      "id": "ui.box",
+      "dir": "box",
+      "file": "box",
+      "docs": "Box is the polymorphic structural primitive. `tag` accepts HTML5 structural\nelements only (sections, lists, tables, forms); anything else falls back to div.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Box",
+          "docs": "Box renders the requested structural HTML element (default div).",
+          "elements": [
+            "div",
+            "section",
+            "article",
+            "aside",
+            "header",
+            "footer",
+            "main",
+            "nav",
+            "figure",
+            "search",
+            "ul",
+            "ol",
+            "li",
+            "dl",
+            "dt",
+            "dd",
+            "fieldset",
+            "form",
+            "table",
+            "thead",
+            "tbody",
+            "tfoot",
+            "tr",
+            "th",
+            "td",
+            "caption",
+            "colgroup",
+            "col"
+          ],
+          "customElement": "ui8-box",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Tag",
+              "html": "tag",
+              "react": "tag",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "enum": [
+                "div",
+                "section",
+                "article",
+                "aside",
+                "header",
+                "footer",
+                "main",
+                "nav",
+                "figure",
+                "search",
+                "ul",
+                "ol",
+                "li",
+                "dl",
+                "dt",
+                "dd",
+                "fieldset",
+                "form",
+                "table",
+                "thead",
+                "tbody",
+                "tfoot",
+                "tr",
+                "th",
+                "td",
+                "caption",
+                "colgroup",
+                "col"
+              ],
+              "docs": "HTML5 structural tag (default div)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.text",
+      "dir": "text",
+      "file": "text",
+      "docs": "Text is the polymorphic text primitive. `tag` accepts HTML5 text elements\nonly (p, span, h1–h6, blockquote, code, …); anything else falls back to p.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Text",
+          "docs": "Text renders the requested text element (default p).",
+          "elements": [
+            "p",
+            "span",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "blockquote",
+            "figcaption",
+            "pre",
+            "code",
+            "small",
+            "strong",
+            "em",
+            "time",
+            "legend"
+          ],
+          "customElement": "ui8-text",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Tag",
+              "html": "tag",
+              "react": "tag",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "enum": [
+                "p",
+                "span",
+                "h1",
+                "h2",
+                "h3",
+                "h4",
+                "h5",
+                "h6",
+                "blockquote",
+                "figcaption",
+                "pre",
+                "code",
+                "small",
+                "strong",
+                "em",
+                "time",
+                "legend"
+              ],
+              "docs": "HTML5 text tag (default p)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.button",
+      "dir": "button",
+      "file": "button",
+      "docs": "Button triggers an action. With `href` it renders an anchor (navigation that\nlooks like an action). Event handlers (onClick) flow through attrs/rest.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Button",
+          "docs": "Button renders a button element, or an anchor when Href is set.\nType/Form apply only in button mode; Disabled on anchors uses aria-disabled.",
+          "elements": [
+            "a",
+            "button"
+          ],
+          "customElement": "ui8-button",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Type",
+              "html": "type",
+              "react": "type",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "enum": [
+                "button",
+                "submit",
+                "reset"
+              ],
+              "docs": "button type (default button)"
+            },
+            {
+              "name": "Form",
+              "html": "form",
+              "react": "form",
+              "type": "string",
+              "required": false,
+              "passthrough": true,
+              "docs": "associated form id (button mode)"
+            },
+            {
+              "name": "Href",
+              "html": "href",
+              "react": "href",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "docs": "renders an anchor when set"
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false,
+              "docs": "blocks interaction"
+            },
+            {
+              "name": "AriaLabel",
+              "html": "aria-label",
+              "react": "aria-label",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaPressed",
+              "html": "aria-pressed",
+              "react": "aria-pressed",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaExpanded",
+              "html": "aria-expanded",
+              "react": "aria-expanded",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaControls",
+              "html": "aria-controls",
+              "react": "aria-controls",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.link",
+      "dir": "link",
+      "file": "link",
+      "docs": "Link renders a semantic anchor for navigation. Use Button for actions.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Link",
+          "docs": "Link renders an anchor; External opens a new tab with rel=noopener noreferrer.",
+          "elements": [
+            "a"
+          ],
+          "customElement": "ui8-link",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Href",
+              "html": "href",
+              "react": "href",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Target",
+              "html": "target",
+              "react": "target",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "docs": "explicit target; External implies _blank"
+            },
+            {
+              "name": "Rel",
+              "html": "rel",
+              "react": "rel",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "docs": "explicit rel; External defaults to noopener noreferrer"
+            },
+            {
+              "name": "External",
+              "html": "external",
+              "react": "external",
+              "type": "bool",
+              "required": false,
+              "passthrough": false,
+              "docs": "opens in a new tab with safe rel defaults"
+            },
+            {
+              "name": "Download",
+              "html": "download",
+              "react": "download",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaCurrent",
+              "html": "aria-current",
+              "react": "aria-current",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaLabel",
+              "html": "aria-label",
+              "react": "aria-label",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.label",
+      "dir": "label",
+      "file": "label",
+      "docs": "Label names a form control.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Label",
+          "docs": "Label renders a native label element.",
+          "elements": [
+            "label"
+          ],
+          "customElement": "ui8-label",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "For",
+              "html": "for",
+              "react": "htmlFor",
+              "type": "string",
+              "required": false,
+              "passthrough": true,
+              "docs": "id of the labeled control"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.input",
+      "dir": "input",
+      "file": "input",
+      "docs": "Input is a single-line native form control (checkbox/radio have their own primitives).",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Input",
+          "docs": "Input renders a native input element (default type text).",
+          "elements": [
+            "input"
+          ],
+          "customElement": "ui8-input",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": false,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Type",
+              "html": "type",
+              "react": "type",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "enum": [
+                "text",
+                "email",
+                "password",
+                "search",
+                "tel",
+                "url",
+                "number",
+                "range",
+                "date",
+                "datetime-local",
+                "month",
+                "week",
+                "time",
+                "color",
+                "file",
+                "hidden"
+              ],
+              "docs": "input type (default text)"
+            },
+            {
+              "name": "ID",
+              "html": "id",
+              "react": "id",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Name",
+              "html": "name",
+              "react": "name",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Placeholder",
+              "html": "placeholder",
+              "react": "placeholder",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Min",
+              "html": "min",
+              "react": "min",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Max",
+              "html": "max",
+              "react": "max",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Step",
+              "html": "step",
+              "react": "step",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Required",
+              "html": "required",
+              "react": "required",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "ReadOnly",
+              "html": "readOnly",
+              "react": "readOnly",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "AriaInvalid",
+              "html": "aria-invalid",
+              "react": "aria-invalid",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaDescribedBy",
+              "html": "aria-describedby",
+              "react": "aria-describedby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.textarea",
+      "dir": "textarea",
+      "file": "textarea",
+      "docs": "Textarea is a multi-line native text field.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Textarea",
+          "docs": "Textarea renders a native textarea; Value is the initial content.",
+          "elements": [
+            "textarea"
+          ],
+          "customElement": "ui8-textarea",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": false,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "ID",
+              "html": "id",
+              "react": "id",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Name",
+              "html": "name",
+              "react": "name",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "docs": "initial content"
+            },
+            {
+              "name": "Placeholder",
+              "html": "placeholder",
+              "react": "placeholder",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Rows",
+              "html": "rows",
+              "react": "rows",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Required",
+              "html": "required",
+              "react": "required",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "ReadOnly",
+              "html": "readOnly",
+              "react": "readOnly",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "AriaInvalid",
+              "html": "aria-invalid",
+              "react": "aria-invalid",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaDescribedBy",
+              "html": "aria-describedby",
+              "react": "aria-describedby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.select",
+      "dir": "select",
+      "file": "select",
+      "docs": "Select is a native dropdown. Flat options come from the Options list;\nSelectOption / SelectOptGroup children cover grouped or custom markup.",
+      "recordTypes": [
+        {
+          "name": "SelectOptionItem",
+          "fields": [
+            {
+              "name": "Value",
+              "type": "string"
+            },
+            {
+              "name": "Label",
+              "type": "string"
+            },
+            {
+              "name": "Disabled",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "parts": [
+        {
+          "name": "Select",
+          "docs": "Select renders option children from Options, then manual children.",
+          "elements": [
+            "select"
+          ],
+          "customElement": "ui8-select",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "ID",
+              "html": "id",
+              "react": "id",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Name",
+              "html": "name",
+              "react": "name",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "docs": "selected option value"
+            },
+            {
+              "name": "Multiple",
+              "html": "multiple",
+              "react": "multiple",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Required",
+              "html": "required",
+              "react": "required",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Options",
+              "html": "options",
+              "react": "options",
+              "type": "items",
+              "required": false,
+              "passthrough": false,
+              "itemsOf": "SelectOptionItem"
+            },
+            {
+              "name": "AriaInvalid",
+              "html": "aria-invalid",
+              "react": "aria-invalid",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaDescribedBy",
+              "html": "aria-describedby",
+              "react": "aria-describedby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        },
+        {
+          "name": "SelectOption",
+          "docs": "SelectOption renders a native option.",
+          "elements": [
+            "option"
+          ],
+          "customElement": "ui8-select-option",
+          "staticAttrs": {},
+          "acceptsClass": false,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Selected",
+              "html": "selected",
+              "react": "selected",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            }
+          ]
+        },
+        {
+          "name": "SelectOptGroup",
+          "docs": "SelectOptGroup renders a native optgroup around option children.",
+          "elements": [
+            "optgroup"
+          ],
+          "customElement": "ui8-select-opt-group",
+          "staticAttrs": {},
+          "acceptsClass": false,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Label",
+              "html": "label",
+              "react": "label",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.checkbox",
+      "dir": "checkbox",
+      "file": "checkbox",
+      "docs": "Checkbox is a native input[type=checkbox]; pair it with Label.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Checkbox",
+          "docs": "Checkbox renders input[type=checkbox].",
+          "elements": [
+            "input"
+          ],
+          "customElement": "ui8-checkbox",
+          "staticAttrs": {
+            "type": "checkbox"
+          },
+          "acceptsClass": true,
+          "acceptsChildren": false,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "ID",
+              "html": "id",
+              "react": "id",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Name",
+              "html": "name",
+              "react": "name",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Checked",
+              "html": "checked",
+              "react": "checked",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Required",
+              "html": "required",
+              "react": "required",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "AriaInvalid",
+              "html": "aria-invalid",
+              "react": "aria-invalid",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaDescribedBy",
+              "html": "aria-describedby",
+              "react": "aria-describedby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.radio",
+      "dir": "radio",
+      "file": "radio",
+      "docs": "Radio is a native input[type=radio]; pair it with Label.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Radio",
+          "docs": "Radio renders input[type=radio].",
+          "elements": [
+            "input"
+          ],
+          "customElement": "ui8-radio",
+          "staticAttrs": {
+            "type": "radio"
+          },
+          "acceptsClass": true,
+          "acceptsChildren": false,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "ID",
+              "html": "id",
+              "react": "id",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Name",
+              "html": "name",
+              "react": "name",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Checked",
+              "html": "checked",
+              "react": "checked",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Required",
+              "html": "required",
+              "react": "required",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "AriaInvalid",
+              "html": "aria-invalid",
+              "react": "aria-invalid",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaDescribedBy",
+              "html": "aria-describedby",
+              "react": "aria-describedby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.switch",
+      "dir": "switch",
+      "file": "switch",
+      "docs": "Switch is an on/off toggle: button[role=switch] with aria-checked.\nState changes are the consumer's (onClick via attrs/rest).",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Switch",
+          "docs": "Switch renders button[type=button][role=switch]; children render the thumb.",
+          "elements": [
+            "button"
+          ],
+          "customElement": "ui8-switch",
+          "staticAttrs": {
+            "type": "button",
+            "role": "switch"
+          },
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Checked",
+              "html": "checked",
+              "react": "checked",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "Disabled",
+              "html": "disabled",
+              "react": "disabled",
+              "type": "bool",
+              "required": false,
+              "passthrough": false
+            },
+            {
+              "name": "ID",
+              "html": "id",
+              "react": "id",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Name",
+              "html": "name",
+              "react": "name",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaLabel",
+              "html": "aria-label",
+              "react": "aria-label",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaLabelledBy",
+              "html": "aria-labelledby",
+              "react": "aria-labelledby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.image",
+      "dir": "image",
+      "file": "image",
+      "docs": "Image renders img, picture, and source. Alt is required; pass an empty\nstring for decorative images.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Image",
+          "docs": "Image renders an img element; alt is always emitted.",
+          "elements": [
+            "img"
+          ],
+          "customElement": "ui8-image",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": false,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Src",
+              "html": "src",
+              "react": "src",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Alt",
+              "html": "alt",
+              "react": "alt",
+              "type": "string",
+              "required": true,
+              "passthrough": false,
+              "docs": "alternative text; empty string for decorative images"
+            },
+            {
+              "name": "SrcSet",
+              "html": "srcset",
+              "react": "srcSet",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Sizes",
+              "html": "sizes",
+              "react": "sizes",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Width",
+              "html": "width",
+              "react": "width",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Height",
+              "html": "height",
+              "react": "height",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Loading",
+              "html": "loading",
+              "react": "loading",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Decoding",
+              "html": "decoding",
+              "react": "decoding",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        },
+        {
+          "name": "Picture",
+          "docs": "Picture wraps Source candidates and a fallback Image.",
+          "elements": [
+            "picture"
+          ],
+          "customElement": "ui8-picture",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": []
+        },
+        {
+          "name": "Source",
+          "docs": "Source renders a source candidate inside picture.",
+          "elements": [
+            "source"
+          ],
+          "customElement": "ui8-source",
+          "staticAttrs": {},
+          "acceptsClass": false,
+          "acceptsChildren": false,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "SrcSet",
+              "html": "srcset",
+              "react": "srcSet",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Media",
+              "html": "media",
+              "react": "media",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Type",
+              "html": "type",
+              "react": "type",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Sizes",
+              "html": "sizes",
+              "react": "sizes",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.icon",
+      "dir": "icon",
+      "file": "icon",
+      "docs": "Icon is a sized frame for a consumer-supplied glyph (svg, sprite, font).\nNo registry: the glyph is the children/slot. Decorative unless Label is set.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Icon",
+          "docs": "Icon renders span[data-slot=icon]; Label switches to role=img + aria-label.",
+          "elements": [
+            "span"
+          ],
+          "customElement": "ui8-icon",
+          "staticAttrs": {
+            "data-slot": "icon"
+          },
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Size",
+              "html": "size",
+              "react": "size",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "variantKey": "size",
+              "enum": [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl"
+              ],
+              "default": "sm",
+              "docs": "size token: xs, sm, md, lg, xl (default sm)"
+            },
+            {
+              "name": "Label",
+              "html": "label",
+              "react": "label",
+              "type": "string",
+              "required": false,
+              "passthrough": false,
+              "docs": "accessible name; omitted = decorative (aria-hidden)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.dialog",
+      "dir": "dialog",
+      "file": "dialog",
+      "docs": "Dialog is the native <dialog>. Opening/closing (showModal) is the consumer's.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Dialog",
+          "docs": "Dialog renders a native dialog element.",
+          "elements": [
+            "dialog"
+          ],
+          "customElement": "ui8-dialog",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "ID",
+              "html": "id",
+              "react": "id",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Open",
+              "html": "open",
+              "react": "open",
+              "type": "bool",
+              "required": false,
+              "passthrough": false,
+              "docs": "initial open state"
+            },
+            {
+              "name": "AriaLabelledBy",
+              "html": "aria-labelledby",
+              "react": "aria-labelledby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaDescribedBy",
+              "html": "aria-describedby",
+              "react": "aria-describedby",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaLabel",
+              "html": "aria-label",
+              "react": "aria-label",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.disclosure",
+      "dir": "disclosure",
+      "file": "disclosure",
+      "docs": "Disclosure is native details/summary. `name` groups exclusive accordions.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Disclosure",
+          "docs": "Disclosure renders a native details element.",
+          "elements": [
+            "details"
+          ],
+          "customElement": "ui8-disclosure",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Open",
+              "html": "open",
+              "react": "open",
+              "type": "bool",
+              "required": false,
+              "passthrough": false,
+              "docs": "initial open state"
+            },
+            {
+              "name": "Name",
+              "html": "name",
+              "react": "name",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        },
+        {
+          "name": "Summary",
+          "docs": "Summary renders the native summary (the disclosure trigger).",
+          "elements": [
+            "summary"
+          ],
+          "customElement": "ui8-summary",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": []
+        }
+      ]
+    },
+    {
+      "id": "ui.meter",
+      "dir": "meter",
+      "file": "meter",
+      "docs": "Meter is a native gauge for a known range (value/min/max).",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Meter",
+          "docs": "Meter renders a native meter; children are the fallback text.",
+          "elements": [
+            "meter"
+          ],
+          "customElement": "ui8-meter",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Min",
+              "html": "min",
+              "react": "min",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Max",
+              "html": "max",
+              "react": "max",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Low",
+              "html": "low",
+              "react": "low",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "High",
+              "html": "high",
+              "react": "high",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Optimum",
+              "html": "optimum",
+              "react": "optimum",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaLabel",
+              "html": "aria-label",
+              "react": "aria-label",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui.progress",
+      "dir": "progress",
+      "file": "progress",
+      "docs": "Progress is native task progress (value/max); omit value for indeterminate.",
+      "recordTypes": [],
+      "parts": [
+        {
+          "name": "Progress",
+          "docs": "Progress renders a native progress element; children are the fallback text.",
+          "elements": [
+            "progress"
+          ],
+          "customElement": "ui8-progress",
+          "staticAttrs": {},
+          "acceptsClass": true,
+          "acceptsChildren": true,
+          "acceptsAttrs": true,
+          "props": [
+            {
+              "name": "Value",
+              "html": "value",
+              "react": "value",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "Max",
+              "html": "max",
+              "react": "max",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            },
+            {
+              "name": "AriaLabel",
+              "html": "aria-label",
+              "react": "aria-label",
+              "type": "string",
+              "required": false,
+              "passthrough": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

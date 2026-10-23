@@ -2,7 +2,8 @@
 /**
  * ui8kit-codegen CLI.
  *
- *   generate [--out <dir>] [--go-module <module>] [--runtimes templ,react,svelte,vue,solid]
+ *   generate [--out <dir>] [--runtimes react,svelte,vue,solid,webcomponent]
+ *   specs [--out <file>]                   write the JSON spec export (specs.json)
  *   check                                  validate all brick definitions
  *   list                                   list bricks and parts
  */
@@ -12,9 +13,7 @@ import { fileStem } from "../domain/model";
 import { validateRegistry } from "../domain/validate";
 import {
   ALL_RUNTIMES,
-  DEFAULT_GO_MODULE,
   generateFiles,
-  phpSkippedParts,
   writeFiles,
   type RuntimeName,
 } from "../application/generate";
@@ -41,6 +40,14 @@ async function main(): Promise<void> {
       console.log(`OK: ${bricks.length} bricks, ${parts} parts validated.`);
       return;
     }
+    case "specs": {
+      const { buildSpecs } = await import("../application/specs");
+      const out = flags["out"] ?? "specs.json";
+      const { writeFile } = await import("node:fs/promises");
+      await writeFile(out, JSON.stringify(buildSpecs(bricks), null, 2) + "\n", "utf8");
+      console.log(`Wrote ${out} (${bricks.length} primitives).`);
+      return;
+    }
     case "list": {
       for (const brick of bricks) {
         console.log(`${brick.id}  (ui/${brick.dir}/${fileStem(brick)}.*)`);
@@ -50,28 +57,21 @@ async function main(): Promise<void> {
     }
     case "generate": {
       const out = flags["out"] ?? "generated";
-      const goModule = flags["go-module"] ?? DEFAULT_GO_MODULE;
       const runtimes = flags["runtimes"]
         ? (flags["runtimes"].split(",") as RuntimeName[])
         : ALL_RUNTIMES;
       for (const r of runtimes) {
         if (!ALL_RUNTIMES.includes(r)) throw new Error(`unknown runtime: ${r}`);
       }
-      const files = await generateFiles(bricks, { goModule, runtimes });
+      const files = await generateFiles(bricks, { runtimes });
       await writeFiles(files, out);
       console.log(
         `Generated ${files.length} files for ${runtimes.join(", ")} into ${out}/ (${bricks.length} bricks).`
       );
-      if (runtimes.includes("latte") || runtimes.includes("twig")) {
-        const skipped = phpSkippedParts(bricks);
-        const total = bricks.reduce((n, b) => n + b.parts.length, 0);
-        console.log(`PHP runtimes (latte/twig): ${total - skipped.length}/${total} parts.`);
-        for (const s of skipped) console.log(`  skipped ${s.brick}/${s.part}: ${s.reason}`);
-      }
       return;
     }
     default:
-      console.error("Usage: ui8kit-codegen <generate|check|list> [flags]");
+      console.error("Usage: ui8kit-codegen <generate|specs|check|list> [flags]");
       process.exitCode = 1;
   }
 }

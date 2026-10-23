@@ -9,39 +9,22 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { fileStem, type BrickDef } from "../domain/model";
-import { phpSupported } from "../domain/php-support";
 import { validateRegistry } from "../domain/validate";
 import { BANNER, type Emitter, type GeneratedFile } from "../emitters/common";
-import { LatteEmitter } from "../emitters/latte";
 import { ReactEmitter } from "../emitters/react";
 import { SolidEmitter } from "../emitters/solid";
 import { SvelteEmitter } from "../emitters/svelte";
-import { TemplEmitter } from "../emitters/templ";
-import { TwigEmitter } from "../emitters/twig";
 import { VueEmitter } from "../emitters/vue";
+import { WebComponentEmitter } from "../emitters/webcomponent";
 
-export type RuntimeName = "templ" | "react" | "svelte" | "vue" | "solid" | "latte" | "twig";
+export type RuntimeName = "react" | "svelte" | "vue" | "solid" | "webcomponent";
 
 export interface GenerateOptions {
-  goModule?: string;
   runtimes?: RuntimeName[];
 }
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
-export const DEFAULT_GO_MODULE = "github.com/ui8kit/ui";
-export const ALL_RUNTIMES: RuntimeName[] = ["templ", "react", "svelte", "vue", "solid", "latte", "twig"];
-
-/** Parts the PHP template emitters skip, with reasons (for the CLI summary). */
-export function phpSkippedParts(bricks: BrickDef[]): Array<{ brick: string; part: string; reason: string }> {
-  const out: Array<{ brick: string; part: string; reason: string }> = [];
-  for (const brick of bricks) {
-    for (const part of brick.parts) {
-      const support = phpSupported(part);
-      if (!support.ok) out.push({ brick: brick.dir, part: part.name, reason: support.reason });
-    }
-  }
-  return out;
-}
+export const ALL_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent"];
 
 export async function generateFiles(
   bricks: BrickDef[],
@@ -49,21 +32,16 @@ export async function generateFiles(
 ): Promise<GeneratedFile[]> {
   validateRegistry(bricks);
   const runtimes = options.runtimes ?? ALL_RUNTIMES;
-  const goModule = options.goModule ?? DEFAULT_GO_MODULE;
 
   const emitters: Emitter[] = [];
-  if (runtimes.includes("templ")) emitters.push(new TemplEmitter({ goModule }));
   if (runtimes.includes("react")) emitters.push(new ReactEmitter());
   if (runtimes.includes("svelte")) emitters.push(new SvelteEmitter());
   if (runtimes.includes("vue")) emitters.push(new VueEmitter());
   if (runtimes.includes("solid")) emitters.push(new SolidEmitter());
-  if (runtimes.includes("latte")) emitters.push(new LatteEmitter());
-  if (runtimes.includes("twig")) emitters.push(new TwigEmitter());
+  if (runtimes.includes("webcomponent")) emitters.push(new WebComponentEmitter());
 
   const files: GeneratedFile[] = [];
-  const emitTs = runtimes.some(
-    (r) => r === "react" || r === "svelte" || r === "vue" || r === "solid"
-  );
+  const emitTs = runtimes.length > 0;
 
   for (const brick of bricks) {
     // Colocate the shared recipes next to every runtime file.
@@ -86,22 +64,8 @@ export async function generateFiles(
   files.push(...(await runtimeSupportFiles(runtimes)));
   files.push(...barrels(bricks, runtimes));
 
-  if (runtimes.includes("templ")) {
-    const { emitGoParityHarness, emitGoMod } = await import("../emitters/go-harness");
-    files.push(emitGoMod(goModule));
-    files.push(emitGoParityHarness(bricks, goModule));
-  }
-
-  if (runtimes.includes("latte") || runtimes.includes("twig")) {
-    const { emitPhpClasses } = await import("../emitters/php-classes");
-    const { emitComposerJson, emitLatteParityHarness, emitTwigParityHarness } = await import(
-      "../emitters/php-harness"
-    );
-    files.push(emitPhpClasses(bricks));
-    files.push(emitComposerJson());
-    if (runtimes.includes("latte")) files.push(emitLatteParityHarness());
-    if (runtimes.includes("twig")) files.push(emitTwigParityHarness());
-  }
+  const { buildSpecs } = await import("./specs");
+  files.push({ path: "specs.json", contents: JSON.stringify(buildSpecs(bricks), null, 2) + "\n" });
 
   // Fail loudly on path collisions — one brick must never overwrite another.
   const seen = new Set<string>();
@@ -122,35 +86,20 @@ export async function writeFiles(files: GeneratedFile[], outDir: string): Promis
 
 async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFile[]> {
   const files: GeneratedFile[] = [];
-  const emitTs = runtimes.some(
-    (r) => r === "react" || r === "svelte" || r === "vue" || r === "solid"
-  );
+  const emitTs = runtimes.length > 0;
   if (emitTs) {
     const tsDir = join(PACKAGE_ROOT, "runtime", "ts");
     for (const name of await readdir(tsDir)) {
       files.push({ path: `utils/${name}`, contents: await readFile(join(tsDir, name), "utf8") });
     }
   }
-  if (runtimes.includes("templ")) {
-    const goDir = join(PACKAGE_ROOT, "runtime", "go");
-    for (const name of await readdir(goDir)) {
-      if (name.endsWith("_test.go")) continue;
-      files.push({ path: `utils/${name}`, contents: await readFile(join(goDir, name), "utf8") });
-    }
+  if (runtimes.includes("webcomponent")) {
+    const wc = await readFile(join(PACKAGE_ROOT, "runtime", "wc", "dom.ts"), "utf8");
+    files.push({ path: "utils/wc.ts", contents: wc });
   }
   if (runtimes.includes("react")) {
     const slot = await readFile(join(PACKAGE_ROOT, "runtime", "react", "slot.tsx"), "utf8");
     files.push({ path: "ui/slot/slot.tsx", contents: slot });
-  }
-  if (runtimes.includes("latte") || runtimes.includes("twig")) {
-    const phpDir = join(PACKAGE_ROOT, "runtime", "php");
-    for (const name of await readdir(phpDir)) {
-      if (name === "TwigExtension.php" && !runtimes.includes("twig")) continue;
-      files.push({
-        path: `php/UI8Kit/${name}`,
-        contents: await readFile(join(phpDir, name), "utf8"),
-      });
-    }
   }
   return files;
 }
@@ -158,7 +107,7 @@ async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFi
 function barrels(bricks: BrickDef[], runtimes: RuntimeName[]): GeneratedFile[] {
   const files: GeneratedFile[] = [];
 
-  if (runtimes.some((r) => r === "react" || r === "svelte" || r === "vue" || r === "solid")) {
+  if (runtimes.length > 0) {
     const lines = [`// ${BANNER}`, `// Shared per-brick contracts (types + classes helpers).`, ``];
     for (const brick of bricks) {
       lines.push(`export * from "./${brick.dir}/${fileStem(brick)}.shared";`);
@@ -206,6 +155,27 @@ function barrels(bricks: BrickDef[], runtimes: RuntimeName[]): GeneratedFile[] {
     }
     lines.push(`export * from "./shared";`);
     files.push({ path: "ui/index.solid.ts", contents: lines.join("\n") + "\n" });
+  }
+
+  if (runtimes.includes("webcomponent")) {
+    const lines = [`// ${BANNER}`, `// Vanilla custom elements barrel.`, ``];
+    const defs: string[] = [];
+    for (const brick of bricks) {
+      const names = brick.parts.map((p) => `define${p.name}`);
+      lines.push(`export * from "./${brick.dir}/${fileStem(brick)}.wc";`);
+      lines.push(`import { ${names.join(", ")} } from "./${brick.dir}/${fileStem(brick)}.wc";`);
+      defs.push(...names);
+    }
+    lines.push(``);
+    lines.push(`/** Register every primitive as <prefix-part> (default prefix "ui8"). */`);
+    lines.push(`export function defineAll(prefix = "ui8"): void {`);
+    for (const d of defs) {
+      const tag = d.slice("define".length).replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+      lines.push(`  ${d}(prefix + ${JSON.stringify("-" + tag)});`);
+    }
+    lines.push(`}`);
+    lines.push(`export * from "./shared";`);
+    files.push({ path: "ui/index.wc.ts", contents: lines.join("\n") + "\n" });
   }
 
   return files;
