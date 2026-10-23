@@ -32,3 +32,13 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
   (the emitter throws). Explicit empty attributes go through `Attrs`.
 - **Children are trusted HTML** (`{ children... }`, `templ.Raw` in the harness). Props and text
   are escaped by templ; never route user input into raw children (XSS).
+
+## Jinja2 specifics
+
+- Output `generated/jinja2/` (one `ui/<brick>/<part>.html.j2` per part); Python helpers come
+  from `runtime/python/` (`ui8kit_jinja`, ported from xgen tag `xgen-archive-2026-10-23`),
+  `ui8kit_jinja/classes.py` is generated. Local check: `pip install jinja2` then
+  `bun test tests/parity.jinja2.test.ts` (`PYTHON=` overrides the interpreter).
+- No asChild/Slot: each part with a class contract gets a `<name>_classes(p)` Jinja global.
+- **Children are trusted HTML** (`{{ children|safe }}`, repeated per branch); never route user
+  input into children (XSS). Props/text are autoescaped.

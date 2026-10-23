@@ -20,5 +20,10 @@ jobs:
           cache-dependency-path: runtime/go/go.sum
       - name: Install templ
         run: go install github.com/a-h/templ/cmd/templ@v0.3.1070 && echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Jinja2
+        run: python -m pip install "Jinja2>=3.1,<4"
       - run: bun install --frozen-lockfile
       - run: bun run verify
