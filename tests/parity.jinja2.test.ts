@@ -62,10 +62,12 @@ function casesFor(brick: BrickDef, part: PartDef): Case[] {
 /** Edge cases: empty input value, attribute escaping, tag fallback. */
 const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> = {
   Input: {
-    // Explicit empty value: the canonical contract omits value="" (blank string);
-    // through the Attrs escape hatch it is forwarded like React's value="".
+    // passthrough attrs are nullable: an explicit "" renders value="" (as React), unset omits it
+    "empty value": { props: { Value: "" } },
     "empty value via Attrs": { props: { Attrs: { value: "" } }, reactProps: { Value: "" } },
   },
+  Checkbox: { "empty value": { props: { Value: "" } } },
+  Radio: { "empty value": { props: { Value: "" } } },
   Button: {
     escaping: { props: { AriaLabel: 'a"b<c>&', Class: 'x"y' } },
     "href escaping": { props: { Href: '/a?b=1&c="2"' } },

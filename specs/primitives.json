@@ -1,7 +1,7 @@
 {
   "$schema": "ui8kit-codegen/specs",
   "version": 1,
-  "specVersion": "3.1.0",
+  "specVersion": "3.2.0",
   "tagGroups": {
     "Box": [
       "div",

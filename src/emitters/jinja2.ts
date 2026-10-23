@@ -13,6 +13,7 @@
  * `<name>_classes(p)` global is the escape hatch.
  */
 
+import { isPassthroughForward } from "../domain/passthrough";
 import type { Expr } from "../domain/expr";
 import {
   type AttrSpec,
@@ -259,6 +260,11 @@ function printAttr(attr: AttrSpec, ctx: Ctx): string {
     case "static":
       return `${attr.name}="${escAttr(attr.value)}"`;
     case "expr": {
+      if (isPassthroughForward(attr, ctx.part)) {
+        // nullable passthrough: unset / None omits, an explicit "" renders attr=""
+        const k = (attr.expr as { name: string }).name;
+        return `{%- if p['${k}'] is defined and p['${k}'] is not none %} ${attr.name}="{{ p['${k}'] }}"{%- endif %}`;
+      }
       const value = stringJ(attr.expr, ctx);
       if (attr.when) {
         if (attr.when.kind === "lit") return attr.when.value ? `${attr.name}="{{ ${value} }}"` : "";

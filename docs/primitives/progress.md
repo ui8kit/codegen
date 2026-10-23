@@ -119,7 +119,7 @@ document.body.append(renderProgress({ value: "30", max: "100", "aria-label": "Up
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/progress"
 
-@progress.Progress(progress.ProgressProps{Value: "30", Max: "100", AriaLabel: "Upload"}) {
+@progress.Progress(progress.ProgressProps{Value: new("30"), Max: "100", AriaLabel: "Upload"}) {
 	Content
 }
 ```

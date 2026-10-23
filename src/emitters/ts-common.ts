@@ -289,19 +289,8 @@ export function emitSharedModule(brick: BrickDef, utilsPath: string): GeneratedF
   return { path: sharedModulePath(brick), contents };
 }
 
-/**
- * True when an attr is a plain conditional forward of a passthrough prop —
- * TS runtimes skip it because rest props deliver the identical attribute.
- */
-export function isPassthroughForward(
-  attr: { kind: string; expr?: Expr; when?: Expr },
-  part: PartDef
-): boolean {
-  if (attr.kind !== "expr" || !attr.expr || attr.when) return false;
-  if (attr.expr.kind !== "prop") return false;
-  const p = part.props.find((x) => x.name === (attr.expr as { name: string }).name);
-  return p?.passthrough === true;
-}
+/** TS runtimes skip plain passthrough forwards: rest props deliver the identical attribute. */
+export { isPassthroughForward } from "../domain/passthrough";
 
 export function quoteIfNeeded(name: string): string {
   return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(name) ? name : JSON.stringify(name);

@@ -93,7 +93,8 @@ function emitPart(brick: BrickDef, part: PartDef): string {
   const params = templateParams(part).map((p) => `{# @param ${p.name} (${p.type}) #}`);
   lines.push(...params);
   for (const p of templateParams(part)) {
-    lines.push(`{% set ${p.name} = ${p.name}|default(${p.type === "children" ? "''" : phpDefault(p.type)}) %}`);
+    // passthrough: `??` keeps an explicit "" (|default would replace it), null = unset
+    lines.push(p.def.passthrough ? `{% set ${p.name} = ${p.name} ?? null %}` : `{% set ${p.name} = ${p.name}|default(${p.type === "children" ? "''" : phpDefault(p.type)}) %}`);
   }
   const root = part.render;
   if (root.kind === "element" && root.tag.kind === "resolved") {

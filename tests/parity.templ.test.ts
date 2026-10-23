@@ -74,12 +74,13 @@ function casesFor(brick: BrickDef, part: PartDef): Case[] {
 /** Edge cases named in the templ contract: empty input value, attribute escaping. */
 const EDGE: Record<string, Record<string, Omit<Case, "brick" | "part" | "id">>> = {
   Input: {
-    // Go strings cannot tell "unset" from "": Value "" omits the attribute
-    // (the canonical contract); React forwards an explicit "" verbatim.
-    "empty value": { props: { Value: "" }, canonicalOnly: "React prints value=\"\" for an explicit empty passthrough" },
+    // passthrough attrs are nullable: an explicit "" renders value="" (as React), unset omits it
+    "empty value": { props: { Value: "" } },
     // Explicit empty value through the Attrs escape hatch matches React's value="".
     "empty value via Attrs": { props: { Attrs: { value: "" } }, reactProps: { Value: "" } },
   },
+  Checkbox: { "empty value": { props: { Value: "" } } },
+  Radio: { "empty value": { props: { Value: "" } } },
   Button: {
     escaping: { props: { AriaLabel: 'a"b<c>&', Class: 'x"y' } },
     "href escaping": { props: { Href: '/a?b=1&c="2"' } },

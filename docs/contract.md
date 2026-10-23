@@ -22,8 +22,16 @@ see the spacing note).
 
 ### Empty values
 
-Canonical rule: a blank string means "unset" and the attribute is omitted. React forwards an
-explicit `""` passthrough verbatim; server runtimes force `value=""` through the attrs escape hatch.
+Passthrough attributes (`id`, `name`, `value`, `aria-*`, `placeholder`, … — props marked passthrough) are **nullable**:
+unset (`undefined` / `null` / `None` / `nil`) omits the attribute, an explicit `""` renders `attr=""` — in every runtime,
+as React does. Server signatures: Twig `x ?? null` (no `|default`), Latte `?string $x = null`, Jinja2 `p['X'] is not none`,
+templ `Value *string` (Go strings cannot be unset; other passthrough strings in templ still treat `""` as unset —
+use `Attrs` for an explicit empty one). Non-passthrough strings keep the rule: a blank string means "unset".
+
+### Button with `href` + `disabled`
+
+As in the v0.1.0 contract: the anchor keeps `href` and gets `aria-disabled="true"` + `tabindex="-1"`
+(anchors have no native `disabled`). The primitive does not drop `href`; block the click in the caller if needed.
 
 ## ARIA
 

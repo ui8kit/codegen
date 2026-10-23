@@ -123,7 +123,7 @@ document.body.append(renderMeter({ value: "0.6", min: "0", max: "1", low: "0.2",
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/meter"
 
-@meter.Meter(meter.MeterProps{Value: "0.6", Min: "0", Max: "1", Low: "0.2", High: "0.8", Optimum: "0.5", AriaLabel: "Disk"}) {
+@meter.Meter(meter.MeterProps{Value: new("0.6"), Min: "0", Max: "1", Low: "0.2", High: "0.8", Optimum: "0.5", AriaLabel: "Disk"}) {
 	Content
 }
 ```

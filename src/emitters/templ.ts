@@ -12,6 +12,7 @@
  * asChild/Slot in templ: `<Part>Classes(p)` is the escape hatch.
  */
 
+import { isPassthroughForward } from "../domain/passthrough";
 import type { Expr } from "../domain/expr";
 import {
   fileStem,
@@ -128,6 +129,8 @@ export class TemplEmitter implements Emitter {
 
 function goType(part: PartDef, name: string): string {
   const p = part.props.find((x) => x.name === name)!;
+  // Value is nullable (nil = unset, ptr to "" = value=""), like React's passthrough. Breaking since 3.2.0.
+  if (p.passthrough && p.name === "Value" && p.type === "string") return "*string";
   switch (p.type) {
     case "string":
       return "string";
@@ -280,6 +283,10 @@ function printAttr(attr: AttrSpec, tag: string, part: PartDef, ctx: GoPrintCtx):
     case "static":
       return `${attr.name}=${JSON.stringify(attr.value)}`;
     case "expr": {
+      if (isPassthroughForward(attr, part) && goType(part, (attr.expr as { name: string }).name) === "*string") {
+        const k = (attr.expr as { name: string }).name;
+        return `if p.${k} != nil {\n\t${attr.name}={ *p.${k} }\n}`;
+      }
       const expr = fold(attr.expr, tag);
       const value = stringGo(expr, ctx);
       if (attr.when) {

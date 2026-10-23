@@ -128,7 +128,7 @@ document.body.append(renderRadio({ checked: true, name: "r", value: "a" }));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/radio"
 
-@radio.Radio(radio.RadioProps{Name: "r", Value: "a", Checked: true})
+@radio.Radio(radio.RadioProps{Name: "r", Value: new("a"), Checked: true})
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

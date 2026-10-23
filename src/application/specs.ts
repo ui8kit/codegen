@@ -11,7 +11,7 @@ import { kebab } from "../emitters/webcomponent";
 
 export const SPECS_VERSION = 1;
 /** Spec contract version; tracks the @ui8kit/codegen package major (3.x). */
-export const SPEC_VERSION = "3.1.0";
+export const SPEC_VERSION = "3.2.0";
 
 function rootTags(part: PartDef): string[] {
   const out = new Set<string>();

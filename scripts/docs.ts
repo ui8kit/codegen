@@ -186,7 +186,12 @@ function snippets(brick: BrickDef, part: PartDef, props: CanonicalProps): Array<
   const wc = `renderX(${jsLit(htmlRuntimeProps(part, props))}${kids ? `, "${CHILD}"` : ""});`.replace("renderX", `render${name}`);
 
   const goFields = Object.entries(props)
-    .map(([k, v]) => `${k}: ${goLit(v, brick, part.props.find((p) => p.name === k))}`)
+    .map(([k, v]) => {
+      const def = part.props.find((p) => p.name === k);
+      const lit = goLit(v, brick, def);
+      // templ Value is *string (nullable passthrough): Go 1.26 new(expr)
+      return `${k}: ${def?.passthrough && k === "Value" && typeof v === "string" ? `new(${lit})` : lit}`;
+    })
     .join(", ");
   const templ = `@${pkg}.${name}(${pkg}.${name}Props{${goFields}})${kids ? ` {\n\t${CHILD}\n}` : ""}`;
 

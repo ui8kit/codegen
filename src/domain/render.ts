@@ -5,6 +5,7 @@
  * assert their SSR output is DOM-equivalent to this renderer's output.
  */
 
+import { isPassthroughForward } from "./passthrough";
 import type { Expr } from "./expr";
 import type {
   AttrSpec,
@@ -209,6 +210,12 @@ function renderAttrs(attrs: AttrSpec[], ctx: Ctx): string {
         break;
       case "expr": {
         if (attr.when && !truthy(evalExpr(attr.when, ctx))) break;
+        // Passthrough attrs are nullable: unset (undefined/null) omits, an explicit "" renders attr="" (React forwards it).
+        if (isPassthroughForward(attr, ctx.part)) {
+          const raw = ctx.props[(attr.expr as { name: string }).name];
+          if (raw !== undefined && raw !== null) put(attr.name, String(raw));
+          break;
+        }
         const v = evalExpr(attr.expr, ctx);
         const s = typeof v === "number" ? String(v) : String(v ?? "");
         if (!attr.when && !attr.keepEmpty && s.trim() === "") break;

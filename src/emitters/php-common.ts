@@ -12,6 +12,7 @@
  * generated `Classes::<part>Classes(array $props)` helper is the escape hatch.
  */
 
+import { isPassthroughForward } from "../domain/passthrough";
 import type { Expr } from "../domain/expr";
 import type { AttrSpec, BrickDef, ClassSpec, ElementNode, Node, PartDef, PropDef } from "../domain/model";
 import { camelCase, reactPropName } from "../domain/naming";
@@ -41,6 +42,11 @@ export const phpItemKey = (field: string): string => camelCase(field);
 /** PHP/Twig single-quoted string literal. */
 export function phpString(value: string): string {
   return `'${value.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'`;
+}
+
+/** Default of a template param: passthrough props are nullable (null = unset, "" = explicit empty attr). */
+export function paramDefault(p: { type: string; def: { passthrough?: boolean } }): string {
+  return p.def.passthrough ? "null" : p.type === "children" ? "''" : phpDefault(p.type);
 }
 
 export function phpDefault(type: string): string {
@@ -257,6 +263,8 @@ function attrEntry(attr: AttrSpec, tag: string, part: PartDef, sx: Syntax): Attr
     case "static":
       return [attr.name, phpString(attr.value)];
     case "expr": {
+      // nullable passthrough: the param defaults to null (omitted by attrs()), "" renders attr=""
+      if (isPassthroughForward(attr, part)) return [attr.name, printExpr(attr.expr, ctx)];
       const expr = fold(attr.expr, tag);
       const value = stringOf(expr, ctx);
       if (attr.when) {

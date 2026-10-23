@@ -24,6 +24,7 @@ import {
   PHP_NAMESPACE,
   type PhpCtx,
   type Syntax,
+  paramDefault,
 } from "./php-common";
 
 const NS = "\\" + PHP_NAMESPACE.latte;
@@ -86,7 +87,7 @@ function emitPart(brick: BrickDef, part: PartDef): string {
 
   const lines = [`{* ${BANNER} *}`, `{* ${part.name} — ${part.docs.split("\n")[0]} *}`];
   const params = templateParams(part).map(
-    (p) => `${latteType(p.type)} $${p.name} = ${p.type === "children" ? "''" : phpDefault(p.type)},`
+    (p) => `${p.def.passthrough ? "?" : ""}${latteType(p.type)} $${p.name} = ${paramDefault(p)},`
   );
   lines.push(params.length ? `{parameters\n${ind(params.join("\n"))}\n}` : `{parameters}`);
   const root = part.render;

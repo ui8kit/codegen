@@ -261,7 +261,7 @@ document.body.append(renderSelectOption({ value: "b" }, "Content"));
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/select" // package selectfield
 
-@selectfield.SelectOption(selectfield.SelectOptionProps{Value: "b"}) {
+@selectfield.SelectOption(selectfield.SelectOptionProps{Value: new("b")}) {
 	Content
 }
 ```

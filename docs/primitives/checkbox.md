@@ -128,7 +128,7 @@ document.body.append(renderCheckbox({ checked: true, required: true, name: "t", 
 ```templ
 import "github.com/ui8kit/codegen/generated/templ/ui/checkbox"
 
-@checkbox.Checkbox(checkbox.CheckboxProps{Name: "t", Value: "1", Checked: true, Required: true})
+@checkbox.Checkbox(checkbox.CheckboxProps{Name: "t", Value: new("1"), Checked: true, Required: true})
 ```
 
 **Twig** ([runtime notes](../runtimes/twig.md))

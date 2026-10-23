@@ -48,7 +48,7 @@ describe("latte emitter", () => {
   const select = file("latte/ui/select/Select.latte");
 
   it("declares typed parameters and prints children with |noescape", () => {
-    expect(button).toContain("string $ariaLabel = '',");
+    expect(button).toContain("?string $ariaLabel = null,"); // passthrough attrs are nullable
     expect(button).toContain("array $attrs = [],");
     expect(count(button, "{$children|noescape}")).toBe(2);
   });
