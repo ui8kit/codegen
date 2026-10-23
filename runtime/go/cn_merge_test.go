@@ -55,3 +55,16 @@ func TestMergeRingOffsetKeepsRingColor(t *testing.T) {
 		}
 	}
 }
+
+func TestMergeObjectAndAspect(t *testing.T) {
+	cases := [][2]string{
+		{"object-cover object-center object-contain", "object-center object-contain"},
+		{"object-center object-top", "object-top"},
+		{"aspect-auto aspect-video", "aspect-video"},
+	}
+	for _, c := range cases {
+		if got := Cn(c[0]); got != c[1] {
+			t.Fatalf("Cn(%q) = %q want %q", c[0], got, c[1])
+		}
+	}
+}

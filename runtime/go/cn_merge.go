@@ -95,6 +95,13 @@ func utilityGroups(core string) []string {
 		return []string{"position"}
 	case "isolate", "isolation-auto":
 		return []string{"isolation"}
+	case "object-contain", "object-cover", "object-fill", "object-none", "object-scale-down":
+		return []string{"object-fit"}
+	case "object-bottom", "object-center", "object-left", "object-left-bottom", "object-left-top", "object-right", "object-right-bottom", "object-right-top", "object-top":
+		return []string{"object-position"}
+	}
+	if strings.HasPrefix(core, "aspect-") {
+		return []string{"aspect"}
 	}
 
 	// rings: the width (ring, ring-2) and the colour (ring-primary) are separate groups, as in tailwind-merge

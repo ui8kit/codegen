@@ -23,6 +23,10 @@ const CASES: Array<[string, string]> = [
   ["ring-ring ring-offset-background ring-2", "ring-ring ring-offset-background ring-2"],
   ["ring-1 ring-2", "ring-2"],
   ["ring-ring ring-primary", "ring-primary"],
+  // object-fit / object-position / aspect are their own groups (image recipes: a variant's fit overrides the default fit)
+  ["object-cover object-center object-contain", "object-center object-contain"],
+  ["object-center object-top", "object-top"],
+  ["aspect-auto aspect-video", "aspect-video"],
 ];
 
 function guard(name: string, available: boolean, body: () => void) {
@@ -37,7 +41,7 @@ describe("cn ring conflict groups", () => {
   });
 
   guard("Go uiutils.Cn", ok("go", ["version"]), () => {
-    const r = spawnSync("go", ["test", "-run", "TestMergeRingOffsetKeepsRingColor", "./utils/"], {
+    const r = spawnSync("go", ["test", "-run", "TestMergeRingOffsetKeepsRingColor|TestMergeObjectAndAspect", "./utils/"], {
       cwd: join(ROOT, "generated", "templ"),
       encoding: "utf8",
     });

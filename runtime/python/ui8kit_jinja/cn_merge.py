@@ -60,6 +60,12 @@ def _groups(core: str) -> list[str]:
         return ["position"]
     if core in ("isolate", "isolation-auto"):
         return ["isolation"]
+    if core in ("object-contain", "object-cover", "object-fill", "object-none", "object-scale-down"):
+        return ["object-fit"]
+    if core in ("object-bottom", "object-center", "object-left", "object-left-bottom", "object-left-top", "object-right", "object-right-bottom", "object-right-top", "object-top"):
+        return ["object-position"]
+    if core.startswith("aspect-"):
+        return ["aspect"]
     # ring-offset-N (width) and ring-offset-<color> are their own groups
     if core.startswith("ring-offset-"):
         return ["ring-offset-width" if _is_number(core[12:]) else "ring-offset-color"]

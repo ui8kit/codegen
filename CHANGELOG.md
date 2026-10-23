@@ -7,6 +7,8 @@
 - Passthrough attributes are nullable in every runtime: an explicit `""` renders `attr=""` like React; Twig `?? null`,
   Latte `?string $x = null`, Jinja2 `is not none`. Parity edge cases `empty value` for Input/Checkbox/Radio in all runtimes.
 - Solid: an empty class attribute is omitted (Solid SSR printed `class=""`); Textarea SSR prints its value as content, never `value=""` (invalid on `<textarea>`), client sync via a ref effect; parity normalization no longer hides either.
+- Server cn merge (Go, PHP, Python): `object-fit`, `object-position` and `aspect-*` are conflict groups, as in tailwind-merge
+  (`object-cover … object-contain` kept both on the server).
 - TS utils / web components: `isDevEnv` without `import.meta` (IIFE/CJS bundles work); dev warnings via `globalThis.__UI8KIT_DEV__`
   or `process.env.NODE_ENV === "development"`.
 - Tests: every brick/part/showcase case through html-validate and axe-core (jsdom).
