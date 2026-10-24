@@ -49,7 +49,7 @@ def _wrap(f: Any, safe: bool = False) -> Any:
 _NAMES = {"def": "def_"}
 _PLAIN = [
     "def", "field", "s", "truthy", "eq", "is_set_str", "default_if_empty", "map_or", "int_map_or",
-    "bool_str", "concat_trim", "cn", "compose", "resolve_tag", "safe_url",
+    "bool_str", "concat_trim", "cn", "compose", "resolve_tag", "safe_url", "has_attr",
 ]
 VOID_TAGS = frozenset(
     ["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"]

@@ -23,8 +23,9 @@ Files land in `{dir}/ui/<brick>/<brick>.tsx` (+ `<brick>.shared.ts`), helpers in
 React is the reference the other runtimes are compared to (together with the canonical renderer).
 Known React-specific behaviour:
 
-- An explicit empty passthrough (`value=""`) is printed verbatim; server runtimes treat blank
-  strings as "unset" (see [contract](../contract.md#empty-values)).
+- A blank optional attribute (`id=""`, `href=""`, `aria-describedby=" "`, …) is omitted — props and rest
+  alike (`safeRest`); only `value=""` is printed, so a controlled `<Input value="">` stays controlled
+  (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
 - Select: `value` becomes `value` when you pass `onChange`, otherwise `defaultValue`.
 - Controlled `checked` without `onChange` triggers React's read-only warning — pass
   `onChange` or `readOnly` in apps.

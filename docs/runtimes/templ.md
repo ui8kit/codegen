@@ -22,12 +22,13 @@ the module is `github.com/ui8kit/codegen/generated/templ` (used by the doc snipp
 
 ## Deviations from React
 
-- **Empty value**: Go cannot distinguish unset from `""`; blank strings omit the attribute.
-  Force `value=""` with `Attrs: templ.Attributes{"value": ""}`.
-- **Attrs duplicates**: `Attrs` are spread last and do **not** replace attributes the primitive
-  already printed (don't duplicate `class`, `id`; use `Class` / typed props).
-- **URL sanitization**: templ rewrites unsafe URLs — `href="javascript:…"` renders
-  `about:invalid#TemplFailedSanitizationURL` (React prints it verbatim).
+- **Empty value**: blank strings omit the attribute, as in every runtime; `Value` is `*string`
+  (`nil` = unset, `new("")` = `value=""`).
+- **Attrs win**: a key in `Attrs` replaces the attribute the primitive would print (`uiutils.HasAttr`);
+  `class` is the exception — use `Class`.
+- **URLs**: unsafe schemes are omitted by `uiutils.SafeURL` / `uiutils.RestAttrs` (no
+  `about:invalid#TemplFailedSanitizationURL`); `<img src>` allows `data:image/…` placeholders
+  (`uiutils.SafeImgURL`). See [contract](../contract.md#attributes-precedence-empty-values-urls).
 - No `asChild` / Slot.
 
 ## Helpers

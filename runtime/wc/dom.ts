@@ -1,5 +1,4 @@
-import { safeUrl } from "./expr";
-const URL_KEYS = new Set(["href", "src", "action", "formaction", "poster", "cite", "background", "xlink:href"]);
+import { dropRestKey, type RestRule } from "./expr";
 // Vanilla light-DOM runtime for the generated custom elements.
 // No shadow DOM: rendered nodes live in the document so consumer token
 // classes apply. Mirrors the canonical attribute semantics.
@@ -25,14 +24,14 @@ export function setAttr(el: Element, name: string, value: string): void {
 }
 
 /** Rest props (everything undeclared): attributes, or listeners for on* functions. */
-export function applyRest(el: Element, rest: Record<string, unknown>): void {
+export function applyRest(el: Element, rest: Record<string, unknown>, rule?: RestRule): void {
   for (const [k, v] of Object.entries(rest)) {
     if (typeof v === "function" && k.startsWith("on")) {
       el.addEventListener(k.slice(2).toLowerCase(), v as EventListener);
       continue;
     }
     if (v === false || v === null || v === undefined) continue;
-    if (typeof v === "string" && v !== "" && URL_KEYS.has(k.toLowerCase()) && safeUrl(v) === "") continue; // javascript:, ...
+    if (dropRestKey(k, v, rule)) continue; // unsafe URL (javascript:, ...) or blank optional attribute
     el.setAttribute(k, v === true ? "" : String(v));
   }
 }

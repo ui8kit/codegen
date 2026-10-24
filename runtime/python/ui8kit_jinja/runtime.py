@@ -11,6 +11,7 @@ None-safe.
 from __future__ import annotations
 
 import html
+import re
 import json
 import math
 import os
@@ -109,22 +110,38 @@ def eq(a: Any, b: Any) -> bool:
 URL_ATTRS = frozenset(["href", "src", "action", "formaction", "poster", "cite", "background", "xlink:href"])
 
 
-def safe_url(v: Any) -> str:
-    """URL attribute value: "" for javascript:, vbscript: and data: (ASCII whitespace/control chars removed, case-insensitive)."""
+_DATA_IMAGE = re.compile(r"^data:image/(png|jpeg|gif|webp|avif|svg\+xml)[;,]")
+
+
+def safe_url(v: Any, data_image: bool = False) -> str:
+    """URL attribute value: "" for javascript:, vbscript: and data: (ASCII whitespace/control chars removed, case-insensitive);
+    data_image (only <img src>) allows data:image/(png|jpeg|gif|webp|avif|svg+xml)."""
     t = s(v)
     k = "".join(c for c in t if ord(c) > 0x20).lower()
+    if data_image and _DATA_IMAGE.match(k):
+        return t
     return "" if k.startswith(("javascript:", "vbscript:", "data:")) else t
 
 
-def attr_html(a: Any) -> str:
-    """the Attrs escape hatch as markup: ` name="value"`, a bare name for True, nothing for None and False"""
+def has_attr(a: Any, name: str) -> bool:
+    """the caller's Attrs set name (case-insensitive): Attrs win over the named attribute"""
+    return isinstance(a, dict) and any(str(k).lower() == name for k in a)
+
+
+def attr_html(a: Any, img: bool = False, blank: Any = ()) -> str:
+    """the Attrs escape hatch as markup: ` name="value"`, a bare name for True, nothing for None and False;
+    an unsafe URL (data:image allowed in <img src> when img) or a blank optional attribute (blank) is omitted"""
     if not isinstance(a, dict):
         return ""
+    blank = list(blank or ())
     out = ""
     for k, v in a.items():
         if v is None or v is False:
             continue
-        if isinstance(v, str) and v != "" and str(k).lower() in URL_ATTRS and safe_url(v) == "":
+        key = str(k).lower()
+        if isinstance(v, str) and v.strip() == "" and key in blank:
+            continue
+        if isinstance(v, str) and v != "" and key in URL_ATTRS and safe_url(v, img and key == "src") == "":
             continue
         name = html.escape(str(k), quote=True)
         out += f" {name}" if v is True else f' {name}="{html.escape(s(v), quote=True)}"'

@@ -19,8 +19,7 @@ Point the Latte loader at `{dir}/ui`. One template per part: `<brick>/<Part>.lat
 
 ## Deviations from React
 
-- Blank strings mean "unset"; force `value=""` via `attrs`.
-- URL attributes are not sanitized (same as React).
+- None for attributes — empty values, `attrs` precedence and URL checks are identical in every runtime (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
 - No `asChild`.
 
 ## Helpers
@@ -38,5 +37,6 @@ Pass every such parameter explicitly when the caller has a variable of the same 
 ## Safe URLs
 
 URL attributes (`href`, `src`, `action`, `formaction`, `poster`, `cite`, `background`, `xlink:href`), named or in `attrs`,
-go through `Rt::safeUrl` / `Rt::urlOrNull` / `Rt::safeAttrs`: `javascript:`, `vbscript:` and `data:` (case and control
-characters ignored) omit the attribute, as in Twig, Jinja2 and templ.
+go through `Rt::safeUrl` / `Rt::urlOrNull` / `Rt::restAttrs`: `javascript:`, `vbscript:` and `data:` (case and control
+characters ignored) omit the attribute, as in every runtime. Only `<img src>` (Image) allows
+`data:image/(png|jpeg|gif|webp|avif|svg+xml)` placeholders (`Rt::imgUrlOrNull`).

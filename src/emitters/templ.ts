@@ -12,8 +12,8 @@
  * asChild/Slot in templ: `<Part>Classes(p)` is the escape hatch.
  */
 
-import { isPassthroughForward } from "../domain/passthrough";
-import { URL_ATTRS } from "../domain/expr";
+import { blankOmittedAttrs, isPassthroughForward } from "../domain/passthrough";
+import { allowsDataImage, URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import {
   fileStem,
@@ -130,7 +130,7 @@ export class TemplEmitter implements Emitter {
 
 function goType(part: PartDef, name: string): string {
   const p = part.props.find((x) => x.name === name)!;
-  // Value is nullable (nil = unset, ptr to "" = value=""), like React's passthrough. Breaking since 3.2.0.
+  // Value is nullable (nil = unset, ptr to "" = value=""), the one nullable attribute (contract). Breaking since 3.2.0.
   if (p.passthrough && p.name === "Value" && p.type === "string") return "*string";
   switch (p.type) {
     case "string":
@@ -271,7 +271,16 @@ function printElement(node: ElementNode, part: PartDef, ctx: GoPrintCtx): string
 }
 
 function printStaticElement(node: ElementNode, tag: string, part: PartDef, ctx: GoPrintCtx): string {
-  const attrs = node.attrs.map((a) => printAttr(a, tag, part, ctx)).filter(Boolean);
+  // Attrs win over a named attribute of the same name (class excepted: it merges), as in every runtime.
+  const hasRest = node.attrs.some((a) => a.kind === "rest");
+  const blank = blankOmittedAttrs(node.attrs, part);
+  const attrs = node.attrs
+    .map((a) => {
+      const code = printAttr(a, tag, part, ctx, blank);
+      if (!code || !hasRest || !(a.kind === "static" || a.kind === "expr" || a.kind === "bool")) return code;
+      return `if !uiutils.HasAttr(p.Attrs, ${JSON.stringify(a.name)}) {\n${ind(code)}\n}`;
+    })
+    .filter(Boolean);
   const isVoid = node.void === true;
   const open = attrs.length === 0 ? `<${tag}` : `<${tag}\n${ind(attrs.join("\n"))}\n`;
   if (isVoid) return `${open}/>`;
@@ -279,7 +288,7 @@ function printStaticElement(node: ElementNode, tag: string, part: PartDef, ctx: 
   return `${open}>\n${ind(printNodes(node.children, part, ctx, tag))}\n</${tag}>`;
 }
 
-function printAttr(attr: AttrSpec, tag: string, part: PartDef, ctx: GoPrintCtx): string {
+function printAttr(attr: AttrSpec, tag: string, part: PartDef, ctx: GoPrintCtx, blank: string[] = []): string {
   switch (attr.kind) {
     case "static":
       return `${attr.name}=${JSON.stringify(attr.value)}`;
@@ -289,6 +298,11 @@ function printAttr(attr: AttrSpec, tag: string, part: PartDef, ctx: GoPrintCtx):
         return `if p.${k} != nil {\n\t${attr.name}={ *p.${k} }\n}`;
       }
       const expr = fold(attr.expr, tag);
+      if (isPassthroughForward(attr, part) && allowsDataImage(tag, attr.name)) {
+        // <img src>: data:image placeholders allowed; templ.SafeURL keeps templ from rewriting the checked value
+        const v = `uiutils.SafeImgURL(${stringGo(expr, ctx)})`;
+        return `if uiutils.IsSetStr(${v}) {\n\t${attr.name}={ templ.SafeURL(${v}) }\n}`;
+      }
       // passthrough URL attrs are plain props here: SafeURL omits an unsafe scheme (templ would print about:invalid#...)
       const value = isPassthroughForward(attr, part) && URL_ATTRS.includes(attr.name) ? `uiutils.SafeURL(${stringGo(expr, ctx)})` : stringGo(expr, ctx);
       if (attr.when) {
@@ -313,7 +327,7 @@ function printAttr(attr: AttrSpec, tag: string, part: PartDef, ctx: GoPrintCtx):
       return `if ${call} != "" {\n\tclass={ ${call} }\n}`;
     }
     case "rest":
-      return `{ uiutils.SafeAttrs(p.Attrs)... }`;
+      return `{ uiutils.RestAttrs(p.Attrs, ${tag === "img"}${blank.map((b) => `, ${JSON.stringify(b)}`).join("")})... }`;
   }
 }
 

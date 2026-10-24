@@ -25,6 +25,7 @@ import {
   type PhpCtx,
   type Syntax,
   paramDefault,
+  restRuleArgs,
 } from "./php-common";
 
 const NS = "\\" + PHP_NAMESPACE.latte;
@@ -75,7 +76,8 @@ function emitPart(brick: BrickDef, part: PartDef): string {
     slot: `{$children|noescape}`,
     element: (tag, attrs, rest, isVoid, children) => {
       const entries = attrs.map(([k, v]) => `${phpString(k)} => ${v},`);
-      if (rest) entries.push("...\\UI8Kit\\Latte\\Rt::safeAttrs($attrs),"); // unsafe URL attrs dropped (javascript:, ...)
+      // caller attrs win; an unsafe URL or a blank optional attr becomes null (omitted, the named one too)
+      if (rest) entries.push(`...\\UI8Kit\\Latte\\Rt::restAttrs($attrs${restRuleArgs(rest, (xs) => `[${xs.join(", ")}]`)}),`);
       const nAttr = entries.length === 0 ? "" : ` n:attr="[\n${ind(entries.join("\n"))}\n]"`;
       const open = `<${tag}${nAttr}>`;
       if (isVoid) return open;

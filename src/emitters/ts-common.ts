@@ -10,9 +10,12 @@ import {
   fileStem,
   type BrickDef,
   type ClassSpec,
+  type ElementNode,
+  type Node,
   type PartDef,
   type PropDef,
 } from "../domain/model";
+import { blankOmittedAttrs } from "../domain/passthrough";
 import { htmlPropName, localIdent, reactPropName } from "../domain/naming";
 import { BANNER, exprType, lowerFirst, makeEnv, pascalCase, type GeneratedFile, type TypeEnv } from "./common";
 import { printTsExpr, type TsPrintCtx } from "./ts-expr";
@@ -316,4 +319,42 @@ export function neverEmptyString(expr: Expr, env: TypeEnv): boolean {
     default:
       return exprType(expr, env) === "bool" || exprType(expr, env) === "int" ? false : false;
   }
+}
+
+/** The element carrying the rest/Attrs spread of a part (first one in document order). */
+export function restElement(node: Node): ElementNode | undefined {
+  switch (node.kind) {
+    case "element":
+      if (node.attrs.some((a) => a.kind === "rest")) return node;
+      for (const c of node.children) { const r = restElement(c); if (r) return r; }
+      return undefined;
+    case "when":
+      for (const c of [...node.then, ...(node.else ?? [])]) { const r = restElement(c); if (r) return r; }
+      return undefined;
+    case "forEach":
+      for (const c of node.body) { const r = restElement(c); if (r) return r; }
+      return undefined;
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * Second argument of `safeRest` / `applyRest` for a part: `img` (data:image allowed in `<img src>`) and the
+ * optional attributes omitted when blank, under every rest-key spelling (HTML, React, Svelte/Vue), lowercase.
+ * Returns "" when the default rule applies (no img, nothing blank-omitted).
+ */
+export function restRuleArg(part: PartDef): string {
+  const el = restElement(part.render);
+  if (!el) return "";
+  const img = el.tag.kind === "static" && el.tag.tag === "img";
+  const names = new Set<string>();
+  for (const a of el.attrs) {
+    if (!blankOmittedAttrs([a], part).length) continue;
+    const def = part.props.find((p) => p.name === ((a as { expr: { name: string } }).expr.name))!;
+    for (const n of [(a as { name: string }).name, reactPropName(def), htmlPropName(def)]) names.add(n.toLowerCase());
+  }
+  if (!img && names.size === 0) return "";
+  const fields = [...(img ? ["img: true"] : []), ...(names.size ? [`blank: [${[...names].map((n) => JSON.stringify(n)).join(", ")}]`] : [])];
+  return `, { ${fields.join(", ")} }`;
 }

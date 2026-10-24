@@ -94,6 +94,21 @@ var URLAttrs = map[string]bool{"href": true, "src": true, "action": true, "forma
 
 // SafeURL returns "" for javascript:, vbscript: and data: URLs (ASCII whitespace/control chars removed, case-insensitive).
 func SafeURL(v string) string {
+	if unsafeURL(v, false) {
+		return ""
+	}
+	return v
+}
+
+// SafeImgURL is SafeURL for <img src>: data:image/(png|jpeg|gif|webp|avif|svg+xml) placeholders are allowed.
+func SafeImgURL(v string) string {
+	if unsafeURL(v, true) {
+		return ""
+	}
+	return v
+}
+
+func unsafeURL(v string, dataImage bool) bool {
 	b := make([]byte, 0, len(v))
 	for i := 0; i < len(v); i++ {
 		if v[i] > 0x20 {
@@ -101,12 +116,58 @@ func SafeURL(v string) string {
 		}
 	}
 	s := strings.ToLower(string(b))
-	for _, p := range []string{"javascript:", "vbscript:", "data:"} {
-		if strings.HasPrefix(s, p) {
-			return ""
+	if dataImage && strings.HasPrefix(s, "data:image/") {
+		rest := s[len("data:image/"):]
+		for _, t := range []string{"png", "jpeg", "gif", "webp", "avif", "svg+xml"} {
+			if strings.HasPrefix(rest, t) && len(rest) > len(t) && (rest[len(t)] == ';' || rest[len(t)] == ',') {
+				return false
+			}
 		}
 	}
-	return v
+	for _, p := range []string{"javascript:", "vbscript:", "data:"} {
+		if strings.HasPrefix(s, p) {
+			return true
+		}
+	}
+	return false
+}
+
+// HasAttr reports whether the caller's Attrs set name (case-insensitive): Attrs win over the named attribute.
+func HasAttr(a templ.Attributes, name string) bool {
+	for k := range a {
+		if strings.EqualFold(k, name) {
+			return true
+		}
+	}
+	return false
+}
+
+// RestAttrs is the Attrs map as rendered: unsafe URLs (data:image allowed in <img src> when img) and blank
+// optional attributes (blank lists them, lowercase; never value) are dropped.
+func RestAttrs(a templ.Attributes, img bool, blank ...string) templ.Attributes {
+	out := templ.Attributes{}
+	for k, v := range a {
+		key := strings.ToLower(k)
+		if s, ok := v.(string); ok {
+			if strings.TrimSpace(s) == "" && contains(blank, key) {
+				continue
+			}
+			if s != "" && URLAttrs[key] && unsafeURL(s, img && key == "src") {
+				continue
+			}
+		}
+		out[k] = v
+	}
+	return out
+}
+
+func contains(list []string, s string) bool {
+	for _, x := range list {
+		if x == s {
+			return true
+		}
+	}
+	return false
 }
 
 // SafeAttrs drops URL attributes with an unsafe URL from an Attrs map.

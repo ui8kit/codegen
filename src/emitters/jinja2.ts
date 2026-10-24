@@ -13,8 +13,8 @@
  * `<name>_classes(p)` global is the escape hatch.
  */
 
-import { isPassthroughForward } from "../domain/passthrough";
-import { URL_ATTRS } from "../domain/expr";
+import { blankOmittedAttrs, isNullableValue, isPassthroughForward } from "../domain/passthrough";
+import { allowsDataImage, URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import {
   type AttrSpec,
@@ -249,7 +249,17 @@ function printElement(node: ElementNode, ctx: Ctx): string {
 }
 
 function printTag(node: ElementNode, tag: string, mode: "void" | "normal" | "maybe", ctx: Ctx): string {
-  const attrs = node.attrs.map((a) => printAttr(a, ctx)).filter(Boolean);
+  // Attrs win over a named attribute of the same name (class excepted: it merges), as in every runtime.
+  const hasRest = node.attrs.some((a) => a.kind === "rest");
+  const staticTag = node.tag.kind === "static" ? node.tag.tag : undefined;
+  const blank = blankOmittedAttrs(node.attrs, ctx.part);
+  const attrs = node.attrs
+    .map((a) => {
+      const code = printAttr(a, ctx, staticTag, blank);
+      if (!code || !hasRest || !(a.kind === "static" || a.kind === "expr" || a.kind === "bool")) return code;
+      return `{%- if not ui_has_attr(${propCode(ctx, "Attrs")}, ${str(a.name)}) %}${code.startsWith("{%") ? code : " " + code}{%- endif %}`;
+    })
+    .filter(Boolean);
   const open = attrs.length === 0 ? `<${tag}>` : `<${tag}\n${ind(attrs.join("\n"))}\n>`;
   if (mode === "void") return open;
   const body = printNodes(node.children, ctx);
@@ -258,16 +268,18 @@ function printTag(node: ElementNode, tag: string, mode: "void" | "normal" | "may
   return `${open}${close}`;
 }
 
-function printAttr(attr: AttrSpec, ctx: Ctx): string {
+function printAttr(attr: AttrSpec, ctx: Ctx, tag?: string, blank: string[] = []): string {
   switch (attr.kind) {
     case "static":
       return `${attr.name}="${escAttr(attr.value)}"`;
     case "expr": {
       if (isPassthroughForward(attr, ctx.part)) {
-        // nullable passthrough: unset / None omits, an explicit "" renders attr=""
         const k = (attr.expr as { name: string }).name;
-        const safe = URL_ATTRS.includes(attr.name) ? ` and (p['${k}'] == '' or ui_safe_url(p['${k}']) != '')` : "";
-        return `{%- if p['${k}'] is defined and p['${k}'] is not none${safe} %} ${attr.name}="{{ p['${k}'] }}"{%- endif %}`;
+        // `value` is nullable: unset / None omits, an explicit "" renders value=""
+        if (isNullableValue(ctx.part, k)) return `{%- if p['${k}'] is defined and p['${k}'] is not none %} ${attr.name}="{{ p['${k}'] }}"{%- endif %}`;
+        // optional attr: unset or blank omits; URL attrs also omit an unsafe scheme (<img src> allows data:image)
+        const safe = URL_ATTRS.includes(attr.name) ? ` and ui_safe_url(p['${k}']${allowsDataImage(tag, attr.name) ? ", true" : ""}) != ''` : "";
+        return `{%- if ui_is_set_str(p['${k}'])${safe} %} ${attr.name}="{{ p['${k}'] }}"{%- endif %}`;
       }
       const value = stringJ(attr.expr, ctx);
       if (attr.when) {
@@ -289,7 +301,7 @@ function printAttr(attr: AttrSpec, ctx: Ctx): string {
       return `{%- with cls = ${call} %}{%- if cls %} class="{{ cls }}"{%- endif %}{%- endwith %}`;
     }
     case "rest":
-      return `{{ ui_attr_html(${propCode(ctx, "Attrs")}) }}`;
+      return `{{ ui_attr_html(${propCode(ctx, "Attrs")}${tag === "img" || blank.length ? `, ${tag === "img" ? "true" : "false"}, [${blank.map(str).join(", ")}]` : ""}) }}`;
   }
 }
 

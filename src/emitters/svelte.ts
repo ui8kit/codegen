@@ -32,6 +32,7 @@ import {
   printInlineClassSpec,
   isPassthroughForward,
   variantTypeName,
+  restRuleArg,
 } from "./ts-common";
 
 const IDENT_RE = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
@@ -93,7 +94,7 @@ export class SvelteEmitter implements Emitter {
 
     const body: string[] = [];
     helperImports.add("safeRest");
-    body.push(`const rest = $derived(safeRest(rawRest));`);
+    body.push(`const rest = $derived(safeRest(rawRest${restRuleArg(part)}));`);
     if (part.classes) {
       sharedValueImports.add(classesHelperName(part));
       const inputs = classSpecProps(part.classes).map((n) => ctx.propCode(n));

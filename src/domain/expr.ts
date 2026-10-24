@@ -125,7 +125,18 @@ export const intToString = (expr: Expr): IntToStringExpr => ({ kind: "intToStrin
 export const safeUrl = (expr: Expr): SafeUrlExpr => ({ kind: "safeUrl", expr });
 /** Attributes whose value is a URL: forwarded through safeUrl in every runtime (and filtered in the Attrs / rest maps of the servers). */
 export const URL_ATTRS = ["href", "src", "action", "formaction", "poster", "cite", "background", "xlink:href"];
-export const isUnsafeUrl = (v: unknown): boolean => /^(javascript|vbscript|data):/.test(String(v ?? "").replace(/[\u0000-\u0020]/g, "").toLowerCase());
+/** Raster/SVG image data URLs allowed only in `<img src>` (placeholders): png, jpeg, gif, webp, avif, svg+xml. */
+export const DATA_IMAGE_RE = /^data:image\/(png|jpeg|gif|webp|avif|svg\+xml)[;,]/;
+/** `<img src>` is the only place where a data:image URL is allowed (never href, action, formaction, …). */
+export const allowsDataImage = (tag: string | undefined, attr: string): boolean => tag === "img" && attr.toLowerCase() === "src";
+/**
+ * Unsafe URL: javascript:, vbscript: or data: scheme (ASCII whitespace/control chars removed, case-insensitive);
+ * with `dataImage` (only `<img src>`) a data:image/(png|jpeg|gif|webp|avif|svg+xml) URL is allowed.
+ */
+export const isUnsafeUrl = (v: unknown, dataImage = false): boolean => {
+  const k = String(v ?? "").replace(/[\u0000-\u0020]/g, "").toLowerCase();
+  return /^(javascript|vbscript|data):/.test(k) && !(dataImage && DATA_IMAGE_RE.test(k));
+};
 
 /** Convenience: `oneOfOr(v, ["submit","reset"], "button")` whitelist. */
 export const oneOfOr = (

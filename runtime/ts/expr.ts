@@ -91,17 +91,30 @@ export function syncValue(node: { value: string }, value?: string | null): { upd
   return { update: apply };
 }
 
-/** URL attribute value: "" for javascript:, vbscript: and data: (ASCII whitespace/control chars removed, case-insensitive). */
-export const safeUrl = (v: string | null | undefined): string =>
-  /^(javascript|vbscript|data):/.test(String(v ?? "").replace(/[\u0000-\u0020]/g, "").toLowerCase()) ? "" : (v ?? "");
+const DATA_IMAGE = /^data:image\/(png|jpeg|gif|webp|avif|svg\+xml)[;,]/;
+/**
+ * URL attribute value: "" for javascript:, vbscript: and data: (ASCII whitespace/control chars removed,
+ * case-insensitive). `dataImage` (only `<img src>`) allows data:image/(png|jpeg|gif|webp|avif|svg+xml).
+ */
+export const safeUrl = (v: string | null | undefined, dataImage = false): string => {
+  const k = String(v ?? "").replace(/[\u0000-\u0020]/g, "").toLowerCase();
+  return /^(javascript|vbscript|data):/.test(k) && !(dataImage && DATA_IMAGE.test(k)) ? "" : (v ?? "");
+};
+
+/** Per-element rest rule: `img` allows data:image in `src`; `blank` lists optional attrs (lowercase) omitted when blank. */
+export type RestRule = { readonly img?: boolean; readonly blank?: readonly string[] };
 
 const URL_KEYS = new Set(["href", "src", "action", "formaction", "poster", "cite", "background", "xlink:href", "xlinkhref"]);
-/** Rest props / caller attrs without URL attributes whose value is unsafe (same omission as safeUrl); identity when clean. */
-export function safeRest<T extends object>(rest: T): T {
-  const bad = Object.keys(rest).filter((k) => {
-    const v = (rest as Record<string, unknown>)[k];
-    return typeof v === "string" && v !== "" && URL_KEYS.has(k.toLowerCase()) && safeUrl(v) === "";
-  });
+/** True when a rest entry must be omitted: an unsafe URL or a blank optional attribute (`value` is never in `blank`). */
+export function dropRestKey(k: string, v: unknown, rule?: RestRule): boolean {
+  if (typeof v !== "string") return false;
+  const key = k.toLowerCase();
+  if (rule?.blank?.includes(key) && v.trim() === "") return true;
+  return v !== "" && URL_KEYS.has(key) && safeUrl(v, rule?.img === true && key === "src") === "";
+}
+/** Rest props / caller attrs without unsafe URLs and blank optional attributes; identity when clean. */
+export function safeRest<T extends object>(rest: T, rule?: RestRule): T {
+  const bad = Object.keys(rest).filter((k) => dropRestKey(k, (rest as Record<string, unknown>)[k], rule));
   if (bad.length === 0) return rest;
   const out = { ...rest } as Record<string, unknown>;
   for (const k of bad) delete out[k];

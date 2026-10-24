@@ -37,6 +37,7 @@ import {
   printInlineClassSpec,
   isPassthroughForward,
   variantTypeName,
+  restRuleArg,
 } from "./ts-common";
 
 /** Solid JSX attribute types for common roots (from solid-js JSX namespace). */
@@ -460,7 +461,7 @@ export class SolidEmitter implements Emitter {
       }
       case "rest":
         if (opts.withRest) ctx.helpers.add("safeRest");
-        return opts.withRest ? `{...safeRest(rest)}` : "";
+        return opts.withRest ? `{...safeRest(rest${restRuleArg(part)})}` : "";
     }
   }
 

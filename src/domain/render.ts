@@ -5,9 +5,9 @@
  * assert their SSR output is DOM-equivalent to this renderer's output.
  */
 
-import { isPassthroughForward } from "./passthrough";
+import { blankOmittedAttrs, isNullableValue, isPassthroughForward } from "./passthrough";
 import type { Expr } from "./expr";
-import { isUnsafeUrl, URL_ATTRS } from "./expr";
+import { allowsDataImage, isUnsafeUrl, URL_ATTRS } from "./expr";
 import type {
   AttrSpec,
   BrickDef,
@@ -89,7 +89,7 @@ export function evalExpr(expr: Expr, ctx: Ctx): string | number | boolean {
     }
     case "safeUrl": {
       const v = evalExpr(expr.expr, ctx);
-      return isUnsafeUrl(v) ? "" : v;
+      return isUnsafeUrl(v) ? "" : v; // named URL expressions (button/link href, form action): never data:
     }
     case "defaultIfEmpty": {
       const v = String(evalExpr(expr.expr, ctx) ?? "").trim();
@@ -207,18 +207,29 @@ function renderAttrs(attrs: AttrSpec[], ctx: Ctx): string {
     if (idx >= 0) ordered.splice(idx, 1);
     ordered.push([name, value]);
   };
+  const tag = ctx.resolvedTag;
+  const unsafe = (name: string, v: unknown) => URL_ATTRS.includes(name.toLowerCase()) && isUnsafeUrl(v, allowsDataImage(tag, name));
+  // Attrs / rest win over every named attribute of the same name (class excepted: it merges), as in v0.1.0 and the
+  // JS runtimes (rest spread last). The winning value is then checked: unsafe URL or blank optional attr ⇒ omitted.
+  const hasRest = attrs.some((a) => a.kind === "rest");
+  const restKeys = new Set(hasRest ? Object.keys(ctx.rest ?? {}).map((k) => k.toLowerCase()) : []);
+  const blank = new Set(blankOmittedAttrs(attrs, ctx.part));
 
   for (const attr of attrs) {
+    if ((attr.kind === "static" || attr.kind === "expr" || attr.kind === "bool") && restKeys.has(attr.name.toLowerCase())) continue;
     switch (attr.kind) {
       case "static":
         put(attr.name, attr.value);
         break;
       case "expr": {
         if (attr.when && !truthy(evalExpr(attr.when, ctx))) break;
-        // Passthrough attrs are nullable: unset (undefined/null) omits, an explicit "" renders attr="" (React forwards it).
+        // Optional (passthrough) attrs: unset or blank omits; `value` is nullable (explicit "" renders value="").
         if (isPassthroughForward(attr, ctx.part)) {
-          const raw = ctx.props[(attr.expr as { name: string }).name];
-          if (raw !== undefined && raw !== null && !(URL_ATTRS.includes(attr.name) && isUnsafeUrl(raw))) put(attr.name, String(raw));
+          const name = (attr.expr as { name: string }).name;
+          const raw = ctx.props[name];
+          if (raw === undefined || raw === null || unsafe(attr.name, raw)) break;
+          if (!isNullableValue(ctx.part, name) && String(raw).trim() === "") break;
+          put(attr.name, String(raw));
           break;
         }
         const v = evalExpr(attr.expr, ctx);
@@ -242,7 +253,8 @@ function renderAttrs(attrs: AttrSpec[], ctx: Ctx): string {
       case "rest":
         for (const [k, v] of Object.entries(ctx.rest ?? {})) {
           if (v === false || v === undefined || v === null) continue;
-          if (typeof v === "string" && v !== "" && URL_ATTRS.includes(k.toLowerCase()) && isUnsafeUrl(v)) continue; // unsafe URL key
+          if (typeof v === "string" && blank.has(k.toLowerCase()) && v.trim() === "") continue; // blank optional attr
+          if (typeof v === "string" && v !== "" && unsafe(k, v)) continue; // unsafe URL key
           put(k, v === true ? true : String(v));
         }
         break;

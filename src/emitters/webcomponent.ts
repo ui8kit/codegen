@@ -24,6 +24,7 @@ import {
   printInlineClassSpec,
   quoteIfNeeded,
   variantTypeName,
+  restRuleArg,
 } from "./ts-common";
 
 export function kebab(name: string): string {
@@ -243,7 +244,7 @@ export class WebComponentEmitter implements Emitter {
         return;
       }
       case "rest":
-        if (isRoot) lines.push(`applyRest(${v}, rest);`);
+        if (isRoot) lines.push(`applyRest(${v}, rest${restRuleArg(part)});`);
         return;
     }
   }

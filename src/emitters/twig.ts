@@ -22,6 +22,7 @@ import {
   type Dialect,
   type PhpCtx,
   type Syntax,
+  restRuleArgs,
 } from "./php-common";
 
 const snake = (s: string) => s.replace(/[A-Z]/g, (c) => "_" + c.toLowerCase());
@@ -80,7 +81,7 @@ function emitPart(brick: BrickDef, part: PartDef): string {
     slot: `{{ children|raw }}`,
     element: (tag, attrs, rest, isVoid, children) => {
       const map = TWIG_DIALECT.map(attrs.map(([k, v]) => [phpString(k), v]));
-      const call = attrs.length === 0 && !rest ? "" : `{{ ui8kit_attrs(${map}${rest ? ", attrs" : ""}) }}`;
+      const call = attrs.length === 0 && !rest ? "" : `{{ ui8kit_attrs(${map}${rest ? `, attrs${restRuleArgs(rest, (xs) => `[${xs.join(", ")}]`)}` : ""}) }}`;
       const open = `<${tag}${call}>`;
       if (isVoid) return open;
       return `${open}${children}</${tag}>`;

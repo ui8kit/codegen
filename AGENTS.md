@@ -47,6 +47,9 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 
 - Every runtime renders the same DOM, classes (tokens) and ARIA as React / the canonical
   renderer (`src/domain/render.ts`). Parity tests prove it: `tests/parity*.test.ts`.
+- Attribute rules (docs/contract.md#attributes-precedence-empty-values-urls): extra attrs win over the named
+  attribute, then blank optional attrs (all but `value`) and unsafe URLs are omitted; `data:image/…` only in
+  `<img src>`. `tests/parity.attrs.test.ts` checks every rule in all 9 real runtimes against explicit HTML.
 - New runtime ⇒ add an emitter, a real-engine parity test (no mocks), CI setup, rules entry in
   `templates/rules/runtimes.json`, README section.
 - `UI8KIT_REQUIRE_ALL_RUNTIMES=1` (set in CI) turns a missing toolchain (Go/templ) into a
@@ -61,8 +64,9 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 - Dynamic tags (Box/Text `Tag`) become a `switch` with one static element per allowed tag;
   `when` branches (Button/Link `Href`) repeat `{ children... }`; items (Select `Options`) loop
   with `for _, item := range`.
-- Go zero values mean "unset": empty strings omit attributes; prop `default`s are unsupported
-  (the emitter throws). Explicit empty attributes go through `Attrs`.
+- Go zero values mean "unset": empty strings omit attributes (`Value` is `*string`: `new("")` = `value=""`);
+  prop `default`s are unsupported (the emitter throws). A key in `Attrs` replaces the named attribute
+  (`uiutils.HasAttr`); `Attrs` go through `uiutils.RestAttrs` (unsafe URLs, blank optional attrs dropped).
 - **Children are trusted HTML** (`{ children... }`, `templ.Raw` in the harness). Props and text
   are escaped by templ; never route user input into raw children (XSS).
 

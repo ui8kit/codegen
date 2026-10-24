@@ -34,6 +34,7 @@ import {
   printInlineClassSpec,
   isPassthroughForward,
   variantTypeName,
+  restRuleArg,
 } from "./ts-common";
 
 export class VueEmitter implements Emitter {
@@ -98,7 +99,7 @@ export class VueEmitter implements Emitter {
     body.push(`const callerClass = computed(() => attrs.class as string | undefined);`);
     body.push(`const restAttrs = computed(() => {`);
     body.push(`  const { class: _class, ...restEntries } = attrs;`);
-    body.push(`  return safeRest(restEntries);`);
+    body.push(`  return safeRest(restEntries${restRuleArg(part)});`);
     helperImports.add("safeRest");
     body.push(`});`);
 

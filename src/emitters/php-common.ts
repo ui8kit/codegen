@@ -12,8 +12,8 @@
  * generated `Classes::<part>Classes(array $props)` helper is the escape hatch.
  */
 
-import { isPassthroughForward } from "../domain/passthrough";
-import { URL_ATTRS } from "../domain/expr";
+import { blankOmittedAttrs, isNullableValue, isPassthroughForward } from "../domain/passthrough";
+import { allowsDataImage, URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import type { AttrSpec, BrickDef, ClassSpec, ElementNode, Node, PartDef, PropDef } from "../domain/model";
 import { camelCase, reactPropName } from "../domain/naming";
@@ -60,6 +60,7 @@ export function phpDefault(type: string): string {
 
 type RtFn =
   | "safeUrl"
+  | "imgUrlOrNull"
   | "urlOrNull"
   | "defaultIfEmpty"
   | "oneOfOr"
@@ -183,6 +184,12 @@ export function classTail(part: PartDef, spec: ClassSpec, ctx: PhpCtx): string[]
 
 /** One attribute entry of an element: name + value code (null/false omit, true = bare). */
 export type AttrEntry = [name: string, value: string];
+export type RestRule = { img: boolean; blank: string[] };
+/** PHP args of Rt::restAttrs / Rt::attrs after the attrs map: `, true, ['href', …]` (omitted when default). */
+export function restRuleArgs(r: RestRule, list: (items: string[]) => string): string {
+  if (!r.img && r.blank.length === 0) return "";
+  return `, ${r.img ? "true" : "false"}${r.blank.length ? `, ${list(r.blank.map(phpString))}` : ""}`;
+}
 
 export interface Syntax {
   ctx: PhpCtx;
@@ -190,7 +197,8 @@ export interface Syntax {
   forEach: (itemsCode: string, body: string) => string;
   text: (code: string) => string;
   slot: string;
-  element: (tag: string, attrs: AttrEntry[], rest: boolean, isVoid: boolean, children: string) => string;
+  /** `rest`: the element spreads the caller's attrs (with its rule: img = data:image in src, blank-omitted names). */
+  element: (tag: string, attrs: AttrEntry[], rest: RestRule | false, isVoid: boolean, children: string) => string;
   /** class attr value for the part's own classes contract. */
   partClasses: () => string;
   /** Variable holding the resolved dynamic tag. */
@@ -256,7 +264,7 @@ function printStatic(node: ElementNode, tag: string, part: PartDef, sx: Syntax):
     const e = attrEntry(a, tag, part, sx);
     if (e) entries.push(e);
   }
-  const rest = node.attrs.some((a) => a.kind === "rest");
+  const rest: RestRule | false = node.attrs.some((a) => a.kind === "rest") ? { img: tag === "img", blank: blankOmittedAttrs(node.attrs, part) } : false;
   const isVoid = node.void === true || VOID_TAGS.has(tag);
   const children = isVoid ? "" : node.children.map((c) => printNode(c, part, sx, tag)).join("");
   return sx.element(tag, entries, rest, isVoid, children);
@@ -268,11 +276,12 @@ function attrEntry(attr: AttrSpec, tag: string, part: PartDef, sx: Syntax): Attr
     case "static":
       return [attr.name, phpString(attr.value)];
     case "expr": {
-      // nullable passthrough: the param defaults to null (omitted by attrs()), "" renders attr=""
+      // optional passthrough: null or blank omits (orNull); `value` is nullable (null omits, "" renders value="")
       if (isPassthroughForward(attr, part)) {
         const raw = printExpr(attr.expr, ctx);
-        // URL attrs: an unsafe scheme (javascript:, ...) becomes null = omitted
-        return [attr.name, URL_ATTRS.includes(attr.name) ? ctx.d.call("urlOrNull", [raw]) : raw];
+        // URL attrs: blank or an unsafe scheme (javascript:, ...) becomes null = omitted; <img src> allows data:image
+        if (URL_ATTRS.includes(attr.name)) return [attr.name, ctx.d.call(allowsDataImage(tag, attr.name) ? "imgUrlOrNull" : "urlOrNull", [raw])];
+        return [attr.name, isNullableValue(part, (attr.expr as { name: string }).name) ? raw : ctx.d.call("orNull", [raw])];
       }
       const expr = fold(attr.expr, tag);
       const value = stringOf(expr, ctx);

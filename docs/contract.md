@@ -16,22 +16,47 @@ see the spacing note).
 - Doc snippets in `primitives/*.md` are executed verbatim in all 9 runtimes (`tests/docs.test.ts`).
 - Class merge order is fixed: recipe base → variant classes → static base → extra expressions →
   state classes → caller `class` (Tailwind-conflict aware).
-- Extra attributes (rest / `Attrs` / `attrs`) are rendered last; in JS runtimes and PHP they win.
+- Extra attributes (rest / `Attrs` / `attrs`) win over the primitive's own attribute of the same name in every
+  runtime — see [Attributes](#attributes-precedence-empty-values-urls).
 - `tag` (Box, Text) accepts only real HTML5 tags from its allow-list; anything else falls back
   (`div` / `p`). Void tags render no children.
-
-### Empty values
-
-Passthrough attributes (`id`, `name`, `value`, `aria-*`, `placeholder`, … — props marked passthrough) are **nullable**:
-unset (`undefined` / `null` / `None` / `nil`) omits the attribute, an explicit `""` renders `attr=""` — in every runtime,
-as React does. Server signatures: Twig `x ?? null` (no `|default`), Latte `?string $x = null`, Jinja2 `p['X'] is not none`,
-templ `Value *string` (Go strings cannot be unset; other passthrough strings in templ still treat `""` as unset —
-use `Attrs` for an explicit empty one). Non-passthrough strings keep the rule: a blank string means "unset".
 
 ### Button with `href` + `disabled`
 
 As in the v0.1.0 contract: the anchor keeps `href` and gets `aria-disabled="true"` + `tabindex="-1"`
 (anchors have no native `disabled`). The primitive does not drop `href`; block the click in the caller if needed.
+
+## Attributes: precedence, empty values, URLs
+
+One rule set, identical DOM in all 9 runtimes (`tests/parity.attrs.test.ts` renders every case in every real engine
+against explicit expected HTML). Since 3.3.0.
+
+1. **Precedence.** A key in the caller's extra attributes (JS rest props / `Attrs` / `attrs`) replaces the primitive's
+   own attribute of that name (static, computed or from a named prop) — as in v0.1.0 (React rest spread last,
+   PHP `array_merge`, canonical renderer). `class` is the exception: it merges (use `class` / `Class`). The winning
+   value is then checked by rules 2–3; if it is dropped, the attribute is **omitted** — the named prop never comes back
+   as a fallback. Example: `Href: "/ok"` + `Attrs: {href: "javascript:x"}` renders `<a>` without `href` everywhere.
+2. **Empty values.** Optional attributes (passthrough props: `id`, `name`, `href`, `src`, `srcset`, `sizes`,
+   `placeholder`, `aria-*`, …) treat a blank string (`""` or whitespace only) as unset and omit the attribute — from the
+   named prop or from extra attributes alike (JS runtimes cannot tell them apart). This is the v0.1.0 contract
+   (canonical renderer and server templates omitted blanks). **`value` is the one exception**: it is nullable —
+   unset (`undefined` / `null` / `None` / `nil`) omits it, an explicit `""` renders `value=""`, because `""` is a real
+   value there (React controlled `<input value="">`, checkbox/radio submit `""` instead of `on`,
+   `<option value="">` placeholder). Undeclared extra attributes (`data-*`, …) keep an explicit `""`.
+   `href=""` is not an exception: an empty link target would point at the current page; the anchor renders without
+   `href` (Button with a blank `Href` renders a `<button>`).
+   Server signatures: Twig `x ?? null`, Latte `?string $x = null`, Jinja2 `p['X']`, templ `Value *string` (other
+   templ strings: `""` = unset).
+3. **URLs.** `href`, `src`, `action`, `formaction`, `poster`, `cite`, `background`, `xlink:href` with a `javascript:`,
+   `vbscript:` or `data:` scheme (case and ASCII control/whitespace ignored) are omitted. **Only `<img src>`** (Image)
+   allows `data:image/(png|jpeg|gif|webp|avif|svg+xml)` followed by `;` or `,` (placeholders); `data:` stays forbidden in
+   `href`, `action`, … and on every other element. `srcset` is not URL-checked (image candidates are never executed),
+   so `data:image/…` in `srcset` is forwarded as given.
+
+### Empty values (history)
+
+3.2.0–3.2.x printed an explicit `""` for every passthrough attribute (`id=""`, `href=""`, `srcset=""`) in all runtimes —
+an unflagged breaking change for Twig, Latte and Jinja2, reverted in 3.3.0 except for `value`.
 
 ## ARIA
 

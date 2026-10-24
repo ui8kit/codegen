@@ -34,6 +34,7 @@ import {
   isPassthroughForward,
   variantTypeName,
   type DeclaredProp,
+  restRuleArg,
 } from "./ts-common";
 
 const REACT_ATTR_TYPES: Record<string, [string, string]> = {
@@ -326,7 +327,7 @@ export class ReactEmitter implements Emitter {
     // Body statements. Caller attrs lose unsafe URLs (javascript:, ...) like every runtime.
     const body: string[] = [];
     helperImports.add("safeRest");
-    body.push(`const rest = safeRest(rawRest);`);
+    body.push(`const rest = safeRest(rawRest${restRuleArg(part)});`);
     if (part.classes) {
       sharedImports.add(classesHelperName(part));
       const inputs = classSpecProps(part.classes).map((n) => ctx.propCode(n));

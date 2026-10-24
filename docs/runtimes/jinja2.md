@@ -19,14 +19,13 @@ One template per part: `ui/<brick>/<part-kebab>.html.j2` (`ui/select/select-opti
 
 - Templates read `p` — canonical PascalCase props (`{'Tag': 'section', 'Class': '…'}`) — and
   `children`. Inside templates: `{% with p = {...}, children = html %}{% include '…' %}{% endwith %}`.
-- Extra attributes: `p['Attrs']` (printed last).
+- Extra attributes: `p['Attrs']` (printed last; a key in `Attrs` replaces the attribute the primitive would print).
 - Children: printed with `{{ children|safe }}` — trusted HTML only; escape user input
   (`markupsafe.escape`) or render it through a template (XSS).
 
 ## Deviations from React
 
-- Blank strings mean "unset"; force `value=""` with `Attrs: {"value": ""}`.
-- `Attrs` is not de-duplicated against attributes the primitive already printed.
+- None — empty values, `Attrs` precedence and URL checks are identical in every runtime (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
 - No `asChild`.
 
 ## Helpers
