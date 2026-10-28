@@ -7,13 +7,13 @@ see the spacing note).
 ## DOM parity
 
 - One spec (`bricks/<name>/<name>.def.ts`) → one canonical renderer (`src/domain/render.ts`) →
-  9 runtimes. For every part and every fixture state (defaults, showcase fixtures, every enum value,
+  9 targets. For every part and every fixture state (defaults, showcase fixtures, every enum value,
   every boolean) each runtime's **normalized DOM** must equal the canonical output (`bun test`:
   `parity*.test.ts`; templ/Twig/Latte/Jinja2 run their real engines, required in CI via
   `UI8KIT_REQUIRE_ALL_RUNTIMES=1`).
 - Normalization ignores incidental differences only: attribute order, self-closing syntax,
   framework comment markers, class order after a tailwind-merge pass.
-- Doc snippets in `primitives/*.md` are executed verbatim in all 9 runtimes (`tests/docs.test.ts`).
+- Doc snippets in `primitives/*.md` are executed verbatim in all 9 targets (`tests/docs.test.ts`).
 - Class merge order is fixed: recipe base → variant classes → static base → extra expressions →
   state classes → caller `class` (Tailwind-conflict aware).
 - Extra attributes (rest / `Attrs` / `attrs`) win over the primitive's own attribute of the same name in every
@@ -28,7 +28,7 @@ As in the v0.1.0 contract: the anchor keeps `href` and gets `aria-disabled="true
 
 ## Attributes: precedence, empty values, URLs
 
-One rule set, identical DOM in all 9 runtimes (`tests/parity.attrs.test.ts` renders every case in every real engine
+One rule set, identical DOM in all 9 targets (`tests/parity.attrs.test.ts` renders every case in every real engine
 against explicit expected HTML). Since 3.3.0.
 
 1. **Precedence.** A key in the caller's extra attributes (JS rest props / `Attrs` / `attrs`) replaces the primitive's

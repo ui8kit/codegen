@@ -13,7 +13,7 @@ Part of the UI8Kit 3 ecosystem — see the ecosystem block in the [repo README](
 | [contract.md](contract.md) | DOM / token / ARIA parity rules every primitive and runtime follows | hand-written |
 | [primitives/slot.md](primitives/slot.md) | React `Slot` behind `asChild` | hand-written |
 
-Runtimes: [React](runtimes/react.md) · [Vue 3](runtimes/vue.md) · [Svelte 5](runtimes/svelte.md) ·
+Targets (5 UI frameworks + 4 server-side template engines): [React](runtimes/react.md) · [Vue 3](runtimes/vue.md) · [Svelte 5](runtimes/svelte.md) ·
 [SolidJS](runtimes/solid.md) · [Web Components](runtimes/webcomponent.md) · [Go templ](runtimes/templ.md) ·
 [Twig](runtimes/twig.md) · [Latte](runtimes/latte.md) · [Jinja2](runtimes/jinja2.md)
 

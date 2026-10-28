@@ -11,12 +11,29 @@
 <!-- ui8kit-ecosystem:end -->
 
 Spec-driven code generator for **style-agnostic HTML primitives**. Each primitive is defined once
-as a typed render contract (`bricks/<name>/<name>.def.ts`); emitters print it into six
-runtimes, and parity tests prove every runtime renders the same DOM/ARIA as the canonical renderer.
+as a typed render contract (`bricks/<name>/<name>.def.ts`); emitters print it into nine
+targets, and parity tests prove every target renders the same DOM/ARIA as the canonical renderer.
 
-Runtimes: **React 19 · Svelte 5 · Vue 3 · SolidJS · Web Components** (vanilla, light DOM) ·
-**Go [templ](https://templ.guide)** (server-rendered, first of the template runtimes).
-PHP template runtimes: **[Twig](https://twig.symfony.com) · [Latte](https://latte.nette.org)**.
+**One system, 9 platforms** — 9 targets: 5 UI frameworks and 4 server-side template engines.
+
+- UI frameworks: **React 19 · Vue 3 · Svelte 5 · SolidJS · Web Components** (vanilla, light DOM).
+- Server-side template engines: **Go [templ](https://templ.guide)** · **[Twig](https://twig.symfony.com)** (PHP) ·
+  **[Latte](https://latte.nette.org)** (PHP) · **[Jinja2](https://jinja.palletsprojects.com)** (Python).
+
+## Terminology
+
+- **Target** (render target) — one output that codegen emits and the parity suites check: a UI framework or a
+  server-side template engine. "Target" is the umbrella term for the whole set.
+- Why not "runtime": templ, Twig, Latte and Jinja2 are server-side template engines, not runtimes (they run inside
+  Go, PHP or Python).
+- Why not "framework": the set includes Web Components (a platform standard) and four template engines.
+- The split is **5 + 4**: 5 UI frameworks (React, Vue 3, Svelte 5, SolidJS, Web Components) and 4 server-side
+  template engines (templ, Twig, Latte, Jinja2). Twig and Latte are separate targets.
+- Tagline: **One system, 9 platforms.**
+- По-русски: «9 targets: 5 UI-фреймворков и 4 серверных шаблонизатора»; на лендинге — «одна система, 9 платформ».
+
+Code identifiers and CLI flags keep their names (`--runtimes`, `runtime/`, `r/<runtime>/`,
+`UI8KIT_REQUIRE_ALL_RUNTIMES`, `docs/runtimes/`).
 
 ## Documentation
 
@@ -46,7 +63,7 @@ bun install
 bun run generate          # writes generated/ (all runtimes + specs.json)
 bun run build:specs       # writes specs/primitives.json (registry-facing JSON spec)
 bun run docs              # regenerate docs/primitives/*.md from the spec
-bun run verify            # check + docs:check + tsc + typecheck:generated + all tests (parity ×6 runtimes)
+bun run verify            # check + docs:check + tsc + typecheck:generated + all tests (parity ×9 targets)
 ```
 
 `generate --runtimes react,svelte,vue,solid,webcomponent,templ` limits the output.

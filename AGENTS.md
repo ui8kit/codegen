@@ -14,6 +14,12 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 `src/emitters/` print it into React, Svelte 5, Vue 3, SolidJS, Web Components and Go templ.
 `generated/` is build output (git-ignored) — never edit it, change the brick or the emitter.
 
+## Terminology
+
+- The set of outputs is **9 targets** (render targets): 5 UI frameworks (React, Vue 3, Svelte 5, SolidJS, Web Components)
+  + 4 server-side template engines (templ, Twig, Latte, Jinja2). Say "targets", not "runtimes"/"frameworks", for the set
+  (see README → Terminology); code identifiers and CLI flags (`--runtimes`, `runtime/`, `r/<runtime>/`) keep their names.
+
 ## Documentation
 
 - `docs/` is the single, exhaustive home for primitives docs ([docs/README.md](docs/README.md)).
@@ -23,7 +29,7 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
   (`scripts/docs.ts`) — after changing a brick/fixture run it and commit the result. Hand-written
   notes go only between `<!-- ui8kit-docs:prose:start/end -->`; runtimes/, contract.md, slot.md
   are fully hand-written. `bun run docs:check` (in `verify`) fails on stale docs;
-  `tests/docs.test.ts` executes every doc snippet in all 9 runtimes.
+  `tests/docs.test.ts` executes every doc snippet in all 9 targets.
 
 ## Commands
 
@@ -49,7 +55,7 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
   renderer (`src/domain/render.ts`). Parity tests prove it: `tests/parity*.test.ts`.
 - Attribute rules (docs/contract.md#attributes-precedence-empty-values-urls): extra attrs win over the named
   attribute, then blank optional attrs (all but `value`) and unsafe URLs are omitted; `data:image/…` only in
-  `<img src>`. `tests/parity.attrs.test.ts` checks every rule in all 9 real runtimes against explicit HTML.
+  `<img src>`. `tests/parity.attrs.test.ts` checks every rule in all 9 real targets against explicit HTML.
 - New runtime ⇒ add an emitter, a real-engine parity test (no mocks), CI setup, rules entry in
   `templates/rules/runtimes.json`, README section.
 - `UI8KIT_REQUIRE_ALL_RUNTIMES=1` (set in CI) turns a missing toolchain (Go/templ) into a
