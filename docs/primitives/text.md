@@ -23,7 +23,7 @@ Text renders the requested text element (default p).
 | --- | --- | --- | --- | --- | --- | --- |
 | `Tag` | `tag` | `tag` | `"p" \| "span" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "blockquote" \| "figcaption" \| "pre" \| "code" \| "small" \| "strong" \| "em" \| "time" \| "legend" \| "del" \| "ins"` | — | prop | HTML5 text tag (default p) |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ## Variants
 

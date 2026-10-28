@@ -24,7 +24,7 @@ Progress renders a native progress element; children are the fallback text.
 | `Max` | `max` | `max` | `string` | — | passthrough attr |  |
 | `AriaLabel` | `aria-label` | `aria-label` | `string` | — | passthrough attr |  |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ## Variants
 

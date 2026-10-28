@@ -22,7 +22,7 @@ Label renders a native label element.
 | --- | --- | --- | --- | --- | --- | --- |
 | `For` | `htmlFor` | `for` | `string` | — | passthrough attr | id of the labeled control |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ## Variants
 

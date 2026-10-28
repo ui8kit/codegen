@@ -25,7 +25,7 @@ One template per part: `ui/<brick>/<part-kebab>.html.j2` (`ui/select/select-opti
 
 ## Deviations from React
 
-- None — empty values, `Attrs` precedence and URL checks are identical in every runtime (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
+- None — empty values, `Attrs` precedence and URL checks are identical in every target (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
 - No `asChild`.
 
 ## Helpers

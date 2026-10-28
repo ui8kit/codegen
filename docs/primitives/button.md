@@ -33,7 +33,7 @@ Type/Form apply only in button mode; Disabled on anchors uses aria-disabled.
 | `AriaExpanded` | `aria-expanded` | `aria-expanded` | `string` | — | passthrough attr |  |
 | `AriaControls` | `aria-controls` | `aria-controls` | `string` | — | passthrough attr |  |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ## Variants
 

@@ -41,7 +41,7 @@ Form renders a native form element; method is whitelisted (get|post|dialog).
 | `AriaLabelledBy` | `aria-labelledby` | `aria-labelledby` | `string` | — | passthrough attr |  |
 | `AriaDescribedBy` | `aria-describedby` | `aria-describedby` | `string` | — | passthrough attr |  |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ## Variants
 

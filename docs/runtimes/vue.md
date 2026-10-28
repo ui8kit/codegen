@@ -18,7 +18,7 @@ One SFC per part: `{dir}/ui/<brick>/<Part>.vue` (+ `<brick>.shared.ts`); barrel 
 ## Deviations from React
 
 - Select/Switch/Checkbox: the live `value`/`checked` DOM property is synced; SSR markup equals React.
-- Blank optional attributes are omitted, `value=""` is kept — like every runtime (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
+- Blank optional attributes are omitted, `value=""` is kept — like every target (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
 
 ## Helpers
 

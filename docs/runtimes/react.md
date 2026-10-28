@@ -20,7 +20,7 @@ Files land in `{dir}/ui/<brick>/<brick>.tsx` (+ `<brick>.shared.ts`), helpers in
 
 ## Reference runtime
 
-React is the reference the other runtimes are compared to (together with the canonical renderer).
+React is the reference the other targets are compared to (together with the canonical renderer).
 Known React-specific behaviour:
 
 - A blank optional attribute (`id=""`, `href=""`, `aria-describedby=" "`, …) is omitted — props and rest

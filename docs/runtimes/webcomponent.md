@@ -13,7 +13,7 @@ Files: `{dir}/ui/<brick>/<brick>.wc.ts`; barrel `index.wc.ts` (`defineAll()`).
 - `render<Part>(props, children)` returns the rendered element (`children`: string, Node or array).
 - `define<Part>(tag = "ui8-…")` / `defineAll()` registers custom elements (`<ui8-button>`) that
   **replace themselves** with the rendered primitive — no shadow DOM, so the DOM is identical to
-  the other runtimes and consumer classes apply.
+  the other targets and consumer classes apply.
 
 ## Props and children
 

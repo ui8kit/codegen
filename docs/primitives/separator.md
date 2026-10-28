@@ -33,7 +33,7 @@ Separator renders a void hr; no children.
 | `Orientation` | `orientation` | `orientation` | `"horizontal" \| "vertical"` | — | prop | horizontal (default) \| vertical |
 | `Decorative` | `decorative` | `decorative` | `boolean` | — | prop | purely visual: role=none, no separator semantics |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins).
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins).
 
 ## Variants
 

@@ -26,7 +26,7 @@ Register `$twig->addExtension(new \UI8Kit\Twig\TwigExtension())` and point the l
 
 ## Deviations from React
 
-- None for attributes — empty values, `attrs` precedence and URL checks are identical in every runtime (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
+- None for attributes — empty values, `attrs` precedence and URL checks are identical in every target (see [contract](../contract.md#attributes-precedence-empty-values-urls)).
 - No `asChild`.
 
 ## Helpers

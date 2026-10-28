@@ -24,7 +24,7 @@ Box renders the requested structural HTML element (default div).
 | --- | --- | --- | --- | --- | --- | --- |
 | `Tag` | `tag` | `tag` | `"div" \| "section" \| "article" \| "aside" \| "header" \| "footer" \| "main" \| "nav" \| "figure" \| "search" \| "ul" \| "ol" \| "li" \| "dl" \| "dt" \| "dd" \| "fieldset" \| "table" \| "thead" \| "tbody" \| "tfoot" \| "tr" \| "th" \| "td" \| "caption" \| "colgroup" \| "col"` | — | prop | HTML5 structural tag (default div) |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ## Variants
 

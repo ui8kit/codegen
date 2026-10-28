@@ -39,7 +39,7 @@ Code identifiers and CLI flags keep their names (`--runtimes`, `runtime/`, `r/<r
 
 **[docs/](docs/README.md)** is the single home for primitives documentation: one page per primitive
 (`docs/primitives/<name>.md` — props, variants, rendered DOM per state, ARIA, classes escape hatch,
-a snippet per runtime), runtime notes (`docs/runtimes/<rt>.md`) and the [contract](docs/contract.md).
+a snippet per target), target notes (`docs/runtimes/<rt>.md`) and the [contract](docs/contract.md).
 Reference parts are generated from the spec (`bun run docs`; `bun run docs:check` runs in `verify`),
 and every snippet is executed in its runtime by `tests/docs.test.ts`.
 
@@ -60,7 +60,7 @@ Composition (cards, badges, alerts, layouts, …) is out of scope for codegen.
 
 ```sh
 bun install
-bun run generate          # writes generated/ (all runtimes + specs.json)
+bun run generate          # writes generated/ (all targets + specs.json)
 bun run build:specs       # writes specs/primitives.json (registry-facing JSON spec)
 bun run docs              # regenerate docs/primitives/*.md from the spec
 bun run verify            # check + docs:check + tsc + typecheck:generated + all tests (parity ×9 targets)
@@ -77,7 +77,7 @@ document.body.append(renderButton({ class: "bg-primary text-primary-foreground" 
 ```
 
 Custom elements replace themselves with the rendered primitive (no shadow DOM), so the
-resulting DOM is identical to the other runtimes and consumer classes apply.
+resulting DOM is identical to the other targets and consumer classes apply.
 
 The swap waits until children exist (DOMContentLoaded while the document is parsing, or the
 next microtask for a host connected before its subtree). Attributes are read **once**, at the
@@ -109,7 +109,7 @@ cd generated/templ && templ generate && go vet ./... && go build ./...
   never pass user input as raw children (XSS).
 - templ sanitizes URL attributes: `href="javascript:…"` renders as
   `about:invalid#TemplFailedSanitizationURL` (React would print it verbatim).
-- `Attrs` are spread last; unlike the JS runtimes they do not replace an attribute the
+- `Attrs` are spread last; unlike the UI frameworks they do not replace an attribute the
   primitive already printed (avoid duplicating `class`, `id`, …; use `Class` / typed props).
 
 Parity: `tests/parity.templ.test.ts` runs the real `templ generate` + `go run ./cmd/parity`
@@ -204,12 +204,12 @@ MIT © UI8Kit
 
 This repo **generates** the primitives (source of truth). You normally do not install from here — apps install the packed output via the CLI:
 
-### Quick start per runtime
+### Quick start per target
 
 Always call the CLI with a pinned major: `npx ui8kit@3`. `add all` and `add --all` are equivalent.
 
 ```bash
-# JS runtimes (writes package.json peers clsx + tailwind-merge for utils)
+# UI frameworks (writes package.json peers clsx + tailwind-merge for utils)
 npx ui8kit@3 init --yes --framework react        --dir src && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework vue          --dir src && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework svelte       --dir src && npx ui8kit@3 add button
@@ -217,14 +217,14 @@ npx ui8kit@3 init --yes --framework solid        --dir src && npx ui8kit@3 add b
 npx ui8kit@3 init --yes --framework webcomponent --dir src && npx ui8kit@3 add button
 npx ui8kit@3 add --all            # everything in r/<runtime>/index.json
 
-# Server runtimes (no package.json is written or required)
+# Server template engines (no package.json is written or required)
 npx ui8kit@3 init --yes --framework templ  --dir internal  && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework twig   --dir templates && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework latte  --dir templates && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework jinja2 --dir templates && npx ui8kit@3 add button
 ```
 
-Post-install for server runtimes (the CLI prints the exact commands from item `meta`; it never runs them and never edits `composer.json` / `go.mod`):
+Post-install for server template engines (the CLI prints the exact commands from item `meta`; it never runs them and never edits `composer.json` / `go.mod`):
 
 - **templ**: `go get github.com/a-h/templ@<printed version>` → `templ generate` (after every `add`, and in CI; `*_templ.go` is generated, not shipped) → `go build ./...`. With `go.mod` present the utils import is rewritten to `<module>/<dir>/utils`.
 - **twig / latte**: `composer require "twig/twig:^3.0"` (or the printed latte package), add the printed PSR-4 entry to `composer.json`, then `composer dump-autoload`:
@@ -257,7 +257,7 @@ Global: `-c, --cwd <dir>`, `-v, --verbose`, `--no-cache`, `-V, --version`.
 - **Default**: `@ui8kit/registry@<CLI major>` from npm via CDN, tried in order **unpkg → jsDelivr**:
   - `https://unpkg.com/@ui8kit/registry@3/r/<runtime>/index.json`
   - `https://cdn.jsdelivr.net/npm/@ui8kit/registry@3/r/<runtime>/index.json`
-- **Per runtime** (`react`, `vue`, `svelte`, `solid`, `webcomponent`, `templ`, `twig`, `latte`, `jinja2`) under `r/<runtime>/`:
+- **Per target** (`react`, `vue`, `svelte`, `solid`, `webcomponent`, `templ`, `twig`, `latte`, `jinja2`) under `r/<runtime>/`:
   - `index.json` — catalogue
   - `components/ui/<name>.json` — primitives (e.g. `button.json`)
   - `utils/utils.json` — `registry:utils` (installed by `init`)

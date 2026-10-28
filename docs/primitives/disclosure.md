@@ -25,7 +25,7 @@ Disclosure renders a native details element.
 | `Open` | `open` | `open` | `boolean` | — | prop | initial open state |
 | `Name` | `name` | `name` | `string` | — | passthrough attr |  |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ### Variants
 
@@ -151,7 +151,7 @@ Summary renders the native summary (the disclosure trigger).
 
 _No typed props (only class / attrs / children)._
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ### Variants
 

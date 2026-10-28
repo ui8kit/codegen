@@ -34,7 +34,7 @@ Input renders a native input element (default type text).
 | `AriaInvalid` | `aria-invalid` | `aria-invalid` | `string` | — | passthrough attr |  |
 | `AriaDescribedBy` | `aria-describedby` | `aria-describedby` | `string` | — | passthrough attr |  |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins).
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins).
 
 ## Variants
 

@@ -33,7 +33,7 @@ Image renders an img element; alt is always emitted.
 | `Loading` | `loading` | `loading` | `string` | — | passthrough attr |  |
 | `Decoding` | `decoding` | `decoding` | `string` | — | passthrough attr |  |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins).
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins).
 
 ### Variants
 
@@ -158,7 +158,7 @@ Picture wraps Source candidates and a fallback Image.
 
 _No typed props (only class / attrs / children)._
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ### Variants
 
@@ -287,7 +287,7 @@ Source renders a source candidate inside picture.
 | `Type` | `type` | `type` | `string` | — | passthrough attr |  |
 | `Sizes` | `sizes` | `sizes` | `string` | — | passthrough attr |  |
 
-Also accepts: extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins).
+Also accepts: extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins).
 
 ### Variants
 

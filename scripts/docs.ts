@@ -271,7 +271,7 @@ function partSection(brick: BrickDef, part: PartDef, multi: boolean): string {
   out.push(
     `Also accepts: ${[
       acceptsClass(part) ? "`class` (`className` in React)" : null,
-      acceptsAttrs(part) ? "extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins)" : null,
+      acceptsAttrs(part) ? "extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins)" : null,
       hasChildren(part) ? "children" : null,
     ].filter(Boolean).join(", ") || "nothing else"}.`,
     ""

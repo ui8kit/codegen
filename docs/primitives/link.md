@@ -28,7 +28,7 @@ Link renders an anchor; External opens a new tab with rel=noopener noreferrer.
 | `AriaCurrent` | `aria-current` | `aria-current` | `string` | — | passthrough attr |  |
 | `AriaLabel` | `aria-label` | `aria-label` | `string` | — | passthrough attr |  |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ## Variants
 

@@ -51,7 +51,7 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 - Forms: `Form` (`<form>`) is the only path — `Box` no longer accepts `tag="form"`.
   `Separator` renders `<hr>`; `decorative` ⇒ `role="none"` (see docs/primitives/separator.md).
 
-- Every runtime renders the same DOM, classes (tokens) and ARIA as React / the canonical
+- Every target renders the same DOM, classes (tokens) and ARIA as React / the canonical
   renderer (`src/domain/render.ts`). Parity tests prove it: `tests/parity*.test.ts`.
 - Attribute rules (docs/contract.md#attributes-precedence-empty-values-urls): extra attrs win over the named
   attribute, then blank optional attrs (all but `value`) and unsafe URLs are omitted; `data:image/…` only in
@@ -102,7 +102,7 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 ## `generated/`
 
 - Never commit `generated/`; it is build output of `bun run generate` and is ignored.
-- Change specs/emitters in `src/`, then run `bun run verify` (regenerates and checks all runtimes).
+- Change specs/emitters in `src/`, then run `bun run verify` (regenerates and checks all targets).
 - `@ui8kit/registry` is packed from a fresh `bun run generate`, never from a stale tree.
 
 <!-- ui8kit-install:start -->
@@ -110,12 +110,12 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
 
 This repo **generates** the primitives (source of truth). You normally do not install from here — apps install the packed output via the CLI:
 
-### Quick start per runtime
+### Quick start per target
 
 Always call the CLI with a pinned major: `npx ui8kit@3`. `add all` and `add --all` are equivalent.
 
 ```bash
-# JS runtimes (writes package.json peers clsx + tailwind-merge for utils)
+# UI frameworks (writes package.json peers clsx + tailwind-merge for utils)
 npx ui8kit@3 init --yes --framework react        --dir src && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework vue          --dir src && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework svelte       --dir src && npx ui8kit@3 add button
@@ -123,14 +123,14 @@ npx ui8kit@3 init --yes --framework solid        --dir src && npx ui8kit@3 add b
 npx ui8kit@3 init --yes --framework webcomponent --dir src && npx ui8kit@3 add button
 npx ui8kit@3 add --all            # everything in r/<runtime>/index.json
 
-# Server runtimes (no package.json is written or required)
+# Server template engines (no package.json is written or required)
 npx ui8kit@3 init --yes --framework templ  --dir internal  && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework twig   --dir templates && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework latte  --dir templates && npx ui8kit@3 add button
 npx ui8kit@3 init --yes --framework jinja2 --dir templates && npx ui8kit@3 add button
 ```
 
-Post-install for server runtimes (the CLI prints the exact commands from item `meta`; it never runs them and never edits `composer.json` / `go.mod`):
+Post-install for server template engines (the CLI prints the exact commands from item `meta`; it never runs them and never edits `composer.json` / `go.mod`):
 
 - **templ**: `go get github.com/a-h/templ@<printed version>` → `templ generate` (after every `add`, and in CI; `*_templ.go` is generated, not shipped) → `go build ./...`. With `go.mod` present the utils import is rewritten to `<module>/<dir>/utils`.
 - **twig / latte**: `composer require "twig/twig:^3.0"` (or the printed latte package), add the printed PSR-4 entry to `composer.json`, then `composer dump-autoload`:
@@ -163,7 +163,7 @@ Global: `-c, --cwd <dir>`, `-v, --verbose`, `--no-cache`, `-V, --version`.
 - **Default**: `@ui8kit/registry@<CLI major>` from npm via CDN, tried in order **unpkg → jsDelivr**:
   - `https://unpkg.com/@ui8kit/registry@3/r/<runtime>/index.json`
   - `https://cdn.jsdelivr.net/npm/@ui8kit/registry@3/r/<runtime>/index.json`
-- **Per runtime** (`react`, `vue`, `svelte`, `solid`, `webcomponent`, `templ`, `twig`, `latte`, `jinja2`) under `r/<runtime>/`:
+- **Per target** (`react`, `vue`, `svelte`, `solid`, `webcomponent`, `templ`, `twig`, `latte`, `jinja2`) under `r/<runtime>/`:
   - `index.json` — catalogue
   - `components/ui/<name>.json` — primitives (e.g. `button.json`)
   - `utils/utils.json` — `registry:utils` (installed by `init`)
@@ -192,6 +192,6 @@ Fix a primitive in **codegen**, repack in **registry**, publish, then `add <name
 - Run `npx ui8kit@3 check` before every commit; fix drift with `add <name> --force`.
 - Upgrade deliberately: change `registryVersion`, `add --all --force`, re-run `init` (rules), `check`, commit.
 - `children` passed to server-template primitives is trusted HTML (not escaped) — escape user input yourself.
-- Server runtimes: after `add`, run the printed toolchain steps (`templ generate`, `composer dump-autoload`, `pip install`).
+- Server template engines: after `add`, run the printed toolchain steps (`templ generate`, `composer dump-autoload`, `pip install`).
 - New UI that is not a primitive goes to a brand registry (`--registry-url`), never into `@ui8kit/registry`.
 <!-- ui8kit-install:end -->

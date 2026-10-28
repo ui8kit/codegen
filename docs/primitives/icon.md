@@ -12,7 +12,7 @@ No registry: the glyph is the children/slot. Decorative unless Label is set.
 ## Notes
 
 <!-- ui8kit-docs:prose:start -->
-- Put a Lucide icon inside (`<Icon size="sm"><Save /></Icon>`; inline Lucide SVG in template runtimes).
+- Put a Lucide icon inside (`<Icon size="sm"><Save /></Icon>`; inline Lucide SVG in server template engines).
 - Without `label` the icon is decorative (`aria-hidden`); with `label` it gets `role="img"` + `aria-label`.
 <!-- ui8kit-docs:prose:end -->
 
@@ -25,7 +25,7 @@ Icon renders span[data-slot=icon]; Label switches to role=img + aria-label.
 | `Size` | `size` | `size` | `string` | — | variant | size token: xs, sm, md, lg, xl (default sm) |
 | `Label` | `label` | `label` | `string` | — | prop | accessible name; omitted = decorative (aria-hidden) |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ## Variants
 

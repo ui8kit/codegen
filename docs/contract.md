@@ -1,6 +1,6 @@
 # Primitives contract
 
-Rules every primitive and every runtime follows. They are **kit-neutral**: they describe the
+Rules every primitive and every target follows. They are **kit-neutral**: they describe the
 primitives layer only. Brand kits built on top may add their own rules (or drop optional ones,
 see the spacing note).
 
@@ -8,7 +8,7 @@ see the spacing note).
 
 - One spec (`bricks/<name>/<name>.def.ts`) → one canonical renderer (`src/domain/render.ts`) →
   9 targets. For every part and every fixture state (defaults, showcase fixtures, every enum value,
-  every boolean) each runtime's **normalized DOM** must equal the canonical output (`bun test`:
+  every boolean) each target's **normalized DOM** must equal the canonical output (`bun test`:
   `parity*.test.ts`; templ/Twig/Latte/Jinja2 run their real engines, required in CI via
   `UI8KIT_REQUIRE_ALL_RUNTIMES=1`).
 - Normalization ignores incidental differences only: attribute order, self-closing syntax,
@@ -38,7 +38,7 @@ against explicit expected HTML). Since 3.3.0.
    as a fallback. Example: `Href: "/ok"` + `Attrs: {href: "javascript:x"}` renders `<a>` without `href` everywhere.
 2. **Empty values.** Optional attributes (passthrough props: `id`, `name`, `href`, `src`, `srcset`, `sizes`,
    `placeholder`, `aria-*`, …) treat a blank string (`""` or whitespace only) as unset and omit the attribute — from the
-   named prop or from extra attributes alike (JS runtimes cannot tell them apart). This is the v0.1.0 contract
+   named prop or from extra attributes alike (UI frameworks cannot tell them apart). This is the v0.1.0 contract
    (canonical renderer and server templates omitted blanks). **`value` is the one exception**: it is nullable —
    unset (`undefined` / `null` / `None` / `nil`) omits it, an explicit `""` renders `value=""`, because `""` is a real
    value there (React controlled `<input value="">`, checkbox/radio submit `""` instead of `on`,
@@ -55,7 +55,7 @@ against explicit expected HTML). Since 3.3.0.
 
 ### Empty values (history)
 
-3.2.0–3.2.x printed an explicit `""` for every passthrough attribute (`id=""`, `href=""`, `srcset=""`) in all runtimes —
+3.2.0–3.2.x printed an explicit `""` for every passthrough attribute (`id=""`, `href=""`, `srcset=""`) in all targets —
 an unflagged breaking change for Twig, Latte and Jinja2, reverted in 3.3.0 except for `value`.
 
 ## ARIA
@@ -87,7 +87,7 @@ Use Lucide icons as children of `Icon` (`lucide-react`, `lucide-vue-next`, `@luc
 
 ## Children are trusted
 
-Template runtimes print children raw (templ `{ children... }`, Twig `|raw`, Latte `|noescape`,
+Server template engines print children raw (templ `{ children... }`, Twig `|raw`, Latte `|noescape`,
 Jinja2 `|safe`). Never route user input into children (XSS).
 
 ## No asChild outside React

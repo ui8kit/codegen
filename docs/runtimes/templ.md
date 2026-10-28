@@ -22,7 +22,7 @@ the module is `github.com/ui8kit/codegen/generated/templ` (used by the doc snipp
 
 ## Deviations from React
 
-- **Empty value**: blank strings omit the attribute, as in every runtime; `Value` is `*string`
+- **Empty value**: blank strings omit the attribute, as in every target; `Value` is `*string`
   (`nil` = unset, `new("")` = `value=""`).
 - **Attrs win**: a key in `Attrs` replaces the attribute the primitive would print (`uiutils.HasAttr`);
   `class` is the exception — use `Class`.

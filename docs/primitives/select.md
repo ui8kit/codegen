@@ -38,7 +38,7 @@ Select renders option children from Options, then manual children.
 | `AriaInvalid` | `aria-invalid` | `aria-invalid` | `string` | — | passthrough attr |  |
 | `AriaDescribedBy` | `aria-describedby` | `aria-describedby` | `string` | — | passthrough attr |  |
 
-Also accepts: `class` (`className` in React), extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: `class` (`className` in React), extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ### Variants
 
@@ -174,7 +174,7 @@ SelectOption renders a native option.
 | `Selected` | `selected` | `selected` | `boolean` | — | prop |  |
 | `Disabled` | `disabled` | `disabled` | `boolean` | — | prop |  |
 
-Also accepts: extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ### Variants
 
@@ -295,7 +295,7 @@ SelectOptGroup renders a native optgroup around option children.
 | `Label` | `label` | `label` | `string` | — | passthrough attr |  |
 | `Disabled` | `disabled` | `disabled` | `boolean` | — | prop |  |
 
-Also accepts: extra attributes (rest props in JS runtimes, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
+Also accepts: extra attributes (rest props in UI frameworks, `Attrs` in templ/Jinja2, `attrs` in Twig/Latte; caller wins), children.
 
 ### Variants
 

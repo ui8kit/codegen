@@ -8,8 +8,8 @@ Part of the UI8Kit 3 ecosystem — see the ecosystem block in the [repo README](
 
 | Path | What | Source |
 | --- | --- | --- |
-| [primitives/](primitives/) | one page per primitive: purpose, props, variants, children, ARIA, `<Name>Classes` escape hatch, rendered DOM per state, one snippet per runtime | **generated** by `bun run docs` (except the `Notes` prose block) |
-| [runtimes/](runtimes/) | per runtime: install, children mechanism, deviations from React, helpers | hand-written |
+| [primitives/](primitives/) | one page per primitive: purpose, props, variants, children, ARIA, `<Name>Classes` escape hatch, rendered DOM per state, one snippet per target | **generated** by `bun run docs` (except the `Notes` prose block) |
+| [runtimes/](runtimes/) | per target: install, children mechanism, deviations from React, helpers | hand-written |
 | [contract.md](contract.md) | DOM / token / ARIA parity rules every primitive and runtime follows | hand-written |
 | [primitives/slot.md](primitives/slot.md) | React `Slot` behind `asChild` | hand-written |
 
