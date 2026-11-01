@@ -189,7 +189,9 @@ toolchainSuite("templ", ok("go", ["version"]), () => {
     writeFileSync(join(dir, "docs.templ"), `package main\n\nimport (\n\t"context"\n\t"encoding/json"\n\t"os"\n\t"strings"\n${[...imports].map((x) => "\t" + x.replace(/^import /, "")).join("\n")}\n)\n\n${comps.join("\n\n")}\n\nfunc main() {\n\tcs := []templ.Component{${snips.map((_, i) => `doc${i}()`).join(", ")}}\n\tout := []string{}\n\tfor _, c := range cs {\n\t\tvar b strings.Builder\n\t\t_ = c.Render(context.Background(), &b)\n\t\tout = append(out, b.String())\n\t}\n\t_ = json.NewEncoder(os.Stdout).Encode(out)\n}\n`);
     const local = join(homedir(), "go", "bin", "templ");
     const [bin, args] = existsSync(local) ? [local, [] as string[]] : ["go", ["run", `github.com/a-h/templ/cmd/templ@${TEMPL_VERSION}`]];
-    execFileSync(bin, [...args, "generate", "-path", "cmd/docsnippets"], { cwd: mod, stdio: "ignore" });
+    // Whole module: the snippets import ui/* packages, whose *_templ.go must exist even when this
+    // suite runs before tests/parity.templ.test.ts (which otherwise generates them).
+    execFileSync(bin, [...args, "generate"], { cwd: mod, stdio: "ignore" });
     return JSON.parse(execFileSync("go", ["run", "./cmd/docsnippets"], { cwd: mod, encoding: "utf8" }));
   } finally {
     rmSync(dir, { recursive: true, force: true });
