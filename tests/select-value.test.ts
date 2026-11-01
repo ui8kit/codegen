@@ -30,13 +30,18 @@ describe("react Select value", () => {
       const err = spyOn(console, "error").mockImplementation(() => {});
       try {
         const html = renderToStaticMarkup(createElement(Select, { value: "b", options: OPTIONS, ...extra }));
-        expect(html).toBe('<select><option value="a">A</option><option value="b" selected="">B</option></select>');
+        expect(html).toBe('<select class="pr-2"><option value="a">A</option><option value="b" selected="">B</option></select>');
         expect(err).not.toHaveBeenCalled();
       } finally {
         err.mockRestore();
       }
     });
   }
+
+  it("merges caller class with the pr-2 base (tailwind-merge aware)", () => {
+    expect(renderToStaticMarkup(createElement(Select, { className: "w-full" }))).toBe('<select class="pr-2 w-full"></select>');
+    expect(renderToStaticMarkup(createElement(Select, { className: "pr-4" }))).toBe('<select class="pr-4"></select>');
+  });
 
   it("uses the array form for multiple", () => {
     const html = renderToStaticMarkup(createElement(Select, { value: "a", multiple: true, options: OPTIONS }));

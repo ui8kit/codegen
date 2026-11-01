@@ -26,6 +26,8 @@ proven by `tests/parity.attrs.test.ts` (32 cases × canonical + 9 real engines, 
   WC `applyRest(el, rest, rule?)`; Go `SafeImgURL`, `HasAttr`, `RestAttrs`; PHP `Rt::imgUrlOrNull`, `Rt::restAttrs`,
   `Rt::attrs($attrs, $rest, $img, $blank)` (Twig `ui8kit_img_url_or_null`); Python `safe_url(v, data_image)`,
   `has_attr`, `attr_html(a, img, blank)`. `SafeAttrs` / `Rt::safeAttrs` stay for existing callers.
+- **Change (output) — Select `pr-2`:** the native `<select>` gets a static base class `pr-2` (spacing before the
+  dropdown indicator) in all 9 targets; caller `class` merges after it (tailwind-merge: `pr-4` replaces `pr-2`).
 - Docs: contract (attribute rules, empty-value history), runtime pages (no attribute deviations left).
 
 Why 3.3.0 and not 3.2.1 / 4.0.0: props, types and template signatures are unchanged (no API break; new helper

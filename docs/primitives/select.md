@@ -71,21 +71,21 @@ Canonical renderer output (children = `Content`); all 9 runtimes are parity-test
 
 | State | Props | HTML |
 | --- | --- | --- |
-| defaults | — | `<select>Content</select>` |
-| options | `{"Name":"c","Value":"b","Options":[{"Value":"a","Label":"A"},{"Value":"b","Label":"B"},{"Value":"c","Label":"C","Disabled":true}]}` | `<select name="c"><option value="a">A</option><option value="b" selected>B</option><option value="c" disabled>C</option>Content</select>` |
-| states | `{"Multiple":true,"Required":true,"Disabled":true,"AriaInvalid":"true"}` | `<select multiple required disabled aria-invalid="true">Content</select>` |
-| option | `{"Value":"x"}` | `<select>Content</select>` |
-| group | `{"Disabled":true}` | `<select disabled>Content</select>` |
-| Multiple | `{"Multiple":true}` | `<select multiple>Content</select>` |
-| Required | `{"Required":true}` | `<select required>Content</select>` |
-| Disabled | `{"Disabled":true}` | `<select disabled>Content</select>` |
+| defaults | — | `<select class="pr-2">Content</select>` |
+| options | `{"Name":"c","Value":"b","Options":[{"Value":"a","Label":"A"},{"Value":"b","Label":"B"},{"Value":"c","Label":"C","Disabled":true}]}` | `<select class="pr-2" name="c"><option value="a">A</option><option value="b" selected>B</option><option value="c" disabled>C</option>Content</select>` |
+| states | `{"Multiple":true,"Required":true,"Disabled":true,"AriaInvalid":"true"}` | `<select class="pr-2" multiple required disabled aria-invalid="true">Content</select>` |
+| option | `{"Value":"x"}` | `<select class="pr-2">Content</select>` |
+| group | `{"Disabled":true}` | `<select class="pr-2" disabled>Content</select>` |
+| Multiple | `{"Multiple":true}` | `<select class="pr-2" multiple>Content</select>` |
+| Required | `{"Required":true}` | `<select class="pr-2" required>Content</select>` |
+| Disabled | `{"Disabled":true}` | `<select class="pr-2" disabled>Content</select>` |
 
 ### Usage
 
 Fixture `options` (`{"Name":"c","Value":"b","Options":[{"Value":"a","Label":"A"},{"Value":"b","Label":"B"},{"Value":"c","Label":"C","Disabled":true}]}`) — every snippet renders:
 
 ```html
-<select name="c"><option value="a">A</option><option value="b" selected>B</option><option value="c" disabled>C</option>Content</select>
+<select class="pr-2" name="c"><option value="a">A</option><option value="b" selected>B</option><option value="c" disabled>C</option>Content</select>
 ```
 
 **React** ([runtime notes](../runtimes/react.md))

@@ -41,7 +41,7 @@ export default brick({
     {
       name: "Select",
       docs: "Select renders option children from Options, then manual children.",
-      classes: {},
+      classes: { staticBase: "pr-2" },
       props: [
         pClass(),
         pPass("ID"),
