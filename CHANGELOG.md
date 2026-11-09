@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.4.0 (2026-11-09)
 
 - **Feature — Button semantic ARIA state:** `Pressed` / `Expanded` (React/Solid/Svelte/Vue/WC `pressed` / `expanded`)
   print `aria-pressed` / `aria-expanded` as `"true"` / `"false"`; unset omits the attribute. Same DOM in all 9
