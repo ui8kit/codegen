@@ -67,6 +67,10 @@ export const eqStr = (a: string | null | undefined, b: string | null | undefined
 export const boolStr = (v: boolean | null | undefined): "true" | "false" =>
   v ? "true" : "false";
 
+/** Tri-state ARIA state: "true"/"false" when set, "" when unset (attribute omitted). */
+export const optBoolStr = (v: boolean | null | undefined): "true" | "false" | "" =>
+  v === true ? "true" : v === false ? "false" : "";
+
 /** Concatenation of trimmed parts (icon `Prefix + Name`). */
 export const concatTrim = (...parts: (string | null | undefined)[]): string =>
   parts.map(trimStr).join("");

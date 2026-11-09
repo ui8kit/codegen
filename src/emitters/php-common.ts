@@ -12,7 +12,7 @@
  * generated `Classes::<part>Classes(array $props)` helper is the escape hatch.
  */
 
-import { blankOmittedAttrs, isNullableValue, isPassthroughForward } from "../domain/passthrough";
+import { blankOmittedAttrs, isNullableValue, isPassthroughForward, shadowingPassthrough } from "../domain/passthrough";
 import { allowsDataImage, URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import type { AttrSpec, BrickDef, ClassSpec, ElementNode, Node, PartDef, PropDef } from "../domain/model";
@@ -46,8 +46,8 @@ export function phpString(value: string): string {
 }
 
 /** Default of a template param: passthrough props are nullable (null = unset, "" = explicit empty attr). */
-export function paramDefault(p: { type: string; def: { passthrough?: boolean } }): string {
-  return p.def.passthrough ? "null" : p.type === "children" ? "''" : phpDefault(p.type);
+export function paramDefault(p: { type: string; def: { passthrough?: boolean; nullable?: boolean } }): string {
+  return p.def.passthrough || p.def.nullable ? "null" : p.type === "children" ? "''" : phpDefault(p.type);
 }
 
 export function phpDefault(type: string): string {
@@ -71,6 +71,7 @@ type RtFn =
   | "concatTrim"
   | "isSetStr"
   | "boolStr"
+  | "optBoolStr"
   | "orNull"
   | "cn"
   | "resolveTag";
@@ -145,6 +146,8 @@ export function printExpr(expr: Expr, ctx: PhpCtx): string {
       return d.call("concatTrim", [list(expr.parts.map(p))]);
     case "boolToString":
       return d.call("boolStr", [truthy(expr.expr, ctx)]);
+    case "optBoolToString":
+      return d.call("optBoolStr", [p(expr.expr)]);
     case "intToString":
       return d.intToString(p(expr.expr));
   }
@@ -260,10 +263,18 @@ function printElement(node: ElementNode, part: PartDef, sx: Syntax): string {
 
 function printStatic(node: ElementNode, tag: string, part: PartDef, sx: Syntax): string {
   const entries: AttrEntry[] = [];
-  for (const a of node.attrs) {
+  const shadowed = new Map<string, string>(); // attr name → computed value a later passthrough falls back to
+  node.attrs.forEach((a, i) => {
     const e = attrEntry(a, tag, part, sx);
-    if (e) entries.push(e);
-  }
+    if (!e) return;
+    if (shadowingPassthrough(node.attrs, i, part)) {
+      shadowed.set(e[0].toLowerCase(), e[1]);
+      return;
+    }
+    const fallback = shadowed.get(e[0].toLowerCase());
+    // the passthrough (null when unset or blank) wins, else the shadowed computed value
+    entries.push(fallback === undefined ? e : [e[0], `(${e[1]} ?? ${fallback})`]);
+  });
   const rest: RestRule | false = node.attrs.some((a) => a.kind === "rest") ? { img: tag === "img", blank: blankOmittedAttrs(node.attrs, part) } : false;
   const isVoid = node.void === true || VOID_TAGS.has(tag);
   const children = isVoid ? "" : node.children.map((c) => printNode(c, part, sx, tag)).join("");

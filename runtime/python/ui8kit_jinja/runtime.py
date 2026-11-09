@@ -176,6 +176,11 @@ def bool_str(v: Any) -> str:
     return "true" if truthy(v) else "false"
 
 
+def opt_bool_str(v: Any) -> str:
+    """Tri-state ARIA state: "true"/"false" when set, "" when None (attribute omitted)."""
+    return "" if v is None else ("true" if truthy(v) else "false")
+
+
 def concat_trim(parts: list) -> str:
     return "".join(s(p).strip() for p in parts)
 

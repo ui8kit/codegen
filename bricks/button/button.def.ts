@@ -9,8 +9,10 @@ import {
   isSet,
   lit,
   oneOfOr,
+  optBoolToString,
   pAttrs,
   pBool,
+  pBoolOpt,
   pChildren,
   pClass,
   pEnum,
@@ -33,13 +35,16 @@ export default brick({
   dir: "button",
   docs:
     "Button triggers an action. With `href` it renders an anchor (navigation that\n" +
-    "looks like an action). Event handlers (onClick) flow through attrs/rest.",
+    "looks like an action). Event handlers (onClick) flow through attrs/rest.\n" +
+    "Pressed / Expanded are the semantic ARIA state props (toggle, disclosure).",
   parts: [
     {
       name: "Button",
       docs:
         "Button renders a button element, or an anchor when Href is set.\n" +
-        "Type/Form apply only in button mode; Disabled on anchors uses aria-disabled.",
+        "Type/Form apply only in button mode; Disabled on anchors uses aria-disabled.\n" +
+        "Pressed (button mode) and Expanded print aria-pressed / aria-expanded as \"true\"/\"false\";\n" +
+        "unset omits the attribute.",
       asChild: true,
       classes: {},
       props: [
@@ -48,6 +53,8 @@ export default brick({
         pPass("Form", "associated form id (button mode)"),
         pStr("Href", "renders an anchor when set"),
         pBool("Disabled", "blocks interaction"),
+        pBoolOpt("Pressed", "toggle state → aria-pressed (button mode); unset omits it"),
+        pBoolOpt("Expanded", "disclosure state → aria-expanded; unset omits it"),
         pPass("AriaLabel"),
         pPass("AriaPressed"),
         pPass("AriaExpanded"),
@@ -63,6 +70,7 @@ export default brick({
             [
               attrExpr("href", prop("Href")),
               attrClass(),
+              attrExpr("aria-expanded", optBoolToString(prop("Expanded"))),
               ...aria,
               attrExpr("aria-disabled", lit("true"), { when: prop("Disabled") }),
               attrExpr("tabindex", lit(-1), { when: prop("Disabled") }),
@@ -79,6 +87,8 @@ export default brick({
               attrClass(),
               attrBool("disabled", prop("Disabled")),
               fwd("form", "Form"),
+              attrExpr("aria-pressed", optBoolToString(prop("Pressed"))),
+              attrExpr("aria-expanded", optBoolToString(prop("Expanded"))),
               ...aria,
               attrRest(),
             ],

@@ -127,6 +127,23 @@ export function validatePart(brick: BrickDef, part: PartDef): void {
     }
   }
 
+  // Nullable bools: only `bool` props, referenced only as the operand of optBoolToString.
+  for (const p of part.props) {
+    if (p.nullable && p.type !== "bool") fail(`nullable prop ${p.name} must be bool`);
+    if (p.nullable && (p.default !== undefined || p.cva || p.passthrough)) fail(`nullable prop ${p.name}: no default, cva or passthrough`);
+  }
+  for (const expr of collectExprs(part)) {
+    const wrapped = new Set<Expr>();
+    walkExpr(expr, (e) => {
+      if (e.kind === "optBoolToString") {
+        if (e.expr.kind !== "prop" || !props.get(e.expr.name)?.nullable) fail("optBoolToString operand must be a nullable bool prop");
+        wrapped.add(e.expr);
+      } else if (e.kind === "prop" && props.get(e.name)?.nullable && !wrapped.has(e)) {
+        fail(`nullable prop "${e.name}" may only be referenced through optBoolToString`);
+      }
+    });
+  }
+
   // Referenced names must exist; passthrough props must stay unreferenced.
   const referencedProps = new Set<string>();
   for (const expr of collectExprs(part)) {

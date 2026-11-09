@@ -89,7 +89,7 @@ function emitPart(brick: BrickDef, part: PartDef): string {
 
   const lines = [`{* ${BANNER} *}`, `{* ${part.name} — ${part.docs.split("\n")[0]} *}`];
   const params = templateParams(part).map(
-    (p) => `${p.def.passthrough ? "?" : ""}${latteType(p.type)} $${p.name} = ${paramDefault(p)},`
+    (p) => `${p.def.passthrough || p.def.nullable ? "?" : ""}${latteType(p.type)} $${p.name} = ${paramDefault(p)},`
   );
   lines.push(params.length ? `{parameters\n${ind(params.join("\n"))}\n}` : `{parameters}`);
   const root = part.render;

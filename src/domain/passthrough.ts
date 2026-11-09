@@ -39,3 +39,26 @@ export function blankOmittedAttrs(attrs: ReadonlyArray<{ kind: string; name?: st
   }
   return out;
 }
+
+/**
+ * A computed attribute shadowed by a later passthrough forward of the same name on one element (Button
+ * `Pressed` → aria-pressed, then `AriaPressed`): the passthrough wins when set, as rest/Attrs do in the JS
+ * runtimes and in the canonical renderer (later attr wins). Returns that passthrough prop, or undefined.
+ * Server runtimes print the computed attr only when the passthrough is unset or blank.
+ */
+export function shadowingPassthrough(
+  attrs: ReadonlyArray<{ kind: string; name?: string; expr?: Expr; when?: Expr }>,
+  index: number,
+  part: PartDef
+): string | undefined {
+  const a = attrs[index]!;
+  if (a.kind !== "expr" || isPassthroughForward(a, part)) return undefined;
+  for (const b of attrs.slice(index + 1)) {
+    if (b.name?.toLowerCase() === a.name?.toLowerCase() && isPassthroughForward(b, part)) {
+      const name = (b.expr as { name: string }).name;
+      if (isNullableValue(part, name)) throw new Error(`${part.name}: ${a.name} shadowed by nullable value prop`);
+      return name;
+    }
+  }
+  return undefined;
+}

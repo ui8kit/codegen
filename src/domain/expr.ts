@@ -27,6 +27,7 @@ export type Expr =
   | ContainsExpr
   | ConcatExpr
   | BoolToStringExpr
+  | OptBoolToStringExpr
   | IntToStringExpr
   | SafeUrlExpr;
 
@@ -74,6 +75,11 @@ export type ContainsExpr = { kind: "contains"; expr: Expr; substring: string };
 export type ConcatExpr = { kind: "concat"; parts: Expr[] };
 /** ARIA state stringification: always `"true"` / `"false"`, never omitted. */
 export type BoolToStringExpr = { kind: "boolToString"; expr: Expr };
+/**
+ * Tri-state ARIA state of a nullable bool prop: `"true"` / `"false"` when set, `""` when unset,
+ * so the attribute is omitted (blank string attrs are never printed). Operand: a nullable bool prop.
+ */
+export type OptBoolToStringExpr = { kind: "optBoolToString"; expr: PropExpr };
 export type IntToStringExpr = { kind: "intToString"; expr: Expr };
 /** URL attribute value: "" when the scheme (ASCII whitespace/control chars removed, lowercased) is javascript:, vbscript: or data:. */
 export type SafeUrlExpr = { kind: "safeUrl"; expr: Expr };
@@ -121,6 +127,7 @@ export const contains = (expr: Expr, substring: string): ContainsExpr => ({
 });
 export const concat = (...parts: Expr[]): ConcatExpr => ({ kind: "concat", parts });
 export const boolToString = (expr: Expr): BoolToStringExpr => ({ kind: "boolToString", expr });
+export const optBoolToString = (expr: PropExpr): OptBoolToStringExpr => ({ kind: "optBoolToString", expr });
 export const intToString = (expr: Expr): IntToStringExpr => ({ kind: "intToString", expr });
 export const safeUrl = (expr: Expr): SafeUrlExpr => ({ kind: "safeUrl", expr });
 /** Attributes whose value is a URL: forwarded through safeUrl in every runtime (and filtered in the Attrs / rest maps of the servers). */
@@ -166,6 +173,7 @@ export function childExprs(expr: Expr): Expr[] {
     case "isSet":
     case "contains":
     case "boolToString":
+    case "optBoolToString":
     case "intToString":
     case "safeUrl":
       return [expr.expr];

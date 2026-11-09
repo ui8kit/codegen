@@ -217,12 +217,12 @@
       "id": "ui.button",
       "dir": "button",
       "file": "button",
-      "docs": "Button triggers an action. With `href` it renders an anchor (navigation that\nlooks like an action). Event handlers (onClick) flow through attrs/rest.",
+      "docs": "Button triggers an action. With `href` it renders an anchor (navigation that\nlooks like an action). Event handlers (onClick) flow through attrs/rest.\nPressed / Expanded are the semantic ARIA state props (toggle, disclosure).",
       "recordTypes": [],
       "parts": [
         {
           "name": "Button",
-          "docs": "Button renders a button element, or an anchor when Href is set.\nType/Form apply only in button mode; Disabled on anchors uses aria-disabled.",
+          "docs": "Button renders a button element, or an anchor when Href is set.\nType/Form apply only in button mode; Disabled on anchors uses aria-disabled.\nPressed (button mode) and Expanded print aria-pressed / aria-expanded as \"true\"/\"false\";\nunset omits the attribute.",
           "elements": [
             "a",
             "button"
@@ -273,6 +273,26 @@
               "required": false,
               "passthrough": false,
               "docs": "blocks interaction"
+            },
+            {
+              "name": "Pressed",
+              "html": "pressed",
+              "react": "pressed",
+              "type": "bool",
+              "required": false,
+              "passthrough": false,
+              "nullable": true,
+              "docs": "toggle state → aria-pressed (button mode); unset omits it"
+            },
+            {
+              "name": "Expanded",
+              "html": "expanded",
+              "react": "expanded",
+              "type": "bool",
+              "required": false,
+              "passthrough": false,
+              "nullable": true,
+              "docs": "disclosure state → aria-expanded; unset omits it"
             },
             {
               "name": "AriaLabel",

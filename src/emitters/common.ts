@@ -78,6 +78,7 @@ export function exprType(expr: Expr, env: TypeEnv): ExprType {
     case "intMapOr":
     case "concat":
     case "boolToString":
+    case "optBoolToString":
     case "intToString":
     case "safeUrl":
       return "string";
@@ -139,6 +140,7 @@ function childListOf(expr: Expr): Expr[] {
     case "isSet":
     case "contains":
     case "boolToString":
+    case "optBoolToString":
     case "intToString":
     case "safeUrl":
       return [expr.expr];

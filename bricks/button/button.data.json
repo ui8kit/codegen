@@ -35,6 +35,45 @@
         "Href": "/x",
         "Disabled": true
       }
+    },
+    "toggleOn": {
+      "props": {
+        "Pressed": true,
+        "Class": "bg-primary text-primary-foreground"
+      }
+    },
+    "toggleOff": {
+      "props": {
+        "Pressed": false
+      }
+    },
+    "menuExpanded": {
+      "props": {
+        "Expanded": true
+      }
+    },
+    "menuCollapsed": {
+      "props": {
+        "Expanded": false
+      }
+    },
+    "hrefExpanded": {
+      "props": {
+        "Href": "/menu",
+        "Expanded": false
+      }
+    },
+    "pressedOverride": {
+      "props": {
+        "Pressed": true,
+        "AriaPressed": "mixed"
+      }
+    },
+    "pressedBlankRaw": {
+      "props": {
+        "Pressed": false,
+        "AriaPressed": " "
+      }
     }
   }
 }

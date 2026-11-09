@@ -189,8 +189,9 @@ function snippets(brick: BrickDef, part: PartDef, props: CanonicalProps): Array<
     .map(([k, v]) => {
       const def = part.props.find((p) => p.name === k);
       const lit = goLit(v, brick, def);
-      // templ Value is *string (nullable passthrough): Go 1.26 new(expr)
-      return `${k}: ${def?.passthrough && k === "Value" && typeof v === "string" ? `new(${lit})` : lit}`;
+      // templ Value is *string (nullable passthrough), tri-state bools are *bool: Go 1.26 new(expr)
+      const ptr = (def?.passthrough && k === "Value" && typeof v === "string") || (def?.nullable && typeof v === "boolean");
+      return `${k}: ${ptr ? `new(${lit})` : lit}`;
     })
     .join(", ");
   const templ = `@${pkg}.${name}(${pkg}.${name}Props{${goFields}})${kids ? ` {\n\t${CHILD}\n}` : ""}`;

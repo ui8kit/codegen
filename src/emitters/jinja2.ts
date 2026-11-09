@@ -13,7 +13,7 @@
  * `<name>_classes(p)` global is the escape hatch.
  */
 
-import { blankOmittedAttrs, isNullableValue, isPassthroughForward } from "../domain/passthrough";
+import { blankOmittedAttrs, isNullableValue, isPassthroughForward, shadowingPassthrough } from "../domain/passthrough";
 import { allowsDataImage, URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import {
@@ -59,7 +59,7 @@ function zeroOf(part: PartDef, name: string): string {
     case "string":
       return "''";
     case "bool":
-      return "false";
+      return p.nullable ? "none" : "false";
     case "int":
       return "0";
     case "items":
@@ -128,6 +128,8 @@ export function printJinjaExpr(expr: Expr, ctx: Ctx): string {
       return `ui_concat_trim([${expr.parts.map(p).join(", ")}])`;
     case "boolToString":
       return `ui_bool_str(${truthyJ(expr.expr, ctx)})`;
+    case "optBoolToString":
+      return `ui_opt_bool_str(${p(expr.expr)})`;
     case "intToString":
       return `ui_s(${p(expr.expr)})`;
   }
@@ -254,8 +256,10 @@ function printTag(node: ElementNode, tag: string, mode: "void" | "normal" | "may
   const staticTag = node.tag.kind === "static" ? node.tag.tag : undefined;
   const blank = blankOmittedAttrs(node.attrs, ctx.part);
   const attrs = node.attrs
-    .map((a) => {
-      const code = printAttr(a, ctx, staticTag, blank);
+    .map((a, i) => {
+      let code = printAttr(a, ctx, staticTag, blank);
+      const shadow = code ? shadowingPassthrough(node.attrs, i, ctx.part) : undefined;
+      if (shadow) code = `{%- if not ui_is_set_str(p['${shadow}']) %}${code.startsWith("{%") ? code : " " + code}{%- endif %}`;
       if (!code || !hasRest || !(a.kind === "static" || a.kind === "expr" || a.kind === "bool")) return code;
       return `{%- if not ui_has_attr(${propCode(ctx, "Attrs")}, ${str(a.name)}) %}${code.startsWith("{%") ? code : " " + code}{%- endif %}`;
     })

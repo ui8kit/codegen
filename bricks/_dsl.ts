@@ -76,6 +76,15 @@ export const pBool = (name: string, docs?: string): PropDef => ({
   docs,
 });
 
+/** Tri-state bool: unset is distinct from false (ARIA state props; use with optBoolToString). */
+export const pBoolOpt = (name: string, docs?: string): PropDef => ({
+  name,
+  type: "bool",
+  cva: false,
+  nullable: true,
+  docs,
+});
+
 export const pInt = (name: string, docs?: string): PropDef => ({
   name,
   type: "int",

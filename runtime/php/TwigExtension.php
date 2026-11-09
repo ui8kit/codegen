@@ -32,6 +32,7 @@ final class TwigExtension extends AbstractExtension
             new TwigFunction('ui8kit_map_or_lower', [Rt::class, 'mapOrLower']),
             new TwigFunction('ui8kit_int_map_or', [Rt::class, 'intMapOr']),
             new TwigFunction('ui8kit_bool_str', [Rt::class, 'boolStr']),
+            new TwigFunction('ui8kit_opt_bool_str', [Rt::class, 'optBoolStr']),
             new TwigFunction('ui8kit_concat_trim', [Rt::class, 'concatTrim']),
             new TwigFunction('ui8kit_safe_url', [Rt::class, 'safeUrl']),
             new TwigFunction('ui8kit_url_or_null', [Rt::class, 'urlOrNull']),

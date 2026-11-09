@@ -168,7 +168,14 @@ export class VueEmitter implements Emitter {
     lines.push(`defineOptions({ name: ${JSON.stringify(part.name)}, inheritAttrs: false });`);
     lines.push(``);
     if (propsFields.length > 0) {
-      lines.push(`const props = defineProps<{\n${propsFields.join("\n")}\n}>();`);
+      // Vue casts an absent boolean prop to false; a nullable (tri-state) bool keeps undefined via an explicit default.
+      const triState = decls.filter((d) => d.def.nullable).map((d) => `${d.local}: undefined`);
+      const defineProps = `defineProps<{\n${propsFields.join("\n")}\n}>()`;
+      lines.push(
+        triState.length > 0
+          ? `const props = withDefaults(${defineProps}, { ${triState.join(", ")} });`
+          : `const props = ${defineProps};`
+      );
       lines.push(``);
     }
     for (const stmt of body) lines.push(stmt);

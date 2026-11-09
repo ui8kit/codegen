@@ -12,7 +12,7 @@
  * asChild/Slot in templ: `<Part>Classes(p)` is the escape hatch.
  */
 
-import { blankOmittedAttrs, isPassthroughForward } from "../domain/passthrough";
+import { blankOmittedAttrs, isPassthroughForward, shadowingPassthrough } from "../domain/passthrough";
 import { allowsDataImage, URL_ATTRS } from "../domain/expr";
 import type { Expr } from "../domain/expr";
 import {
@@ -136,7 +136,8 @@ function goType(part: PartDef, name: string): string {
     case "string":
       return "string";
     case "bool":
-      return "bool";
+      // Tri-state (nil = unset): ARIA state props, read only through uiutils.OptBoolStr.
+      return p.nullable ? "*bool" : "bool";
     case "int":
       return "int";
     case "items":
@@ -275,8 +276,10 @@ function printStaticElement(node: ElementNode, tag: string, part: PartDef, ctx: 
   const hasRest = node.attrs.some((a) => a.kind === "rest");
   const blank = blankOmittedAttrs(node.attrs, part);
   const attrs = node.attrs
-    .map((a) => {
-      const code = printAttr(a, tag, part, ctx, blank);
+    .map((a, i) => {
+      let code = printAttr(a, tag, part, ctx, blank);
+      const shadow = code ? shadowingPassthrough(node.attrs, i, part) : undefined;
+      if (shadow) code = `if !uiutils.IsSetStr(${ctx.propCode(shadow)}) {\n${ind(code)}\n}`;
       if (!code || !hasRest || !(a.kind === "static" || a.kind === "expr" || a.kind === "bool")) return code;
       return `if !uiutils.HasAttr(p.Attrs, ${JSON.stringify(a.name)}) {\n${ind(code)}\n}`;
     })

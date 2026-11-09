@@ -78,6 +78,12 @@ final class Rt
         return $v ? 'true' : 'false';
     }
 
+    /** Tri-state ARIA state: 'true'/'false' when set, '' when null (attribute omitted). */
+    public static function optBoolStr(mixed $v): string
+    {
+        return $v === null ? '' : ($v ? 'true' : 'false');
+    }
+
     /** Concatenation of trimmed parts (icon Prefix + Name). */
     public static function concatTrim(array $parts): string
     {

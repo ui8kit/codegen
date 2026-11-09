@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+- **Feature — Button semantic ARIA state:** `Pressed` / `Expanded` (React/Solid/Svelte/Vue/WC `pressed` / `expanded`)
+  print `aria-pressed` / `aria-expanded` as `"true"` / `"false"`; unset omits the attribute. Same DOM in all 9
+  targets (showcase fixtures `toggleOn`, `toggleOff`, `menuExpanded`, `menuCollapsed`, `hrefExpanded`,
+  `pressedOverride`, `pressedBlankRaw`). `Pressed` is button mode only. The raw `AriaPressed` / `AriaExpanded` and
+  `Attrs` keep working and win when set (non-blank). Covers ui8kit/contract rule 02 (`<Button pressed={on}>`).
+- **Feature — tri-state bool props (generator):** `PropDef.nullable` (`pBoolOpt`) + expression `optBoolToString`.
+  templ `*bool` (nil = unset, `new(true)`), PHP/Jinja2 default `null` / `none`, Vue `withDefaults(…, { x: undefined })`
+  (no Boolean cast to false). `specs/primitives.json` marks such props `"nullable": true`.
+- Runtime helpers (additive): TS `optBoolStr`, Go `OptBoolStr`, PHP `Rt::optBoolStr` (Twig `ui8kit_opt_bool_str`),
+  Python `opt_bool_str`.
+- Server runtimes (templ, Twig, Latte, Jinja2): a computed attribute followed by a passthrough of the same name prints
+  once; the passthrough wins when set (as rest does in the JS runtimes and the canonical renderer).
+- Separator: unchanged; `<hr>` never gets a redundant `role="separator"` (regression test `tests/aria-state.test.ts`).
+
 ## 3.3.0 (2026-10-24, unpublished)
 
 One attribute rule set in all 9 runtimes (docs/contract.md#attributes-precedence-empty-values-urls),

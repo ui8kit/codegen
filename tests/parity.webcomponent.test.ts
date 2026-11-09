@@ -53,7 +53,9 @@ for (const brick of bricks) {
 function hostAttrs(part: PartDef, props: Record<string, unknown>): string {
   return Object.entries(props)
     .map(([k, v]) => {
-      if (v === false || v === undefined || v === null) return "";
+      if (v === undefined || v === null) return "";
+      // readHost: a bool host attribute "false" is false (tri-state props keep false distinct from unset)
+      if (v === false) return ` ${k}="false"`;
       if (v === true) return ` ${k}`;
       const s = typeof v === "object" ? JSON.stringify(v) : String(v);
       return ` ${k}="${s.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`;

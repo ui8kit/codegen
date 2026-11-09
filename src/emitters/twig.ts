@@ -95,7 +95,8 @@ function emitPart(brick: BrickDef, part: PartDef): string {
   lines.push(...params);
   for (const p of templateParams(part)) {
     // passthrough: `??` keeps an explicit "" (|default would replace it), null = unset
-    lines.push(p.def.passthrough ? `{% set ${p.name} = ${p.name} ?? null %}` : `{% set ${p.name} = ${p.name}|default(${p.type === "children" ? "''" : phpDefault(p.type)}) %}`);
+    // nullable bool: `??` keeps an explicit false (|default would replace it), null = unset
+    lines.push(p.def.passthrough || p.def.nullable ? `{% set ${p.name} = ${p.name} ?? null %}` : `{% set ${p.name} = ${p.name}|default(${p.type === "children" ? "''" : phpDefault(p.type)}) %}`);
   }
   const root = part.render;
   if (root.kind === "element" && root.tag.kind === "resolved") {

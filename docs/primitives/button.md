@@ -8,6 +8,7 @@
 
 Button triggers an action. With `href` it renders an anchor (navigation that
 looks like an action). Event handlers (onClick) flow through attrs/rest.
+Pressed / Expanded are the semantic ARIA state props (toggle, disclosure).
 
 ## Notes
 
@@ -15,10 +16,21 @@ looks like an action). Event handlers (onClick) flow through attrs/rest.
 - Use `href` for navigation that looks like an action; plain links use [Link](link.md).
 - `disabled` on the anchor form becomes `aria-disabled="true"` + `tabindex="-1"` (anchors have no native disabled).
 - Event handlers (`onClick`, `@click`, `on:click`) go through rest/attrs.
+- **State through props, not ARIA strings** (ui8kit/contract rule 02): a toggle is `<Button pressed={on}>`, a
+  disclosure trigger `<Button expanded={open} aria-controls="menu">`. Both are tri-state: `true` / `false` print
+  `aria-pressed` / `aria-expanded` as `"true"` / `"false"`, unset prints nothing (a plain action button).
+  templ: `Pressed: new(on)` (`*bool`, nil = unset); Twig/Latte/Jinja2: `null` / `None` = unset;
+  Web Components: `pressed="false"` on the host is `false`, no attribute is unset.
+- `pressed` applies in button mode only (`aria-pressed` is not allowed on links); `expanded` works on both forms.
+- The raw `aria-pressed` / `aria-expanded` (named props or attrs/rest) still work and win over `pressed` / `expanded`
+  when set and non-blank. Prefer the semantic props in compositions.
+- For an on/off setting use [Switch](switch.md) (`role="switch"` + `aria-checked`), not a pressed Button.
 <!-- ui8kit-docs:prose:end -->
 
 Button renders a button element, or an anchor when Href is set.
 Type/Form apply only in button mode; Disabled on anchors uses aria-disabled.
+Pressed (button mode) and Expanded print aria-pressed / aria-expanded as "true"/"false";
+unset omits the attribute.
 
 ## Props
 
@@ -28,6 +40,8 @@ Type/Form apply only in button mode; Disabled on anchors uses aria-disabled.
 | `Form` | `form` | `form` | `string` | — | passthrough attr | associated form id (button mode) |
 | `Href` | `href` | `href` | `string` | — | prop | renders an anchor when set |
 | `Disabled` | `disabled` | `disabled` | `boolean` | — | prop | blocks interaction |
+| `Pressed` | `pressed` | `pressed` | `boolean` | — | prop | toggle state → aria-pressed (button mode); unset omits it |
+| `Expanded` | `expanded` | `expanded` | `boolean` | — | prop | disclosure state → aria-expanded; unset omits it |
 | `AriaLabel` | `aria-label` | `aria-label` | `string` | — | passthrough attr |  |
 | `AriaPressed` | `aria-pressed` | `aria-pressed` | `string` | — | passthrough attr |  |
 | `AriaExpanded` | `aria-expanded` | `aria-expanded` | `string` | — | passthrough attr |  |
@@ -45,7 +59,7 @@ Accepts children (default slot / `children` / `{ children... }` / trusted HTML s
 
 ## ARIA
 
-- Computed/forwarded: `aria-label`, `aria-pressed`, `aria-expanded`, `aria-controls`, `aria-disabled` (omitted when empty).
+- Computed/forwarded: `aria-expanded`, `aria-label`, `aria-pressed`, `aria-controls`, `aria-disabled` (omitted when empty).
 - Typed ARIA props: `aria-label`, `aria-pressed`, `aria-expanded`, `aria-controls` — static values only.
 
 ## Classes escape hatch
@@ -75,10 +89,19 @@ Canonical renderer output (children = `Content`); all 9 runtimes are parity-test
 | pressed | `{"AriaPressed":"true","AriaExpanded":"false","AriaControls":"m1"}` | `<button type="button" aria-pressed="true" aria-expanded="false" aria-controls="m1">Content</button>` |
 | href | `{"Href":"/docs","Class":"underline"}` | `<a href="/docs" class="underline">Content</a>` |
 | hrefDisabled | `{"Href":"/x","Disabled":true}` | `<a href="/x" aria-disabled="true" tabindex="-1">Content</a>` |
+| toggleOn | `{"Pressed":true,"Class":"bg-primary text-primary-foreground"}` | `<button type="button" class="bg-primary text-primary-foreground" aria-pressed="true">Content</button>` |
+| toggleOff | `{"Pressed":false}` | `<button type="button" aria-pressed="false">Content</button>` |
+| menuExpanded | `{"Expanded":true}` | `<button type="button" aria-expanded="true">Content</button>` |
+| menuCollapsed | `{"Expanded":false}` | `<button type="button" aria-expanded="false">Content</button>` |
+| hrefExpanded | `{"Href":"/menu","Expanded":false}` | `<a href="/menu" aria-expanded="false">Content</a>` |
+| pressedOverride | `{"Pressed":true,"AriaPressed":"mixed"}` | `<button type="button" aria-pressed="mixed">Content</button>` |
+| pressedBlankRaw | `{"Pressed":false,"AriaPressed":" "}` | `<button type="button" aria-pressed="false">Content</button>` |
 | Type=button | `{"Type":"button"}` | `<button type="button">Content</button>` |
 | Type=submit | `{"Type":"submit"}` | `<button type="submit">Content</button>` |
 | Type=reset | `{"Type":"reset"}` | `<button type="reset">Content</button>` |
 | Disabled | `{"Disabled":true}` | `<button type="button" disabled>Content</button>` |
+| Pressed | `{"Pressed":true}` | `<button type="button" aria-pressed="true">Content</button>` |
+| Expanded | `{"Expanded":true}` | `<button type="button" aria-expanded="true">Content</button>` |
 
 ## Usage
 

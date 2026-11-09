@@ -66,6 +66,14 @@ func BoolStr(v bool) string {
 	return "false"
 }
 
+// OptBoolStr stringifies tri-state ARIA state: "true"/"false" when set, "" when nil (attribute omitted).
+func OptBoolStr(v *bool) string {
+	if v == nil {
+		return ""
+	}
+	return BoolStr(*v)
+}
+
 // ConcatTrim concatenates trimmed parts (icon Prefix + Name).
 func ConcatTrim(parts ...string) string {
 	var b strings.Builder

@@ -102,6 +102,9 @@ export function printTsExpr(expr: Expr, ctx: TsPrintCtx): string {
     case "boolToString":
       ctx.helpers.add("boolStr");
       return `boolStr(${p(expr.expr)})`;
+    case "optBoolToString":
+      ctx.helpers.add("optBoolStr");
+      return `optBoolStr(${p(expr.expr)})`;
     case "intToString":
       return `String(${p(expr.expr)} ?? 0)`;
   }

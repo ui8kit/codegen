@@ -39,6 +39,12 @@ export interface PropDef {
   itemsOf?: string;
   /** Required in TS signatures (e.g. Image alt). */
   required?: boolean;
+  /**
+   * Tri-state bool (bool only): unset (undefined / nil / null / None) is distinct from false.
+   * Go `*bool`, PHP/Jinja2 default null/none, Vue default undefined. Referenced only through
+   * `optBoolToString` (ARIA state: "true" / "false", attribute omitted when unset).
+   */
+  nullable?: boolean;
   docs?: string;
 }
 

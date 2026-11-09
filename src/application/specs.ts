@@ -69,6 +69,7 @@ export function buildSpecs(bricks: BrickDef[]) {
               type: p.type,
               required: p.required === true,
               passthrough: p.passthrough === true,
+              ...(p.nullable ? { nullable: true } : {}),
               ...(p.enumValues ? { enum: p.enumValues } : {}),
               ...(p.itemsOf ? { itemsOf: p.itemsOf } : {}),
               ...(p.cva && recipe

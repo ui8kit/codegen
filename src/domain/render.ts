@@ -126,6 +126,10 @@ export function evalExpr(expr: Expr, ctx: Ctx): string | number | boolean {
       return expr.parts.map((p) => String(evalExpr(p, ctx) ?? "").trim()).join("");
     case "boolToString":
       return truthy(evalExpr(expr.expr, ctx)) ? "true" : "false";
+    case "optBoolToString": {
+      const raw = ctx.props[expr.expr.name];
+      return raw === true ? "true" : raw === false ? "false" : "";
+    }
     case "intToString":
       return String(Number(evalExpr(expr.expr, ctx) ?? 0));
   }

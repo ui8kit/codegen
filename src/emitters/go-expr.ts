@@ -71,6 +71,8 @@ export function printGoExpr(expr: Expr, ctx: GoPrintCtx): string {
       return `uiutils.ConcatTrim(${expr.parts.map(p).join(", ")})`;
     case "boolToString":
       return `uiutils.BoolStr(${truthyGo(expr.expr, ctx)})`;
+    case "optBoolToString":
+      return `uiutils.OptBoolStr(${p(expr.expr)})`;
     case "intToString":
       return `strconv.Itoa(int(${p(expr.expr)}))`;
   }
