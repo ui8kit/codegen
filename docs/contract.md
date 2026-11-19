@@ -52,6 +52,10 @@ against explicit expected HTML). Since 3.3.0.
    allows `data:image/(png|jpeg|gif|webp|avif|svg+xml)` followed by `;` or `,` (placeholders); `data:` stays forbidden in
    `href`, `action`, … and on every other element. `srcset` is not URL-checked (image candidates are never executed),
    so `data:image/…` in `srcset` is forwarded as given.
+   **Latte note:** Latte >= 3.1.9 checks `src` itself after `Rt::imgUrlOrNull` and renders `src=""` for any `data:` URL
+   (and for a URL with leading whitespace), so a `data:image` placeholder is not portable to Latte. UI8Kit media never
+   take `data:` (use an https or relative URL); the parity fixtures for `<img src>` use https URLs
+   (`tests/parity.attrs.test.ts`), the data:image rule itself is unit-tested in `tests/safe-url.test.ts`.
 
 ### Empty values (history)
 

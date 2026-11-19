@@ -40,3 +40,7 @@ URL attributes (`href`, `src`, `action`, `formaction`, `poster`, `cite`, `backgr
 go through `Rt::safeUrl` / `Rt::urlOrNull` / `Rt::restAttrs`: `javascript:`, `vbscript:` and `data:` (case and control
 characters ignored) omit the attribute, as in every target. Only `<img src>` (Image) allows
 `data:image/(png|jpeg|gif|webp|avif|svg+xml)` placeholders (`Rt::imgUrlOrNull`).
+
+Latte >= 3.1.9 then applies its own URL check to `src` and prints `src=""` for a `data:` URL (and for a URL with
+leading whitespace): accepted engine behaviour, so do not rely on `data:image` placeholders with Latte; pass an https or
+relative URL (UI8Kit media never take `data:`).

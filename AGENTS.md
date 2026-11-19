@@ -58,7 +58,7 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
   renderer (`src/domain/render.ts`). Parity tests prove it: `tests/parity*.test.ts`.
 - Attribute rules (docs/contract.md#attributes-precedence-empty-values-urls): extra attrs win over the named
   attribute, then blank optional attrs (all but `value`) and unsafe URLs are omitted; `data:image/…` only in
-  `<img src>`. `tests/parity.attrs.test.ts` checks every rule in all 9 real targets against explicit HTML.
+  `<img src>` (Latte >= 3.1.9 drops `data:` in `src` itself: not portable, the parity fixtures use https there). `tests/parity.attrs.test.ts` checks every rule in all 9 real targets against explicit HTML.
 - New runtime ⇒ add an emitter, a real-engine parity test (no mocks), CI setup, rules entry in
   `templates/rules/runtimes.json`, README section.
 - `UI8KIT_REQUIRE_ALL_RUNTIMES=1` (set in CI) turns a missing toolchain (Go/templ) into a

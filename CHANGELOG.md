@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Tests — Latte 3.1.9:** Latte >= 3.1.9 renders `src=""` for a `data:` URL (and a URL with leading whitespace) in
+  `<img src>` by its own URL check. Accepted: the four `<img src>` "kept" fixtures of `tests/parity.attrs.test.ts` use
+  https URLs now (same DOM in all 9 targets); docs note in `docs/contract.md` and `docs/runtimes/latte.md`. No output
+  change.
+
 - **Generator option — `generate --cn join`** (`GenerateOptions.cn: "merge" | "join"`, default `merge`): the TS
   runtimes' `utils/cn.ts` becomes `runtime/ts-join/cn.ts`, a dependency-free clsx-style join (strings, numbers, arrays,
   `{ class: on }` objects) without tailwind-merge. For builds whose class lists never conflict, such as the wireframe
