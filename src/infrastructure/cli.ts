@@ -2,7 +2,8 @@
 /**
  * ui8kit-codegen CLI.
  *
- *   generate [--out <dir>] [--runtimes react,svelte,vue,solid,webcomponent,templ,jinja2,twig,latte]
+ *   generate [--out <dir>] [--runtimes react,svelte,vue,solid,webcomponent,templ,jinja2,twig,latte] [--cn merge|join]
+ *                                          --cn join: utils/cn.ts without tailwind-merge (catalog builds; default merge)
  *   specs [--out <file>]                   write the JSON spec export (specs.json)
  *   check                                  validate all brick definitions
  *   list                                   list bricks and parts
@@ -13,7 +14,9 @@ import { fileStem } from "../domain/model";
 import { validateRegistry } from "../domain/validate";
 import {
   ALL_RUNTIMES,
+  CN_MODES,
   generateFiles,
+  type CnMode,
   writeFiles,
   type RuntimeName,
 } from "../application/generate";
@@ -63,10 +66,12 @@ async function main(): Promise<void> {
       for (const r of runtimes) {
         if (!ALL_RUNTIMES.includes(r)) throw new Error(`unknown runtime: ${r}`);
       }
-      const files = await generateFiles(bricks, { runtimes });
+      const cn = (flags["cn"] ?? "merge") as CnMode;
+      if (!CN_MODES.includes(cn)) throw new Error(`unknown --cn: ${cn} (merge | join)`);
+      const files = await generateFiles(bricks, { runtimes, cn });
       await writeFiles(files, out);
       console.log(
-        `Generated ${files.length} files for ${runtimes.join(", ")} into ${out}/ (${bricks.length} bricks).`
+        `Generated ${files.length} files for ${runtimes.join(", ")} into ${out}/ (${bricks.length} bricks${cn === "join" ? ", cn join" : ""}).`
       );
       return;
     }

@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- **Generator option — `generate --cn join`** (`GenerateOptions.cn: "merge" | "join"`, default `merge`): the TS
+  runtimes' `utils/cn.ts` becomes `runtime/ts-join/cn.ts`, a dependency-free clsx-style join (strings, numbers, arrays,
+  `{ class: on }` objects) without tailwind-merge. For builds whose class lists never conflict, such as the wireframe
+  catalog of ui8kit/prototypes (which aliases the kit's `utils/cn` to it in its catalog build only). The default output,
+  what `@ui8kit/registry` packs and `ui8kit add` installs, is byte-identical (`tests/cn-join.test.ts`). No new
+  primitive; no registry change; no release needed for the default.
+
 ## 3.4.0 (2026-11-09)
 
 - **Feature — Button semantic ARIA state:** `Pressed` / `Expanded` (React/Solid/Svelte/Vue/WC `pressed` / `expanded`)

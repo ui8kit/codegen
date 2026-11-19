@@ -46,6 +46,9 @@ Spec-driven generator: `bricks/<name>/<name>.def.ts` is the single source of tru
   whitespace-only nodes between sibling elements are ignored.
 - React boolean attrs are forwarded as-is (`checked={checked}`), never `|| undefined`:
   `checked={false}` must stay controlled (`tests/react-controlled.test.ts`).
+- `generate --cn join` swaps only the TS `utils/cn.ts` for `runtime/ts-join/cn.ts` (no tailwind-merge, no conflict
+  resolution) for catalog builds; the default `merge` is what the registry packs and stays byte-identical
+  (`tests/cn-join.test.ts`). Never pack the registry with `--cn join`.
 - `cn`/`CnMerge` ports (Go, PHP, Python) keep tailwind-merge groups: `ring-offset-N`,
   `ring-offset-<color>`, `ring-N` and `ring-<color>` are four separate groups (`tests/cn-merge.test.ts`).
 - Forms: `Form` (`<form>`) is the only path — `Box` no longer accepts `tag="form"`.

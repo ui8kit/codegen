@@ -35,8 +35,18 @@ export type RuntimeName = "react" | "svelte" | "vue" | "solid" | "webcomponent" 
 /** Runtimes that consume the shared TypeScript layer (`ui/*.shared.ts`, `utils/*.ts`). */
 export const TS_RUNTIMES: RuntimeName[] = ["react", "svelte", "vue", "solid", "webcomponent"];
 
+/**
+ * How the TS runtimes' `utils/cn.ts` joins classes. `merge` (default, the registry and `ui8kit add`): clsx +
+ * tailwind-merge, a caller class wins over a recipe class. `join`: `runtime/ts-join/cn.ts`, a dependency-free
+ * clsx-style join without conflict resolution, for builds whose class lists never conflict (a wireframe catalog).
+ * Only `utils/cn.ts` differs; every other file is byte-identical.
+ */
+export type CnMode = "merge" | "join";
+export const CN_MODES: CnMode[] = ["merge", "join"];
+
 export interface GenerateOptions {
   runtimes?: RuntimeName[];
+  cn?: CnMode;
 }
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -83,7 +93,7 @@ export async function generateFiles(
     }
   }
 
-  files.push(...(await runtimeSupportFiles(runtimes)));
+  files.push(...(await runtimeSupportFiles(runtimes, options.cn ?? "merge")));
   if (runtimes.includes("templ")) files.push(...(await templSupportFiles(bricks)));
   if (runtimes.includes("jinja2")) files.push(...(await jinja2SupportFiles(bricks)));
   for (const php of ["twig", "latte"] as const) {
@@ -114,13 +124,15 @@ export async function writeFiles(files: GeneratedFile[], outDir: string): Promis
   }
 }
 
-async function runtimeSupportFiles(runtimes: RuntimeName[]): Promise<GeneratedFile[]> {
+async function runtimeSupportFiles(runtimes: RuntimeName[], cn: CnMode): Promise<GeneratedFile[]> {
+  if (!CN_MODES.includes(cn)) throw new Error(`unknown cn mode: ${cn}`);
   const files: GeneratedFile[] = [];
   const emitTs = runtimes.some((r) => TS_RUNTIMES.includes(r));
   if (emitTs) {
     const tsDir = join(PACKAGE_ROOT, "runtime", "ts");
     for (const name of await readdir(tsDir)) {
-      files.push({ path: `utils/${name}`, contents: await readFile(join(tsDir, name), "utf8") });
+      const src = cn === "join" && name === "cn.ts" ? join(PACKAGE_ROOT, "runtime", "ts-join", "cn.ts") : join(tsDir, name);
+      files.push({ path: `utils/${name}`, contents: await readFile(src, "utf8") });
     }
   }
   if (runtimes.includes("webcomponent")) {
