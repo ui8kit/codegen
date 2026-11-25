@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 3.5.0 (2026-11-25)
+
+- **Feature — templ class mode (opt-in):** `uiutils.SetClassMode(uiutils.ClassesSemantic)` turns `uiutils.Cn` into a
+  plain join of the non-empty fragments (no tailwind-merge at render time), for apps that pass semantic class names
+  with CSS generated in cascade layers (codegen-x `compose.ClassesSemantic`, fastygo/market ADR-0029).
+  `uiutils.Compose` (primitives with their own recipe: Icon) keeps merging in both modes. Default
+  `uiutils.ClassesUtilities`: output byte-identical; other targets unchanged. Tests: `runtime/go/class_mode_test.go`
+  (run by `tests/cn-merge.test.ts`); docs `docs/runtimes/templ.md#class-mode-opt-in`.
 - **Tests — Latte 3.1.9:** Latte >= 3.1.9 renders `src=""` for a `data:` URL (and a URL with leading whitespace) in
   `<img src>` by its own URL check. Accepted: the four `<img src>` "kept" fixtures of `tests/parity.attrs.test.ts` use
   https URLs now (same DOM in all 9 targets); docs note in `docs/contract.md` and `docs/runtimes/latte.md`. No output

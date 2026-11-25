@@ -41,7 +41,7 @@ describe("cn ring conflict groups", () => {
   });
 
   guard("Go uiutils.Cn", ok("go", ["version"]), () => {
-    const r = spawnSync("go", ["test", "-run", "TestMergeRingOffsetKeepsRingColor|TestMergeObjectAndAspect", "./utils/"], {
+    const r = spawnSync("go", ["test", "-run", "TestMergeRingOffsetKeepsRingColor|TestMergeObjectAndAspect|TestClassMode", "./utils/"], {
       cwd: join(ROOT, "generated", "templ"),
       encoding: "utf8",
     });

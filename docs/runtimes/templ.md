@@ -35,4 +35,13 @@ the module is `github.com/ui8kit/codegen/generated/templ` (used by the doc snipp
 
 `<Part>Classes(p <Part>Props) string`: `<a class={ button.ButtonClasses(button.ButtonProps{}) }>`.
 
+## Class mode (opt-in)
+
+`uiutils.Cn` resolves Tailwind conflicts (last class wins) by default (`uiutils.ClassesUtilities`).
+`uiutils.SetClassMode(uiutils.ClassesSemantic)`, called once at startup, makes `Cn` a plain join of the non-empty
+fragments: for apps whose class lists are semantic names (for example the `ui-*` classes of the codegen-x compositions
+in `compose.ClassesSemantic`) with CSS generated in cascade layers, so there is nothing to merge at render time.
+`uiutils.Compose` (primitives with their own recipe, such as Icon) merges in both modes. Only the templ target has
+the option; the output of every other target and of the default mode is unchanged.
+
 See also: [contract](../contract.md) · [docs index](../README.md) · primitive pages in [primitives/](../primitives/).

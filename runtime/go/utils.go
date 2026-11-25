@@ -69,13 +69,53 @@ func Compose(v Variants, selection map[string]string, extra ...string) string {
 		}
 	}
 	parts = append(parts, extra...)
-	return Cn(parts...)
+	// always merged: a primitive's own recipe (Icon) must resolve conflicts with the caller's classes in both class modes
+	return mergeTailwind(parts...)
+}
+
+// Class modes (SetClassMode). ClassesUtilities, the default: Cn resolves Tailwind conflicts. ClassesSemantic: the
+// caller passes semantic class names (for example the ui-* names of codegen-x compose.ClassesSemantic) whose CSS is
+// generated with cascade layers, so there is nothing to resolve: Cn only joins. Compose merges in both modes.
+const (
+	ClassesUtilities = "utilities"
+	ClassesSemantic  = "semantic"
+)
+
+var joinOnly bool
+
+// SetClassMode selects ClassesUtilities or ClassesSemantic for every Cn call (any other value: utilities).
+// Call it once at startup, before rendering.
+func SetClassMode(mode string) { joinOnly = mode == ClassesSemantic }
+
+// ClassMode returns the current class mode.
+func ClassMode() string {
+	if joinOnly {
+		return ClassesSemantic
+	}
+	return ClassesUtilities
 }
 
 // Cn joins class fragments and resolves Tailwind conflicts (last class wins),
 // matching the JS `cn` = clsx + tailwind-merge used by HostingPanel kit.
+// In ClassesSemantic it only joins the non-empty fragments (whitespace normalized).
 func Cn(classes ...string) string {
+	if joinOnly {
+		return joinClasses(classes)
+	}
 	return mergeTailwind(classes...)
+}
+
+func joinClasses(classes []string) string {
+	var b strings.Builder
+	for _, c := range classes {
+		for _, t := range strings.Fields(c) {
+			if b.Len() > 0 {
+				b.WriteByte(' ')
+			}
+			b.WriteString(t)
+		}
+	}
+	return b.String()
 }
 
 // MergeAttrs merges attribute maps left to right.
